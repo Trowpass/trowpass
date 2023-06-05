@@ -1,19 +1,18 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
-import 'package:app/screens/auth/login.dart';
+import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/shareds/utils/app_colors.dart';
+import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class SignupScreenBusiness extends StatelessWidget {
-  final TextEditingController businessNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
+class LoginScreen extends StatelessWidget {
+  final TextEditingController emailPhoneNumberController =
       TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,29 +32,40 @@ class SignupScreenBusiness extends StatelessWidget {
           padding: EdgeInsets.all(20),
           child: Column(
             children: [
-              Text(
-                'Let’s Get Started!',
-                style: appStyles(24, null, FontWeight.w600),
-              ),
-              SizedBox(height: 22),
-              Text(
-                'Create an account with SanwoPay',
-                style: appStyles(
-                  16,
-                  Colors.black,
-                  FontWeight.w400,
+              Image.asset(login_img),
+              Align(
+                 alignment: Alignment.topLeft,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                      'Welcome back!',
+                      style: appStyles(24, null, FontWeight.w600),
+                    ),
+                    SizedBox(height: 22),
+                    Text(
+                      'Log in to your account.',
+                      style: appStyles(
+                        16,
+                        Colors.black,
+                        FontWeight.w400,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: 32),
-              SignupForm(
-                businessNameController: businessNameController,
-                emailController: emailController,
+              LoginForm(
+                emailPhoneNumberController: emailPhoneNumberController,
                 passwordController: passwordController,
-                confirmPasswordController: confirmPasswordController,
               ),
               SizedBox(height: 32),
               Text(
-                'Already have an account?',
+                'Don’t have an account?',
                 style: appStyles(
                   14,
                   grayscale,
@@ -64,10 +74,10 @@ class SignupScreenBusiness extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(() => LoginScreen());
+                  Get.to(() => AccountTypeScreen());
                 },
                 child: Text(
-                  'Login here',
+                  'Signup',
                   style: appStyles(
                     14,
                     secondaryColor,
@@ -83,17 +93,13 @@ class SignupScreenBusiness extends StatelessWidget {
   }
 }
 
-class SignupForm extends StatelessWidget {
-  final TextEditingController businessNameController;
-  final TextEditingController emailController;
+class LoginForm extends StatelessWidget {
+  final TextEditingController emailPhoneNumberController;
   final TextEditingController passwordController;
-  final TextEditingController confirmPasswordController;
 
-  SignupForm({
-    required this.businessNameController,
-    required this.emailController,
+  LoginForm({
+    required this.emailPhoneNumberController,
     required this.passwordController,
-    required this.confirmPasswordController,
   });
 
   @override
@@ -101,23 +107,10 @@ class SignupForm extends StatelessWidget {
     return Column(
       children: [
         TextInputForm(
-          inputController: businessNameController,
-          textLabel: 'Business Name',
-          textHint: 'Business Name',
-          validatorMessage: 'Please enter a valid business name',
-          isPassword: false,
-          autoCorrect: false,
-          prefixIcon: Icon(
-            Icons.business_rounded,
-            size: 30,
-          ),
-        ),
-        SizedBox(height: 16),
-        TextInputForm(
-          inputController: emailController,
-          textLabel: 'Company Email',
-          textHint: 'Company Email',
-          validatorMessage: 'Please enter a valid email',
+          inputController: emailPhoneNumberController,
+          textLabel: 'Email or phone number',
+          textHint: 'Email or phone number',
+          validatorMessage: 'Please enter a valid email or phone number',
           isPassword: false,
           autoCorrect: false,
           prefixIcon: Icon(
@@ -138,22 +131,9 @@ class SignupForm extends StatelessWidget {
             size: 30,
           ),
         ),
-        SizedBox(height: 16),
-        TextInputForm(
-          inputController: confirmPasswordController,
-          textLabel: 'Confirm Password',
-          textHint: 'Confirm password',
-          validatorMessage: 'Passwords do not match',
-          isPassword: true,
-          autoCorrect: false,
-          prefixIcon: Icon(
-            Icons.lock,
-            size: 30,
-          ),
-        ),
         SizedBox(height: 25),
         StandardButton(
-          text: 'SIGN UP',
+          text: 'LOG IN',
           onPressed: () {
             // Handle individual button press
           },

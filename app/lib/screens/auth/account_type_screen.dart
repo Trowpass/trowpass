@@ -6,7 +6,6 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widgets/app_styles.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/route_manager.dart';
 
 class AccountTypeScreen extends StatelessWidget {

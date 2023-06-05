@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
+import 'package:app/screens/auth/login.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SignupScreenIndividual extends StatelessWidget {
   final TextEditingController fullNameController = TextEditingController();
@@ -33,7 +35,7 @@ class SignupScreenIndividual extends StatelessWidget {
             children: [
               Text(
                 'Let’s Get Started!',
-                style: appStyles(24,null, FontWeight.w600),
+                style: appStyles(24, null, FontWeight.w600),
               ),
               SizedBox(height: 22),
               Text(
@@ -50,15 +52,23 @@ class SignupScreenIndividual extends StatelessWidget {
               SizedBox(height: 32),
               Text(
                 'Already have an account?',
-                style: appStyles(14, grayscale, FontWeight.w600,),
+                style: appStyles(
+                  14,
+                  grayscale,
+                  FontWeight.w600,
+                ),
               ),
               TextButton(
                 onPressed: () {
-                  // Action to perform when the button is pressed
+                  Get.to(() => LoginScreen());
                 },
                 child: Text(
                   'Login here',
-                  style: appStyles(14, secondaryColor, FontWeight.w600,),
+                  style: appStyles(
+                    14,
+                    secondaryColor,
+                    FontWeight.w600,
+                  ),
                 ),
               )
             ],
@@ -94,7 +104,7 @@ class SignupForm extends StatelessWidget {
           isPassword: false,
           autoCorrect: false,
           prefixIcon: Icon(
-            Icons.business_rounded,
+            Icons.person_outline_outlined,
             size: 30,
           ),
         ),
