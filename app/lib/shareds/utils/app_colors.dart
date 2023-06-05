@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-const primaryColor = Color(0xFF051094);
-const secondaryColor = Color(0xFF0122AE); // the color for sign up
+import 'dart:ui';
+
+const primaryColor = Color(0xFF0122AE);
 const validationErrorColor = Color(0xFFFF0000);
-const yellowColor = Color(0xFFFEE135);
+const yellowColor = Color(0xFFFFDE00);
+const successColor = Color(0xFF00BA88);
 const background = Color(0xFFffffff);
 const grayscale = Color(0xFFA0A3BD);
