@@ -1,14 +1,16 @@
+// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
+
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
-
 import '../shareds/utils/app_colors.dart';
 import '../shareds/utils/border_radius.dart';
 
 class StandardButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
+  final color;
   const StandardButton(
-      {super.key, required this.text, required this.onPressed});
+      {super.key, required this.text, required this.onPressed, this.color});
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -24,7 +26,38 @@ class StandardButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: appStyles(22, Colors.white, FontWeight.bold),
+          style: appStyles(22, color ?? Colors.white, FontWeight.bold),
+        ),
+      ),
+    );
+  }
+}
+
+class StandardButtonOutline extends StatelessWidget {
+  final String text;
+  final VoidCallback? onPressed;
+  final color;
+  const StandardButtonOutline(
+      {super.key, required this.text, required this.onPressed, this.color});
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.maxFinite,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(defaultBorderRadius)),
+          side: BorderSide(
+            color:
+                primaryColor, // Apply border color or transparent if not provided
+          ),
+          backgroundColor: background,
+          minimumSize: const Size(double.infinity, 70),
+        ),
+        child: Text(
+          text,
+          style: appStyles(16, color ?? Colors.white, FontWeight.w600),
         ),
       ),
     );
