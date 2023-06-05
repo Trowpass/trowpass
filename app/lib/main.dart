@@ -1,3 +1,4 @@
+import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,12 +15,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Trowpass',
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: primaryColor,
-        colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Trowpass'),
+      home: AccountTypeScreen(),     
     );
   }
 }

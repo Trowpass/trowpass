@@ -1,1 +1,1 @@
-const double defaultBorderRadius = 16;
+const double defaultBorderRadius = 07;
