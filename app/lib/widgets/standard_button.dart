@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_typing_uninitialized_variables
-
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import '../shareds/utils/app_colors.dart';
@@ -58,7 +56,9 @@ class StandardButtonOutline extends StatelessWidget {
         child: Text(
           text,
           style: appStyles(16, color ?? Colors.white, FontWeight.w600),
-        ),
+          backgroundColor: primaryColor,
+          minimumSize: const Size(double.infinity, 70),
+          side: const BorderSide(color: primaryColor),
       ),
     );
   }

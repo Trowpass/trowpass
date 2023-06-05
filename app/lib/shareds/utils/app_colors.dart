@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 const primaryColor = Color(0xFF051094);
 const secondaryColor = Color(0xFF0122AE); // the color for sign up
 const validationErrorColor = Color(0xFFFF0000);

@@ -1,4 +1,5 @@
 import 'package:app/screens/auth/account_type_screen.dart';
+import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,30 +15,36 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Trowpass',
-      // theme: ThemeData.dark().copyWith(
-      //   scaffoldBackgroundColor: primaryColor,
-      //   colorScheme: ColorScheme.fromSeed(seedColor: primaryColor),
-      //   useMaterial3: true,
-      // ),
-      home: AccountTypeScreen(),
+      home: AccountTypeScreen(),     
     );
   }
 }
 
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key, required this.title});
-//   final String title;
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
 
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-// class _MyHomePageState extends State<MyHomePage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-      
-
-//         );
-//   }
-// }
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text(widget.title),
+        ),
+        body: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Get started by adding your implementations/screens',
+              ),
+            ],
+          ),
+        ));
+  }
+}
