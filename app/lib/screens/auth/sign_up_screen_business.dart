@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:app/shareds/utils/app_colors.dart';
+import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreenBusiness extends StatelessWidget {
   final TextEditingController businessNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -32,15 +33,16 @@ class SignupScreen extends StatelessWidget {
             children: [
               Text(
                 'Let’s Get Started!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
+                style: appStyles(24, null, FontWeight.w600),
               ),
               SizedBox(height: 22),
               Text(
                 'Create an account with SanwoPay',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                style: appStyles(
+                    16,
+                    Colors.black,
+                    FontWeight.w400,
+                   ),
               ),
               SizedBox(height: 32),
               SignupForm(
@@ -52,10 +54,11 @@ class SignupScreen extends StatelessWidget {
               SizedBox(height: 32),
               Text(
                 'Already have an account?',
-                style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: grayscale),
+                style: appStyles(
+                    14,
+                    grayscale,
+                    FontWeight.w600,
+                    ),
               ),
               TextButton(
                 onPressed: () {
@@ -63,10 +66,10 @@ class SignupScreen extends StatelessWidget {
                 },
                 child: Text(
                   'Login here',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: secondaryColor,
+                  style: appStyles(
+                    14,
+                    secondaryColor,
+                    FontWeight.w600,
                   ),
                 ),
               )
