@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
+import 'package:app/screens/auth/sign_up_screen.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
@@ -27,15 +28,20 @@ class AccountTypeScreen extends StatelessWidget {
               'Get Started as a',
               style: appStyles(20, Colors.black, FontWeight.w500),
             ),
-            SizedBox(height: 32),
+            SizedBox(height: 35),
              StandardButtonOutline(
-              color: primaryColor,
+              color: secondaryColor,
               text: 'Business',
               onPressed: () {
-                // Handle business button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignupScreen(),
+                  ),
+                );
               },
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 18),
              StandardButton(
               text: 'Individual',
               onPressed: () {

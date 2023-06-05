@@ -20,13 +20,13 @@ class StandardButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(defaultBorderRadius)),
-          backgroundColor: primaryColor,
+          backgroundColor: secondaryColor,
           minimumSize: const Size(double.infinity, 70),
-          side: const BorderSide(color: primaryColor),
+          side: const BorderSide(color: secondaryColor),
         ),
         child: Text(
           text,
-          style: appStyles(22, color ?? Colors.white, FontWeight.bold),
+          style: appStyles(16, color ?? Colors.white, FontWeight.bold),
         ),
       ),
     );
@@ -50,7 +50,7 @@ class StandardButtonOutline extends StatelessWidget {
               borderRadius: BorderRadius.circular(defaultBorderRadius)),
           side: BorderSide(
             color:
-                primaryColor, // Apply border color or transparent if not provided
+                secondaryColor, // Apply border color or transparent if not provided
           ),
           backgroundColor: background,
           minimumSize: const Size(double.infinity, 70),
