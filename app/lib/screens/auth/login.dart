@@ -21,12 +21,6 @@ class LoginScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: background,
           elevation: 0.0,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              Get.back();
-            },
-          ),
         ),
         body: SingleChildScrollView(
           child: Padding(
