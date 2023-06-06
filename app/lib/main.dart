@@ -1,4 +1,5 @@
-import 'package:app/screens/auth/login.dart';
+import 'package:app/shareds/resources/routes/app_pages.dart';
+import 'package:app/shareds/resources/routes/app_reoutes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,10 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GetMaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: AppRoutes.login,
+      getPages: AppPages.list,
       title: 'Trowpass',
-      home: LoginScreen(),
     );
   }
 }
