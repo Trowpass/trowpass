@@ -8,6 +8,8 @@ import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../navigation_menus/home_landing_tab_screen.dart';
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -74,6 +76,19 @@ class LoginScreen extends StatelessWidget {
                   },
                   child: Text(
                     'Sign Up',
+                    style: appStyles(
+                      14,
+                      primaryColor,
+                      FontWeight.w600,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Get.to(() => const HomeLandingTabScreen());
+                  },
+                  child: Text(
+                    'Go to bottom menu',
                     style: appStyles(
                       14,
                       primaryColor,
