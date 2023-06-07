@@ -7,7 +7,6 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../navigation_menus/home_landing_tab_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -164,7 +163,24 @@ class LoginForm extends StatelessWidget {
                   onFieldSubmitted: (_) =>
                       authController.isFocused.value = false,
                 )),
-            const SizedBox(height: 25),
+            const SizedBox(height: 03),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: TextButton(
+                onPressed: () {
+                  Get.to(() => const HomeLandingTabScreen());
+                },
+                child: Text(
+                  'Forgot Password?',
+                  style: appStyles(
+                    14,
+                    grayscale,
+                    FontWeight.w400,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 18),
             StandardButton(
               text: 'LOG IN',
               onPressed: () {

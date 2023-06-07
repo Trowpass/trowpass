@@ -1,3 +1,4 @@
+import 'package:app/screens/dashboard/dashboard.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,21 +12,7 @@ class HomeTabScreen extends GetView<HomeTabController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          controller.title,
-          style: const TextStyle(color: Colors.black),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body: const Center(
-        child: Text(
-          "Home Page",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      body:  DashboardScreen(),
     );
   }
 }
