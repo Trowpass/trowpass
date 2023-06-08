@@ -163,44 +163,37 @@ class DashboardScreen extends StatelessWidget {
                         CustomCard(
                           imagePath: scan,
                           text: 'Scan to Pay',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                         CustomCard(
                           imagePath: topup,
                           text: 'Topup Transport Wallet',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                         CustomCard(
                           imagePath: loan,
                           text: 'Get Transport Loan',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                         CustomCard(
                           imagePath: card,
                           text: 'Transport Card',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                         CustomCard(
                           imagePath: book,
                           text: 'Book a Bus',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                         CustomCard(
                           imagePath: send,
                           text: 'Send Money',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                         CustomCard(
                           imagePath: book,
                           text: 'Transports Pay',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                         CustomCard(
                           imagePath: flight,
@@ -212,8 +205,7 @@ class DashboardScreen extends StatelessWidget {
                         CustomCard(
                           imagePath: train,
                           text: 'Train Ticket',
-                          onTap: () {
-                          },
+                          onTap: () {},
                         ),
                       ],
                     ),
@@ -222,11 +214,27 @@ class DashboardScreen extends StatelessWidget {
                   ImageSlider(),
                 ],
               ),
-            
-            )
+            ),
           ],
         ),
       ),
+      floatingActionButton: GetBuilder<DashboardController>(
+        builder: (controller) {
+          return FloatingActionButton.extended(
+            onPressed: () {},
+            backgroundColor: primaryColor,
+            icon: Icon(
+              Icons.add,
+              color: background,
+            ),
+            label: Text(
+              'Topup Wallet',
+              style: appStyles(12, background, FontWeight.w400),
+            ),
+          );
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
