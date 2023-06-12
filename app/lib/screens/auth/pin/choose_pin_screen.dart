@@ -25,16 +25,6 @@ class ChoosePinController extends GetxController {
       pin.value = pin.value.substring(0, pin.value.length - 1);
     }
   }
-
-  void continueButtonPressed() {
-    if (pin.value.length == 4) {
-      // Perform any desired logic with the entered PIN
-      print('Entered PIN: ${pin.value}');
-    } else {
-      // Handle the case when the PIN is not complete
-      print('Please enter a 4-digit PIN.');
-    }
-  }
 }
 
 class ChoosePinScreen extends StatelessWidget {
