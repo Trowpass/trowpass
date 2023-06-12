@@ -33,35 +33,37 @@ class DashboardScreen extends StatelessWidget {
                     padding: EdgeInsets.all(16),
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Welcome back!',
-                                    style: appStyles(
-                                        16, offWhite, FontWeight.w300),
-                                  ),
-                                  Text(
-                                    'Damilola',
-                                    style: appStyles(
-                                        18, offWhite, FontWeight.w500),
-                                  ),
-                                ],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 17),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Welcome back!',
+                                      style: appStyles(
+                                          16, offWhite, FontWeight.w300),
+                                    ),
+                                    Text(
+                                      'Damilola',
+                                      style: appStyles(
+                                          18, offWhite, FontWeight.w500),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Align(
-                                alignment: Alignment.topRight,
-                                child: Image.asset(qrCode),
-                              ),
-                            ),
-                          ],
+                              Expanded(
+                                  flex: 1,
+                                  child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Image.asset(qrCode),
+                                  )),
+                            ],
+                          ),
                         ),
                         SizedBox(height: 36),
                         Row(

@@ -9,6 +9,7 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../navigation_menus/home_landing_tab_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -86,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(() =>  HomeLandingTabScreen());
+                    Get.to(() => HomeLandingTabScreen());
                   },
                   child: Text(
                     'Go to bottom menu',
@@ -170,7 +171,7 @@ class LoginForm extends StatelessWidget {
               alignment: Alignment.bottomRight,
               child: TextButton(
                 onPressed: () {
-                  Get.to(() => const HomeLandingTabScreen());
+                  Get.to(() => HomeLandingTabScreen());
                 },
                 child: Text(
                   'Forgot Password?',
