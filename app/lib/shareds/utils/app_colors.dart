@@ -7,3 +7,4 @@ const successColor = Color(0xFF00BA88);
 const background = Color(0xFFffffff);
 const grayscale = Color(0xFFA0A3BD);
 const offWhite = Color(0xFFFCFCFC);
+const titleActive = Color(0xFF14142B);

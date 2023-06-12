@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app/controllers/auth_controller.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -84,7 +86,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => const HomeLandingTabScreen());
+                    Get.to(() =>  HomeLandingTabScreen());
                   },
                   child: Text(
                     'Go to bottom menu',
