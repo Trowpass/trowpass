@@ -8,6 +8,8 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../wallet/top_up_transport_wallet.dart';
+
 class DashboardController extends GetxController {
   var showBalance = true.obs;
 
@@ -170,7 +172,9 @@ class DashboardScreen extends StatelessWidget {
                         CustomCard(
                           imagePath: topup,
                           text: 'Topup Transport Wallet',
-                          onTap: () {},
+                          onTap: () {
+                            Get.to(TopUpTransportWalletScreen());
+                          },
                         ),
                         CustomCard(
                           imagePath: loan,
