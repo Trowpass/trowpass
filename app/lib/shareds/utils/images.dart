@@ -2,6 +2,7 @@
 const loginImg = 'assets/images/welcome_img.png';
 const qrCode = 'assets/images/qrcode.png';
 const slide1 = 'assets/images/slide1.png';
+const paymentSummary = 'assets/images/payment.png';
 
 //region Icons
 const card = 'assets/icons/card.png';

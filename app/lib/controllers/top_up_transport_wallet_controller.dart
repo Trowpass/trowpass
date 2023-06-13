@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TopUpWalletController extends GetxController {
+class TopUpTransportWalletController extends GetxController {
   final title = Rx<String>('Topup your transport wallet');
   final subTitle = Rx<String>(
       'Easily fund your tansport wallet without opening several apps to do so.');

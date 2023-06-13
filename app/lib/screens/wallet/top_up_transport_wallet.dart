@@ -4,14 +4,14 @@ import 'package:app/widgets/text_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/top_up_wallet_controller.dart';
+import '../../controllers/top_up_transport_wallet_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/border_radius.dart';
 
-class TopUpWalletScreen extends StatelessWidget {
-  TopUpWalletScreen({super.key});
+class TopUpTransportWalletScreen extends StatelessWidget {
+  TopUpTransportWalletScreen({super.key});
 
-  final controller = Get.put(TopUpWalletController());
+  final controller = Get.put(TopUpTransportWalletController());
 
   @override
   Widget build(BuildContext context) {
