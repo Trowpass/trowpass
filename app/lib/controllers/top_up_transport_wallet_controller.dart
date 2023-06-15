@@ -1,3 +1,4 @@
+import 'package:app/screens/wallet/top_up_transport_wallet_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,6 +40,8 @@ class TopUpTransportWalletController extends GetxController {
     Get.focusScope!.unfocus();
     if (pinTextEditController.text.length <= 4) {
       Get.snackbar('Pin validation', 'Incomplete pin length');
+    } else {
+      Get.to(TopUpTransportWalletSummaryScreen());
     }
   }
 

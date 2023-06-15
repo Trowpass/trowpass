@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../controllers/top_up_transport_wallet_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/border_radius.dart';
+import '../beneficiary/beneficiaries.dart';
 
 class TopUpTransportWalletScreen extends StatelessWidget {
   TopUpTransportWalletScreen({super.key});
@@ -91,7 +92,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                       }).toList(),
                     ))),
             GestureDetector(
-              onTap: null,
+              onTap: () => Get.to(BeneficiariesScreen()),
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Text(

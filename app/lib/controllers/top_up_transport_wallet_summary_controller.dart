@@ -1,3 +1,4 @@
+import 'package:app/screens/wallet/top_up_transport_wallet_done.dart';
 import 'package:get/get.dart';
 
 class TopUpTransportWalletSummaryController extends GetxController {
@@ -15,5 +16,7 @@ class TopUpTransportWalletSummaryController extends GetxController {
     super.onInit();
   }
 
-  void trySubmit() {}
+  void trySubmit() {
+    Get.to(TopUpTransportWalletDoneScreen());
+  }
 }
