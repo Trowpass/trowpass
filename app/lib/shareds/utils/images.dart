@@ -4,6 +4,9 @@ const qrCode = 'assets/images/qrcode.png';
 const slide1 = 'assets/images/slide1.png';
 const paymentSummary = 'assets/images/payment.png';
 const successImg = 'assets/images/success.png';
+const yellowCard = 'assets/images/yellow_card.png';
+const visaCard = 'assets/images/visa.png';
+const masterCard = 'assets/images/master_card.png';
 
 //region Icons
 const card = 'assets/icons/card.png';
