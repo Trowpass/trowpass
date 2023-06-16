@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../wallet/top_up_transport_wallet.dart';
+import '../wallet/topup/wallet_top_up.dart';
 
 class DashboardController extends GetxController {
   var showBalance = true.obs;
@@ -227,7 +228,7 @@ class DashboardScreen extends StatelessWidget {
       floatingActionButton: GetBuilder<DashboardController>(
         builder: (controller) {
           return FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: () => Get.to(WalletTopUpScreen()),
             backgroundColor: primaryColor,
             icon: Icon(
               Icons.add,

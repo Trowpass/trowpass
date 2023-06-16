@@ -29,7 +29,7 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Text(
-                      'Payment Receipt',
+                      'Receipt',
                       style: appStyles(20, Colors.white, FontWeight.bold),
                     ),
                   ),
