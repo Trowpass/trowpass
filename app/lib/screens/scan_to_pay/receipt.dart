@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_declarations, use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
@@ -8,9 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ReceiptController extends GetxController {
-  final String recipientName = 'John Doe';
-  final String recipientNumber = '1234567890';
-  final String amount = '\$100.00'; // Replace with the actual amount
+  final RxString recipientName = RxString('');
+  final RxString recipientNumber = RxString('');
+  final RxString amount = RxString('');
+
+  void initData(String name, String number, String amount) {
+    recipientName.value = name;
+    recipientNumber.value = number;
+    this.amount.value = amount;
+  }
 }
 
 class ReceiptScreen extends StatelessWidget {
@@ -18,6 +24,12 @@ class ReceiptScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String recipientName = 'Ajakaye Damilola';
+    final String recipientNumber = '07056833529';
+    final String amount = 'N100,000';
+
+    controller.initData(recipientName, recipientNumber, amount);
+
     return Scaffold(
       backgroundColor: primaryColor,
       body: Container(
@@ -28,8 +40,10 @@ class ReceiptScreen extends StatelessWidget {
               const SizedBox(
                 height: 80,
               ),
-              Text('Transfer Receipt',
-                  style: appStyles(20, background, FontWeight.w600)),
+              Text(
+                'Transfer Receipt',
+                style: appStyles(20, background, FontWeight.w600),
+              ),
               const SizedBox(
                 height: 40,
               ),
@@ -63,15 +77,17 @@ class ReceiptScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: 0),
-                          Text(
-                            'Ajakaye Damilola',
-                            style: appStyles(16, titleActive, FontWeight.w500),
-                          ),
+                          Obx(() => Text(
+                                controller.recipientName.value,
+                                style:
+                                    appStyles(16, titleActive, FontWeight.w500),
+                              )),
                           SizedBox(height: 30),
-                          Text(
-                            'N5,000',
-                            style: appStyles(24, titleActive, FontWeight.w600),
-                          ),
+                          Obx(() => Text(
+                                controller.amount.value,
+                                style: appStyles(
+                                    24, titleActive, FontWeight.w600),
+                              )),
                           SizedBox(height: 6),
                           Padding(
                             padding: const EdgeInsets.all(40.0),
@@ -98,16 +114,18 @@ class ReceiptScreen extends StatelessWidget {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'Ajakaye Damilola',
-                                          style: appStyles(
-                                              14, titleActive, FontWeight.w500),
-                                        ),
-                                        Text(
-                                          '07056833529',
-                                          style: appStyles(
-                                              10, gray, FontWeight.w500),
-                                        ),
+                                        Obx(() => Text(
+                                              controller.recipientName.value,
+                                              style: appStyles(
+                                                  14,
+                                                  titleActive,
+                                                  FontWeight.w500),
+                                            )),
+                                        Obx(() => Text(
+                                              controller.recipientNumber.value,
+                                              style: appStyles(
+                                                  10, gray, FontWeight.w500),
+                                            )),
                                       ],
                                     ),
                                   ],
@@ -135,11 +153,3 @@ class ReceiptScreen extends StatelessWidget {
     );
   }
 }
-
-// void main() {
-//   runApp(
-//     GetMaterialApp(
-//       home: ReceiptScreen(),
-//     ),
-//   );
-// }

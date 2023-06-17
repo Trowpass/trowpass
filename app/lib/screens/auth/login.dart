@@ -3,7 +3,6 @@
 import 'package:app/controllers/auth_controller.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/screens/scan_to_pay/pay.dart';
-import 'package:app/screens/scan_to_pay/payment_summary.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
