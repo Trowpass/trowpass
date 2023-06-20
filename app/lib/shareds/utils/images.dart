@@ -2,6 +2,15 @@
 const loginImg = 'assets/images/welcome_img.png';
 const qrCode = 'assets/images/qrcode.png';
 const slide1 = 'assets/images/slide1.png';
+const code = 'assets/images/code.png';
+const profile = 'assets/images/profile.png';
+const subtract = 'assets/images/Substract.png';
+const success = 'assets/images/success.png';
+const masterCard = 'assets/images/master_card.png';
+const visaCard = 'assets/images/visa.png';
+const yellowCard = 'assets/images/yellow_card.png';
+const user = 'assets/images/user.png';
+const summary = 'assets/images/summary.png';
 
 //region Icons
 const card = 'assets/icons/card.png';

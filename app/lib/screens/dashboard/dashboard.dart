@@ -3,7 +3,6 @@
 import 'package:app/screens/dashboard/components/custom_card.dart';
 import 'package:app/screens/dashboard/components/image_slider.dart';
 import 'package:app/screens/scan_to_pay/qr_code.dart';
-import 'package:app/screens/scan_to_pay/receipt.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';

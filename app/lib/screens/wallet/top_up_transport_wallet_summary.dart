@@ -32,7 +32,7 @@ class TopUpTransportWalletSummaryScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(top: 20, bottom: 10),
-                child: Image.asset(paymentSummary),
+                child: Image.asset(summary),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 2),

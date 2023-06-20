@@ -48,7 +48,7 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 20),
-                              child: Image.asset(successImg),
+                              child: Image.asset(success),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 3),
