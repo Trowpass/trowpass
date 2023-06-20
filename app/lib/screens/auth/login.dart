@@ -2,6 +2,7 @@
 
 import 'package:app/controllers/auth_controller.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
+import 'package:app/screens/scan_to_pay/pay.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -9,7 +10,6 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../navigation_menus/home_landing_tab_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -87,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => HomeLandingTabScreen());
+                    Get.to(() => PayScreen());
                   },
                   child: Text(
                     'Go to bottom menu',
@@ -118,6 +118,7 @@ class LoginForm extends StatelessWidget {
         child: Column(
           children: [
             Obx(() => TextInputForm(
+                  enabled: true,
                   inputController: authController.emailPhoneNumberController,
                   textLabel: 'Email or phone number',
                   textHint: 'Email or phone number',
@@ -141,6 +142,7 @@ class LoginForm extends StatelessWidget {
                 )),
             const SizedBox(height: 16),
             Obx(() => TextInputForm(
+                  enabled: true,
                   inputController: authController.passwordController,
                   textLabel: 'Password',
                   textHint: 'Password',

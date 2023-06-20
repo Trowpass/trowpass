@@ -8,3 +8,8 @@ const background = Color(0xFFffffff);
 const grayscale = Color(0xFFA0A3BD);
 const offWhite = Color(0xFFFCFCFC);
 const titleActive = Color(0xFF14142B);
+
+const line = Color(0xFF092CF7);
+const filled = Color(0xFFEDEDED);
+const label = Color(0xFF6E7191);
+const gray = Color(0xFF252422);

@@ -88,6 +88,7 @@ class SigUpForm extends StatelessWidget {
         child: Column(
           children: [
             TextInputForm(
+              enabled: true,
               inputController: businessController.businessNameController,
               textLabel: 'Business Name',
               textHint: 'Business Name',
@@ -101,6 +102,7 @@ class SigUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextInputForm(
+              enabled: true,
               inputController: businessController.emailController,
               textLabel: 'Company Email',
               textHint: 'Company Email',
@@ -114,6 +116,7 @@ class SigUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextInputForm(
+              enabled: true,
               inputController: businessController.passwordController,
               textLabel: 'Password',
               textHint: 'Password',
@@ -127,6 +130,7 @@ class SigUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextInputForm(
+              enabled: true,
               inputController: businessController.confirmPasswordController,
               textLabel: 'Confirm Password',
               textHint: 'Confirm password',
