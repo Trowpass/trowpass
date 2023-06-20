@@ -5,56 +5,88 @@ import 'package:flutter/material.dart';
 import '../shareds/utils/app_colors.dart';
 import '../shareds/utils/border_radius.dart';
 
-// this input text is for validation form ony
 class TextInputForm extends StatelessWidget {
   final TextEditingController inputController;
-  final String textLabel;
+  final String? textLabel;
   final String textHint;
   final String? textError;
-  final String validatorMessage;
+  final String? validatorMessage;
   final bool isPassword;
   final bool autoCorrect;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final TextInputType? inputType;
+  final InputBorder? enabledBorder;
+  final InputBorder? focusedBorder;
+  final void Function()? onTap;
+  final void Function(String)? onChanged;
+  final void Function(String)? onFieldSubmitted;
+  final bool enabled; // Added the enabled field
+
   const TextInputForm({
     Key? key,
     required this.inputController,
-    required this.textLabel,
+    this.textLabel,
     required this.textHint,
     this.textError,
-    required this.validatorMessage,
+    this.validatorMessage,
     required this.isPassword,
     required this.autoCorrect,
     this.prefixIcon,
     this.suffixIcon,
     this.inputType,
+    this.enabledBorder,
+    this.focusedBorder,
+    this.onTap,
+    this.onChanged,
+    this.onFieldSubmitted,
+    required this.enabled, // Added the enabled parameter
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+     final fillColor = enabled ? Colors.transparent : filled;
+     final borderColor = enabled ? primaryColor : filled;
+
     return TextFormField(
       keyboardType: inputType,
       obscureText: isPassword,
       autocorrect: autoCorrect,
       controller: inputController,
       style: const TextStyle(fontSize: 15),
+      enabled: enabled, // Use the enabled parameter to enable or disable the input field
       decoration: InputDecoration(
-          prefixIcon: prefixIcon,
-          suffixIcon: suffixIcon,
-          labelText: textLabel,
-          labelStyle: appStyles(15, null, null),
-          hintText: textHint,
-          errorText: textError,
-          errorStyle: appStyles(null, validationErrorColor, null),
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(defaultBorderRadius))),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
+        labelText: textLabel,
+        labelStyle: appStyles(15, null, null),
+        hintText: textHint,
+        errorText: textError,
+        errorStyle: appStyles(null, validationErrorColor, null),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(defaultBorderRadius),
+          borderSide: const BorderSide(color: primaryColor),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(defaultBorderRadius),
+          borderSide: const BorderSide(color: primaryColor),
+        ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(defaultBorderRadius),
+          borderSide: BorderSide(color: borderColor),
+        ),
+         filled: true,
+        fillColor: fillColor,
+      ),
       validator: (value) {
         if (value!.isEmpty) {
           return validatorMessage;
         }
         return null;
       },
+      onChanged: onChanged,
+      onTap: onTap,
+      onFieldSubmitted: onFieldSubmitted,
     );
   }
 }
