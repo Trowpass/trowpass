@@ -1,5 +1,6 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:app/screens/scan_to_pay/scan.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -186,27 +187,46 @@ Widget _buildMyCodeTab() {
 }
 
 Widget _buildScanTab() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(50.0),
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'Scan the QR code for customer information',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ],
+  return Container(
+    child: Column(
+      children: [
+        SizedBox(
+          height: 20,
         ),
-      ),
-    ],
+        Expanded(
+            flex: 1,
+            child: Column(
+              children: [
+                Text(
+                  "Scan the QR code",
+                  style: appStyles(16, titleActive, FontWeight.w500),
+                ),
+                Text(
+                  "for customer information",
+                  style: appStyles(16, titleActive, FontWeight.w500),
+                ),
+              ],
+            )),
+        Expanded(flex: 4, child: QrScanArea()),
+        Expanded(
+            flex: 1,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(Icons.browse_gallery_outlined),
+                  SizedBox(
+                    width: 10.0,
+                  ),
+                  Text(
+                    "Add code from gallery",
+                    style: appStyles(16, grayscale, FontWeight.w500),
+                  ),
+                ],
+              ),
+            )),
+      ],
+    ),
   );
 }

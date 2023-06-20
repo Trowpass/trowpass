@@ -2,6 +2,7 @@
 
 import 'package:app/screens/dashboard/components/custom_card.dart';
 import 'package:app/screens/dashboard/components/image_slider.dart';
+import 'package:app/screens/scan_to_pay/qr_code.dart';
 import 'package:app/screens/scan_to_pay/receipt.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
@@ -167,7 +168,7 @@ class DashboardScreen extends StatelessWidget {
                           imagePath: scan,
                           text: 'Scan to Pay',
                           onTap: () {
-                            Get.to(() => ReceiptScreen());
+                            Get.to(() => ScanScreen());
                           },
                         ),
                         CustomCard(
