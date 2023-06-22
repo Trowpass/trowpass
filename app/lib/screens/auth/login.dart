@@ -8,8 +8,9 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
-import '../../widgets/overlay_loader.dart';
+import '../../widgets/app_logo.dart';
 import '../navigation_menus/home_landing_tab_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -18,9 +19,12 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isLoaded.value
-        ? overlayLoader(controller.isLoaded.value)
-        : GestureDetector(
+    return Obx(() => OverlayLoaderWithAppIcon(
+          isLoading: controller.isLoaded.value,
+          overlayBackgroundColor: background,
+          circularProgressColor: primaryColor,
+          appIcon: appLogo(70, 70),
+          child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
               backgroundColor: background,
@@ -180,6 +184,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ));
+          ),
+        ));
   }
 }
