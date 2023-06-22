@@ -14,8 +14,9 @@ class AccountTypeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: background,
         elevation: 0.0,
         leading: IconButton(
           icon: const Icon(
@@ -47,7 +48,7 @@ class AccountTypeScreen extends StatelessWidget {
             StandardButton(
               text: 'Individual',
               onPressed: () {
-                Get.to(() => const SignUpScreenIndividual());
+                Get.to(() => SignUpScreenIndividual());
               },
             ),
           ],

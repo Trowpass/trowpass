@@ -9,19 +9,12 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/dashboard_conroller.dart';
 import '../wallet/top_up_transport_wallet.dart';
 import '../wallet/topup/wallet_top_up.dart';
 
-class DashboardController extends GetxController {
-  var showBalance = true.obs;
-
-  void toggleBalanceVisibility() {
-    showBalance.toggle();
-  }
-}
-
 class DashboardScreen extends StatelessWidget {
-  final DashboardController controller = Get.put(DashboardController());
+  final controller = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +31,7 @@ class DashboardScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 17),
+                          padding: const EdgeInsets.symmetric(vertical: 25),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -53,7 +46,7 @@ class DashboardScreen extends StatelessWidget {
                                           16, offWhite, FontWeight.w300),
                                     ),
                                     Text(
-                                      'Damilola',
+                                      controller.userName.value,
                                       style: appStyles(
                                           18, offWhite, FontWeight.w500),
                                     ),
