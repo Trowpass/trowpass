@@ -14,7 +14,6 @@ String getBaseUrlOnEnvironment(Environment environment) {
     default:
       break;
   }
-
   return _config[_baseUrl];
 }
 
