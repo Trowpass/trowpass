@@ -16,7 +16,6 @@ class SignUpScreenBusiness extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.focusScope!.unfocus(),
       child: Scaffold(
-        backgroundColor: background,
         appBar: AppBar(
           backgroundColor: background,
           elevation: 0.0,
@@ -58,7 +57,7 @@ class SignUpScreenBusiness extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.to(() => LoginScreen());
+                    Get.to(() => const LoginScreen());
                   },
                   child: Text(
                     'Login here',

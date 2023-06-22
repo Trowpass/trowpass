@@ -1,15 +1,14 @@
-import 'package:app/screens/auth/login.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/bindings/dashboard_tab_binding.dart';
+import '../../../screens/navigation_menus/home_landing_tab_screen.dart';
 import 'app_reoutes.dart';
 
 class AppPages {
   static var list = [
     GetPage(
       name: AppRoutes.login,
-      page: () => LoginScreen(),
-      // page: () => HomeLandingTabScreen(),
+      page: () => HomeLandingTabScreen(),
       binding: DashboardTabBinding(),
     ),
   ];
