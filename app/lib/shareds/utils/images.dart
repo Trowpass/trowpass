@@ -22,3 +22,4 @@ const send = 'assets/icons/send.png';
 const book = 'assets/icons/book.png';
 const topup = 'assets/icons/topup.png';
 const train = 'assets/icons/train.png';
+const configure = 'assets/icons/configure.png';
