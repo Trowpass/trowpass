@@ -6,7 +6,7 @@ import '../../widgets/bottom_bar_navigation_menu.dart';
 import 'bills_tab_screen.dart';
 import 'history_tab_screen.dart';
 import 'home_tab_screen.dart';
-import 'profile_tab_screen.dart';
+import 'user_profile.dart';
 
 class HomeLandingTabScreen extends StatelessWidget {
   HomeLandingTabScreen({super.key});
@@ -18,11 +18,11 @@ class HomeLandingTabScreen extends StatelessWidget {
       return Scaffold(
           body: Obx(() => IndexedStack(
                 index: controller.pageIndex.value,
-                children: const [
-                  HomeTabScreen(),
-                  HistoryTabScreen(),
-                  BillsTabScreen(),
-                  ProfileTabScreen(),
+                children: [
+                  const HomeTabScreen(),
+                  const HistoryTabScreen(),
+                  const BillsTabScreen(),
+                  UserProfileScreen(),
                 ],
               )),
           bottomNavigationBar: buildBottomNavigationMenu(

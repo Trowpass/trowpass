@@ -11,6 +11,10 @@ class TextInput extends StatelessWidget {
   final String? textHint;
   final bool isPassword;
   final bool isReadOnly;
+  final bool enabled;
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  final int? maxLines;
   const TextInput({
     Key? key,
     required this.inputController,
@@ -20,11 +24,18 @@ class TextInput extends StatelessWidget {
     required this.isReadOnly,
     this.maxLength,
     this.keyboardType,
+    required this.enabled,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.maxLines,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final fillColor = enabled ? Colors.transparent : filled;
+    final borderColor = enabled ? primaryColor : filled;
     return TextField(
+      maxLines: maxLines,
       keyboardType: keyboardType,
       maxLength: maxLength,
       readOnly: isReadOnly,
@@ -32,11 +43,14 @@ class TextInput extends StatelessWidget {
       autocorrect: isPassword == false ? true : false,
       controller: inputController,
       decoration: InputDecoration(
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
+          fillColor: fillColor,
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: primaryColor),
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: grayscale),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: borderColor),
           ),
           labelText: textLabel,
           hintText: textHint,
