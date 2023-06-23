@@ -37,7 +37,7 @@ class OtpController extends GetxController {
       String otpValue =
           '${codeOneController.text}${codeTwoController.text}${codeThreeController.text}${codeFourController.text}';
       var response = await userController.verifyOtpAsync(VerifyOtpRequest(
-          email: session.readRiderEmail(), code: otpValue.trim()));
+          email: session.readRiderEmail()!, code: otpValue.trim()));
       if (response.status) {
         Get.to(HomeLandingTabScreen());
       } else {
