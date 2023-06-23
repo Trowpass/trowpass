@@ -2,6 +2,9 @@
 
 import 'package:app/screens/dashboard/components/custom_card.dart';
 import 'package:app/screens/dashboard/components/image_slider.dart';
+import 'package:app/screens/get_transport_card/card_request_successful.dart';
+import 'package:app/screens/get_transport_card/card_type.dart';
+import 'package:app/screens/get_transport_card/created_card.dart';
 import 'package:app/screens/scan_to_pay/qr_code.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
@@ -170,7 +173,7 @@ class DashboardScreen extends StatelessWidget {
                           imagePath: scan,
                           text: 'Scan to Pay',
                           onTap: () {
-                            Get.to(() => ScanScreen());
+                            Get.to(ScanScreen());
                           },
                         ),
                         CustomCard(
@@ -188,7 +191,10 @@ class DashboardScreen extends StatelessWidget {
                         CustomCard(
                           imagePath: card,
                           text: 'Transport Card',
-                          onTap: () {},
+                          
+                          onTap: () {
+                            Get.to(CardRequestSucessfulScreen());
+                          },
                         ),
                         CustomCard(
                           imagePath: book,

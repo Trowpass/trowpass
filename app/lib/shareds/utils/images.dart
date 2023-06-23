@@ -11,6 +11,7 @@ const visaCard = 'assets/images/visa.png';
 const yellowCard = 'assets/images/yellow_card.png';
 const user = 'assets/images/user.png';
 const summary = 'assets/images/summary.png';
+const cardSuccess = 'assets/images/card_success.png';
 
 //region Icons
 const card = 'assets/icons/card.png';
