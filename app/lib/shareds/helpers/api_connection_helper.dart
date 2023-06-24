@@ -17,8 +17,7 @@ class ApiConnectionHelper {
         return false;
       },
       headers: {
-        '': null,
-        'Accept': "text/plain",
+        'Accept': '*/*',
       }))
     ..interceptors.addAll([
       AppInterceptors(),

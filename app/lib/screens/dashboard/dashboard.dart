@@ -2,9 +2,7 @@
 
 import 'package:app/screens/dashboard/components/custom_card.dart';
 import 'package:app/screens/dashboard/components/image_slider.dart';
-import 'package:app/screens/get_transport_card/card_request_successful.dart';
-import 'package:app/screens/get_transport_card/card_type.dart';
-import 'package:app/screens/get_transport_card/created_card.dart';
+import 'package:app/screens/get_transport_card/transport_card.dart';
 import 'package:app/screens/scan_to_pay/qr_code.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
@@ -12,19 +10,12 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/dashboard_conroller.dart';
 import '../wallet/top_up_transport_wallet.dart';
 import '../wallet/topup/wallet_top_up.dart';
 
-class DashboardController extends GetxController {
-  var showBalance = true.obs;
-
-  void toggleBalanceVisibility() {
-    showBalance.toggle();
-  }
-}
-
 class DashboardScreen extends StatelessWidget {
-  final DashboardController controller = Get.put(DashboardController());
+  final controller = Get.put(DashboardController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +32,7 @@ class DashboardScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 17),
+                          padding: const EdgeInsets.symmetric(vertical: 25),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -56,7 +47,7 @@ class DashboardScreen extends StatelessWidget {
                                           16, offWhite, FontWeight.w300),
                                     ),
                                     Text(
-                                      'Damilola',
+                                      controller.userName.value,
                                       style: appStyles(
                                           18, offWhite, FontWeight.w500),
                                     ),
@@ -191,9 +182,8 @@ class DashboardScreen extends StatelessWidget {
                         CustomCard(
                           imagePath: card,
                           text: 'Transport Card',
-                          
                           onTap: () {
-                            Get.to(CardRequestSucessfulScreen());
+                            Get.to(GetTransportCard());
                           },
                         ),
                         CustomCard(
