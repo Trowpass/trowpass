@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/services/requests/post_requests/user_login_request.dart';
+import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 
 import '../services/exceptions/dio_exceptions.dart';
@@ -8,10 +9,13 @@ import '../services/requests/post_requests/rider_registration_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../services/responses/base_response.dart';
 import '../services/responses/user_login_response.dart';
+import '../services/responses/view_profile_response.dart';
+
 import '../shareds/constants/endpoints.dart';
 import '../shareds/helpers/api_connection_helper.dart';
 
 class UserRepository {
+  GetSessionManager session = GetSessionManager();
   var apiConnectionHelper = ApiConnectionHelper();
   dynamic response;
 
@@ -60,6 +64,26 @@ class UserRepository {
         return BaseResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to verify account');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+  Future<ViewProfileResponse> getUserProfileAsync() async {
+    try {
+      var response = await apiConnectionHelper.getDataAsync(
+          url: Endpoints().userProfile,
+          requestOptions: Options(headers: {
+            'Authorization': 'Token ${session.readAuthorizationToken()}'
+          }));
+      if (response.data != null) {
+        return ViewProfileResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to get user profile');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));

@@ -106,36 +106,44 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                 contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                 title: const Text('Account/Wallet Number'),
                 subtitle: TextInput(
-                    isReadOnly: false,
-                    inputController:
-                        controller.accountWalletNumberTextEditController,
-                    textHint: 'Type here',
-                    isPassword: false)),
+                  isReadOnly: false,
+                  inputController:
+                      controller.accountWalletNumberTextEditController,
+                  textHint: 'Type here',
+                  isPassword: false,
+                  enabled: false,
+                )),
             ListTile(
                 contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                 title: const Text('Account Name'),
                 subtitle: TextInput(
-                    isReadOnly: true,
-                    inputController: controller.accountNameTextEditController,
-                    isPassword: false)),
+                  isReadOnly: true,
+                  inputController: controller.accountNameTextEditController,
+                  isPassword: false,
+                  enabled: false,
+                )),
             ListTile(
                 contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                 title: const Text('Amount'),
                 subtitle: TextInput(
-                    keyboardType: TextInputType.number,
-                    isReadOnly: false,
-                    inputController: controller.amountTextEditController,
-                    textHint: '0.00',
-                    isPassword: false)),
+                  keyboardType: TextInputType.number,
+                  isReadOnly: false,
+                  inputController: controller.amountTextEditController,
+                  textHint: '0.00',
+                  isPassword: false,
+                  enabled: false,
+                )),
             ListTile(
                 contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                 title: const Text('PIN'),
                 subtitle: TextInput(
-                    keyboardType: TextInputType.number,
-                    isReadOnly: false,
-                    inputController: controller.pinTextEditController,
-                    textHint: 'Pin',
-                    isPassword: true)),
+                  keyboardType: TextInputType.number,
+                  isReadOnly: false,
+                  inputController: controller.pinTextEditController,
+                  textHint: 'Pin',
+                  isPassword: true,
+                  enabled: false,
+                )),
             Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: StandardButton(

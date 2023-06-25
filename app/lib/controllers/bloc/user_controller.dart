@@ -45,4 +45,15 @@ class UserController {
       return Future.error(e);
     }
   }
+  Future<ViewProfileResponse> userProfileAsync() async {
+    try {
+      final response = await userRepository.getUserProfileAsync();
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
 }

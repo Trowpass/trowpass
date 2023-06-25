@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../shareds/utils/app_colors.dart';
 import '../shareds/utils/border_radius.dart';
@@ -22,7 +23,7 @@ class TextInputForm extends StatelessWidget {
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final bool enabled; // Added the enabled field
-
+  final List<TextInputFormatter>? inputFormatters;
   const TextInputForm({
     Key? key,
     required this.inputController,
@@ -40,21 +41,24 @@ class TextInputForm extends StatelessWidget {
     this.onTap,
     this.onChanged,
     this.onFieldSubmitted,
-    required this.enabled, // Added the enabled parameter
+    required this.enabled,
+    this.inputFormatters, // Added the enabled parameter
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-     final fillColor = enabled ? Colors.transparent : filled;
-     final borderColor = enabled ? primaryColor : filled;
+    final fillColor = enabled ? Colors.transparent : filled;
+    final borderColor = enabled ? primaryColor : filled;
 
     return TextFormField(
+      inputFormatters: inputFormatters,
       keyboardType: inputType,
       obscureText: isPassword,
       autocorrect: autoCorrect,
       controller: inputController,
       style: const TextStyle(fontSize: 15),
-      enabled: enabled, // Use the enabled parameter to enable or disable the input field
+      enabled:
+          enabled, // Use the enabled parameter to enable or disable the input field
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
@@ -75,7 +79,7 @@ class TextInputForm extends StatelessWidget {
           borderRadius: BorderRadius.circular(defaultBorderRadius),
           borderSide: BorderSide(color: borderColor),
         ),
-         filled: true,
+        filled: true,
         fillColor: fillColor,
       ),
       validator: (value) {
