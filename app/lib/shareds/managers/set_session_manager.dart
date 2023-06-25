@@ -21,7 +21,6 @@ class SetSessionManager {
   void writeUserFirstName(dynamic fn) {
     storage.write(userFirstName, fn);
   }
-
   void writeUserFullName(dynamic fullNmae) {
     storage.write(riderFullName, fullNmae);
   }

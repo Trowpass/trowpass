@@ -2,6 +2,7 @@
 
 import 'package:app/screens/dashboard/components/custom_card.dart';
 import 'package:app/screens/dashboard/components/image_slider.dart';
+import 'package:app/screens/get_transport_card/transport_card.dart';
 import 'package:app/screens/scan_to_pay/qr_code.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
@@ -29,6 +30,10 @@ class DashboardScreen extends StatelessWidget {
                     color: primaryColor,
                     child: Column(
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 25),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         Container(
                           padding: EdgeInsets.all(16),
                           child: Column(
@@ -40,6 +45,15 @@ class DashboardScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
+                                    Text(
+                                      'Welcome back!',
+                                      style: appStyles(
+                                          16, offWhite, FontWeight.w300),
+                                    ),
+                                    Text(
+                                      controller.userName.value,
+                                      style: appStyles(
+                                          18, offWhite, FontWeight.w500),
                                     Expanded(
                                       flex: 1,
                                       child: Column(
@@ -164,6 +178,58 @@ class DashboardScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(12.0),
                     child: Column(
                       children: [
+                        CustomCard(
+                          imagePath: scan,
+                          text: 'Scan to Pay',
+                          onTap: () {
+                            Get.to(ScanScreen());
+                          },
+                        ),
+                        CustomCard(
+                          imagePath: topup,
+                          text: 'Topup Transport Wallet',
+                          onTap: () {
+                            Get.to(TopUpTransportWalletScreen());
+                          },
+                        ),
+                        CustomCard(
+                          imagePath: loan,
+                          text: 'Get Transport Loan',
+                          onTap: () {},
+                        ),
+                        CustomCard(
+                          imagePath: card,
+                          text: 'Transport Card',
+                          onTap: () {
+                            Get.to(GetTransportCard());
+                          },
+                        ),
+                        CustomCard(
+                          imagePath: book,
+                          text: 'Book a Bus',
+                          onTap: () {},
+                        ),
+                        CustomCard(
+                          imagePath: send,
+                          text: 'Send Money',
+                          onTap: () {},
+                        ),
+                        CustomCard(
+                          imagePath: book,
+                          text: 'Transports Pay',
+                          onTap: () {},
+                        ),
+                        CustomCard(
+                          imagePath: flight,
+                          text: 'Book Flight',
+                          onTap: () {
+                            // Handle card 8 tap
+                          },
+                        ),
+                        CustomCard(
+                          imagePath: train,
+                          text: 'Train Ticket',
+                          onTap: () {},
                         Container(
                           child: GridView.count(
                             crossAxisCount: 3,

@@ -8,6 +8,7 @@ const background = Color(0xFFffffff);
 const grayscale = Color(0xFFA0A3BD);
 const offWhite = Color(0xFFFCFCFC);
 const titleActive = Color(0xFF14142B);
+const anchor = Color(0xFF1CC8EE);
 
 const line = Color(0xFF092CF7);
 const filled = Color(0xFFEDEDED);
