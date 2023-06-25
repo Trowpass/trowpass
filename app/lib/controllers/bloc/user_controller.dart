@@ -5,6 +5,7 @@ import 'package:app/services/requests/post_requests/verify_otp_request.dart';
 import '../../services/requests/post_requests/rider_registration_request.dart';
 import '../../services/responses/base_response.dart';
 import '../../services/responses/user_login_response.dart';
+import '../../services/responses/view_profile_response.dart';
 
 class UserController {
   final userRepository = UserRepository();
@@ -45,6 +46,7 @@ class UserController {
       return Future.error(e);
     }
   }
+
   Future<ViewProfileResponse> userProfileAsync() async {
     try {
       final response = await userRepository.getUserProfileAsync();

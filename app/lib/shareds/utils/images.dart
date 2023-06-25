@@ -15,7 +15,6 @@ const cardSuccess = 'assets/images/card_success.png';
 const mainLogo = 'assets/images/main_logo.png';
 const preview = 'assets/images/preview.png';
 const design = 'assets/images/card_design.png';
-const mainLogo = 'assets/images/main_logo.png';
 const trowpassLogo = 'assets/images/trowpass_logo.png';
 
 //region Icons
