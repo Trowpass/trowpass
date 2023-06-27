@@ -48,6 +48,8 @@ dependencies:
   overlay_loader_with_app_icon: ^0.0.3
   circular_countdown_timer: ^0.2.3
   get_storage: ^2.1.1
+  file_picker: ^5.3.2
+  open_file: ^3.3.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

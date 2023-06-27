@@ -8,5 +8,9 @@ class Endpoints {
   String verifyOtp = 'user/verify/';
   String resendOtp = 'user/resend-otp';
   String login = 'user/login/';
-String userProfile = 'user/view-profile/';
+  String userProfile = 'user/view-profile/';
+  String changePassword = 'user/update-password/';
+  String uploadProfile = 'user/upload-photo/';
+  String resetPassword = 'user/reset-password/';
+  String resetPasswordOtp = 'user/reset-password-otp';
 }

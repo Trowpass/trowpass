@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:app/controllers/auth_controller.dart';
+import 'package:app/screens/auth/forgot_password.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -11,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../widgets/app_logo.dart';
-import '../navigation_menus/home_landing_tab_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -131,9 +131,8 @@ class LoginScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: TextButton(
-                                  onPressed: () {
-                                    Get.to(() => HomeLandingTabScreen());
-                                  },
+                                  onPressed: () =>
+                                      Get.to(() => ForgotPasswordScreen()),
                                   child: Text(
                                     'Forgot Password?',
                                     style: appStyles(

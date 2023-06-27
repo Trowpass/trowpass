@@ -52,6 +52,18 @@ class ApiConnectionHelper {
     return response;
   }
 
+  Future<Response<dynamic>> postFormData(
+      {dynamic requestData,
+      required String path,
+      Options? requestOptions,
+      Map<String, dynamic>? queryParmeters}) async {
+    Response response = await dio.post(path,
+        data: requestData,
+        options: requestOptions,
+        queryParameters: queryParmeters);
+    return response;
+  }
+
   Future<Response<dynamic>> updateDataAsync(
       {dynamic requestData,
       required String path,

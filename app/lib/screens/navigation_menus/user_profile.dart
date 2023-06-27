@@ -1,13 +1,15 @@
+import 'package:app/screens/auth/login.dart';
+import 'package:app/screens/profile/view_qr_code.dart';
+import 'package:app/screens/settings/settings.dart';
 import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
-import '../auth/edit_profile.dart';
-import '../auth/kyc_registraion.dart';
 import '../auth/pin/change_pin.dart';
+import '../profile/edit_profile.dart';
+import '../profile/kyc_registraion.dart';
 
 class UserProfileScreen extends StatelessWidget {
   UserProfileScreen({super.key});
@@ -40,21 +42,30 @@ class UserProfileScreen extends StatelessWidget {
                   children: [
                     Container(
                       alignment: Alignment.center,
-                      child: const CircleAvatar(
-                        backgroundImage: AssetImage(profile),
-                        radius: 60,
-                      ),
+                      child: contoller.profilePhoto.value.isEmpty
+                          ? CircleAvatar(
+                              backgroundImage: AssetImage(
+                                  contoller.profilePlaceHolder.value),
+                              radius: 60,
+                            )
+                          : CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(contoller.profilePhoto.value),
+                              radius: 60,
+                            ),
                     ),
-                    GestureDetector(
-                      onTap: null,
-                      child: Transform.translate(
-                        offset: const Offset(200, 75),
-                        child: const CircleAvatar(
-                          backgroundColor: primaryColor,
-                          child: Icon(Icons.edit),
-                        ),
-                      ),
-                    ),
+                    Transform.translate(
+                        offset: const Offset(40, 75),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () => contoller.pickImage(),
+                            child: const CircleAvatar(
+                              backgroundColor: primaryColor,
+                              child: Icon(Icons.edit),
+                            ),
+                          ),
+                        ))
                   ],
                 )),
             Text(contoller.fullName.value,
@@ -100,23 +111,6 @@ class UserProfileScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.zero,
               child: GestureDetector(
-                onTap: null,
-                child: ListTile(
-                  horizontalTitleGap: 0,
-                  leading: const Icon(
-                    Icons.work_history_rounded,
-                    size: 30,
-                  ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
-                  contentPadding: EdgeInsets.zero,
-                  title: Text('History',
-                      style: appStyles(18, null, FontWeight.w500)),
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.zero,
-              child: GestureDetector(
                 onTap: () => Get.to(KycRegistrationScreen()),
                 child: ListTile(
                   horizontalTitleGap: 0,
@@ -134,7 +128,7 @@ class UserProfileScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.zero,
               child: GestureDetector(
-                onTap: null,
+                onTap: () => Get.to(ViewQRCodeScreen()),
                 child: ListTile(
                   horizontalTitleGap: 0,
                   leading: const Icon(
@@ -145,6 +139,43 @@ class UserProfileScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   title: Text('QR Code',
                       style: appStyles(18, null, FontWeight.w500)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.zero,
+              child: GestureDetector(
+                onTap: () => Get.to(const SettingScreen()),
+                child: ListTile(
+                  horizontalTitleGap: 0,
+                  leading: const Icon(
+                    Icons.settings_rounded,
+                    size: 30,
+                  ),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  contentPadding: EdgeInsets.zero,
+                  title: Text('Settings',
+                      style: appStyles(18, null, FontWeight.w500)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.zero,
+              child: GestureDetector(
+                onTap: () {
+                  Get.offAll(LoginScreen());
+                  contoller.session.clearAllSesstion();
+                },
+                child: ListTile(
+                  horizontalTitleGap: 0,
+                  leading: const Icon(
+                    Icons.exit_to_app_rounded,
+                    size: 30,
+                  ),
+                  contentPadding: EdgeInsets.zero,
+                  title: Text('Sign Out',
+                      style:
+                          appStyles(18, validationErrorColor, FontWeight.w500)),
                 ),
               ),
             ),

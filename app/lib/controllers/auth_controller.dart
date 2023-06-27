@@ -18,7 +18,6 @@ class AuthController extends GetxController {
   final isPassword = false.obs;
   final showPassword = false.obs;
   final isFocused = false.obs;
-
   final isLoaded = false.obs;
 
   @override
@@ -33,15 +32,22 @@ class AuthController extends GetxController {
   Future<void> login() async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
+
     try {
       var response = await userController.loginAsync(UserLoginRequest(
           mobile: emailPhoneNumberController.text.trim(),
           password: passwordController.text.trim(),
           deviceToken: Guid.newGuid.toString()));
       if (response.status) {
-        session.writeAuthorizationToken(response.data.token);
-        session.writeUserFirstName(response.data.firstName.toTitleCase());
+        session.writeAuthorizationToken(response.data!.token);
+        session.writeUserFirstName(response.data!.firstName.toTitleCase());
         Get.to(HomeLandingTabScreen());
+
+        //get profile
+        var profileResponse = await userController.userProfileAsync();
+        if (profileResponse.status) {
+          session.writeUserQRCode(profileResponse.data.qrCode);
+        }
       } else {
         Get.defaultDialog(
             title: 'Information', content: Text(response.message));
@@ -49,6 +55,7 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
+          colorText: Colors.white,
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;

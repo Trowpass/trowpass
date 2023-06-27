@@ -11,4 +11,9 @@ class GetSessionManager {
   String? readAuthorizationToken() => storage.read(authorizationToken);
   String? readUserFirstName() => storage.read(userFirstName);
   String? readRiderFullName() => storage.read(riderFullName);
+  String readRiderQRCode() => storage.read(qrCode);
+
+  void clearAllSesstion() {
+    storage.erase();
+  }
 }

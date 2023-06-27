@@ -9,7 +9,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-      // page: () => HomeLandingTabScreen(),
       binding: DashboardTabBinding(),
     ),
   ];

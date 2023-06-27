@@ -1,7 +1,7 @@
 class UserLoginResponse {
   bool status;
   String message;
-  UserLoginData data;
+  UserLoginData? data;
 
   UserLoginResponse({
     required this.status,
@@ -13,7 +13,9 @@ class UserLoginResponse {
       UserLoginResponse(
           status: json['status'],
           message: json['message'],
-          data: UserLoginData.fromJson(json['data']));
+          data: json['data'] != null
+              ? UserLoginData.fromJson(json['data'])
+              : null);
 }
 
 class UserLoginData {
