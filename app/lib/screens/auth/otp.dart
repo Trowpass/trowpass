@@ -11,8 +11,8 @@ import '../../widgets/circle_countdown_timer.dart';
 import '../../widgets/standard_button.dart';
 
 class OtpScreen extends StatelessWidget {
-  final String userPhoneNumber;
-  OtpScreen({super.key, required this.userPhoneNumber});
+  final String phoneNumber;
+  OtpScreen({super.key, required this.phoneNumber});
   final controller = Get.put(OtpController());
 
 // to prevent back button click
@@ -42,7 +42,7 @@ class OtpScreen extends StatelessWidget {
                         textScaleFactor: 1.5,
                       ),
                       subtitle: Text(
-                        'Please enter the code sent to $userPhoneNumber. It expires in 5 minutes',
+                        'Please enter the code sent to $phoneNumber. It expires in 5 minutes',
                         style: appStyles(16, null, null),
                       ),
                     ),

@@ -1,3 +1,4 @@
+import 'package:app/screens/auth/login.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -36,10 +37,10 @@ class OtpController extends GetxController {
     try {
       String otpValue =
           '${codeOneController.text}${codeTwoController.text}${codeThreeController.text}${codeFourController.text}';
-      var response = await userController.verifyOtpAsync(VerifyOtpRequest(
-email: session.readRiderEmail()!, code: otpValue.trim()));
+      var response = await userController
+          .verifyOtpAsync(VerifyOtpRequest(otp: otpValue.trim()));
       if (response.status) {
-        Get.to(HomeLandingTabScreen());
+        Get.to(LoginScreen());
       } else {
         Get.defaultDialog(
             title: 'Information', content: Text(response.message));

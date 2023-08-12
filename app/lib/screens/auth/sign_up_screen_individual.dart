@@ -85,6 +85,21 @@ class SignUpScreenIndividual extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             TextInputForm(
+                              inputType: TextInputType.emailAddress,
+                              enabled: true,
+                              inputController: controller.emailController,
+                              textLabel: 'Email',
+                              textHint: 'Email',
+                              validatorMessage: 'Please enter your email',
+                              isPassword: false,
+                              autoCorrect: false,
+                              prefixIcon: const Icon(
+                                Icons.email,
+                                size: 30,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextInputForm(
                               inputType: TextInputType.phone,
                               enabled: true,
                               inputController: controller.phoneNumberController,

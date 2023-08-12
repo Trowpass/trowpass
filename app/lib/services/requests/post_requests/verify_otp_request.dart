@@ -1,7 +1,6 @@
 class VerifyOtpRequest {
-  String email;
-  String code;
+  String otp;
 
-  VerifyOtpRequest({required this.email, required this.code});
-  Map<String, dynamic> toJson() => {'email': email, 'code': code};
+  VerifyOtpRequest({required this.otp});
+  Map<String, dynamic> toJson() => {'otp': otp};
 }

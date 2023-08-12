@@ -1,8 +1,9 @@
+// ignore_for_file: avoid_print
+
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_guid/flutter_guid.dart';
 import 'package:get/get.dart';
 
 import '../screens/navigation_menus/home_landing_tab_screen.dart';
@@ -35,19 +36,27 @@ class AuthController extends GetxController {
     Get.focusScope!.unfocus();
     try {
       var response = await userController.loginAsync(UserLoginRequest(
-          mobile: emailPhoneNumberController.text.trim(),
-          password: passwordController.text.trim(),
-          deviceToken: Guid.newGuid.toString()));
+          phoneNumber: emailPhoneNumberController.text.trim(),
+          password: passwordController.text.trim()));
       if (response.status) {
-        session.writeAuthorizationToken(response.data.token);
-        session.writeUserFirstName(response.data.firstName.toTitleCase());
+        session.writeAuthorizationToken(response.data!.token);
+        session.writeUserId(response.data!.userId);
+        // session.writeUserFirstName(response.data!.firstName.toTitleCase());
         Get.to(HomeLandingTabScreen());
       } else {
-        Get.defaultDialog(
-            title: 'Information', content: Text(response.message));
+        // Check for invalid credentials specifically
+        if (response.responseCode == "11") {
+          Get.defaultDialog(
+              title: 'Login Failed', content: Text(response.message));
+        } else {
+          Get.defaultDialog(
+              title: 'Information', content: Text(response.message));
+        }
         isLoaded.value = false;
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('Error: $e');
+      print('Stack Trace: $stackTrace');
       Get.snackbar('Information', e.toString(),
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);
