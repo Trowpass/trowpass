@@ -4,9 +4,9 @@ import '../helpers/api_config_helper.dart';
 String baseUrl = getBaseUrlOnEnvironment(Environment.staging);
 
 class Endpoints {
-  String riderRegister = 'user/register/';
-  String verifyOtp = 'user/verify/';
-  String resendOtp = 'user/resend-otp';
-  String login = 'user/login/';
-String userProfile = 'user/view-profile/';
+  String riderRegister = 'api/v1/auth/create';
+  String verifyOtp = 'api/v1/auth/verify-account';
+  String resendOtp = 'api/v1/auth/resend-otp';
+  String login = 'api/v1/auth/sign-in';
+  String userProfile = 'api/v1/user/profile';
 }

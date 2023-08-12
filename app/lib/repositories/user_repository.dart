@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:app/services/requests/post_requests/user_login_request.dart';
@@ -73,13 +75,16 @@ class UserRepository {
       return Future.error(e);
     }
   }
+
   Future<ViewProfileResponse> getUserProfileAsync() async {
     try {
+      var userId = session.readUserId();
+      var url = '${Endpoints().userProfile}/$userId';
+      //
       var response = await apiConnectionHelper.getDataAsync(
-          url: Endpoints().userProfile,
-          requestOptions: Options(headers: {
-            'Authorization': 'Token ${session.readAuthorizationToken()}'
-          }));
+          url: url,
+         );
+      //
       if (response.data != null) {
         return ViewProfileResponse.fromJson(response.data);
       } else {

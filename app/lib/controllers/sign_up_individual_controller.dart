@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_guid/flutter_guid.dart';
 import 'package:get/get.dart';
 
 import '../screens/auth/otp.dart';
@@ -15,6 +14,7 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -33,8 +33,9 @@ class SignUpIndividualController extends GetxController {
   Future<void> registerRider() async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
-    String riderEmail =
-        '${phoneNumberController.text.trim()}_rider_none@gmail.com';
+    // String riderEmail =
+    //     '${phoneNumberController.text.trim()}_rider_none@gmail.com';
+    String businessName = 'null';
     try {
       if (passwordController.text != confirmPasswordController.text) {
         Get.defaultDialog(
@@ -44,14 +45,17 @@ class SignUpIndividualController extends GetxController {
             RiderRegistrationRequest(
                 firstName: firstNameController.text.trim(),
                 lastName: lastNameController.text.trim(),
-                email: riderEmail,
-                mobile: phoneNumberController.text.trim(),
+                email: emailController.text.trim(),
+                phoneNumber: phoneNumberController.text.trim(),
+                businessName: businessName,
                 password: passwordController.text.trim(),
-                userType: 'Rider',
-                deviceToken: Guid.newGuid.toString()));
+                confirmPassword: confirmPasswordController.text.trim(),
+                userAccountType: 'rider',
+                ));
+
         if (response.status) {
-          session.writeRiderEmail(riderEmail);
-          Get.to(OtpScreen(userPhoneNumber: phoneNumberController.text));
+          // session.writeRiderEmail(riderEmail);
+          Get.to(OtpScreen(phoneNumber: phoneNumberController.text));
         } else {
           Get.defaultDialog(
               title: 'Information', content: Text(response.message));

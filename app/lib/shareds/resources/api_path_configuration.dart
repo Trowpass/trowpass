@@ -19,7 +19,7 @@ String getBaseUrlOnEnvironment(Environment environment) {
 }
 
 Map<String, dynamic> staggingBaseUrl = {
-  _baseUrl: "https://api-v1.trowpass.ng/",
+  _baseUrl: "http://samaon-001-site1.htempurl.com/",
 };
 
 Map<String, dynamic> prodBaseUrl = {

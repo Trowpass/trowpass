@@ -52,7 +52,7 @@ class DashboardScreen extends StatelessWidget {
                                                 16, offWhite, FontWeight.w300),
                                           ),
                                           Text(
-                                            controller.userName.value,
+                                            controller.fullName.value,
                                             style: appStyles(
                                                 18, offWhite, FontWeight.w500),
                                           ),

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/auth/login.dart';
@@ -10,6 +12,7 @@ import '../shareds/utils/app_colors.dart';
 class DashboardController extends GetxController {
   final showBalance = true.obs;
   final userName = Rx<String>('');
+  final fullName = Rx<String>('');
   final accountNumber = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
   final isLoaded = Rx<bool>(false);
@@ -20,6 +23,7 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = false;
+    fullName.value = '';
     userProfile();
     super.onInit();
   }
@@ -30,16 +34,12 @@ class DashboardController extends GetxController {
 
   Future userProfile() async {
     try {
-      String fullName = '';
       isLoaded.value = true;
       var response = await userController.userProfileAsync();
       if (response.status) {
         userName.value = response.data.firstName.toTitleCase();
-        accountNumber.value = response.data.virtualAccountNumber;
-        qrCodeUrl.value = response.data.qrCode;
-
-        fullName =
-            '${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}';
+        qrCodeUrl.value = response.data.privateQRCode;
+        fullName.value = '${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}';
         session.writeUserFullName(fullName);
       } else {
         Get.defaultDialog(
@@ -47,7 +47,9 @@ class DashboardController extends GetxController {
             content: const Text('Unable to fetch profile'));
         Get.to(LoginScreen());
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print('Error: $e');
+      print('Stack Trace: $stackTrace');
       Get.snackbar('Information', e.toString(),
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);

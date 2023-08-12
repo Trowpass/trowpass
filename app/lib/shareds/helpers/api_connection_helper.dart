@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../resources/app_interceptors.dart';
 import '../resources/routes/api_paths.dart';
+
+GetSessionManager session = GetSessionManager();
 
 class ApiConnectionHelper {
   final Dio dio = Dio(BaseOptions(
@@ -18,6 +21,7 @@ class ApiConnectionHelper {
       },
       headers: {
         'Accept': '*/*',
+        'x-token' :  session.readAuthorizationToken()
       }))
     ..interceptors.addAll([
       AppInterceptors(),

@@ -1,6 +1,8 @@
+import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/repositories/user_repository.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
+import 'package:app/shareds/managers/set_session_manager.dart';
 
 import '../../services/requests/post_requests/rider_registration_request.dart';
 import '../../services/responses/base_response.dart';
@@ -9,6 +11,7 @@ import '../../services/responses/view_profile_response.dart';
 
 class UserController {
   final userRepository = UserRepository();
+  SetSessionManager session = SetSessionManager();
 
   Future<UserLoginResponse> loginAsync(UserLoginRequest request) async {
     try {
@@ -51,6 +54,8 @@ class UserController {
     try {
       final response = await userRepository.getUserProfileAsync();
       if (response.status) {
+        session.writeUserFullName(
+            '${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}');
         return response;
       }
       return Future.error(response.message);
