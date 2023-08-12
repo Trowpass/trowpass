@@ -50,8 +50,8 @@ class ViewProfileData {
   factory ViewProfileData.fromJson(Map<String, dynamic> json) =>
       ViewProfileData(
           userId: json['userId'] ?? '',
-          firstName: json['first_name'] ?? '',
-          lastName: json['last_name'] ?? '',
+          firstName: json['firstName'] ?? '',
+          lastName: json['lastName'] ?? '',
           phoneNumber: json['phoneNumber'] ?? '',
           businessName: json['businessName'] ?? '',
           email: json['email'] ?? '',
