@@ -12,4 +12,5 @@ class GetSessionManager {
   String? readUserId() => storage.read(userIdKey);
   String? readUserFirstName() => storage.read(userFirstName);
   String? readRiderFullName() => storage.read(riderFullName);
+  String? readRiderAccountNumber() => storage.read(userAccountNumber);
 }

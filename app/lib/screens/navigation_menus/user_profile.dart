@@ -1,3 +1,4 @@
+import 'package:app/screens/auth/login.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -145,6 +146,24 @@ class UserProfileScreen extends StatelessWidget {
                   contentPadding: EdgeInsets.zero,
                   title: Text('QR Code',
                       style: appStyles(18, null, FontWeight.w500)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.zero,
+              child: GestureDetector(
+                onTap: () => Get.to(LoginScreen()),
+                child: ListTile(
+                  horizontalTitleGap: 0,
+                  leading: const Icon(
+                    Icons.logout_outlined,
+                    size: 30,
+                  ),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  contentPadding: EdgeInsets.zero,
+                  title: Text('Logout',
+                      style:
+                          appStyles(18, validationErrorColor, FontWeight.w500)),
                 ),
               ),
             ),

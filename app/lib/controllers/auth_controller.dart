@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +40,6 @@ class AuthController extends GetxController {
       if (response.status) {
         session.writeAuthorizationToken(response.data!.token);
         session.writeUserId(response.data!.userId);
-        // session.writeUserFirstName(response.data!.firstName.toTitleCase());
         Get.to(HomeLandingTabScreen());
       } else {
         // Check for invalid credentials specifically
@@ -54,9 +52,7 @@ class AuthController extends GetxController {
         }
         isLoaded.value = false;
       }
-    } catch (e, stackTrace) {
-      print('Error: $e');
-      print('Stack Trace: $stackTrace');
+    } catch (e) {
       Get.snackbar('Information', e.toString(),
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);

@@ -55,7 +55,7 @@ class UserController {
       final response = await userRepository.getUserProfileAsync();
       if (response.status) {
         session.writeUserFullName(
-            '${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}');
+            '${response.data!.firstName!.toTitleCase()} ${response.data!.lastName!.toCapitalized()}');
         return response;
       }
       return Future.error(response.message);

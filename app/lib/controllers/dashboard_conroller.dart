@@ -23,7 +23,6 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = false;
-    fullName.value = '';
     userProfile();
     super.onInit();
   }
@@ -37,19 +36,22 @@ class DashboardController extends GetxController {
       isLoaded.value = true;
       var response = await userController.userProfileAsync();
       if (response.status) {
-        userName.value = response.data.firstName.toTitleCase();
-        qrCodeUrl.value = response.data.privateQRCode;
-        fullName.value = '${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}';
-        session.writeUserFullName(fullName);
+        userName.value = response.data!.firstName!.toTitleCase();
+        qrCodeUrl.value = response.data!.privateQRCode!;
+        fullName.value =
+            '${response.data!.firstName!.toTitleCase()} ${response.data!.lastName!.toCapitalized()}';
+        accountNumber.value = response.data!.accountDetail != null
+            ? response.data!.accountDetail!.accountNumber!
+            : '';
+        session.writeUserFullName(fullName.value);
+        session.writeUserAccountNumber(accountNumber.value);
       } else {
         Get.defaultDialog(
             title: 'Information',
             content: const Text('Unable to fetch profile'));
         Get.to(LoginScreen());
       }
-    } catch (e, stackTrace) {
-      print('Error: $e');
-      print('Stack Trace: $stackTrace');
+    } catch (e) {
       Get.snackbar('Information', e.toString(),
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);

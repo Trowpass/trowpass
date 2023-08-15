@@ -21,7 +21,7 @@ class ApiConnectionHelper {
       },
       headers: {
         'Accept': '*/*',
-        'x-token' :  session.readAuthorizationToken()
+        'x-token': session.readAuthorizationToken() ?? ''
       }))
     ..interceptors.addAll([
       AppInterceptors(),

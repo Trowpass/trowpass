@@ -10,11 +10,26 @@ import '../../widgets/currency_format.dart';
 import '../../widgets/standard_button.dart';
 
 class TopUpTransportWalletDoneScreen extends StatelessWidget {
-  TopUpTransportWalletDoneScreen({super.key});
+  final String successMessage;
+  final String reference;
+  final String companyName;
+  final String recipientName;
+  final double amount;
+  TopUpTransportWalletDoneScreen(
+      {super.key,
+      required this.successMessage,
+      required this.reference,
+      required this.companyName,
+      required this.recipientName,
+      required this.amount});
   final controller = Get.put(TopUpTransportWalletDoneContoller());
 
   @override
   Widget build(BuildContext context) {
+    controller.transactionId.value = reference;
+    controller.companyName.value = companyName;
+    controller.recipientName.value = recipientName;
+    controller.transactionAmount.value = amount;
     return Scaffold(
         backgroundColor: primaryColor,
         body: SingleChildScrollView(
@@ -26,6 +41,7 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 20),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Text(
@@ -53,7 +69,7 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 3),
                               child: Text(
-                                'Payment Successful',
+                                successMessage,
                                 style: appStyles(16, null, FontWeight.bold),
                                 textScaleFactor: 1.2,
                               ),
@@ -64,14 +80,14 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                                 title: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'Company name wallet top up successful',
+                                    '${controller.companyName.value} wallet top up successful',
                                     style: appStyles(16, null, null),
                                   ),
                                 ),
                                 subtitle: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                      'Trans ID: ${controller.transactionId.value}'),
+                                      'Transaction ID: ${controller.transactionId.value}'),
                                 ),
                               ),
                             ),
@@ -111,11 +127,11 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                                     offset: const Offset(0, 40),
                                     child: const DottedLine(
                                       dashColor: grayscale,
-                                      dashLength: 10,
+                                      dashLength: 6,
                                       dashGapLength: 3,
                                       lineThickness: 2,
                                       dashRadius: 1,
-                                      lineLength: 330,
+                                      lineLength: 275,
                                     ),
                                   ),
                                 ),
@@ -129,7 +145,7 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                                   Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        'Recipient',
+                                        controller.recipientName.value,
                                         style: appStyles(
                                             20, null, FontWeight.bold),
                                       )),

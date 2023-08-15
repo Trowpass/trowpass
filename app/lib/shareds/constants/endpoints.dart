@@ -9,4 +9,6 @@ class Endpoints {
   String resendOtp = 'api/v1/auth/resend-otp';
   String login = 'api/v1/auth/sign-in';
   String userProfile = 'api/v1/user/profile';
+  String paystackVerification = 'api/v1/paystack/verify';
+  String walletTopUp = 'api/v1/wallet/fund';
 }

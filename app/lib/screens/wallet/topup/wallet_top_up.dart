@@ -32,6 +32,9 @@ class WalletTopUpScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(children: [
+                const SizedBox(
+                  height: 40,
+                ),
                 Container(
                   height: 200,
                   width: double.infinity,
@@ -127,6 +130,7 @@ class WalletTopUpScreen extends StatelessWidget {
                         child: TextFormField(
                           keyboardType: TextInputType.number,
                           controller: controller.topUpAmountController,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           decoration: InputDecoration(
                               hintText: '0.0',
                               focusedBorder: const OutlineInputBorder(
@@ -135,7 +139,7 @@ class WalletTopUpScreen extends StatelessWidget {
                               enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: grayscale),
                               ),
-                              prefixIcon: const Icon(Icons.payment),
+                              prefixIcon: const Icon(Icons.payments_outlined),
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     controller.shouldEntryAmountBeCleared
@@ -154,7 +158,11 @@ class WalletTopUpScreen extends StatelessWidget {
                     child: StandardButton(
                       text: 'Continue to pay',
                       onPressed: () {
-                        controller.trySubmit();
+                        if (controller.formKey.currentState!.validate()) {
+                          controller.formKey.currentState!.save();
+                          // go to checkout page
+                          controller.checkout(context);
+                        }
                       },
                     ))
               ]),
