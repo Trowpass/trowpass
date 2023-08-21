@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../widgets/app_logo.dart';
-import '../navigation_menus/home_landing_tab_screen.dart';
+import 'forgot_password/forgot_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -132,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                                 alignment: Alignment.bottomRight,
                                 child: TextButton(
                                   onPressed: () {
-                                    Get.to(() => HomeLandingTabScreen());
+                                    Get.to(() => ForgotPasswordScreen());
                                   },
                                   child: Text(
                                     'Forgot Password?',

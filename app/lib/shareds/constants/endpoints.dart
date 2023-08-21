@@ -9,4 +9,6 @@ class Endpoints {
   String resendOtp = 'api/v1/auth/resend-otp';
   String login = 'api/v1/auth/sign-in';
   String userProfile = 'api/v1/user/profile';
+  static String forgotPassword = '/api/v1/auth/forgot-password';
+  static String resetPassword = '/api/v1/auth/reset-password';
 }

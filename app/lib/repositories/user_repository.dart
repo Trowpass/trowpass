@@ -7,9 +7,13 @@ import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 
 import '../services/exceptions/dio_exceptions.dart';
+import '../services/requests/post_requests/forget_password_request.dart';
+import '../services/requests/post_requests/reset_password_request.dart';
 import '../services/requests/post_requests/rider_registration_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../services/responses/base_response.dart';
+import '../services/responses/forgot_password_response.dart';
+import '../services/responses/reset_password_response.dart';
 import '../services/responses/user_login_response.dart';
 import '../services/responses/view_profile_response.dart';
 
@@ -23,8 +27,7 @@ class UserRepository {
 
   Future<UserLoginResponse> userLoginAsync(UserLoginRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().login);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints().login);
       if (response.data != null) {
         return UserLoginResponse.fromJson(response.data);
       } else {
@@ -39,11 +42,9 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> createRiderAccountAsync(
-      RiderRegistrationRequest request) async {
+  Future<BaseResponse> createRiderAccountAsync(RiderRegistrationRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().riderRegister);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints().riderRegister);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {
@@ -60,8 +61,7 @@ class UserRepository {
 
   Future<BaseResponse> verifyOtpAsync(VerifyOtpRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().verifyOtp);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints().verifyOtp);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {
@@ -82,13 +82,55 @@ class UserRepository {
       var url = '${Endpoints().userProfile}/$userId';
       //
       var response = await apiConnectionHelper.getDataAsync(
-          url: url,
-         );
+        url: url,
+      );
       //
       if (response.data != null) {
         return ViewProfileResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to get user profile');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<ForgotPasswordResponse> requestForgotPasswordAsync(ForgetPasswordRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+        requestData: request,
+        path: Endpoints.forgotPassword,
+      );
+
+      if (response.data != null) {
+        return ForgotPasswordResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to send request');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<ResetPasswordResponse> resetPasswordAsync(ResetPasswordRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+        requestData: request,
+        path: '${Endpoints.resetPassword}/${request.email}',
+      );
+
+      if (response.data != null) {
+        return ResetPasswordResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to send request');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
