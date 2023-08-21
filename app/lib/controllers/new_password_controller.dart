@@ -15,6 +15,8 @@ class NewPasswordController extends GetxController {
   final isLoaded = false.obs;
   var isFocused = false.obs;
   var is2Focused = false.obs;
+  var isPassword1Hidden = true.obs;
+  var isPassword2Hidden = true.obs;
 
   UserRepository userRepository = UserRepository();
 

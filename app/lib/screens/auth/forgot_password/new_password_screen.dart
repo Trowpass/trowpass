@@ -67,7 +67,7 @@ class NewPasswordScreen extends StatelessWidget {
                               textLabel: 'New Password',
                               textHint: 'New Password',
                               validatorMessage: validatorMessage,
-                              isPassword: true,
+                              isPassword: controller.isPassword1Hidden.value,
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.lock,
@@ -76,11 +76,11 @@ class NewPasswordScreen extends StatelessWidget {
                               validator: (value) => value != null && value.isEmpty ? validatorMessage : null,
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  Icons.remove_red_eye_outlined,
+                                  controller.isPassword1Hidden.value ? Icons.visibility_off : Icons.visibility,
                                   color: controller.isFocused.value ? primaryColor : null,
                                   size: 30,
                                 ),
-                                onPressed: () {},
+                                onPressed: () => controller.isPassword1Hidden.value = !controller.isPassword1Hidden.value,
                               ),
                             );
                           }),
@@ -94,22 +94,22 @@ class NewPasswordScreen extends StatelessWidget {
                               textHint: 'Confirm New Password',
                               validatorMessage: validatorMessage,
                               validator: (value) => (value != controller.passwordController.text) ? validatorMessage : null,
-                              isPassword: true,
+                              isPassword: controller.isPassword2Hidden.value,
                               autoCorrect: false,
-                              onTap: () => controller.isFocused.value = true,
-                              onChanged: (_) => controller.isFocused.value = false,
-                              onFieldSubmitted: (_) => controller.isFocused.value = false,
+                              onTap: () => controller.is2Focused.value = true,
+                              onChanged: (_) => controller.is2Focused.value = false,
+                              onFieldSubmitted: (_) => controller.is2Focused.value = false,
                               prefixIcon: const Icon(
                                 Icons.lock,
                                 size: 30,
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  Icons.remove_red_eye_outlined,
+                                  controller.isPassword2Hidden.value ? Icons.visibility_off : Icons.visibility,
                                   color: controller.isFocused.value ? primaryColor : null,
                                   size: 30,
                                 ),
-                                onPressed: () {},
+                                onPressed: () => controller.isPassword2Hidden.value = !controller.isPassword2Hidden.value,
                               ),
                             );
                           })
