@@ -24,6 +24,7 @@ class DashboardController extends GetxController {
   void onInit() {
     isLoaded.value = false;
     fullName.value = '';
+    accountNumber.value = '';
     userProfile();
     super.onInit();
   }
@@ -37,10 +38,11 @@ class DashboardController extends GetxController {
       isLoaded.value = true;
       var response = await userController.userProfileAsync();
       if (response.status) {
-        userName.value = response.data.firstName.toTitleCase();
+        accountNumber.value = response.data.accountDetail.accountNumber;
         qrCodeUrl.value = response.data.privateQRCode;
         fullName.value = '${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}';
         session.writeUserFullName(fullName);
+
       } else {
         Get.defaultDialog(
             title: 'Information',

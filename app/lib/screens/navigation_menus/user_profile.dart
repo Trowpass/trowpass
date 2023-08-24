@@ -117,7 +117,7 @@ class UserProfileScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.zero,
               child: GestureDetector(
-                onTap: () => Get.to(KycRegistrationScreen()),
+                onTap: null,
                 child: ListTile(
                   horizontalTitleGap: 0,
                   leading: const Icon(
