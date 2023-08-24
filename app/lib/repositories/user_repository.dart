@@ -3,10 +3,9 @@
 import 'dart:io';
 
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
-import 'package:app/services/requests/post_requests/kyc_registration_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
-import 'package:app/services/responses/kyc_response.dart';
+import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 
@@ -62,7 +61,6 @@ class UserRepository {
     }
   }
 
-
   Future<BaseResponse> verifyOtpAsync(VerifyOtpRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
@@ -87,8 +85,8 @@ class UserRepository {
       var url = '${Endpoints().userProfile}/$userId';
       //
       var response = await apiConnectionHelper.getDataAsync(
-          url: url,
-         );
+        url: url,
+      );
       //
       if (response.data != null) {
         return ViewProfileResponse.fromJson(response.data);
@@ -123,4 +121,26 @@ class UserRepository {
     }
   }
 
+  Future<UserWalletResponse> getUserWalletAsync() async {
+    try {
+      int? userId = session.readUserId();
+      var url = '${Endpoints().userWallet}/$userId';
+      //
+      var response = await apiConnectionHelper.getDataAsync(
+        url: url,
+      );
+      //
+      if (response.data != null) {
+        return UserWalletResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to get user wallet details');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
 }

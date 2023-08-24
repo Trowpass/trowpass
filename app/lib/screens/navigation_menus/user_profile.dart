@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
 import '../auth/edit_profile.dart';
-import '../auth/kyc_registraion.dart';
 import '../auth/pin/change_pin.dart';
 
 class UserProfileScreen extends StatelessWidget {

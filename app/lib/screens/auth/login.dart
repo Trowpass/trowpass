@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../widgets/app_logo.dart';
-import '../navigation_menus/home_landing_tab_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});

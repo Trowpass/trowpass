@@ -9,6 +9,7 @@ class Endpoints {
   String resendOtp = 'api/v1/auth/resend-otp';
   String login = 'api/v1/auth/sign-in';
   String userProfile = 'api/v1/user/profile';
+  String userWallet = 'api/v1/wallet/me';
   String userKyc = 'api/v1/userkyc/create-update';
   String createWallet = 'api/v1/wallet/create';
 }
