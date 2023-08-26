@@ -16,7 +16,7 @@ class OtpController extends GetxController {
   TextEditingController codeFourController = TextEditingController();
 
   final countDownController = CountDownController();
-  final int countDownControllerDuration = 300; // in seconds [5 minutes]
+  final int countDownControllerDuration = 1900; // in seconds [5 minutes]
   final isTimeElapsed = false.obs;
   final isLoaded = false.obs;
 

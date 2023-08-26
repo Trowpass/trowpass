@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:app/screens/auth/account_type_screen.dart';
+import 'package:app/screens/auth/wallet_tag.dart';
 import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class AuthController extends GetxController {
         session.writeAuthorizationToken(response.data!.token);
         session.writeUserId(response.data!.userId);
         // session.writeUserFirstName(response.data!.firstName.toTitleCase());
-        Get.to(HomeLandingTabScreen());
+        Get.to(WalletTagScreen());
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {

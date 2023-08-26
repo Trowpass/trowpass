@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 import 'package:app/screens/dashboard/dashboard.dart';
+import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class WalletTagController extends GetxController {
           userId: userId,
           walletName: walletTagController.text.trim(),));
       if (response.status) {
-      Get.to(DashboardScreen());
+      Get.to(HomeLandingTabScreen());
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {

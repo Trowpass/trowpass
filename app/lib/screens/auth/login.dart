@@ -72,10 +72,10 @@ class LoginScreen extends StatelessWidget {
                                     enabled: true,
                                     inputController:
                                         controller.emailPhoneNumberController,
-                                    textLabel: 'Email or phone number',
-                                    textHint: 'Email or phone number',
+                                    textLabel: 'Phone number',
+                                    textHint: 'Phone number',
                                     validatorMessage:
-                                        'Please enter a valid email or phone number',
+                                        'Please enter a valid phone number',
                                     isPassword: false,
                                     autoCorrect: false,
                                     prefixIcon: const Icon(

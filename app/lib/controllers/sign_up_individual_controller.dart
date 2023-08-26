@@ -15,6 +15,7 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController bvnController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
@@ -35,8 +36,7 @@ class SignUpIndividualController extends GetxController {
     Get.focusScope!.unfocus();
     // String riderEmail =
     //     '${phoneNumberController.text.trim()}_rider_none@gmail.com';
-    String businessName = 'null';
-    String bvn = 'null';
+    String businessName = 'olavent';
     try {
       if (passwordController.text != confirmPasswordController.text) {
         Get.defaultDialog(
@@ -49,7 +49,7 @@ class SignUpIndividualController extends GetxController {
                 email: emailController.text.trim(),
                 phoneNumber: phoneNumberController.text.trim(),
                 businessName: businessName,
-                bvn: bvn,
+                bvn: bvnController.text.trim(),
                 password: passwordController.text.trim(),
                 confirmPassword: confirmPasswordController.text.trim(),
                 userAccountType: 'rider',
