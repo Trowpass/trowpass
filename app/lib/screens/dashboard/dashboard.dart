@@ -96,9 +96,7 @@ class DashboardScreen extends StatelessWidget {
                                               children: [
                                                 Obx(
                                                   () => Text(
-                                                    controller.showBalance.value
-                                                        ? 'N12,500.00'
-                                                        : '*******',
+                                                    controller.showBalance.value ? controller.balance.value.toStringAsFixed(2) : '*******',
                                                     style: TextStyle(
                                                       color: Colors.white,
                                                       fontSize: 16,

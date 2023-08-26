@@ -4,20 +4,18 @@
 # This file should be version controlled.
 
 version:
-  revision: d3d8effc686d73e0114d71abdcccef63fa1f25d2
-  channel: stable
-
+  revision: 796c8ef79279f9c774545b3771238c3098dbefab
 project_type: app
 
 # Tracks metadata for the flutter migrate command
 migration:
   platforms:
     - platform: root
-      create_revision: d3d8effc686d73e0114d71abdcccef63fa1f25d2
-      base_revision: d3d8effc686d73e0114d71abdcccef63fa1f25d2
-    - platform: web
-      create_revision: d3d8effc686d73e0114d71abdcccef63fa1f25d2
-      base_revision: d3d8effc686d73e0114d71abdcccef63fa1f25d2
+      create_revision: 796c8ef79279f9c774545b3771238c3098dbefab
+      base_revision: 796c8ef79279f9c774545b3771238c3098dbefab
+    - platform: android
+      create_revision: 796c8ef79279f9c774545b3771238c3098dbefab
+      base_revision: 796c8ef79279f9c774545b3771238c3098dbefab
 
   # User provided section
 

@@ -1,12 +1,9 @@
 // ignore_for_file: avoid_print
-
-import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
+import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../screens/navigation_menus/home_landing_tab_screen.dart';
 import '../shareds/managers/set_session_manager.dart';
 import '../shareds/utils/app_colors.dart';
 import 'bloc/user_controller.dart';
@@ -19,7 +16,6 @@ class AuthController extends GetxController {
   final isPassword = false.obs;
   final showPassword = false.obs;
   final isFocused = false.obs;
-
   final isLoaded = false.obs;
 
   @override

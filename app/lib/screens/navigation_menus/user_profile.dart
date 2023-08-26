@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
 import '../auth/edit_profile.dart';
-import '../auth/kyc_registraion.dart';
 import '../auth/pin/change_pin.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -117,7 +116,7 @@ class UserProfileScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.zero,
               child: GestureDetector(
-                onTap: () => Get.to(KycRegistrationScreen()),
+                onTap: null,
                 child: ListTile(
                   horizontalTitleGap: 0,
                   leading: const Icon(

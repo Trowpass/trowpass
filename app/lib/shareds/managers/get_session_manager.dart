@@ -9,7 +9,7 @@ class GetSessionManager {
   String? readRiderPhoneNumber() => storage.read(riderMobilePhone);
   String? readRiderEmail() => storage.read(riderEmail);
   String? readAuthorizationToken() => storage.read(authorizationToken);
-  String? readUserId() => storage.read(userIdKey);
+  int? readUserId() => storage.read(userIdKey);
   String? readUserFirstName() => storage.read(userFirstName);
   String? readRiderFullName() => storage.read(riderFullName);
 }

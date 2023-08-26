@@ -2,7 +2,10 @@
 
 import 'dart:io';
 
+import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
+import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 
@@ -77,7 +80,7 @@ class UserRepository {
 
   Future<ViewProfileResponse> getUserProfileAsync() async {
     try {
-      var userId = session.readUserId();
+      int? userId = session.readUserId();
       var url = '${Endpoints().userProfile}/$userId';
       //
       var response = await apiConnectionHelper.getDataAsync(
@@ -97,7 +100,6 @@ class UserRepository {
       return Future.error(e);
     }
   }
-
   Future<BaseResponse> requestForgotPasswordAsync(ForgetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
@@ -130,6 +132,15 @@ class UserRepository {
         return BaseResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to reset password');
+  Future<CreateWalletResponse> createWalletAsync(
+      CreateWalletRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: Endpoints().createWallet);
+      if (response.data != null) {
+        return CreateWalletResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to create tag');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
@@ -172,6 +183,19 @@ class UserRepository {
         return BaseResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to resend otp');
+  Future<UserWalletResponse> getUserWalletAsync() async {
+    try {
+      int? userId = session.readUserId();
+      var url = '${Endpoints().userWallet}/$userId';
+      //
+      var response = await apiConnectionHelper.getDataAsync(
+        url: url,
+      );
+      //
+      if (response.data != null) {
+        return UserWalletResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to get user wallet details');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));

@@ -23,26 +23,17 @@ class UserLoginResponse {
 
 class UserLoginData {
   String token;
-  String userId;
-  String firstName;
-  String lastName;
-  String tokenKey;
+  int userId;
   String tokenExpires;
 
   UserLoginData({
     required this.token,
     required this.userId,
-    required this.firstName,
-    required this.lastName,
-    required this.tokenKey,
     required this.tokenExpires,
   });
 
   factory UserLoginData.fromJson(Map<String, dynamic> json) => UserLoginData(
       token: json['token'] ?? '',
       userId: json['userId'] ?? '',
-      firstName: json['firstName'] ?? '',
-      lastName: json['lastName'] ?? '',
-      tokenKey: json['tokenKey'] ?? '',
       tokenExpires: json['tokenExpires'] ?? '');
 }
