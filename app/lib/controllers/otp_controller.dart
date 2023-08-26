@@ -2,8 +2,6 @@ import 'package:app/screens/auth/login.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../screens/navigation_menus/home_landing_tab_screen.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../shareds/managers/get_session_manager.dart';
 import '../shareds/utils/app_colors.dart';

@@ -36,6 +36,7 @@ class SignUpIndividualController extends GetxController {
     // String riderEmail =
     //     '${phoneNumberController.text.trim()}_rider_none@gmail.com';
     String businessName = 'null';
+    String bvn = 'null';
     try {
       if (passwordController.text != confirmPasswordController.text) {
         Get.defaultDialog(
@@ -48,6 +49,7 @@ class SignUpIndividualController extends GetxController {
                 email: emailController.text.trim(),
                 phoneNumber: phoneNumberController.text.trim(),
                 businessName: businessName,
+                bvn: bvn,
                 password: passwordController.text.trim(),
                 confirmPassword: confirmPasswordController.text.trim(),
                 userAccountType: 'rider',

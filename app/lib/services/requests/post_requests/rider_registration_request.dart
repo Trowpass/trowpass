@@ -2,6 +2,7 @@ class RiderRegistrationRequest {
   String firstName;
   String lastName;
   String email;
+  String bvn;
   String phoneNumber;
   String businessName;
   String password;
@@ -12,6 +13,7 @@ class RiderRegistrationRequest {
       {required this.firstName,
       required this.lastName,
       required this.email,
+      required this.bvn,
       required this.phoneNumber,
       required this.businessName,
       required this.password,
@@ -23,6 +25,7 @@ class RiderRegistrationRequest {
         'firstName': firstName,
         'lastName': lastName,
         'email': email,
+        'bvn': bvn,
         'phoneNumber': phoneNumber,
         'businessName': businessName,
         'password': password,
