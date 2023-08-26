@@ -8,12 +8,11 @@ import 'package:dio/dio.dart';
 
 import '../services/exceptions/dio_exceptions.dart';
 import '../services/requests/post_requests/forget_password_request.dart';
+import '../services/requests/post_requests/resend_otp_request.dart';
 import '../services/requests/post_requests/reset_password_request.dart';
 import '../services/requests/post_requests/rider_registration_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../services/responses/base_response.dart';
-import '../services/responses/forgot_password_response.dart';
-import '../services/responses/reset_password_response.dart';
 import '../services/responses/user_login_response.dart';
 import '../services/responses/view_profile_response.dart';
 
@@ -99,7 +98,7 @@ class UserRepository {
     }
   }
 
-  Future<ForgotPasswordResponse> requestForgotPasswordAsync(ForgetPasswordRequest request) async {
+  Future<BaseResponse> requestForgotPasswordAsync(ForgetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
@@ -107,7 +106,7 @@ class UserRepository {
       );
 
       if (response.data != null) {
-        return ForgotPasswordResponse.fromJson(response.data);
+        return BaseResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to send request');
       }
@@ -120,7 +119,7 @@ class UserRepository {
     }
   }
 
-  Future<ResetPasswordResponse> resetPasswordAsync(ResetPasswordRequest request) async {
+  Future<BaseResponse> resetPasswordAsync(ResetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
@@ -128,9 +127,51 @@ class UserRepository {
       );
 
       if (response.data != null) {
-        return ResetPasswordResponse.fromJson(response.data);
+        return BaseResponse.fromJson(response.data);
       } else {
-        throw Exception('Unable to send request');
+        throw Exception('Unable to reset password');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<BaseResponse> resendOtpToEmailAsync(ResendOtpRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+        requestData: request,
+        path: Endpoints.resendOtpForgetPassword,
+      );
+
+      if (response.data != null) {
+        return BaseResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to resend otp');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<BaseResponse> resendOtpToPhoneNumberAsync(ResendOtpRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+        requestData: request,
+        path: Endpoints.resendOtpAccountVerification,
+      );
+
+      if (response.data != null) {
+        return BaseResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to resend otp');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));

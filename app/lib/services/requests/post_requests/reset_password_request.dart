@@ -9,6 +9,6 @@ class ResetPasswordRequest {
 
   @override
   String toString() {
-    return 'ForgetPasswordRequest: {"otp": $otp, newPassword: $newPassword}';
+    return 'ForgetPasswordRequest: {"otp": $otp, newPassword: $newPassword, "email": $email}';
   }
 }

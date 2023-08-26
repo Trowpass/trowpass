@@ -25,7 +25,8 @@ class ForgotPasswordScreen extends StatelessWidget {
             backgroundColor: background,
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: Color(0xFFE9E9E9),
+                statusBarColor: primaryColor,
+                systemNavigationBarColor: primaryColor,
                 statusBarIconBrightness: Brightness.light, // For Android
                 statusBarBrightness: Brightness.light, // For iOS
               ),
@@ -86,25 +87,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                         ),
                       );
                     }),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
-                            child: Align(
-                              alignment: Alignment.centerRight,
-                              child: TextButton(
-                                onPressed: () => controller.tryResendOtpSubmit(),
-                                child: Text(
-                                  'Resend',
-                                  style: appStyles(16, grayscale, FontWeight.w400),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    const SizedBox(height: 20),
                     StandardButton(
                       text: 'Request OTP',
                       onPressed: () {

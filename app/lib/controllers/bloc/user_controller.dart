@@ -25,8 +25,7 @@ class UserController {
     }
   }
 
-  Future<BaseResponse> riderRegistrationAsync(
-      RiderRegistrationRequest request) async {
+  Future<BaseResponse> riderRegistrationAsync(RiderRegistrationRequest request) async {
     try {
       final response = await userRepository.createRiderAccountAsync(request);
       if (response.status) {
@@ -54,8 +53,7 @@ class UserController {
     try {
       final response = await userRepository.getUserProfileAsync();
       if (response.status) {
-        session.writeUserFullName(
-            '${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}');
+        session.writeUserFullName('${response.data.firstName.toTitleCase()} ${response.data.lastName.toCapitalized()}');
         return response;
       }
       return Future.error(response.message);

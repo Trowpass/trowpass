@@ -33,7 +33,8 @@ class NewPasswordScreen extends StatelessWidget {
               backgroundColor: background,
               elevation: 0.0,
               systemOverlayStyle: const SystemUiOverlayStyle(
-                statusBarColor: Color(0xFFE9E9E9),
+                statusBarColor: primaryColor,
+                systemNavigationBarColor: primaryColor,
                 statusBarIconBrightness: Brightness.light, // For Android
                 statusBarBrightness: Brightness.light, // For iOS
               ),
@@ -116,7 +117,7 @@ class NewPasswordScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 18),
+                    const SizedBox(height: 28),
                     StandardButton(
                       text: 'Change Password',
                       onPressed: () {

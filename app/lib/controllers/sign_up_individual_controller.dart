@@ -16,8 +16,7 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController phoneNumberController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   final isLoaded = false.obs;
 
@@ -38,34 +37,29 @@ class SignUpIndividualController extends GetxController {
     String businessName = 'null';
     try {
       if (passwordController.text != confirmPasswordController.text) {
-        Get.defaultDialog(
-            title: 'Validation', content: const Text('Password mis-matched'));
+        Get.defaultDialog(title: 'Validation', content: const Text('Password mis-matched'));
       } else {
-        var response = await userController.riderRegistrationAsync(
-            RiderRegistrationRequest(
-                firstName: firstNameController.text.trim(),
-                lastName: lastNameController.text.trim(),
-                email: emailController.text.trim(),
-                phoneNumber: phoneNumberController.text.trim(),
-                businessName: businessName,
-                password: passwordController.text.trim(),
-                confirmPassword: confirmPasswordController.text.trim(),
-                userAccountType: 'rider',
-                ));
+        var response = await userController.riderRegistrationAsync(RiderRegistrationRequest(
+          firstName: firstNameController.text.trim(),
+          lastName: lastNameController.text.trim(),
+          email: emailController.text.trim(),
+          phoneNumber: phoneNumberController.text.trim(),
+          businessName: businessName,
+          password: passwordController.text.trim(),
+          confirmPassword: confirmPasswordController.text.trim(),
+          userAccountType: 'rider',
+        ));
 
         if (response.status) {
           // session.writeRiderEmail(riderEmail);
           Get.to(OtpScreen(phoneNumber: phoneNumberController.text));
         } else {
-          Get.defaultDialog(
-              title: 'Information', content: Text(response.message));
+          Get.defaultDialog(title: 'Information', content: Text(response.message));
           isLoaded.value = false;
         }
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
   }

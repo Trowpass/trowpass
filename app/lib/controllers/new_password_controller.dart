@@ -39,7 +39,7 @@ class NewPasswordController extends GetxController {
         Get.defaultDialog(title: 'Success', content: Text(response.message));
         Timer(
           const Duration(milliseconds: 1500),
-          () => Get.to(() => LoginScreen()),
+          () => Get.off(() => LoginScreen()),
         );
       } else {
         Get.defaultDialog(title: 'Information', content: Text(response.message));
