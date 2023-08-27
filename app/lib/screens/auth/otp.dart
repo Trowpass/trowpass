@@ -30,6 +30,7 @@ class OtpScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: background,
               appBar: AppBar(
+                automaticallyImplyLeading: false,
                 systemOverlayStyle: const SystemUiOverlayStyle(
                   statusBarColor: primaryColor,
                   systemNavigationBarColor: primaryColor,
@@ -54,7 +55,8 @@ class OtpScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(left: 30, right: 30, top: 8, bottom: 16),
+                      padding: const EdgeInsets.only(
+                          left: 30, right: 30, top: 8, bottom: 16),
                       child: Text(
                         'Please enter the code sent to $phoneNumber. It expires in 5 minutes',
                         style: appStyles(16, null, null),
@@ -72,8 +74,11 @@ class OtpScreen extends StatelessWidget {
                               width: 64,
                               child: TextFormField(
                                 controller: controller.codeOneController,
-                                validator: (value) => value != null && value.isEmpty ? "" : null,
-                                onChanged: (value) => value.length == 1 ? FocusScope.of(context).nextFocus() : null,
+                                validator: (value) =>
+                                    value != null && value.isEmpty ? "" : null,
+                                onChanged: (value) => value.length == 1
+                                    ? FocusScope.of(context).nextFocus()
+                                    : null,
                                 decoration: InputDecoration(
                                   hintText: '*',
                                   errorStyle: const TextStyle(height: 0),
@@ -81,7 +86,8 @@ class OtpScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(7),
                                   ),
                                 ),
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 inputFormatters: [
@@ -95,7 +101,8 @@ class OtpScreen extends StatelessWidget {
                               width: 64,
                               child: TextFormField(
                                 controller: controller.codeTwoController,
-                                validator: (value) => value != null && value.isEmpty ? "" : null,
+                                validator: (value) =>
+                                    value != null && value.isEmpty ? "" : null,
                                 onChanged: (value) => value.length == 1
                                     ? FocusScope.of(context).nextFocus()
                                     : FocusScope.of(context).previousFocus(),
@@ -106,7 +113,8 @@ class OtpScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(7),
                                   ),
                                 ),
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 inputFormatters: [
@@ -120,7 +128,8 @@ class OtpScreen extends StatelessWidget {
                               width: 64,
                               child: TextFormField(
                                 controller: controller.codeThreeController,
-                                validator: (value) => value != null && value.isEmpty ? "" : null,
+                                validator: (value) =>
+                                    value != null && value.isEmpty ? "" : null,
                                 onChanged: (value) => value.length == 1
                                     ? FocusScope.of(context).nextFocus()
                                     : FocusScope.of(context).previousFocus(),
@@ -131,7 +140,8 @@ class OtpScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(7),
                                   ),
                                 ),
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 inputFormatters: [
@@ -145,8 +155,11 @@ class OtpScreen extends StatelessWidget {
                               width: 64,
                               child: TextFormField(
                                 controller: controller.codeFourController,
-                                validator: (value) => value != null && value.isEmpty ? "" : null,
-                                onChanged: (value) => value.length == 1 ? FocusScope.of(context).nextFocus() : null,
+                                validator: (value) =>
+                                    value != null && value.isEmpty ? "" : null,
+                                onChanged: (value) => value.length == 1
+                                    ? FocusScope.of(context).nextFocus()
+                                    : null,
                                 decoration: InputDecoration(
                                   hintText: '*',
                                   errorStyle: const TextStyle(height: 0),
@@ -154,7 +167,8 @@ class OtpScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(7),
                                   ),
                                 ),
-                                style: Theme.of(context).textTheme.headlineMedium,
+                                style:
+                                    Theme.of(context).textTheme.headlineMedium,
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 inputFormatters: [
@@ -168,7 +182,8 @@ class OtpScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -180,19 +195,25 @@ class OtpScreen extends StatelessWidget {
                               controller: controller.resendCountDownController,
                               seconds: controller.countdown,
                               build: (_, double time) {
-                                Duration duration = Duration(seconds: time.toInt());
+                                Duration duration =
+                                    Duration(seconds: time.toInt());
                                 int minutes = duration.inMinutes;
                                 int seconds = duration.inSeconds.remainder(60);
-                                String formattedTime = "${"$minutes".padLeft(2, "0")}:${"$seconds".padLeft(2, '0')}";
+                                String formattedTime =
+                                    "${"$minutes".padLeft(2, "0")}:${"$seconds".padLeft(2, '0')}";
 
                                 return TextButton(
                                   onPressed: () {
-                                    if ([controller.countdown, 0].contains(time)) {
-                                      controller.tryResendOtpSubmit(phoneNumber);
+                                    if ([controller.countdown, 0]
+                                        .contains(time)) {
+                                      controller
+                                          .tryResendOtpSubmit(phoneNumber);
                                     }
                                   },
                                   child: Text(
-                                    [controller.countdown, 0].contains(time) ? 'Resend' : 'Resend in $formattedTime',
+                                    [controller.countdown, 0].contains(time)
+                                        ? 'Resend'
+                                        : 'Resend in $formattedTime',
                                   ),
                                 );
                               },
@@ -209,7 +230,8 @@ class OtpScreen extends StatelessWidget {
                           onPressed: controller.isExpiryTimeElapsed.value
                               ? null
                               : () {
-                                  if (controller.formKey.currentState!.validate()) {
+                                  if (controller.formKey.currentState!
+                                      .validate()) {
                                     controller.formKey.currentState!.save();
                                     controller.verifyOtp();
                                   }
