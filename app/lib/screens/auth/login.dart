@@ -69,6 +69,7 @@ class LoginScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               Obx(() => TextInputForm(
+                                inputType: TextInputType.phone,
                                     enabled: true,
                                     inputController:
                                         controller.emailPhoneNumberController,

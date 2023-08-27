@@ -39,7 +39,7 @@ class AuthController extends GetxController {
         session.writeAuthorizationToken(response.data!.token);
         session.writeUserId(response.data!.userId);
         // session.writeUserFirstName(response.data!.firstName.toTitleCase());
-        Get.to(WalletTagScreen());
+        Get.to(HomeLandingTabScreen());
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {
