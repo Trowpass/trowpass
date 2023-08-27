@@ -1,11 +1,9 @@
 // ignore_for_file: avoid_print, unnecessary_string_interpolations
 import 'package:app/controllers/bloc/user_controller.dart';
-import 'package:app/screens/auth/login.dart';
-import 'package:app/shareds/managers/set_session_manager.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../shareds/utils/app_colors.dart';
+import '../screens/auth/wallet_tag.dart';
+import '../shareds/managers/get_session_manager.dart';
 
 class DashboardController extends GetxController {
   final showBalance = true.obs;
@@ -16,16 +14,17 @@ class DashboardController extends GetxController {
   final qrCodeUrl = Rx<String>('');
   final isLoaded = Rx<bool>(false);
 
-  SetSessionManager session = SetSessionManager();
+  GetSessionManager session = GetSessionManager();
   UserController userController = UserController();
 
   @override
   void onInit() {
-    isLoaded.value = false;
+    isLoaded.value = true;
     fullName.value = '';
     balance.value = 0.0;
     accountNumber.value = '';
     userProfile();
+    userWallet();
     super.onInit();
   }
 
@@ -34,29 +33,19 @@ class DashboardController extends GetxController {
   }
 
   Future userProfile() async {
-    try {
-      isLoaded.value = true;
-      var response = await userController.userWalletAsync();
-      if (response.status) {
-        accountNumber.value = response.data!.accountNumber;
-        balance.value = response.data!.balance;
-        String originalName = response.data!.name;
-        List<String> nameParts = originalName.split('-');
-        String truncatedName = nameParts[0].trim();
-        fullName.value = truncatedName;
-      } else {
-        Get.defaultDialog(
-            title: 'Information',
-            content: const Text('Unable to fetch profile'));
-        Get.to(LoginScreen());
-      }
-    } catch (e, stackTrace) {
-      print('Error: $e');
-      print('Stack Trace: $stackTrace');
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
-          snackPosition: SnackPosition.BOTTOM);
-      isLoaded.value = false;
+    var response = await userController.userProfileAsync();
+    if (response.status) {
+      fullName.value = session.readRiderFullName()!;
+    }
+  }
+
+  Future userWallet() async {
+    var response = await userController.userWalletAsync();
+    if (response.status) {
+      accountNumber.value = response.data!.accountNumber;
+      balance.value = response.data!.balance;
+    } else {
+      Get.to(WalletTagScreen());
     }
   }
 }

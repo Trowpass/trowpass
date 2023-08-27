@@ -117,6 +117,21 @@ class SigUpForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextInputForm(
+              inputType: TextInputType.phone,
+              enabled: true,
+              inputController: businessController.bvnController,
+              textLabel: 'BVN',
+              textHint: 'Enter your BVN',
+              validatorMessage: 'Please enter a valid bvn',
+              isPassword: false,
+              autoCorrect: false,
+              prefixIcon: const Icon(
+                Icons.confirmation_number_rounded,
+                size: 30,
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextInputForm(
               enabled: true,
               inputController: businessController.passwordController,
               textLabel: 'Password',
