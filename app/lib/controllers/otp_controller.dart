@@ -1,7 +1,12 @@
-import 'package:app/screens/auth/login.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timer_count_down/timer_controller.dart' as resend_timer;
+import 'package:circular_countdown_timer/circular_countdown_timer.dart' as expiry_timer;
+
+import 'package:app/screens/auth/login.dart';
+
+import '../repositories/user_repository.dart';
+import '../services/requests/post_requests/resend_otp_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../shareds/managers/get_session_manager.dart';
 import '../shareds/utils/app_colors.dart';
@@ -15,10 +20,16 @@ class OtpController extends GetxController {
   TextEditingController codeThreeController = TextEditingController();
   TextEditingController codeFourController = TextEditingController();
 
-  final countDownController = CountDownController();
-  final int countDownControllerDuration = 1900; // in seconds [5 minutes]
-  final isTimeElapsed = false.obs;
   final isLoaded = false.obs;
+  final isExpiryTimeElapsed = false.obs;
+  final countdown = const Duration(minutes: 1).inSeconds;
+  final countDownControllerDuration = const Duration(minutes: 5).inSeconds;
+  final resendCountDownController = resend_timer.CountdownController();
+  final expiryCountDownController = expiry_timer.CountDownController();
+
+  final userRepository = UserRepository();
+  GetSessionManager session = GetSessionManager();
+  UserController userController = UserController();
 
   @override
   void onInit() {
@@ -26,8 +37,9 @@ class OtpController extends GetxController {
     super.onInit();
   }
 
-  GetSessionManager session = GetSessionManager();
-  UserController userController = UserController();
+  void timerElapsed() {
+    isExpiryTimeElapsed.value = true;
+  }
 
   Future<void> verifyOtp() async {
     isLoaded.value = true;
@@ -35,26 +47,44 @@ class OtpController extends GetxController {
     try {
       String otpValue =
           '${codeOneController.text}${codeTwoController.text}${codeThreeController.text}${codeFourController.text}';
-      var response = await userController
-          .verifyOtpAsync(VerifyOtpRequest(otp: otpValue.trim()));
+      var response = await userController.verifyOtpAsync(VerifyOtpRequest(otp: otpValue.trim()));
       if (response.status) {
         Get.to(LoginScreen());
       } else {
-        Get.defaultDialog(
-            title: 'Information', content: Text(response.message));
+        Get.defaultDialog(title: 'Information', content: Text(response.message));
         isLoaded.value = false;
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
   }
 
-  void tryResendOtpSubmit() {
-    Get.snackbar('Information', 'No implemented yet',
+  Future<void> tryResendOtpSubmit(String phoneNumber) async {
+    isLoaded.value = true;
+    Get.focusScope!.unfocus();
+
+    try {
+      ResendOtpRequest request = ResendOtpRequest(phoneNumber: phoneNumber);
+      var response = await userRepository.resendOtpToPhoneNumberAsync(request);
+
+      if (response.status) {
+        isLoaded.value = false;
+        isExpiryTimeElapsed.value = false;
+        resendCountDownController.restart();
+        expiryCountDownController.restart();
+      } else {
+        Get.defaultDialog(title: 'Information', content: Text(response.message));
+        isLoaded.value = false;
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Information',
+        e.toString(),
         backgroundColor: validationErrorColor,
-        snackPosition: SnackPosition.BOTTOM);
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      isLoaded.value = false;
+    }
   }
 }

@@ -24,6 +24,8 @@ class TextInputForm extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
   final bool enabled; // Added the enabled field
   final List<TextInputFormatter>? inputFormatters;
+  final String? Function(String?)? validator;
+
   const TextInputForm({
     Key? key,
     required this.inputController,
@@ -43,6 +45,7 @@ class TextInputForm extends StatelessWidget {
     this.onFieldSubmitted,
     required this.enabled,
     this.inputFormatters, // Added the enabled parameter
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -57,8 +60,7 @@ class TextInputForm extends StatelessWidget {
       autocorrect: autoCorrect,
       controller: inputController,
       style: const TextStyle(fontSize: 15),
-      enabled:
-          enabled, // Use the enabled parameter to enable or disable the input field
+      enabled: enabled, // Use the enabled parameter to enable or disable the input field
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
@@ -82,12 +84,13 @@ class TextInputForm extends StatelessWidget {
         filled: true,
         fillColor: fillColor,
       ),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return validatorMessage;
-        }
-        return null;
-      },
+      validator: validator ??
+          (value) {
+            if (value!.isEmpty) {
+              return validatorMessage;
+            }
+            return null;
+          },
       onChanged: onChanged,
       onTap: onTap,
       onFieldSubmitted: onFieldSubmitted,

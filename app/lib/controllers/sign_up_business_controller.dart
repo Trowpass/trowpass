@@ -8,6 +8,7 @@ class SignUpBusinessController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final TextEditingController bvnController = TextEditingController();
 
   void trySubmit() {
     Get.focusScope!.unfocus();

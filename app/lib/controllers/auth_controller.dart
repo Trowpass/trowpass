@@ -1,10 +1,13 @@
 // ignore_for_file: avoid_print
 import 'package:app/screens/auth/account_type_screen.dart';
+import 'package:app/screens/auth/pin/choose_pin_screen.dart';
 import 'package:app/screens/auth/wallet_tag.dart';
 import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../screens/navigation_menus/home_landing_tab_screen.dart';
 import '../shareds/managers/set_session_manager.dart';
 import '../shareds/utils/app_colors.dart';
 import 'bloc/user_controller.dart';
@@ -38,8 +41,7 @@ class AuthController extends GetxController {
       if (response.status) {
         session.writeAuthorizationToken(response.data!.token);
         session.writeUserId(response.data!.userId);
-        // session.writeUserFirstName(response.data!.firstName.toTitleCase());
-        Get.to(HomeLandingTabScreen());
+        Get.to(ChoosePinController());
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {

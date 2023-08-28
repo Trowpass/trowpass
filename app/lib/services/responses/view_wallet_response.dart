@@ -1,16 +1,15 @@
 class UserWalletResponse {
-  bool status;
   String message;
+  bool status;
   String responseCode;
   WalletData? data;
 
   UserWalletResponse({
-    required this.status,
     required this.message,
+    required this.status,
     required this.responseCode,
-    this.data,
+    required this.data,
   });
-
   factory UserWalletResponse.fromJson(Map<String, dynamic> json) =>
       UserWalletResponse(
         status: json['status'],
@@ -28,6 +27,7 @@ class WalletData {
   String bankName;
   double balance;
   bool isActive;
+  String serviceWalletId;
 
   WalletData({
     required this.id,
@@ -37,6 +37,7 @@ class WalletData {
     required this.bankName,
     required this.balance,
     required this.isActive,
+    required this.serviceWalletId,
   });
 
   factory WalletData.fromJson(Map<String, dynamic> json) => WalletData(
@@ -46,6 +47,7 @@ class WalletData {
         accountNumber: json['accountNumber'] ?? '',
         bankName: json['bankName'] ?? '',
         balance: (json['balance'] ?? 0.0).toDouble(),
-        isActive: json['isActive'] ?? false,
+        isActive: json['isActive'],
+        serviceWalletId: json['serviceWalletId'],
       );
 }
