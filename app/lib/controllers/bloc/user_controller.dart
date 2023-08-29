@@ -4,10 +4,12 @@ import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/rider_registration_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
+import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/responses/base_response.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
 import 'package:app/services/responses/user_login_response.dart';
 import 'package:app/services/responses/view_profile_response.dart';
+import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 
@@ -65,6 +67,19 @@ class UserController {
       if (response.status) {
         session.writeUserFullName(
             '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}');
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<UserByPhoneResponse> userByPhoneAsync(
+      UserByPhoneRequest request) async {
+    try {
+      final response = await userRepository.getUserByPhoneAsync(request);
+      if (response.status) {
         return response;
       }
       return Future.error(response.message);

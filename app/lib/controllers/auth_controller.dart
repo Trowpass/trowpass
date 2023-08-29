@@ -41,7 +41,7 @@ class AuthController extends GetxController {
       if (response.status) {
         session.writeAuthorizationToken(response.data!.token);
         session.writeUserId(response.data!.userId);
-        Get.to(ChoosePinController());
+        Get.to(HomeLandingTabScreen());
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {

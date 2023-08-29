@@ -55,4 +55,5 @@ class WalletTagController extends GetxController {
       isLoaded.value = false;
     }
   }
+  
 }

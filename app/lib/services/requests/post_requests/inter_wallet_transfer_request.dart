@@ -1,11 +1,11 @@
-class InterWalletTransferRequestRequest {
+class InterWalletTransferRequest {
   int senderUserId;
   String recipientPhoneNumber;
   String narration;
   int amount;
   String pin;
 
-  InterWalletTransferRequestRequest({
+  InterWalletTransferRequest({
     required this.senderUserId,
     required this.recipientPhoneNumber,
     required this.narration,
