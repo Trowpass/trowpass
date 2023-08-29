@@ -9,7 +9,7 @@ class Endpoints {
   String verifyOtp = 'api/v1/auth/verify-account';
   String login = 'api/v1/auth/sign-in';
   String userProfile = 'api/v1/user/profile';
-  String userByPhone = 'api/v1/user';
+  String userByPhone = 'api/v1/user/details';
   static String forgotPassword = '/api/v1/auth/forgot-password';
   static String resetPassword = '/api/v1/auth/reset-password';
   static String resendOtpAccountVerification = 'api/v1/auth/resend-otp/${OtpType.accountVerification}';
