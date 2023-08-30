@@ -45,7 +45,7 @@ class TextInputForm extends StatelessWidget {
     this.onFieldSubmitted,
     required this.enabled,
     this.inputFormatters, // Added the enabled parameter
-    this.validator,
+    this.validator,  String? initialValue,
   }) : super(key: key);
 
   @override

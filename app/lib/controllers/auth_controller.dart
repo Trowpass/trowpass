@@ -1,10 +1,9 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_const_constructors
 import 'package:app/screens/auth/account_type_screen.dart';
+import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../screens/navigation_menus/home_landing_tab_screen.dart';
 import '../shareds/managers/set_session_manager.dart';
 import '../shareds/utils/app_colors.dart';
 import 'bloc/user_controller.dart';
@@ -43,10 +42,10 @@ class AuthController extends GetxController {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {
           Get.defaultDialog(
-              title: 'Login Failed', content: Text(response.message));
+              title: 'Login Failed', content: Text(response.message, style: TextStyle(color: Colors.white),));
         } else {
           Get.defaultDialog(
-              title: 'Information', content: Text(response.message));
+              title: 'Information', content: Text(response.message, style: TextStyle(color: Colors.white),));
         }
         isLoaded.value = false;
       }
