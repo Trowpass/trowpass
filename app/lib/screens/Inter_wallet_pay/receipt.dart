@@ -10,6 +10,8 @@ import '../../widgets/currency_format.dart';
 import '../../widgets/standard_button.dart';
 
 class InterWalletTransferReceiptScreen extends StatelessWidget {
+  InterWalletTransferReceiptScreen(
+      {super.key, required this.transactionDetails});
   InterWalletTransferReceiptScreen({super.key, required this.transactionDetails});
   // InterWalletTransferReceiptScreen({super.key, required InterWalletTransferResponse transactionDetails, required this.transactionDetails});
   final InterWalletTransferResponse transactionDetails;
@@ -151,9 +153,13 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: ListTile(
-                                              title: Text(transactionDetails.data?.recipientName ?? ''),
-                                              subtitle: Text(transactionDetails.data?.recipientPhoneNumber ?? ''
-                                                  )))
+                                              title: Text(transactionDetails
+                                                      .data?.recipientName ??
+                                                  ''),
+                                              subtitle: Text(transactionDetails
+                                                      .data
+                                                      ?.recipientPhoneNumber ??
+                                                  '')))
                                     ],
                                   ),
                                   Padding(

@@ -84,26 +84,26 @@ class PayForm extends StatelessWidget {
               inputType: TextInputType.number,
               enabled: true,
               inputController: payController.phoneNumberController,
-               onChanged: (value) {
+              onChanged: (value) {
                 if (value.trim().length == 11) {
                   payController.fetchUserDataByPhoneNumber();
                 }
               },
               // textLabel: '08134678957462',
-              textHint: 'Receipient Phone Number',
+              textHint: 'Recipient Phone Number',
               isPassword: false,
               autoCorrect: false,
               validatorMessage: 'Please enter recepient number',
             ),
             const SizedBox(height: 10),
-            LabelText(textLabel: "Receipient Name"),
+            LabelText(textLabel: "Recipient Name"),
             const SizedBox(height: 16),
             TextInputForm(
               enabled: false,
               inputController: payController.fullNameController,
               initialValue: payController.fullNameController.text,
               // textLabel: 'Receipient Name',
-              textHint: 'Receipient Name',
+              textHint: 'Recipient Name',
               isPassword: false,
               autoCorrect: false,
             ),

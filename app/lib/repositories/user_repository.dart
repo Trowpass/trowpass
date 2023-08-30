@@ -105,8 +105,7 @@ class UserRepository {
       return Future.error(e);
     }
   }
-
-   Future<UserByPhoneResponse> getUserByPhoneAsync(
+  Future<UserByPhoneResponse> getUserByPhoneAsync(
       UserByPhoneRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(

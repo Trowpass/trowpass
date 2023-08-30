@@ -1,4 +1,3 @@
-import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/screens/auth/login.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -14,7 +13,6 @@ import '../../widgets/text_form_input.dart';
 class SignUpScreenIndividual extends StatelessWidget {
   SignUpScreenIndividual({super.key});
   final controller = Get.put(SignUpIndividualController());
-  final userController = UserController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,8 @@ class SignUpScreenIndividual extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.only(
+                    top: 5, right: 20, left: 20, bottom: 20),
                 child: Column(
                   children: [
                     Text(
@@ -48,7 +47,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     Text(
-                      'Create an account with SanwoPay',
+                      'Create an account with Trowpass',
                       style: appStyles(16, Colors.black, FontWeight.w400),
                     ),
                     const SizedBox(height: 32),
@@ -141,6 +140,33 @@ class SignUpScreenIndividual extends StatelessWidget {
                                 Icons.lock_clock_rounded,
                                 size: 30,
                               ),
+                              onChanged: (value) =>
+                                  controller.checkPassword(value),
+                            ),
+                            SizedBox(
+                              height: 17,
+                              child: Stack(
+                                children: <Widget>[
+                                  SizedBox.expand(
+                                    child: LinearProgressIndicator(
+                                        value: controller.strength.value,
+                                        backgroundColor: Colors.red[500],
+                                        color: controller.strength.value <=
+                                                1 / 4
+                                            ? Colors.red
+                                            : controller.strength.value == 2 / 4
+                                                ? Colors.yellow
+                                                : controller.strength.value ==
+                                                        3 / 4
+                                                    ? Colors.blue
+                                                    : Colors.green,
+                                        minHeight: 15),
+                                  ),
+                                  Center(
+                                      child:
+                                          Text(controller.displayText.value)),
+                                ],
+                              ),
                             ),
                             const SizedBox(height: 10),
                             TextInputForm(
@@ -164,7 +190,9 @@ class SignUpScreenIndividual extends StatelessWidget {
                                 if (controller.formKey.currentState!
                                     .validate()) {
                                   controller.formKey.currentState!.save();
-                                  controller.registerRider();
+                                  controller.strength.value < 1 / 2
+                                      ? null
+                                      : controller.registerRider();
                                 }
                               },
                             ),

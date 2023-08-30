@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../controllers/top_up_transport_wallet_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/border_radius.dart';
+import '../../widgets/text_form_input.dart';
 import '../beneficiary/beneficiaries.dart';
 
 class TopUpTransportWalletScreen extends StatelessWidget {
@@ -134,16 +135,17 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                   enabled: false,
                 )),
             ListTile(
-                contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
-                title: const Text('PIN'),
-                subtitle: TextInput(
-                  keyboardType: TextInputType.number,
-                  isReadOnly: false,
+              contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
+              title: const Text('PIN'),
+              subtitle: TextInputForm(
+                  enabled: true,
+                  inputType: TextInputType.number,
                   inputController: controller.pinTextEditController,
-                  textHint: 'Pin',
+                  textHint: '0000',
+                  validatorMessage: 'Enter your pin',
                   isPassword: true,
-                  enabled: false,
-                )),
+                  autoCorrect: false),
+            ),
             Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: StandardButton(
