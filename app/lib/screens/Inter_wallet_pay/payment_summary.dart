@@ -12,7 +12,8 @@ import '../../controllers/inter_wallet_transfer_controller/payment_summary_contr
 class InterWalletPaymentSummaryScreen extends StatelessWidget {
   final PaymentSummaryController paymentSummaryController =
       Get.put(PaymentSummaryController());
-  final PaymentSummaryController paymentSummaryController = Get.put(PaymentSummaryController());
+
+  @override
   Widget build(BuildContext context) {
     paymentSummaryController.initializeData();
     return GestureDetector(
