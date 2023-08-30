@@ -19,7 +19,7 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  
+
   final password = ''.obs;
   final strength = RxDouble(0);
   final displayText = 'Mix of upper & lower case, number and character'.obs;
@@ -46,9 +46,9 @@ class SignUpIndividualController extends GetxController {
     Get.focusScope!.unfocus();
     // String riderEmail =
     //     '${phoneNumberController.text.trim()}_rider_none@gmail.com';
-    String businessName = 'null';
+    String businessName = 'N/A';
     String bvn = '22222222222';
-    
+
     try {
       if (passwordController.text != confirmPasswordController.text) {
         Get.defaultDialog(
@@ -59,6 +59,8 @@ class SignUpIndividualController extends GetxController {
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
+          businessName: businessName,
+          bvn: bvn,
           phoneNumber: phoneNumberController.text.trim(),
           password: passwordController.text.trim(),
           confirmPassword: confirmPasswordController.text.trim(),
