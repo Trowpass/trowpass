@@ -105,7 +105,6 @@ class UserRepository {
       return Future.error(e);
     }
   }
-
   Future<UserByPhoneResponse> getUserByPhoneAsync(
       UserByPhoneRequest request) async {
     try {

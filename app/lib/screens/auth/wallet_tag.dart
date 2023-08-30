@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:app/controllers/wallet_tag_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -48,15 +46,6 @@ class WalletTagScreen extends StatelessWidget {
                               'Create Wallet Tag!',
                               style: appStyles(24, null, FontWeight.w600),
                             ),
-                            // const SizedBox(height: 22),
-                            // Text(
-                            //   'Log in to your account.',
-                            //   style: appStyles(
-                            //     16,
-                            //     Colors.black,
-                            //     FontWeight.w400,
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -65,21 +54,19 @@ class WalletTagScreen extends StatelessWidget {
                           key: controller.formKey,
                           child: Column(
                             children: [
-                               TextInputForm(
-                                    enabled: true,
-                                    inputController:
-                                        controller.walletTagController,
-                                    textLabel: 'Enter a name',
-                                    textHint: 'Enter a name',
-                                    validatorMessage:
-                                        'Please enter a valid name',
-                                    isPassword: false,
-                                    autoCorrect: false,
-                                    prefixIcon: const Icon(
-                                      Icons.person_outline_outlined,
-                                      size: 30,
-                                    ),
-                                  ),
+                              TextInputForm(
+                                enabled: true,
+                                inputController: controller.walletTagController,
+                                textLabel: 'Enter a name',
+                                textHint: 'Enter a name',
+                                validatorMessage: 'Please enter a valid name',
+                                isPassword: false,
+                                autoCorrect: false,
+                                prefixIcon: const Icon(
+                                  Icons.person_outline_outlined,
+                                  size: 30,
+                                ),
+                              ),
                               const SizedBox(height: 16),
                               StandardButton(
                                 text: 'Create',

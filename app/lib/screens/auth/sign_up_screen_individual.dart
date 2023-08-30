@@ -114,6 +114,21 @@ class SignUpScreenIndividual extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             TextInputForm(
+                              inputType: TextInputType.phone,
+                              enabled: true,
+                              inputController: controller.bvnController,
+                              textLabel: 'BVN',
+                              textHint: 'Enter your BVN',
+                              validatorMessage: 'Please enter a valid bvn',
+                              isPassword: false,
+                              autoCorrect: false,
+                              prefixIcon: const Icon(
+                                Icons.confirmation_number_rounded,
+                                size: 30,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            TextInputForm(
                               enabled: true,
                               inputController: controller.passwordController,
                               textLabel: 'Password',
@@ -122,7 +137,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               isPassword: true,
                               autoCorrect: false,
                               prefixIcon: const Icon(
-                                Icons.lock,
+                                Icons.lock_clock_rounded,
                                 size: 30,
                               ),
                               onChanged: (value) =>

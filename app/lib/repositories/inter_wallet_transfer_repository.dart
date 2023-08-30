@@ -32,25 +32,4 @@ class InterWalletTransferRepository {
       return Future.error(e);
     }
   }
-
-  // Future<UserWalletResponse> getUserWalletAsync() async {
-  //   try {
-  //     int? userId = session.readUserId();
-  //     var url = '${Endpoints().userWallet}/$userId';
-  //     var response = await apiConnectionHelper.getDataAsync(
-  //       url: url,
-  //     );
-  //     if (response.data != null) {
-  //       return UserWalletResponse.fromJson(response.data);
-  //     } else {
-  //       throw Exception('Unable to get user wallet details');
-  //     }
-  //   } on DioError catch (e) {
-  //     return Future.error(DioExceptions.fromDioError(e));
-  //   } on SocketException catch (e) {
-  //     return Future.error(e);
-  //   } catch (e) {
-  //     return Future.error(e);
-  //   }
-  // }
 }

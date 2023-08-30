@@ -14,11 +14,12 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController bvnController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-
+  
   final password = ''.obs;
   final strength = RxDouble(0);
   final displayText = 'Mix of upper & lower case, number and character'.obs;
@@ -47,6 +48,7 @@ class SignUpIndividualController extends GetxController {
     //     '${phoneNumberController.text.trim()}_rider_none@gmail.com';
     String businessName = 'null';
     String bvn = '22222222222';
+    
     try {
       if (passwordController.text != confirmPasswordController.text) {
         Get.defaultDialog(
@@ -58,14 +60,11 @@ class SignUpIndividualController extends GetxController {
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
           phoneNumber: phoneNumberController.text.trim(),
-          businessName: businessName,
-          bvn: bvn,
           password: passwordController.text.trim(),
           confirmPassword: confirmPasswordController.text.trim(),
           userAccountType: 'rider',
         ));
         if (response.status) {
-          // session.writeRiderEmail(riderEmail);
           Get.to(OtpScreen(phoneNumber: phoneNumberController.text));
         } else {
           Get.defaultDialog(

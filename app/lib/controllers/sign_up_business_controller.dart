@@ -8,7 +8,7 @@ class SignUpBusinessController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-
+  
   final password = ''.obs;
   final strength = RxDouble(0);
   final displayText = 'Please enter a password'.obs;
@@ -26,6 +26,7 @@ class SignUpBusinessController extends GetxController {
     isLoaded.value = false;
     super.onInit();
   }
+  final TextEditingController bvnController = TextEditingController();
 
   void trySubmit() {
     Get.focusScope!.unfocus();

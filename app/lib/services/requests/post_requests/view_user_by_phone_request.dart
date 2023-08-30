@@ -1,6 +1,5 @@
 class UserByPhoneRequest {
   String phoneNumber;
-
   UserByPhoneRequest({
     required this.phoneNumber,
   });
