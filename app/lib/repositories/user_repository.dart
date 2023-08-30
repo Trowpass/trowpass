@@ -1,10 +1,10 @@
-// ignore_for_file: avoid_print
-
 import 'dart:io';
 
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
+import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
@@ -18,7 +18,6 @@ import '../services/requests/post_requests/verify_otp_request.dart';
 import '../services/responses/base_response.dart';
 import '../services/responses/user_login_response.dart';
 import '../services/responses/view_profile_response.dart';
-
 import '../shareds/constants/endpoints.dart';
 import '../shareds/helpers/api_connection_helper.dart';
 
@@ -29,7 +28,8 @@ class UserRepository {
 
   Future<UserLoginResponse> userLoginAsync(UserLoginRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints().login);
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: Endpoints().login);
       if (response.data != null) {
         return UserLoginResponse.fromJson(response.data);
       } else {
@@ -44,9 +44,11 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> createRiderAccountAsync(RiderRegistrationRequest request) async {
+  Future<BaseResponse> createRiderAccountAsync(
+      RiderRegistrationRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints().riderRegister);
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: Endpoints().riderRegister);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {
@@ -61,9 +63,12 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> verifyOtpAsync(VerifyOtpRequest request) async {
+  Future<BaseResponse> verifyOtpAsync(
+      VerifyOtpRequest request, dynamic customerPhoneNumber) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints().verifyOtp);
+      var url = '${Endpoints().verifyOtp}/$customerPhoneNumber';
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: url);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {
@@ -100,7 +105,28 @@ class UserRepository {
       return Future.error(e);
     }
   }
-  Future<BaseResponse> requestForgotPasswordAsync(ForgetPasswordRequest request) async {
+
+  Future<UserByPhoneResponse> getUserByPhoneAsync(
+      UserByPhoneRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: Endpoints().userByPhone);
+      if (response.data != null) {
+        return UserByPhoneResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to get user');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<BaseResponse> requestForgotPasswordAsync(
+      ForgetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
@@ -111,6 +137,27 @@ class UserRepository {
         return BaseResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to send request');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<BaseResponse> resendOtpToPhoneNumberAsync(
+      ResendOtpRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+        requestData: request,
+        path: Endpoints.resendOtpAccountVerification,
+      );
+      if (response.data != null) {
+        return BaseResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to resend otp');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
@@ -132,6 +179,16 @@ class UserRepository {
         return BaseResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to reset password');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
   Future<CreateWalletResponse> createWalletAsync(
       CreateWalletRequest request) async {
     try {
@@ -172,26 +229,13 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> resendOtpToPhoneNumberAsync(ResendOtpRequest request) async {
-    try {
-      var response = await apiConnectionHelper.postDataAsync(
-        requestData: request,
-        path: Endpoints.resendOtpAccountVerification,
-      );
-
-      if (response.data != null) {
-        return BaseResponse.fromJson(response.data);
-      } else {
-        throw Exception('Unable to resend otp');
   Future<UserWalletResponse> getUserWalletAsync() async {
     try {
       int? userId = session.readUserId();
       var url = '${Endpoints().userWallet}/$userId';
-      //
       var response = await apiConnectionHelper.getDataAsync(
         url: url,
       );
-      //
       if (response.data != null) {
         return UserWalletResponse.fromJson(response.data);
       } else {

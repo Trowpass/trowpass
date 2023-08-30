@@ -14,5 +14,4 @@ class BaseResponse {
         message: json['message'],
         responseCode: json['responseCode'],
       );
-  });
 }

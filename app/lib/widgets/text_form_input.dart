@@ -46,6 +46,7 @@ class TextInputForm extends StatelessWidget {
     required this.enabled,
     this.inputFormatters, // Added the enabled parameter
     this.validator,
+    String? initialValue,
   }) : super(key: key);
 
   @override
@@ -60,7 +61,8 @@ class TextInputForm extends StatelessWidget {
       autocorrect: autoCorrect,
       controller: inputController,
       style: const TextStyle(fontSize: 15),
-      enabled: enabled, // Use the enabled parameter to enable or disable the input field
+      enabled:
+          enabled, // Use the enabled parameter to enable or disable the input field
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
