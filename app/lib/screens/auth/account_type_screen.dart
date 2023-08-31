@@ -39,14 +39,14 @@ class AccountTypeScreen extends StatelessWidget {
             const SizedBox(height: 35),
             StandardButtonOutline(
               color: primaryColor,
-              text: 'Business',
+              text: 'Fleet Manager(Transporter)',
               onPressed: () {
                 Get.to(() => const SignUpScreenBusiness());
               },
             ),
             const SizedBox(height: 18),
             StandardButton(
-              text: 'Individual',
+              text: 'Ride Manager(Passenger)',
               onPressed: () {
                 Get.to(() => SignUpScreenIndividual());
               },

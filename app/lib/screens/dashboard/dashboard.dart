@@ -9,6 +9,7 @@ import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/overlay_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/dashboard_conroller.dart';
@@ -20,6 +21,10 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark,
+    ));
     return Obx(() => !controller.isLoaded.value
         ? overlayLoader(!controller.isLoaded.value)
         : RefreshIndicator(
@@ -40,7 +45,7 @@ class DashboardScreen extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(vertical: 25),
+                                      const EdgeInsets.symmetric(vertical: 55),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,

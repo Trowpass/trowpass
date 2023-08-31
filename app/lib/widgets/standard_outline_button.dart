@@ -28,7 +28,7 @@ class StandardButtonOutline extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: appStyleWithMoreProps(22, color, FontWeight.w600, null),
+            style: appStyleWithMoreProps(16, color, FontWeight.w500, null),
           ),
         ));
   }

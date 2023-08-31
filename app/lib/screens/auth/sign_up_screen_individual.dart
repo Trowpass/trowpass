@@ -48,7 +48,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                     ),
                     const SizedBox(height: 15),
                     Text(
-                      'Create an account with SanwoPay',
+                      'Create an account with Trowpass',
                       style: appStyles(16, Colors.black, FontWeight.w400),
                     ),
                     const SizedBox(height: 32),
