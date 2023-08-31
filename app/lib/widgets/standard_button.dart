@@ -19,7 +19,7 @@ class StandardButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(defaultBorderRadius)),
           backgroundColor: primaryColor,
-          minimumSize: const Size(double.infinity, 50),
+          minimumSize: const Size(double.infinity, 60),
           side: const BorderSide(color: primaryColor),
         ),
         child: Text(

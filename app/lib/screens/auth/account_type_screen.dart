@@ -1,12 +1,12 @@
-import 'package:app/screens/auth/sign_up_screen_business.dart';
 import 'package:app/screens/auth/sign_up_screen_individual.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
+import 'package:app/widgets/standard_outline_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-import '../../widgets/standard_outline_button.dart';
+import 'sign_up_screen_business.dart';
 
 class AccountTypeScreen extends StatelessWidget {
   const AccountTypeScreen({super.key});
@@ -36,17 +36,17 @@ class AccountTypeScreen extends StatelessWidget {
               'Get Started as a',
               style: appStyles(20, Colors.black, FontWeight.w500),
             ),
-            const SizedBox(height: 35),
+            const SizedBox(height: 30),
             StandardButtonOutline(
               color: primaryColor,
-              text: 'Business',
+              text: 'Fleet Manager[Transporter]',
               onPressed: () {
-                Get.to(() => const SignUpScreenBusiness());
+                Get.to(() => SignUpScreenBusiness());
               },
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 7),
             StandardButton(
-              text: 'Individual',
+              text: 'Ride Manager[Passenger]',
               onPressed: () {
                 Get.to(() => SignUpScreenIndividual());
               },

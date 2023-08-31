@@ -24,7 +24,7 @@ class ScanScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: background,
         elevation: 0.0,
-        title: Text('Sanwopay QR code',
+        title: Text('Trowpass QR Code',
             style: appStyles(20, titleActive, FontWeight.w500)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),

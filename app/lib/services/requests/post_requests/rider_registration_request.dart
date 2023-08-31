@@ -1,27 +1,34 @@
 class RiderRegistrationRequest {
   String firstName;
   String lastName;
+  String phoneNumber;
+  String businessName;
   String email;
-  String mobile;
+  String bvn;
   String password;
-  String userType;
-  String deviceToken;
+  String confirmPassword;
+  String userAccountType;
 
-  RiderRegistrationRequest(
-      {required this.firstName,
-      required this.lastName,
-      required this.email,
-      required this.mobile,
-      required this.password,
-      required this.userType,
-      required this.deviceToken});
+  RiderRegistrationRequest({
+    required this.firstName,
+    required this.lastName,
+    required this.phoneNumber,
+    required this.businessName,
+    required this.email,
+    required this.bvn,
+    required this.password,
+    required this.confirmPassword,
+    required this.userAccountType,
+  });
   Map<String, dynamic> toJson() => {
-        'first_name': firstName,
-        'last_name': lastName,
+        'firstName': firstName,
+        'lastName': lastName,
         'email': email,
-        'mobile': mobile,
+        'bvn': bvn,
+        'phoneNumber': phoneNumber,
+        'businessName': businessName,
         'password': password,
-        'user_type': userType,
-        'device_token': deviceToken
+        'confirmPassword': confirmPassword,
+        'userAccountType': userAccountType,
       };
 }

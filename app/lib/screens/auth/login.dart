@@ -8,9 +8,10 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
-import '../../widgets/overlay_loader.dart';
-import '../navigation_menus/home_landing_tab_screen.dart';
+import '../../widgets/app_logo.dart';
+import 'forgot_password/forgot_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
@@ -18,47 +19,24 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isLoaded.value
-        ? overlayLoader(controller.isLoaded.value)
-        : GestureDetector(
+    return Obx(() => OverlayLoaderWithAppIcon(
+        isLoading: controller.isLoaded.value,
+        overlayBackgroundColor: background,
+        circularProgressColor: primaryColor,
+        appIcon: appLogo(70, 70),
+        child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
-              backgroundColor: background,
-              appBar: AppBar(
                 backgroundColor: background,
-                elevation: 0.0,
-              ),
-              body: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
-                    children: [
+                appBar: AppBar(
+                  backgroundColor: background,
+                  elevation: 0.0,
+                ),
+                body: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(children: [
                       Image.asset(loginImg),
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              'Welcome back!',
-                              style: appStyles(24, null, FontWeight.w600),
-                            ),
-                            const SizedBox(height: 22),
-                            Text(
-                              'Log in to your account.',
-                              style: appStyles(
-                                16,
-                                Colors.black,
-                                FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       const SizedBox(height: 32),
                       Form(
                           key: controller.formKey,
@@ -68,14 +46,14 @@ class LoginScreen extends StatelessWidget {
                                     enabled: true,
                                     inputController:
                                         controller.emailPhoneNumberController,
-                                    textLabel: 'Email or phone number',
-                                    textHint: 'Email or phone number',
+                                    textLabel: 'Enter phone number',
+                                    textHint: 'Enter phone number',
                                     validatorMessage:
-                                        'Please enter a valid email or phone number',
+                                        'Please enter a valid phone number',
                                     isPassword: false,
                                     autoCorrect: false,
                                     prefixIcon: const Icon(
-                                      Icons.email_outlined,
+                                      Icons.phone_android_outlined,
                                       size: 30,
                                     ),
                                     suffixIcon: IconButton(
@@ -127,9 +105,8 @@ class LoginScreen extends StatelessWidget {
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: TextButton(
-                                  onPressed: () {
-                                    Get.to(() => HomeLandingTabScreen());
-                                  },
+                                  onPressed: () =>
+                                      Get.to(() => ForgotPasswordScreen()),
                                   child: Text(
                                     'Forgot Password?',
                                     style: appStyles(
@@ -163,23 +140,14 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {
-                          controller.createAccount();
-                        },
-                        child: Text(
-                          'Sign Up',
-                          style: appStyles(
-                            14,
-                            primaryColor,
-                            FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
+                          onPressed: () {
+                            controller.createAccount();
+                          },
+                          child: Text(
+                            'Sign Up',
+                          ))
+                    ]),
                   ),
-                ),
-              ),
-            ),
-          ));
+                )))));
   }
 }

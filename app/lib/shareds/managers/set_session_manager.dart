@@ -6,8 +6,8 @@ import '../constants/session_constants.dart';
 class SetSessionManager {
   final storage = GetStorage();
 
-  void writeRiderPhoneNumber(dynamic riderMobile) {
-    storage.write(riderMobilePhone, riderMobile);
+  void writeRiderPhoneNumber(dynamic phoneNumber) {
+    storage.write(riderMobilePhone, phoneNumber);
   }
 
   void writeRiderEmail(dynamic email) {
@@ -17,8 +17,14 @@ class SetSessionManager {
   void writeAuthorizationToken(dynamic token) {
     storage.write(authorizationToken, token);
   }
+   void writeUserId(dynamic userId) {
+    storage.write(userIdKey, userId);
+  }
 
   void writeUserFirstName(dynamic fn) {
     storage.write(userFirstName, fn);
+  }
+  void writeUserFullName(dynamic fullNmae) {
+    storage.write(riderFullName, fullNmae);
   }
 }

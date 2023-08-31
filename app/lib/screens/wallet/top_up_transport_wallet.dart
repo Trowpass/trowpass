@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../../controllers/top_up_transport_wallet_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/border_radius.dart';
+import '../../widgets/text_form_input.dart';
 import '../beneficiary/beneficiaries.dart';
 
 class TopUpTransportWalletScreen extends StatelessWidget {
@@ -106,36 +107,45 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                 contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                 title: const Text('Account/Wallet Number'),
                 subtitle: TextInput(
-                    isReadOnly: false,
-                    inputController:
-                        controller.accountWalletNumberTextEditController,
-                    textHint: 'Type here',
-                    isPassword: false)),
+                  isReadOnly: false,
+                  inputController:
+                      controller.accountWalletNumberTextEditController,
+                  textHint: 'Type here',
+                  isPassword: false,
+                  enabled: false,
+                )),
             ListTile(
                 contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                 title: const Text('Account Name'),
                 subtitle: TextInput(
-                    isReadOnly: true,
-                    inputController: controller.accountNameTextEditController,
-                    isPassword: false)),
+                  isReadOnly: true,
+                  inputController: controller.accountNameTextEditController,
+                  isPassword: false,
+                  enabled: false,
+                )),
             ListTile(
                 contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
                 title: const Text('Amount'),
                 subtitle: TextInput(
-                    keyboardType: TextInputType.number,
-                    isReadOnly: false,
-                    inputController: controller.amountTextEditController,
-                    textHint: '0.00',
-                    isPassword: false)),
+                  keyboardType: TextInputType.number,
+                  isReadOnly: false,
+                  inputController: controller.amountTextEditController,
+                  textHint: '0.00',
+                  isPassword: false,
+                  enabled: false,
+                )),
             ListTile(
-                contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
-                title: const Text('PIN'),
-                subtitle: TextInput(
-                    keyboardType: TextInputType.number,
-                    isReadOnly: false,
-                    inputController: controller.pinTextEditController,
-                    textHint: 'Pin',
-                    isPassword: true)),
+              contentPadding: const EdgeInsets.only(top: 5, bottom: 5),
+              title: const Text('PIN'),
+              subtitle: TextInputForm(
+                  enabled: true,
+                  inputType: TextInputType.number,
+                  inputController: controller.pinTextEditController,
+                  textHint: '0000',
+                  validatorMessage: 'Enter your pin',
+                  isPassword: true,
+                  autoCorrect: false),
+            ),
             Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: StandardButton(

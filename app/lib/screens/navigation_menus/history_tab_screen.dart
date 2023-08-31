@@ -1,3 +1,4 @@
+import 'package:app/screens/history/history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,23 +10,9 @@ class HistoryTabScreen extends GetView<HistoryTabController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: primaryColor,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          controller.title,
-          style: const TextStyle(color: Colors.black),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
-      body: const Center(
-        child: Text(
-          "History Page",
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+    return const Scaffold(
+      backgroundColor: background,
+      body: HistoryScreen(),
     );
   }
 }
