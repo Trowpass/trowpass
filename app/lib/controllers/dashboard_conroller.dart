@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, unnecessary_string_interpolations
 import 'package:app/controllers/bloc/user_controller.dart';
+import 'package:app/widgets/currency_format.dart';
 import 'package:get/get.dart';
 
 import '../screens/auth/wallet_tag.dart';
@@ -10,7 +11,7 @@ class DashboardController extends GetxController {
   final userName = Rx<String>('');
   final fullName = Rx<String>('');
   final accountNumber = Rx<String>('');
-  final balance = Rx<double>(0.0);
+  final balance = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
   final isLoaded = Rx<bool>(false);
 
@@ -21,7 +22,7 @@ class DashboardController extends GetxController {
   void onInit() {
     isLoaded.value = true;
     fullName.value = '';
-    balance.value = 0.0;
+    balance.value = '';
     accountNumber.value = '';
     userProfile();
     userWallet();
@@ -43,7 +44,7 @@ class DashboardController extends GetxController {
     var response = await userController.userWalletAsync();
     if (response.status) {
       accountNumber.value = response.data!.accountNumber;
-      balance.value = response.data!.balance;
+      balance.value = formatCurrency(response.data!.balance);
     } else {
       Get.to(WalletTagScreen());
     }

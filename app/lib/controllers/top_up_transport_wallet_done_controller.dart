@@ -8,17 +8,16 @@ class TopUpTransportWalletDoneContoller extends GetxController {
   final transactionAmount = Rx<double>(0);
   final recipientImage = Rx<String>('');
   final recipientName = Rx<String>('');
+  final companyName = Rx<String>('');
   final recipientAccountNumber = Rx<String>('');
 
   String setTransactionId = '847474847';
-  double setTransactionAmount = 5000;
   String setRecipientImage = loginImg;
   String setRecipientName = 'Alfred George';
   String setRecipientAccountNumber = '0011223345';
 
   @override
   void onInit() {
-    transactionAmount.value = setTransactionAmount;
     transactionId.value = setTransactionId;
     recipientImage.value = setRecipientImage;
     recipientName.value = setRecipientName;
