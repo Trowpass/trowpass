@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/dashboard_conroller.dart';
+import '../../widgets/currency_format.dart';
 import '../wallet/top_up_transport_wallet.dart';
 import '../wallet/topup/wallet_top_up.dart';
 
@@ -103,10 +104,7 @@ class DashboardScreen extends StatelessWidget {
                                                     () => Text(
                                                       controller
                                                               .showBalance.value
-                                                          ? controller
-                                                              .balance.value
-                                                              .toStringAsFixed(
-                                                                  2)
+                                                          ? '${currencyFormat(context).currencySymbol}${controller.balance.value}'
                                                           : '*******',
                                                       style: TextStyle(
                                                         color: Colors.white,

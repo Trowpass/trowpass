@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
         circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        appIcon: appLogo(50, 50),
         child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
