@@ -10,9 +10,10 @@ import 'package:get/get.dart';
 import '../../controllers/inter_wallet_transfer_controller/payment_summary_controller.dart';
 
 class InterWalletPaymentSummaryScreen extends StatelessWidget {
-  final PaymentSummaryController paymentSummaryController = Get.put(PaymentSummaryController());
+  final PaymentSummaryController paymentSummaryController =
+      Get.put(PaymentSummaryController());
 
-   @override
+  @override
   Widget build(BuildContext context) {
     paymentSummaryController.initializeData();
     return GestureDetector(

@@ -6,7 +6,7 @@ class TopUpTransportWalletController extends GetxController {
   final title = Rx<String>('Topup your transport wallet');
   final subTitle = Rx<String>(
       'Easily fund your tansport wallet without opening several apps to do so.');
-  final accountName = Rx<String>('Kodex');
+  final accountName = Rx<String>('Trowpass');
 
   final bankNameTextEditController = TextEditingController();
   final accountWalletNumberTextEditController = TextEditingController();

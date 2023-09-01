@@ -24,11 +24,11 @@ class StandardButtonOutline extends StatelessWidget {
                   primaryColor, // Apply border color or transparent if not provided
             ),
             backgroundColor: background,
-            minimumSize: const Size(double.infinity, 70),
+            minimumSize: const Size(double.infinity, 60),
           ),
           child: Text(
             text,
-            style: appStyleWithMoreProps(16, color, FontWeight.w500, null),
+            style: appStyles(16, Colors.black, FontWeight.w600),
           ),
         ));
   }

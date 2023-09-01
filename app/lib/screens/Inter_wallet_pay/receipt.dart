@@ -5,12 +5,14 @@ import 'package:app/shareds/utils/images.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../widgets/app_styles.dart';
 import '../../widgets/currency_format.dart';
 import '../../widgets/standard_button.dart';
 
 class InterWalletTransferReceiptScreen extends StatelessWidget {
-  InterWalletTransferReceiptScreen({super.key, required this.transactionDetails});
+  InterWalletTransferReceiptScreen(
+      {super.key, required this.transactionDetails});
   // InterWalletTransferReceiptScreen({super.key, required InterWalletTransferResponse transactionDetails, required this.transactionDetails});
   final InterWalletTransferResponse transactionDetails;
   final controller = Get.put(ReceiptController());
@@ -151,9 +153,13 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                           child: ListTile(
-                                              title: Text(transactionDetails.data?.recipientName ?? ''),
-                                              subtitle: Text(transactionDetails.data?.recipientPhoneNumber ?? ''
-                                                  )))
+                                              title: Text(transactionDetails
+                                                      .data?.recipientName ??
+                                                  ''),
+                                              subtitle: Text(transactionDetails
+                                                      .data
+                                                      ?.recipientPhoneNumber ??
+                                                  '')))
                                     ],
                                   ),
                                   Padding(

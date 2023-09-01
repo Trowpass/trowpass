@@ -16,7 +16,8 @@ class UserByPhoneResponse {
       message: json['message'] ?? '',
       status: json['status'],
       responseCode: json['responseCode'] ?? '',
-      data: json['data'] != null ? UserByPhoneData.fromJson(json['data']) : null,
+      data:
+          json['data'] != null ? UserByPhoneData.fromJson(json['data']) : null,
     );
   }
 }

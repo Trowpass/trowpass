@@ -20,6 +20,16 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController confirmPasswordController =
       TextEditingController();
 
+  final password = ''.obs;
+  final strength = RxDouble(0);
+  final displayText = 'Mix of upper & lower case, number and character'.obs;
+
+  RegExp numReg = RegExp(r".*[0-9].*");
+  RegExp letterReg = RegExp(r".*[A-Za-z].*");
+
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+
   final isLoaded = false.obs;
 
   @override
@@ -34,6 +44,11 @@ class SignUpIndividualController extends GetxController {
   Future<void> registerRider() async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
+    // String riderEmail =
+    //     '${phoneNumberController.text.trim()}_rider_none@gmail.com';
+    String businessName = 'N/A';
+    String bvn = '22222222222';
+
     try {
       if (passwordController.text != confirmPasswordController.text) {
         Get.defaultDialog(
@@ -44,9 +59,9 @@ class SignUpIndividualController extends GetxController {
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
+          businessName: businessName,
+          bvn: bvn,
           phoneNumber: phoneNumberController.text.trim(),
-          businessName: 'N/A',
-          bvn: bvnController.text.trim(),
           password: passwordController.text.trim(),
           confirmPassword: confirmPasswordController.text.trim(),
           userAccountType: 'rider',
@@ -64,6 +79,25 @@ class SignUpIndividualController extends GetxController {
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
+    }
+  }
+
+  void checkPassword(String value) {
+    password.value = value.trim();
+    if (password.isEmpty) {
+      strength.value = 0;
+      displayText.value = 'Please enter your password';
+    } else if (password.value.length < 8) {
+      strength.value = 1 / 4;
+      displayText.value = 'Your password is too short';
+    } else {
+      if (!regex.hasMatch(password.value)) {
+        strength.value = 3 / 4;
+        displayText.value = 'Password not strong enough';
+      } else {
+        strength.value = 1;
+        displayText.value = 'Your password is great';
+      }
     }
   }
 }
