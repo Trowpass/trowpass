@@ -149,7 +149,7 @@ class PayForm extends StatelessWidget {
               text: 'Pay Now',
               onPressed: () {
                 if (payController.formKey.currentState!.validate()) {
-                  payController.InterWalletPay();
+                  payController.interWalletPay();
                 }
               },
             ),

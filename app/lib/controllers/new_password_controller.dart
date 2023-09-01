@@ -31,18 +31,21 @@ class NewPasswordController extends GetxController {
     Get.focusScope!.unfocus();
 
     try {
-      var resetPasswordRequest = ResetPasswordRequest(otp: otp, newPassword: passwordController.text, email: email);
-      var response = await userRepository.resetPasswordAsync(resetPasswordRequest);
+      var resetPasswordRequest = ResetPasswordRequest(
+          otp: otp, newPassword: passwordController.text, email: email);
+      var response =
+          await userRepository.resetPasswordAsync(resetPasswordRequest);
 
       if (response.status) {
         isLoaded.value = false;
         Get.defaultDialog(title: 'Success', content: Text(response.message));
         Timer(
           const Duration(milliseconds: 1500),
-          () => Get.off(() => LoginScreen()),
+          () => Get.offAll(() => LoginScreen()),
         );
       } else {
-        Get.defaultDialog(title: 'Information', content: Text(response.message));
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
         isLoaded.value = false;
       }
     } catch (e) {

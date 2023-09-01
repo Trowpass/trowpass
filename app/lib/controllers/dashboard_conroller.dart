@@ -46,7 +46,7 @@ class DashboardController extends GetxController {
       accountNumber.value = response.data!.accountNumber;
       balance.value = formatCurrency(response.data!.balance);
     } else {
-      Get.to(WalletTagScreen());
+      Get.offAll(() => WalletTagScreen());
     }
   }
 }

@@ -27,14 +27,18 @@ class ForgotPassWordController extends GetxController {
     Get.focusScope!.unfocus();
 
     try {
-      var forgetPasswordRequest = ForgetPasswordRequest(email: emailAddressInputController.text);
-      var response = await userRepository.requestForgotPasswordAsync(forgetPasswordRequest);
+      var forgetPasswordRequest =
+          ForgetPasswordRequest(email: emailAddressInputController.text);
+      var response = await userRepository
+          .requestForgotPasswordAsync(forgetPasswordRequest);
 
       if (response.status) {
         isLoaded.value = false;
-        Get.to(() => ForgotPasswordOtpScreen(email: emailAddressInputController.text));
+        Get.offAll(() =>
+            ForgotPasswordOtpScreen(email: emailAddressInputController.text));
       } else {
-        Get.defaultDialog(title: 'Information', content: Text(response.message));
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
         isLoaded.value = false;
       }
     } catch (e) {
@@ -61,7 +65,9 @@ class ForgotPassWordController extends GetxController {
     if (email == null) {
       return false;
     } else {
-      return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(email);
+      return RegExp(
+              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+          .hasMatch(email);
     }
   }
 }

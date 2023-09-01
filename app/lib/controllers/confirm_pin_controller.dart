@@ -8,6 +8,11 @@ import 'package:get/get.dart';
 
 class ConfirmPinController extends GetxController {
   RxString pin = ''.obs;
+  final formKey = GlobalKey<FormState>();
+  TextEditingController codeOneController = TextEditingController();
+  TextEditingController codeTwoController = TextEditingController();
+  TextEditingController codeThreeController = TextEditingController();
+  TextEditingController codeFourController = TextEditingController();
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
 
   final isLoaded = false.obs;
@@ -56,7 +61,7 @@ class ConfirmPinController extends GetxController {
         confirmPin: pin.value,
       ));
       if (response.status) {
-        Get.to(HomeLandingTabScreen());
+        Get.offAll(() => HomeLandingTabScreen());
       } else {
         Get.defaultDialog(
           title: 'Information',
@@ -76,6 +81,8 @@ class ConfirmPinController extends GetxController {
   }
 
   void validatePinAndCreate(String chosenPin) {
+    pin.value =
+        '${codeOneController.text}${codeTwoController.text}${codeThreeController.text}${codeFourController.text}';
     if (pin.value.length == 4) {
       if (pin.value != chosenPin) {
         showErrorSnackbar('PINs do not match.');

@@ -69,6 +69,6 @@ class AuthController extends GetxController {
   }
 
   void createAccount() {
-    Get.to(const AccountTypeScreen());
+    Get.offAll(const AccountTypeScreen());
   }
 }
