@@ -21,4 +21,6 @@ class Endpoints {
   String userKyc = 'api/v1/userkyc/create-update';
   String createWallet = 'api/v1/wallet/create';
   String interWalletTransfer = 'api/v1/wallet/inter-wallet-transfer';
+  String paystackVerification = 'api/v1/paystack/verify-transaction';
+  String walletTopUp = 'api/v1/paystack/credit-wallet';
 }

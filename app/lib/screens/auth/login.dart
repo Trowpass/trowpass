@@ -108,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                                 alignment: Alignment.bottomRight,
                                 child: TextButton(
                                   onPressed: () =>
-                                      Get.to(() => ChoosePinScreen()),
+                                      Get.to(() => ForgotPasswordScreen()),
                                   child: Text(
                                     'Forgot Password?',
                                     style: appStyles(

@@ -68,6 +68,7 @@ class UserController {
       if (response.status) {
         session.writeUserFullName(
             '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}');
+        session.writeRiderEmail(response.data!.email);
         return response;
       }
       return Future.error(response.message);
