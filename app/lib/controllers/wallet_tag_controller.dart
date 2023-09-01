@@ -1,12 +1,9 @@
 // ignore_for_file: avoid_print
-import 'package:app/screens/dashboard/dashboard.dart';
-import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
+import 'package:app/screens/auth/pin/choose_pin_screen.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../screens/navigation_menus/home_landing_tab_screen.dart';
 import '../shareds/utils/app_colors.dart';
 import 'bloc/user_controller.dart';
 
@@ -36,7 +33,7 @@ class WalletTagController extends GetxController {
         walletName: walletTagController.text.trim(),
       ));
       if (response.status) {
-      Get.to(HomeLandingTabScreen());
+      Get.to(ChoosePinScreen());
       } else {
         if (response.responseCode == "11") {
           Get.defaultDialog(title: 'Failed', content: Text(response.message));

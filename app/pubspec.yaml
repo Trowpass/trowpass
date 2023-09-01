@@ -51,6 +51,7 @@ dependencies:
   get_storage: ^2.1.1
   http: ^0.13.5
   iconsax: ^0.0.8
+  qr_flutter: ^4.1.0
   timer_count_down: ^2.2.2
 dev_dependencies:
   flutter_test:

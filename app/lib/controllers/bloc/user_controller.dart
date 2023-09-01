@@ -1,5 +1,6 @@
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/repositories/user_repository.dart';
+import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/rider_registration_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
@@ -110,4 +111,18 @@ class UserController {
       return Future.error(e);
     }
   }
+
+   Future<BaseResponse> choosePinAsync(
+      ChoosePinRequest request) async {
+    try {
+      final response = await userRepository.choosePinAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
 }

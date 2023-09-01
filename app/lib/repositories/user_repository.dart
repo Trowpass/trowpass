@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
@@ -248,4 +249,24 @@ class UserRepository {
       return Future.error(e);
     }
   }
+
+    Future<BaseResponse> choosePinAsync(
+      ChoosePinRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: Endpoints().createPin);
+      if (response.data != null) {
+        return BaseResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to create tag');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
 }

@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
@@ -14,14 +17,21 @@ class UserProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+      statusBarColor: Colors.white,
+      statusBarIconBrightness: Brightness.dark,
+    ));
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
         leading: null,
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: primaryColor,
-        title: Text(contoller.title.value),
+        backgroundColor: background,
+        title: Text(
+          contoller.title.value,
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
