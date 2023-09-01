@@ -38,7 +38,7 @@ class AuthController extends GetxController {
       if (response.status) {
         session.writeAuthorizationToken(response.data!.token);
         session.writeUserId(response.data!.userId);
-        Get.to(HomeLandingTabScreen());
+        Get.offAll(HomeLandingTabScreen());
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {
@@ -69,6 +69,6 @@ class AuthController extends GetxController {
   }
 
   void createAccount() {
-    Get.to(const AccountTypeScreen());
+    Get.offAll(const AccountTypeScreen());
   }
 }

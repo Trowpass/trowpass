@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
 import '../auth/edit_profile.dart';
+import '../auth/login.dart';
 import '../auth/pin/change_pin.dart';
 
 class UserProfileScreen extends StatelessWidget {
@@ -153,6 +154,23 @@ class UserProfileScreen extends StatelessWidget {
                   trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
                   contentPadding: EdgeInsets.zero,
                   title: Text('QR Code',
+                      style: appStyles(18, null, FontWeight.w500)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.zero,
+              child: GestureDetector(
+                onTap: () => Get.offAll(LoginScreen()),
+                child: ListTile(
+                  horizontalTitleGap: 0,
+                  leading: const Icon(
+                    Icons.logout_rounded,
+                    size: 30,
+                  ),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  contentPadding: EdgeInsets.zero,
+                  title: Text('Logout',
                       style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),

@@ -30,18 +30,19 @@ class _PyamentProcessingState extends State<PyamentProcessing> {
   GetSessionManager session = GetSessionManager();
 
   void verifyOnServer() async {
+    Get.focusScope!.unfocus();
     final paymentRef = widget.reference;
     try {
       var response = await paymentController
           .verifyPaystackTransactionAsync(paymentRef.trim());
       if (response.status) {
-        Get.to(TopUpTransportWalletDoneScreen(
-          successMessage: 'Payment was successful',
-          reference: paymentRef,
-          companyName: widget.companyName,
-          recipientName: widget.recipientName,
-          amount: widget.amount,
-        ));
+        Get.offAll(() => TopUpTransportWalletDoneScreen(
+              successMessage: 'Payment was successful',
+              reference: paymentRef,
+              companyName: widget.companyName,
+              recipientName: widget.recipientName,
+              amount: widget.amount,
+            ));
       } else {
         AlertDialog(
           title: const Text("Payment"),
@@ -51,7 +52,7 @@ class _PyamentProcessingState extends State<PyamentProcessing> {
             const Spacer(),
             ElevatedButton(
                 onPressed: () {
-                  Get.to(WalletTopUpScreen());
+                  Get.offAll(() => WalletTopUpScreen());
                 },
                 child: const Text("Try Again"))
           ]),

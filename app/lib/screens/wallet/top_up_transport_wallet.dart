@@ -18,12 +18,28 @@ class TopUpTransportWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
-        title: Text(controller.title.value),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: primaryColor,
-      ),
+          title: Text(controller.title.value,
+              style: appStyles(18, titleActive, FontWeight.w600)),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: background,
+          actions: [
+            IconButton(
+              icon:
+                  const Icon(Icons.notifications_outlined, color: Colors.black),
+              onPressed: () {
+                Get.back();
+              },
+            )
+          ],
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Get.back();
+            },
+          )),
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(20),

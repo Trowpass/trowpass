@@ -4,26 +4,17 @@ import 'package:get/get.dart';
 
 class ChoosePinController extends GetxController {
   RxString pin = ''.obs;
-  List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
-
-  void updatePin(String value) {
-    if (pin.value.length < 4) {
-      pin.value += value;
-      if (pin.value.length < 4) {
-        focusNodes[pin.value.length].requestFocus();
-      }
-    }
-  }
-
-  void deletePin() {
-    if (pin.value.isNotEmpty) {
-      pin.value = pin.value.substring(0, pin.value.length - 1);
-    }
-  }
+  final formKey = GlobalKey<FormState>();
+  TextEditingController codeOneController = TextEditingController();
+  TextEditingController codeTwoController = TextEditingController();
+  TextEditingController codeThreeController = TextEditingController();
+  TextEditingController codeFourController = TextEditingController();
 
   void navigateToConfirmPin() {
+    pin.value =
+        '${codeOneController.text}${codeTwoController.text}${codeThreeController.text}${codeFourController.text}';
     if (pin.value.length == 4) {
-      Get.to(ConfirmPinScreen(), arguments: pin.value);
+      Get.offAll(ConfirmPinScreen(), arguments: pin.value);
     } else {
       showErrorSnackbar('Please enter a complete PIN.');
     }
@@ -33,5 +24,3 @@ class ChoosePinController extends GetxController {
     Get.snackbar('Error', message);
   }
 }
-
-

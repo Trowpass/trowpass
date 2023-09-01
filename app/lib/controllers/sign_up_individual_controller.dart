@@ -67,7 +67,7 @@ class SignUpIndividualController extends GetxController {
           userAccountType: 'rider',
         ));
         if (response.status) {
-          Get.to(OtpScreen(phoneNumber: phoneNumberController.text));
+          Get.offAll(() => OtpScreen(phoneNumber: phoneNumberController.text));
         } else {
           Get.defaultDialog(
               title: 'Information', content: Text(response.message));

@@ -1,9 +1,9 @@
+import 'package:app/screens/auth/login.dart';
+import 'package:circular_countdown_timer/circular_countdown_timer.dart'
+    as expiry_timer;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_controller.dart' as resend_timer;
-import 'package:circular_countdown_timer/circular_countdown_timer.dart' as expiry_timer;
-
-import 'package:app/screens/auth/login.dart';
 
 import '../repositories/user_repository.dart';
 import '../services/requests/post_requests/resend_otp_request.dart';
@@ -47,15 +47,19 @@ class OtpController extends GetxController {
     try {
       String otpValue =
           '${codeOneController.text}${codeTwoController.text}${codeThreeController.text}${codeFourController.text}';
-      var response = await userController.verifyOtpAsync(VerifyOtpRequest(otp: otpValue.trim()));
+      var response = await userController
+          .verifyOtpAsync(VerifyOtpRequest(otp: otpValue.trim()));
       if (response.status) {
-        Get.to(LoginScreen());
+        Get.offAll(() => LoginScreen());
       } else {
-        Get.defaultDialog(title: 'Information', content: Text(response.message));
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
         isLoaded.value = false;
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(),
+          backgroundColor: validationErrorColor,
+          snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
   }
@@ -74,7 +78,8 @@ class OtpController extends GetxController {
         resendCountDownController.restart();
         expiryCountDownController.restart();
       } else {
-        Get.defaultDialog(title: 'Information', content: Text(response.message));
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
         isLoaded.value = false;
       }
     } catch (e) {

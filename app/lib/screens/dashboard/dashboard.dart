@@ -200,17 +200,23 @@ class DashboardScreen extends StatelessWidget {
                                 CustomCard(
                                   imagePath: loan,
                                   text: 'Get Transport Loan',
-                                  onTap: () {},
+                                  onTap: () {
+                                    upComingWidget('Get Transport Loan');
+                                  },
                                 ),
                                 CustomCard(
                                   imagePath: card,
                                   text: 'Transport Card',
-                                  onTap: () {},
+                                  onTap: () {
+                                    upComingWidget('Transport Card');
+                                  },
                                 ),
                                 CustomCard(
                                   imagePath: book,
                                   text: 'Book a Bus',
-                                  onTap: () {},
+                                  onTap: () {
+                                    upComingWidget('Book a Bus');
+                                  },
                                 ),
                                 CustomCard(
                                   imagePath: send,
@@ -222,19 +228,23 @@ class DashboardScreen extends StatelessWidget {
                                 CustomCard(
                                   imagePath: book,
                                   text: 'Transports Pay',
-                                  onTap: () {},
+                                  onTap: () {
+                                    upComingWidget('Transports Pay');
+                                  },
                                 ),
                                 CustomCard(
                                   imagePath: flight,
                                   text: 'Book Flight',
                                   onTap: () {
-                                    // Handle card 8 tap
+                                    upComingWidget('Book Flight');
                                   },
                                 ),
                                 CustomCard(
                                   imagePath: train,
                                   text: 'Train Ticket',
-                                  onTap: () {},
+                                  onTap: () {
+                                    upComingWidget('Train Ticket');
+                                  },
                                 ),
                               ],
                             ),
@@ -268,4 +278,27 @@ class DashboardScreen extends StatelessWidget {
             ),
           ));
   }
+}
+
+void upComingWidget(dynamic pageTitle) {
+  Get.defaultDialog(
+      title: pageTitle,
+      content: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Divider(
+            color: background,
+          ),
+          Text(
+              'We have you in mind. In the mean time, explore the available features. Thank you.',
+              style: TextStyle(color: background),
+              textAlign: TextAlign.center)
+        ],
+      ),
+      middleText: 'Coming Soon!!!',
+      backgroundColor: primaryColor,
+      titleStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      middleTextStyle: TextStyle(color: Colors.white),
+      radius: 30);
 }
