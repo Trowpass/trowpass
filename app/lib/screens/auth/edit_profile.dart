@@ -21,7 +21,7 @@ class EditProfileScreen extends StatelessWidget {
         elevation: 0,
         title: const Text('Edit Profile'),
         centerTitle: true,
-        backgroundColor: primaryColor,
+        backgroundColor: background,
       ),
       body: SingleChildScrollView(
         child: Padding(

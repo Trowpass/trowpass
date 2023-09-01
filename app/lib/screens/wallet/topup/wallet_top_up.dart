@@ -21,10 +21,32 @@ class WalletTopUpScreen extends StatelessWidget {
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
         circularProgressColor: primaryColor,
-        appIcon: appLogo(50, 50),
+        appIcon: appLogo(70, 70),
         child: GestureDetector(
           onTap: () => Get.focusScope!.unfocus(),
           child: Scaffold(
+            backgroundColor: background,
+            appBar: AppBar(
+                elevation: 0.0,
+                backgroundColor: background,
+                title: Text('Topup your wallet',
+                    style: appStyles(18, titleActive, FontWeight.w600)),
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.notifications_outlined,
+                        color: Colors.black),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  )
+                ],
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Get.back();
+                  },
+                )),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20),

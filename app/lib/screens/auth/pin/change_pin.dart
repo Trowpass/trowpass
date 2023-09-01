@@ -22,7 +22,7 @@ class ChangePinScreen extends StatelessWidget {
           style: appStyles(18, null, FontWeight.w300),
         ),
         centerTitle: true,
-        backgroundColor: primaryColor,
+        backgroundColor: background,
       ),
       body: GestureDetector(
         onTap: () => Get.focusScope!.unfocus(),
