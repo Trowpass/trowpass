@@ -79,7 +79,7 @@ class OnBoardingScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.small(
         backgroundColor: primaryColor,
         child: const Icon(Icons.arrow_forward),
-        onPressed: () => Get.to(LoginScreen()),
+        onPressed: () => Get.offAll(LoginScreen()),
       ),
     );
   }
