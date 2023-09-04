@@ -16,6 +16,7 @@ const mainLogo = 'assets/images/main_logo.png';
 const preview = 'assets/images/preview.png';
 const design = 'assets/images/card_design.png';
 const trowpassLogo = 'assets/images/trowpass_logo.png';
+const finance = 'assets/images/finance.png';
 
 //region Icons
 const card = 'assets/icons/card.png';

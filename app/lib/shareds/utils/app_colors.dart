@@ -14,3 +14,4 @@ const line = Color(0xFF092CF7);
 const filled = Color(0xFFEDEDED);
 const label = Color(0xFF6E7191);
 const gray = Color(0xFF252422);
+const scrollIndicatorColor = Color(0xFFD9D9D9);

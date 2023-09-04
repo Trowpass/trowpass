@@ -54,6 +54,8 @@ dependencies:
   qr_flutter: ^4.1.0
   timer_count_down: ^2.2.2
   flutter_native_splash: ^2.3.2
+  smooth_page_indicator: ^1.1.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
