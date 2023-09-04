@@ -24,7 +24,7 @@ class StandardButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: appStyles(16, Colors.white, FontWeight.w600),
+          style: appStyles(16, Colors.white, FontWeight.w400),
         ),
       ),
     );

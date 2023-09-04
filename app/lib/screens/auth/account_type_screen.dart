@@ -42,21 +42,21 @@ class AccountTypeScreen extends StatelessWidget {
           children: [
             Text(
               'Get Started as a',
-              style: appStyles(20, Colors.black, FontWeight.w500),
+              style: appStyles(20, Colors.black, FontWeight.w300),
             ),
             const SizedBox(height: 30),
+            StandardButton(
+              text: 'Ride Manager[Passenger]',
+              onPressed: () {
+                Get.to(() => SignUpScreenIndividual());
+              },
+            ),
+            const SizedBox(height: 18),
             StandardButtonOutline(
               color: primaryColor,
               text: 'Fleet Manager[Transporter]',
               onPressed: () {
                 Get.to(() => SignUpScreenBusiness());
-              },
-            ),
-            const SizedBox(height: 7),
-            StandardButton(
-              text: 'Ride Manager[Passenger]',
-              onPressed: () {
-                Get.to(() => SignUpScreenIndividual());
               },
             ),
           ],
