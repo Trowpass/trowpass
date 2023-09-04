@@ -1,4 +1,3 @@
-import 'package:app/screens/auth/login.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart'
     as expiry_timer;
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:timer_count_down/timer_controller.dart' as resend_timer;
 
 import '../repositories/user_repository.dart';
+import '../screens/auth/pin/choose_pin_screen.dart';
 import '../services/requests/post_requests/resend_otp_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../shareds/managers/get_session_manager.dart';
@@ -50,10 +50,10 @@ class OtpController extends GetxController {
       var response = await userController
           .verifyOtpAsync(VerifyOtpRequest(otp: otpValue.trim()));
       if (response.status) {
-        Get.offAll(() => LoginScreen());
+        Get.offAll(() => ChoosePinScreen());
       } else {
         Get.defaultDialog(
-            title: 'Information', content: Text(response.message));
+            title: 'Information', content: Text(response.message!));
         isLoaded.value = false;
       }
     } catch (e) {
