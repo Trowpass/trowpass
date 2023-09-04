@@ -1,7 +1,7 @@
-import 'package:app/screens/onboarding/onboarding_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/bindings/dashboard_tab_binding.dart';
+import '../../../screens/onboarding/onboarding_screen.dart';
 import 'app_reoutes.dart';
 
 class AppPages {

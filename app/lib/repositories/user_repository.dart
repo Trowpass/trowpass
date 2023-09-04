@@ -18,6 +18,7 @@ import '../services/requests/post_requests/rider_registration_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../services/responses/base_response.dart';
 import '../services/responses/user_login_response.dart';
+import '../services/responses/verify_account_response.dart';
 import '../services/responses/view_profile_response.dart';
 import '../shareds/constants/endpoints.dart';
 import '../shareds/helpers/api_connection_helper.dart';
@@ -64,14 +65,14 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> verifyOtpAsync(
+  Future<VerifyAccountResponse> verifyOtpAsync(
       VerifyOtpRequest request, dynamic customerPhoneNumber) async {
     try {
       var url = '${Endpoints().verifyOtp}/$customerPhoneNumber';
       var response = await apiConnectionHelper.postDataAsync(
           requestData: request, path: url);
       if (response.data != null) {
-        return BaseResponse.fromJson(response.data);
+        return VerifyAccountResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to verify account');
       }
@@ -106,6 +107,7 @@ class UserRepository {
       return Future.error(e);
     }
   }
+
   Future<UserByPhoneResponse> getUserByPhoneAsync(
       UserByPhoneRequest request) async {
     try {
@@ -250,8 +252,7 @@ class UserRepository {
     }
   }
 
-    Future<BaseResponse> choosePinAsync(
-      ChoosePinRequest request) async {
+  Future<BaseResponse> choosePinAsync(ChoosePinRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
           requestData: request, path: Endpoints().createPin);
@@ -268,5 +269,4 @@ class UserRepository {
       return Future.error(e);
     }
   }
-
 }

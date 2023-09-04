@@ -3,7 +3,6 @@ import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/widgets/currency_format.dart';
 import 'package:get/get.dart';
 
-import '../screens/auth/wallet_tag.dart';
 import '../shareds/managers/get_session_manager.dart';
 
 class DashboardController extends GetxController {
@@ -45,8 +44,6 @@ class DashboardController extends GetxController {
     if (response.status) {
       accountNumber.value = response.data!.accountNumber;
       balance.value = formatCurrency(response.data!.balance);
-    } else {
-      Get.offAll(() => WalletTagScreen());
     }
   }
 }
