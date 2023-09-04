@@ -1,6 +1,7 @@
 import 'package:app/screens/wallet/topup/wallet_top_up.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -15,11 +16,7 @@ class PyamentProcessing extends StatefulWidget {
   final String recipientName;
   final double amount;
   const PyamentProcessing(
-      {super.key,
-      required this.reference,
-      required this.companyName,
-      required this.recipientName,
-      required this.amount});
+      {super.key, required this.reference, required this.companyName, required this.recipientName, required this.amount});
 
   @override
   State<PyamentProcessing> createState() => _PyamentProcessingState();
@@ -33,8 +30,7 @@ class _PyamentProcessingState extends State<PyamentProcessing> {
     Get.focusScope!.unfocus();
     final paymentRef = widget.reference;
     try {
-      var response = await paymentController
-          .verifyPaystackTransactionAsync(paymentRef.trim());
+      var response = await paymentController.verifyPaystackTransactionAsync(paymentRef.trim());
       if (response.status) {
         Get.offAll(() => TopUpTransportWalletDoneScreen(
               successMessage: 'Payment was successful',
@@ -59,9 +55,7 @@ class _PyamentProcessingState extends State<PyamentProcessing> {
         );
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
     }
   }
 
@@ -73,14 +67,23 @@ class _PyamentProcessingState extends State<PyamentProcessing> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: background,
-      body: OverlayLoaderWithAppIcon(
-        isLoading: true,
-        overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
-        child: Container(),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.light, // For iOS
+        statusBarIconBrightness: Brightness.light, // For Android
+        systemNavigationBarColor: navigationBarBackground,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
+        backgroundColor: background,
+        body: OverlayLoaderWithAppIcon(
+          isLoading: true,
+          overlayBackgroundColor: background,
+          circularProgressColor: primaryColor,
+          appIcon: appLogo(70, 70),
+          child: Container(),
+        ),
       ),
     );
   }

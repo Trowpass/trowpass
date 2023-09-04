@@ -2,6 +2,7 @@ import 'package:app/shareds/utils/border_radius.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -27,6 +28,13 @@ class WalletTopUpScreen extends StatelessWidget {
           child: Scaffold(
             backgroundColor: background,
             appBar: AppBar(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: primaryColor,
+            statusBarBrightness: Brightness.light, // For iOS
+            statusBarIconBrightness: Brightness.light, // For Android
+            systemNavigationBarColor: navigationBarBackground,
+            systemNavigationBarIconBrightness: Brightness.dark,
+          ),
                 elevation: 0.0,
                 backgroundColor: background,
                 title: Text('Topup your wallet',

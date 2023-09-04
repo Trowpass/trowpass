@@ -3,6 +3,7 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/wallet_top_up_payment_option_contoller.dart';
@@ -18,6 +19,13 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         title: Text(controller.title.value),
         centerTitle: true,
         backgroundColor: primaryColor,
@@ -55,8 +63,7 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                           controller.cardType.value,
                           style: appStyles(18, null, FontWeight.w500),
                         ),
-                        subtitle: Text(controller.cardPan.value,
-                            style: appStyles(16, null, FontWeight.w400)),
+                        subtitle: Text(controller.cardPan.value, style: appStyles(16, null, FontWeight.w400)),
                       ),
                     ),
                   ),
@@ -66,17 +73,14 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 5, bottom: 5),
                   child: ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius)),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(defaultBorderRadius)),
                         backgroundColor: primaryColor,
                         minimumSize: const Size(double.infinity, 70),
                         side: const BorderSide(color: primaryColor),
                       ),
                       onPressed: () => Get.to(AddNewCardScreen()),
                       icon: const Icon(Icons.queue_rounded),
-                      label: Text('Add Card',
-                          style: appStyles(16, null, FontWeight.w500)))),
+                      label: Text('Add Card', style: appStyles(16, null, FontWeight.w500)))),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 15),
                 child: Align(
@@ -98,9 +102,7 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                     child: ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: primaryColor),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: primaryColor),
                         padding: const EdgeInsets.all(10),
                         child: const Icon(
                           Icons.qr_code_rounded,
@@ -111,8 +113,7 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                         'Scan Bar Code',
                         style: appStyles(18, null, FontWeight.w500),
                       ),
-                      subtitle: Text('Scan bar code to pay',
-                          style: appStyles(16, null, FontWeight.w400)),
+                      subtitle: Text('Scan bar code to pay', style: appStyles(16, null, FontWeight.w400)),
                     ),
                   ),
                 ),
@@ -127,9 +128,7 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                     child: ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: primaryColor),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: primaryColor),
                         padding: const EdgeInsets.all(10),
                         child: const Icon(
                           Icons.phone_iphone_outlined,
@@ -140,8 +139,7 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                         'Phone Number',
                         style: appStyles(18, null, FontWeight.w500),
                       ),
-                      subtitle: Text('Pay directly to a phone number',
-                          style: appStyles(16, null, FontWeight.w400)),
+                      subtitle: Text('Pay directly to a phone number', style: appStyles(16, null, FontWeight.w400)),
                     ),
                   ),
                 ),
@@ -156,9 +154,7 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                     child: ListTile(
                       contentPadding: EdgeInsets.zero,
                       leading: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(4),
-                            color: primaryColor),
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: primaryColor),
                         padding: const EdgeInsets.all(10),
                         child: const Icon(
                           Icons.store_rounded,
@@ -169,8 +165,7 @@ class WalletTopUpPaymentOptions extends StatelessWidget {
                         'Bank Account',
                         style: appStyles(18, null, FontWeight.w500),
                       ),
-                      subtitle: Text('Pay directly to bank account',
-                          style: appStyles(16, null, FontWeight.w400)),
+                      subtitle: Text('Pay directly to bank account', style: appStyles(16, null, FontWeight.w400)),
                     ),
                   ),
                 ),

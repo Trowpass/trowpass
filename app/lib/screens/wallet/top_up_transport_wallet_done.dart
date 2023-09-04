@@ -2,6 +2,7 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/top_up_transport_wallet_done_controller.dart';
@@ -30,7 +31,15 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
     controller.companyName.value = companyName;
     controller.recipientName.value = recipientName;
     controller.transactionAmount.value = amount;
-    return Scaffold(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.light, // For iOS
+        statusBarIconBrightness: Brightness.light, // For Android
+        systemNavigationBarColor: navigationBarBackground,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+      child: Scaffold(
         backgroundColor: primaryColor,
         body: SingleChildScrollView(
           child: Padding(
@@ -202,6 +211,6 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        )));
   }
 }

@@ -2,6 +2,7 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
 import '../../controllers/top_up_transport_wallet_controller.dart';
@@ -20,6 +21,13 @@ class TopUpTransportWalletScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+       systemOverlayStyle:  const SystemUiOverlayStyle(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.light, // For iOS
+        statusBarIconBrightness: Brightness.light, // For Android
+        systemNavigationBarColor: navigationBarBackground,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
           title: Text(controller.title.value,
               style: appStyles(18, titleActive, FontWeight.w600)),
           centerTitle: true,

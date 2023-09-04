@@ -2,6 +2,7 @@ import 'package:app/screens/auth/login.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -26,6 +27,13 @@ class SignUpScreenIndividual extends StatelessWidget {
           child: Scaffold(
             backgroundColor: background,
             appBar: AppBar(
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: primaryColor,
+                statusBarBrightness: Brightness.light, // For iOS
+                statusBarIconBrightness: Brightness.light, // For Android
+                systemNavigationBarColor: navigationBarBackground,
+                systemNavigationBarIconBrightness: Brightness.dark,
+              ),
               backgroundColor: background,
               elevation: 0.0,
               leading: IconButton(
@@ -37,8 +45,7 @@ class SignUpScreenIndividual extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.only(
-                    top: 5, right: 20, left: 20, bottom: 20),
+                padding: const EdgeInsets.only(top: 5, right: 20, left: 20, bottom: 20),
                 child: Column(
                   children: [
                     Text(
@@ -140,8 +147,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                                 Icons.lock_clock_rounded,
                                 size: 30,
                               ),
-                              onChanged: (value) =>
-                                  controller.checkPassword(value),
+                              onChanged: (value) => controller.checkPassword(value),
                             ),
                             SizedBox(
                               height: 17,
@@ -151,28 +157,23 @@ class SignUpScreenIndividual extends StatelessWidget {
                                     child: LinearProgressIndicator(
                                         value: controller.strength.value,
                                         backgroundColor: Colors.red[500],
-                                        color: controller.strength.value <=
-                                                1 / 4
+                                        color: controller.strength.value <= 1 / 4
                                             ? Colors.red
                                             : controller.strength.value == 2 / 4
                                                 ? Colors.yellow
-                                                : controller.strength.value ==
-                                                        3 / 4
+                                                : controller.strength.value == 3 / 4
                                                     ? Colors.blue
                                                     : Colors.green,
                                         minHeight: 15),
                                   ),
-                                  Center(
-                                      child:
-                                          Text(controller.displayText.value)),
+                                  Center(child: Text(controller.displayText.value)),
                                 ],
                               ),
                             ),
                             const SizedBox(height: 10),
                             TextInputForm(
                               enabled: true,
-                              inputController:
-                                  controller.confirmPasswordController,
+                              inputController: controller.confirmPasswordController,
                               textLabel: 'Confirm Password',
                               textHint: 'Confirm password',
                               validatorMessage: 'Passwords do not match',
@@ -187,12 +188,9 @@ class SignUpScreenIndividual extends StatelessWidget {
                             StandardButton(
                               text: 'SIGN UP',
                               onPressed: () async {
-                                if (controller.formKey.currentState!
-                                    .validate()) {
+                                if (controller.formKey.currentState!.validate()) {
                                   controller.formKey.currentState!.save();
-                                  controller.strength.value < 1 / 2
-                                      ? null
-                                      : controller.registerRider();
+                                  controller.strength.value < 1 / 2 ? null : controller.registerRider();
                                 }
                               },
                             ),

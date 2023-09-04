@@ -4,6 +4,7 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -25,6 +26,13 @@ class WalletTagScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: background,
               appBar: AppBar(
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: primaryColor,
+                  statusBarBrightness: Brightness.light, // For iOS
+                  statusBarIconBrightness: Brightness.light, // For Android
+                  systemNavigationBarColor: navigationBarBackground,
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                ),
                 backgroundColor: background,
                 elevation: 0.0,
               ),
@@ -71,8 +79,7 @@ class WalletTagScreen extends StatelessWidget {
                               StandardButton(
                                 text: 'Create',
                                 onPressed: () {
-                                  if (controller.formKey.currentState!
-                                      .validate()) {
+                                  if (controller.formKey.currentState!.validate()) {
                                     controller.formKey.currentState!.save();
                                     controller.walletTag();
                                   } else {}

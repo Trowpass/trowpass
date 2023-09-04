@@ -23,6 +23,13 @@ class ConfirmPinScreen extends StatelessWidget {
         appIcon: appLogo(70, 70),
         child: Scaffold(
           appBar: AppBar(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: primaryColor,
+              statusBarBrightness: Brightness.light, // For iOS
+              statusBarIconBrightness: Brightness.light, // For Android
+              systemNavigationBarColor: navigationBarBackground,
+              systemNavigationBarIconBrightness: Brightness.dark,
+            ),
             centerTitle: true,
             backgroundColor: background,
             elevation: 0,
@@ -65,11 +72,8 @@ class ConfirmPinScreen extends StatelessWidget {
                           child: TextFormField(
                             obscureText: true,
                             controller: controller.codeOneController,
-                            validator: (value) =>
-                                value != null && value.isEmpty ? "" : null,
-                            onChanged: (value) => value.length == 1
-                                ? FocusScope.of(context).nextFocus()
-                                : null,
+                            validator: (value) => value != null && value.isEmpty ? "" : null,
+                            onChanged: (value) => value.length == 1 ? FocusScope.of(context).nextFocus() : null,
                             decoration: InputDecoration(
                               hintText: '*',
                               errorStyle: const TextStyle(height: 0),
@@ -80,10 +84,7 @@ class ConfirmPinScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineMedium,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
                           ),
                         ),
                         SizedBox(
@@ -92,8 +93,7 @@ class ConfirmPinScreen extends StatelessWidget {
                           child: TextFormField(
                             obscureText: true,
                             controller: controller.codeTwoController,
-                            validator: (value) =>
-                                value != null && value.isEmpty ? "" : null,
+                            validator: (value) => value != null && value.isEmpty ? "" : null,
                             onChanged: (value) => value.length == 1
                                 ? FocusScope.of(context).nextFocus()
                                 : FocusScope.of(context).previousFocus(),
@@ -107,10 +107,7 @@ class ConfirmPinScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineMedium,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
                           ),
                         ),
                         SizedBox(
@@ -119,8 +116,7 @@ class ConfirmPinScreen extends StatelessWidget {
                           child: TextFormField(
                             obscureText: true,
                             controller: controller.codeThreeController,
-                            validator: (value) =>
-                                value != null && value.isEmpty ? "" : null,
+                            validator: (value) => value != null && value.isEmpty ? "" : null,
                             onChanged: (value) => value.length == 1
                                 ? FocusScope.of(context).nextFocus()
                                 : FocusScope.of(context).previousFocus(),
@@ -134,10 +130,7 @@ class ConfirmPinScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineMedium,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
                           ),
                         ),
                         SizedBox(
@@ -146,11 +139,8 @@ class ConfirmPinScreen extends StatelessWidget {
                           child: TextFormField(
                             obscureText: true,
                             controller: controller.codeFourController,
-                            validator: (value) =>
-                                value != null && value.isEmpty ? "" : null,
-                            onChanged: (value) => value.length == 1
-                                ? FocusScope.of(context).nextFocus()
-                                : null,
+                            validator: (value) => value != null && value.isEmpty ? "" : null,
+                            onChanged: (value) => value.length == 1 ? FocusScope.of(context).nextFocus() : null,
                             decoration: InputDecoration(
                               hintText: '*',
                               errorStyle: const TextStyle(height: 0),
@@ -161,10 +151,7 @@ class ConfirmPinScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineMedium,
                             keyboardType: TextInputType.number,
                             textAlign: TextAlign.center,
-                            inputFormatters: [
-                              LengthLimitingTextInputFormatter(1),
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
+                            inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
                           ),
                         ),
                       ],

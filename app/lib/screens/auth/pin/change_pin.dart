@@ -17,6 +17,13 @@ class ChangePinScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         title: Text(
           'Change PIN',
           style: appStyles(18, null, FontWeight.w300),
@@ -35,8 +42,7 @@ class ChangePinScreen extends StatelessWidget {
                   children: [
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Enter Old PIN',
-                          style: appStyles(18, null, FontWeight.w300)),
+                      title: Text('Enter Old PIN', style: appStyles(18, null, FontWeight.w300)),
                       subtitle: TextInputForm(
                         inputType: TextInputType.number,
                         enabled: true,
@@ -46,23 +52,18 @@ class ChangePinScreen extends StatelessWidget {
                         isPassword: false,
                         autoCorrect: false,
                         suffixIcon: IconButton(
-                            onPressed: () =>
-                                controller.oldPinController.clear(),
+                            onPressed: () => controller.oldPinController.clear(),
                             icon: const Icon(
                               Icons.close,
                               size: 20,
                             )),
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(4),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
+                        inputFormatters: [LengthLimitingTextInputFormatter(4), FilteringTextInputFormatter.digitsOnly],
                       ),
                     ),
                     const SizedBox(height: 10),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Enter New PIN',
-                          style: appStyles(18, null, FontWeight.w300)),
+                      title: Text('Enter New PIN', style: appStyles(18, null, FontWeight.w300)),
                       subtitle: TextInputForm(
                         inputType: TextInputType.number,
                         enabled: true,
@@ -72,23 +73,18 @@ class ChangePinScreen extends StatelessWidget {
                         isPassword: false,
                         autoCorrect: false,
                         suffixIcon: IconButton(
-                            onPressed: () =>
-                                controller.newPinController.clear(),
+                            onPressed: () => controller.newPinController.clear(),
                             icon: const Icon(
                               Icons.close,
                               size: 20,
                             )),
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(4),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
+                        inputFormatters: [LengthLimitingTextInputFormatter(4), FilteringTextInputFormatter.digitsOnly],
                       ),
                     ),
                     const SizedBox(height: 10),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Confirm New PIN',
-                          style: appStyles(18, null, FontWeight.w300)),
+                      title: Text('Confirm New PIN', style: appStyles(18, null, FontWeight.w300)),
                       subtitle: TextInputForm(
                         inputType: TextInputType.number,
                         enabled: true,
@@ -98,16 +94,12 @@ class ChangePinScreen extends StatelessWidget {
                         isPassword: false,
                         autoCorrect: false,
                         suffixIcon: IconButton(
-                            onPressed: () =>
-                                controller.confirmNewPinController.clear(),
+                            onPressed: () => controller.confirmNewPinController.clear(),
                             icon: const Icon(
                               Icons.close,
                               size: 20,
                             )),
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(4),
-                          FilteringTextInputFormatter.digitsOnly
-                        ],
+                        inputFormatters: [LengthLimitingTextInputFormatter(4), FilteringTextInputFormatter.digitsOnly],
                       ),
                     ),
                     const SizedBox(height: 10),

@@ -34,9 +34,10 @@ class NewPasswordScreen extends StatelessWidget {
               elevation: 0.0,
               systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarColor: primaryColor,
-                systemNavigationBarColor: primaryColor,
-                statusBarIconBrightness: Brightness.light, // For Android
                 statusBarBrightness: Brightness.light, // For iOS
+                statusBarIconBrightness: Brightness.light, // For Android
+                systemNavigationBarColor: navigationBarBackground,
+                systemNavigationBarIconBrightness: Brightness.dark,
               ),
             ),
             body: Padding(

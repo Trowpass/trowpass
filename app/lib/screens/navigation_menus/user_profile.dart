@@ -25,6 +25,13 @@ class UserProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         leading: null,
         automaticallyImplyLeading: false,
         elevation: 0,
@@ -37,8 +44,7 @@ class UserProfileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
           child: Padding(
-        padding:
-            const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -67,8 +73,7 @@ class UserProfileScreen extends StatelessWidget {
                     ),
                   ],
                 )),
-            Text(contoller.fullName.value,
-                style: appStyles(18, null, FontWeight.bold)),
+            Text(contoller.fullName.value, style: appStyles(18, null, FontWeight.bold)),
             Text(
               'Rider',
               style: appStyles(18, null, FontWeight.w300),
@@ -85,8 +90,7 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                   trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Edit Profile',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('Edit Profile', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -102,8 +106,7 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                   trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Change PIN',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('Change PIN', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -119,8 +122,7 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                   trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('History',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('History', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -136,8 +138,7 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                   trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('KYC Registration',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('KYC Registration', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -153,8 +154,7 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                   trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('QR Code',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('QR Code', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -170,8 +170,7 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                   trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Logout',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('Logout', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),

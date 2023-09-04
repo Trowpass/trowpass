@@ -1,5 +1,6 @@
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
 import '../../controllers/add_beneficiary_controller.dart';
@@ -15,6 +16,13 @@ class AddBeneficiaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         title: Text(controller.title.value),
         centerTitle: true,
         backgroundColor: primaryColor,
@@ -35,9 +43,7 @@ class AddBeneficiaryScreen extends StatelessWidget {
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: grayscale),
                                 ),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        defaultBorderRadius))),
+                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(defaultBorderRadius))),
                             onChanged: (Object? newSeleted) {
                               controller.onSetSelectedBankName(newSeleted);
                             },
@@ -57,8 +63,7 @@ class AddBeneficiaryScreen extends StatelessWidget {
                       title: const Text('Account/Wallet Number'),
                       subtitle: TextInput(
                         isReadOnly: false,
-                        inputController:
-                            controller.accountWalletNumberTextEditController,
+                        inputController: controller.accountWalletNumberTextEditController,
                         textHint: 'Type here',
                         isPassword: false,
                         enabled: false,
@@ -68,8 +73,7 @@ class AddBeneficiaryScreen extends StatelessWidget {
                       title: const Text('Account Name'),
                       subtitle: TextInput(
                         isReadOnly: true,
-                        inputController:
-                            controller.accountNameTextEditController,
+                        inputController: controller.accountNameTextEditController,
                         isPassword: false,
                         enabled: false,
                       )),
