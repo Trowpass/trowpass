@@ -4,6 +4,7 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -26,6 +27,13 @@ class SignUpScreenBusiness extends StatelessWidget {
             child: Scaffold(
                 backgroundColor: background,
                 appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarColor: primaryColor,
+                    statusBarBrightness: Brightness.light, // For iOS
+                    statusBarIconBrightness: Brightness.light, // For Android
+                    systemNavigationBarColor: navigationBarBackground,
+                    systemNavigationBarIconBrightness: Brightness.dark,
+                  ),
                   backgroundColor: background,
                   elevation: 0.0,
                   leading: IconButton(
@@ -60,12 +68,10 @@ class SignUpScreenBusiness extends StatelessWidget {
                               children: [
                                 TextInputForm(
                                   enabled: true,
-                                  inputController:
-                                      businessController.businessNameController,
+                                  inputController: businessController.businessNameController,
                                   textLabel: 'Business Name',
                                   textHint: 'Business Name',
-                                  validatorMessage:
-                                      'Please enter a valid business name',
+                                  validatorMessage: 'Please enter a valid business name',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
@@ -76,12 +82,10 @@ class SignUpScreenBusiness extends StatelessWidget {
                                 const SizedBox(height: 16),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController:
-                                      businessController.emailController,
+                                  inputController: businessController.emailController,
                                   textLabel: 'Company Email',
                                   textHint: 'Company Email',
-                                  validatorMessage:
-                                      'Please enter a valid email',
+                                  validatorMessage: 'Please enter a valid email',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
@@ -92,12 +96,10 @@ class SignUpScreenBusiness extends StatelessWidget {
                                 const SizedBox(height: 16),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController:
-                                      businessController.passwordController,
+                                  inputController: businessController.passwordController,
                                   textLabel: 'Password',
                                   textHint: 'Password',
-                                  validatorMessage:
-                                      'Please enter a valid password',
+                                  validatorMessage: 'Please enter a valid password',
                                   isPassword: true,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
@@ -111,36 +113,25 @@ class SignUpScreenBusiness extends StatelessWidget {
                                     children: <Widget>[
                                       SizedBox.expand(
                                         child: LinearProgressIndicator(
-                                            value: businessController
-                                                .strength.value,
+                                            value: businessController.strength.value,
                                             backgroundColor: Colors.grey[300],
-                                            color: businessController
-                                                        .strength.value <=
-                                                    1 / 4
+                                            color: businessController.strength.value <= 1 / 4
                                                 ? Colors.red
-                                                : businessController
-                                                            .strength.value ==
-                                                        2 / 4
+                                                : businessController.strength.value == 2 / 4
                                                     ? Colors.yellow
-                                                    : businessController
-                                                                .strength
-                                                                .value ==
-                                                            3 / 4
+                                                    : businessController.strength.value == 3 / 4
                                                         ? Colors.blue
                                                         : Colors.green,
                                             minHeight: 15),
                                       ),
-                                      Center(
-                                          child: Text(businessController
-                                              .displayText.value)),
+                                      Center(child: Text(businessController.displayText.value)),
                                     ],
                                   ),
                                 ),
                                 const SizedBox(height: 16),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController: businessController
-                                      .confirmPasswordController,
+                                  inputController: businessController.confirmPasswordController,
                                   textLabel: 'Confirm Password',
                                   textHint: 'Confirm password',
                                   validatorMessage: 'Passwords do not match',
@@ -155,11 +146,8 @@ class SignUpScreenBusiness extends StatelessWidget {
                                 StandardButton(
                                   text: 'SIGN UP',
                                   onPressed: () {
-                                    if (businessController.formKey.currentState!
-                                        .validate()) {
-                                      businessController.strength.value < 1 / 2
-                                          ? null
-                                          : businessController.trySubmit();
+                                    if (businessController.formKey.currentState!.validate()) {
+                                      businessController.strength.value < 1 / 2 ? null : businessController.trySubmit();
                                     }
                                   },
                                 ),

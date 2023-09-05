@@ -7,6 +7,7 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -29,6 +30,13 @@ class LoginScreen extends StatelessWidget {
             child: Scaffold(
                 backgroundColor: background,
                 appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarColor: primaryColor,
+                    statusBarBrightness: Brightness.light, // For iOS
+                    statusBarIconBrightness: Brightness.light, // For Android
+                    systemNavigationBarColor: navigationBarBackground,
+                    systemNavigationBarIconBrightness: Brightness.dark,
+                  ),
                   backgroundColor: background,
                   elevation: 0.0,
                 ),
@@ -45,12 +53,10 @@ class LoginScreen extends StatelessWidget {
                               Obx(() => TextInputForm(
                                     inputType: TextInputType.number,
                                     enabled: true,
-                                    inputController:
-                                        controller.emailPhoneNumberController,
+                                    inputController: controller.emailPhoneNumberController,
                                     textLabel: 'Enter phone number',
                                     textHint: 'Enter phone number',
-                                    validatorMessage:
-                                        'Please enter a valid phone number',
+                                    validatorMessage: 'Please enter a valid phone number',
                                     isPassword: false,
                                     autoCorrect: false,
                                     prefixIcon: const Icon(
@@ -58,25 +64,19 @@ class LoginScreen extends StatelessWidget {
                                       size: 30,
                                     ),
                                     suffixIcon: IconButton(
-                                      icon: Icon(Icons.cancel,
-                                          color: controller.isFocused.value
-                                              ? primaryColor
-                                              : null),
+                                      icon: Icon(Icons.cancel, color: controller.isFocused.value ? primaryColor : null),
                                       onPressed: () {
-                                        controller.emailPhoneNumberController
-                                            .clear();
+                                        controller.emailPhoneNumberController.clear();
                                       },
                                     ),
                                   )),
                               const SizedBox(height: 16),
                               Obx(() => TextInputForm(
                                     enabled: true,
-                                    inputController:
-                                        controller.passwordController,
+                                    inputController: controller.passwordController,
                                     textLabel: 'Password',
                                     textHint: 'Password',
-                                    validatorMessage:
-                                        'Please enter a valid password',
+                                    validatorMessage: 'Please enter a valid password',
                                     isPassword: !controller.isPassword.value,
                                     autoCorrect: false,
                                     prefixIcon: const Icon(
@@ -87,27 +87,20 @@ class LoginScreen extends StatelessWidget {
                                       icon: controller.isPassword.value
                                           ? const Icon(Icons.visibility_off)
                                           : const Icon(Icons.visibility),
-                                      color: controller.isFocused.value
-                                          ? primaryColor
-                                          : null,
+                                      color: controller.isFocused.value ? primaryColor : null,
                                       onPressed: () {
-                                        controller.isPassword.value =
-                                            !controller.isPassword.value;
+                                        controller.isPassword.value = !controller.isPassword.value;
                                       },
                                     ),
-                                    onTap: () =>
-                                        controller.isFocused.value = true,
-                                    onChanged: (_) =>
-                                        controller.isFocused.value = false,
-                                    onFieldSubmitted: (_) =>
-                                        controller.isFocused.value = false,
+                                    onTap: () => controller.isFocused.value = true,
+                                    onChanged: (_) => controller.isFocused.value = false,
+                                    onFieldSubmitted: (_) => controller.isFocused.value = false,
                                   )),
                               const SizedBox(height: 03),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: TextButton(
-                                  onPressed: () =>
-                                      Get.to(() => ForgotPasswordScreen()),
+                                  onPressed: () => Get.to(() => ForgotPasswordScreen()),
                                   child: Text(
                                     'Forgot Password?',
                                     style: appStyles(
@@ -122,8 +115,7 @@ class LoginScreen extends StatelessWidget {
                               StandardButton(
                                 text: 'LOG IN',
                                 onPressed: () {
-                                  if (controller.formKey.currentState!
-                                      .validate()) {
+                                  if (controller.formKey.currentState!.validate()) {
                                     controller.formKey.currentState!.save();
                                     controller.login();
                                   } else {}

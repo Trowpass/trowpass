@@ -5,6 +5,7 @@ import 'package:app/screens/get_transport_card/card_design.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CardTypeScreen extends StatelessWidget {
@@ -15,6 +16,13 @@ class CardTypeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: background,
         elevation: 0,
         centerTitle: false,
@@ -95,20 +103,21 @@ class CardBox extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: Text(
+                  Expanded(
+                      child: Text(
                     description,
                     style: appStyles(13, label, FontWeight.w400),
-                    )),
+                  )),
                   TextButton(
                     onPressed: () {
-                        Get.to(CardDesignScreen());
+                      Get.to(CardDesignScreen());
                     },
                     child: Text(
                       'Get Started',
                       style: appStyles(
                         13,
                         anchor,
-                         FontWeight.w500,
+                        FontWeight.w500,
                       ),
                     ),
                   ),

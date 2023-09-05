@@ -22,17 +22,21 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark,
-    ));
     return Obx(() => !controller.isLoaded.value
         ? overlayLoader(!controller.isLoaded.value)
         : RefreshIndicator(
             onRefresh: () async {
               await controller.userWallet();
             },
-            child: Scaffold(
+            child: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: const SystemUiOverlayStyle(
+                statusBarColor: primaryColor,
+                statusBarBrightness: Brightness.light, // For iOS
+                statusBarIconBrightness: Brightness.light, // For Android
+                systemNavigationBarColor: navigationBarBackground,
+                systemNavigationBarIconBrightness: Brightness.light,
+              ),
+              child: Scaffold(
               body: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -276,7 +280,7 @@ class DashboardScreen extends StatelessWidget {
               floatingActionButtonLocation:
                   FloatingActionButtonLocation.endFloat,
             ),
-          ));
+          )));
   }
 }
 

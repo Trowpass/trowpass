@@ -8,15 +8,22 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CardDesignScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: background,
         elevation: 0,
         centerTitle: true,
@@ -38,8 +45,8 @@ class CardDesignScreen extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-            const SizedBox(height: 16),
-           CardHolderField()
+                const SizedBox(height: 16),
+                CardHolderField()
               ],
             ),
           ),
@@ -48,7 +55,6 @@ class CardDesignScreen extends StatelessWidget {
     );
   }
 }
-
 
 class CardHolderField extends StatelessWidget {
   final cardDesignHolderInputController = Get.put(CardDesignHolderInputController());
@@ -70,7 +76,7 @@ class CardHolderField extends StatelessWidget {
               isPassword: false,
               autoCorrect: false,
             ),
-          const SizedBox(height: 25),
+            const SizedBox(height: 25),
             StandardButton(
               text: 'Get Card',
               onPressed: () {

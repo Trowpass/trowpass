@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/bills_tab_controller.dart';
@@ -12,6 +13,13 @@ class BillsTabScreen extends GetView<BillsTabController> {
     return Scaffold(
       backgroundColor: primaryColor,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         centerTitle: true,
         title: Text(
           controller.title,

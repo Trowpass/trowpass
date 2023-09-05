@@ -1,6 +1,7 @@
 import 'package:app/screens/history/list_item.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/history_tab_controller.dart';
@@ -19,6 +20,13 @@ class HistoryScreen extends GetView<HistoryTabController> {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: background,
         elevation: 0.0,
         title: Text(

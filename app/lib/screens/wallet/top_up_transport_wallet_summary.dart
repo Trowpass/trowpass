@@ -1,5 +1,6 @@
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/top_up_transport_wallet_summary_controller.dart';
@@ -16,6 +17,13 @@ class TopUpTransportWalletSummaryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.dark,
+        ),
         title: Text(controller.title.value),
         centerTitle: true,
         elevation: 0,
@@ -52,8 +60,7 @@ class TopUpTransportWalletSummaryScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 child: Text(
                   '${currencyFormat(context).currencySymbol}${formatCurrency(controller.amount.value)}',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               Padding(
