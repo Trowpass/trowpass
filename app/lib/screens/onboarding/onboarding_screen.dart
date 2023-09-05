@@ -20,11 +20,11 @@ class OnBoardingScreen extends StatelessWidget {
       backgroundColor: background,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: primaryColor,
-          statusBarBrightness: Brightness.light, // For iOS
-          statusBarIconBrightness: Brightness.light, // For Android
+          statusBarColor: statusBarWhiteBackground,
+          statusBarBrightness: Brightness.dark, // For iOS
+          statusBarIconBrightness: Brightness.dark, // For Android
           systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
         backgroundColor: background,
         elevation: 0.0,
@@ -50,7 +50,7 @@ class OnBoardingScreen extends StatelessWidget {
                         child: Text(
                           item.title,
                           textAlign: TextAlign.center,
-                          style: appStyles(18, titleActive, FontWeight.bold),
+                          style: appStyles(22, titleActive, FontWeight.bold),
                         ),
                       ),
                       Image.asset(

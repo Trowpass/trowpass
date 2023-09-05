@@ -17,6 +17,7 @@ class ChangePinScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        backgroundColor: background,
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: primaryColor,
           statusBarBrightness: Brightness.light, // For iOS
@@ -24,25 +25,30 @@ class ChangePinScreen extends StatelessWidget {
           systemNavigationBarColor: navigationBarBackground,
           systemNavigationBarIconBrightness: Brightness.dark,
         ),
+        elevation: 0.0,
         title: Text(
           'Change PIN',
-          style: appStyles(18, null, FontWeight.w300),
+          style: appStyles(18, titleActive, FontWeight.w500),
         ),
-        centerTitle: true,
-        backgroundColor: background,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Get.back();
+          },
+        ),
       ),
       body: GestureDetector(
         onTap: () => Get.focusScope!.unfocus(),
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.all(24),
             child: Form(
                 key: controller.formKey,
                 child: Column(
                   children: [
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Enter Old PIN', style: appStyles(18, null, FontWeight.w300)),
+                      title: Text('Enter Old PIN', style: appStyles(18, null, FontWeight.w500)),
                       subtitle: TextInputForm(
                         inputType: TextInputType.number,
                         enabled: true,
@@ -63,7 +69,7 @@ class ChangePinScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Enter New PIN', style: appStyles(18, null, FontWeight.w300)),
+                      title: Text('Enter New PIN', style: appStyles(18, null, FontWeight.w500)),
                       subtitle: TextInputForm(
                         inputType: TextInputType.number,
                         enabled: true,
@@ -84,7 +90,7 @@ class ChangePinScreen extends StatelessWidget {
                     const SizedBox(height: 10),
                     ListTile(
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Confirm New PIN', style: appStyles(18, null, FontWeight.w300)),
+                      title: Text('Confirm New PIN', style: appStyles(18, null, FontWeight.w500)),
                       subtitle: TextInputForm(
                         inputType: TextInputType.number,
                         enabled: true,
