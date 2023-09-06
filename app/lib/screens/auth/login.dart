@@ -30,6 +30,7 @@ class LoginScreen extends StatelessWidget {
             child: Scaffold(
                 backgroundColor: background,
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   systemOverlayStyle: const SystemUiOverlayStyle(
                     statusBarColor: primaryColor,
                     statusBarBrightness: Brightness.light, // For iOS
@@ -59,9 +60,10 @@ class LoginScreen extends StatelessWidget {
                                     validatorMessage: 'Please enter a valid phone number',
                                     isPassword: false,
                                     autoCorrect: false,
-                                    prefixIcon: const Icon(
+                                    prefixIcon: Icon(
                                       Icons.phone_android_outlined,
-                                      size: 30,
+                                      size: 24,
+                                      color: controller.isFocused.value ? primaryColor : null,
                                     ),
                                     suffixIcon: IconButton(
                                       icon: Icon(Icons.cancel, color: controller.isFocused.value ? primaryColor : null),
@@ -79,9 +81,10 @@ class LoginScreen extends StatelessWidget {
                                     validatorMessage: 'Please enter a valid password',
                                     isPassword: !controller.isPassword.value,
                                     autoCorrect: false,
-                                    prefixIcon: const Icon(
+                                    prefixIcon: Icon(
                                       Icons.lock,
-                                      size: 30,
+                                      size: 24,
+                                      color: controller.isFocused.value ? primaryColor : null,
                                     ),
                                     suffixIcon: IconButton(
                                       icon: controller.isPassword.value
@@ -92,8 +95,6 @@ class LoginScreen extends StatelessWidget {
                                         controller.isPassword.value = !controller.isPassword.value;
                                       },
                                     ),
-                                    onTap: () => controller.isFocused.value = true,
-                                    onChanged: (_) => controller.isFocused.value = false,
                                     onFieldSubmitted: (_) => controller.isFocused.value = false,
                                   )),
                               const SizedBox(height: 03),
@@ -138,6 +139,11 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: Text(
                             'Sign Up',
+                            style: appStyles(
+                              14,
+                              primaryColor,
+                              FontWeight.w600,
+                            ),
                           ))
                     ]),
                   ),

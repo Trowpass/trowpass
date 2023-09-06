@@ -70,18 +70,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                           isPassword: false,
                           autoCorrect: false,
                           validator: (value) => controller.isEmailValid(value) ? null : validatorMessage,
-                          onTap: () => controller.isFocused.value = true,
-                          onChanged: (_) => controller.isFocused.value = false,
                           onFieldSubmitted: (_) => controller.isFocused.value = false,
                           prefixIcon: const Icon(
                             Icons.email_outlined,
-                            size: 30,
+                            size: 24,
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
                               Icons.cancel,
                               color: controller.isFocused.value ? primaryColor : null,
-                              size: 30,
+                              size: 24,
                             ),
                             onPressed: () => controller.emailAddressInputController.clear(),
                           ),

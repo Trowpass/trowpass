@@ -77,7 +77,7 @@ class OnBoardingScreen extends StatelessWidget {
                     offset: 8,
                     dotWidth: 16,
                     dotHeight: 8,
-                    dotColor: scrollIndicatorColor,
+                    dotColor: greyLight,
                     activeDotColor: primaryColor,
                   ),
                 )),

@@ -8,6 +8,7 @@ import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../controllers/sign_up_individual_controller.dart';
 import '../../widgets/app_logo.dart';
+import '../../widgets/password_strength_bar.dart';
 import '../../widgets/standard_button.dart';
 import '../../widgets/text_form_input.dart';
 
@@ -72,7 +73,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.person_outline_outlined,
-                                size: 30,
+                                size: 24,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -86,7 +87,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.person_outline_outlined,
-                                size: 30,
+                                size: 24,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -101,7 +102,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.email,
-                                size: 30,
+                                size: 22,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -116,7 +117,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.phone_android,
-                                size: 30,
+                                size: 24,
                               ),
                             ),
                             const SizedBox(height: 10),
@@ -131,7 +132,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                             //   autoCorrect: false,
                             //   prefixIcon: const Icon(
                             //     Icons.confirmation_number_rounded,
-                            //     size: 30,
+                            //     size: 24,
                             //   ),
                             // ),
                             // const SizedBox(height: 10),
@@ -140,48 +141,47 @@ class SignUpScreenIndividual extends StatelessWidget {
                               inputController: controller.passwordController,
                               textLabel: 'Password',
                               textHint: 'Password',
-                              validatorMessage: 'Please enter a valid password',
-                              isPassword: true,
+                              isPassword: controller.isPasswordHidden.value,
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.lock_clock_rounded,
-                                size: 30,
+                                size: 24,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                  color: controller.isFocused.value ? primaryColor : null,
+                                  size: 24,
+                                ),
+                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
                               ),
                               onChanged: (value) => controller.checkPassword(value),
                             ),
-                            SizedBox(
-                              height: 17,
-                              child: Stack(
-                                children: <Widget>[
-                                  SizedBox.expand(
-                                    child: LinearProgressIndicator(
-                                        value: controller.strength.value,
-                                        backgroundColor: Colors.red[500],
-                                        color: controller.strength.value <= 1 / 4
-                                            ? Colors.red
-                                            : controller.strength.value == 2 / 4
-                                                ? Colors.yellow
-                                                : controller.strength.value == 3 / 4
-                                                    ? Colors.blue
-                                                    : Colors.green,
-                                        minHeight: 15),
-                                  ),
-                                  Center(child: Text(controller.displayText.value)),
-                                ],
-                              ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: Obx(() => PasswordStrengthBar(strength: controller.strength.value)),
                             ),
-                            const SizedBox(height: 10),
                             TextInputForm(
                               enabled: true,
                               inputController: controller.confirmPasswordController,
                               textLabel: 'Confirm Password',
                               textHint: 'Confirm password',
-                              validatorMessage: 'Passwords do not match',
-                              isPassword: true,
+                              validatorMessage: 'Password do not match',
+                              validator: (value) =>
+                                  controller.passwordController.text != value ? 'Password do not match' : null,
+                              isPassword: controller.isPasswordHidden.value,
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.lock,
-                                size: 30,
+                                size: 24,
+                              ),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                  color: controller.isFocused.value ? primaryColor : null,
+                                  size: 24,
+                                ),
+                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -190,7 +190,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               onPressed: () async {
                                 if (controller.formKey.currentState!.validate()) {
                                   controller.formKey.currentState!.save();
-                                  controller.strength.value < 1 / 2 ? null : controller.registerRider();
+                                  controller.strength.value == Strength.secure ? null : controller.registerRider();
                                 }
                               },
                             ),
