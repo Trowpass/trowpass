@@ -15,7 +15,7 @@ class VerifyAccountResponse {
       VerifyAccountResponse(
         status: json['status'] ?? '',
         message: json['message'] ?? '',
-        responseCode: json['responsCode'] ?? '',
+        responseCode: json['responseCode'] ?? '',
         data: json['data'] != null
             ? VerifyAccountData.fromJson(json['data'])
             : null,
