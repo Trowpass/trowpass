@@ -5,6 +5,7 @@ import '../screens/auth/otp.dart';
 import '../services/requests/post_requests/rider_registration_request.dart';
 import '../shareds/managers/set_session_manager.dart';
 import '../shareds/utils/app_colors.dart';
+import '../widgets/password_strength_bar.dart';
 import 'bloc/user_controller.dart';
 
 class SignUpIndividualController extends GetxController {
@@ -17,20 +18,19 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController bvnController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController =
-      TextEditingController();
+  final TextEditingController confirmPasswordController = TextEditingController();
 
   final password = ''.obs;
-  final strength = RxDouble(0);
-  final displayText = 'Mix of upper & lower case, number and character'.obs;
+  final strength = Rx(Strength.weak);
 
   RegExp numReg = RegExp(r".*[0-9].*");
   RegExp letterReg = RegExp(r".*[A-Za-z].*");
 
-  RegExp regex =
-      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
   final isLoaded = false.obs;
+  final isPasswordHidden = true.obs;
+  final isFocused = false.obs;
 
   @override
   void onInit() {
@@ -51,11 +51,10 @@ class SignUpIndividualController extends GetxController {
 
     try {
       if (passwordController.text != confirmPasswordController.text) {
-        Get.defaultDialog(
-            title: 'Validation', content: const Text('Password mis-matched'));
+        Get.defaultDialog(title: 'Validation', content: const Text('Password mis-matched'));
+        isLoaded.value = false;
       } else {
-        var response = await userController
-            .riderRegistrationAsync(RiderRegistrationRequest(
+        var response = await userController.riderRegistrationAsync(RiderRegistrationRequest(
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
@@ -68,16 +67,14 @@ class SignUpIndividualController extends GetxController {
         ));
         if (response.status) {
           Get.offAll(() => OtpScreen(phoneNumber: phoneNumberController.text));
+          isLoaded.value = false;
         } else {
-          Get.defaultDialog(
-              title: 'Information', content: Text(response.message));
+          Get.defaultDialog(title: 'Information', content: Text(response.message));
           isLoaded.value = false;
         }
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
   }
@@ -85,18 +82,14 @@ class SignUpIndividualController extends GetxController {
   void checkPassword(String value) {
     password.value = value.trim();
     if (password.isEmpty) {
-      strength.value = 0;
-      displayText.value = 'Please enter your password';
+      strength.value = Strength.weak;
     } else if (password.value.length < 8) {
-      strength.value = 1 / 4;
-      displayText.value = 'Your password is too short';
+      strength.value = Strength.weak;
     } else {
       if (!regex.hasMatch(password.value)) {
-        strength.value = 3 / 4;
-        displayText.value = 'Password not strong enough';
+        strength.value = Strength.moderate;
       } else {
-        strength.value = 1;
-        displayText.value = 'Your password is great';
+        strength.value = Strength.secure;
       }
     }
   }

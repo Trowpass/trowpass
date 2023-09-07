@@ -47,7 +47,7 @@ class EditProfileScreen extends StatelessWidget {
                       isPassword: false,
                       prefixIcon: const Icon(
                         Icons.photo_camera,
-                        size: 30,
+                        size: 24,
                       ),
                       isReadOnly: false,
                     ),
@@ -62,7 +62,7 @@ class EditProfileScreen extends StatelessWidget {
                       autoCorrect: false,
                       prefixIcon: const Icon(
                         Icons.person_outline_outlined,
-                        size: 30,
+                        size: 24,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -76,7 +76,7 @@ class EditProfileScreen extends StatelessWidget {
                       autoCorrect: false,
                       prefixIcon: const Icon(
                         Icons.person_outline_outlined,
-                        size: 30,
+                        size: 24,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -88,7 +88,7 @@ class EditProfileScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.place,
-                            size: 30,
+                            size: 24,
                           ),
                           labelText: 'Address',
                           labelStyle: appStyles(15, null, null),
@@ -127,7 +127,7 @@ class EditProfileScreen extends StatelessWidget {
                       autoCorrect: false,
                       prefixIcon: const Icon(
                         Icons.phone_android,
-                        size: 30,
+                        size: 24,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -139,7 +139,7 @@ class EditProfileScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.edit,
-                            size: 30,
+                            size: 24,
                           ),
                           labelText: 'Bio',
                           labelStyle: appStyles(15, null, null),
