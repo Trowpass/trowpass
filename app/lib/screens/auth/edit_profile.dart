@@ -24,7 +24,7 @@ class EditProfileScreen extends StatelessWidget {
           statusBarBrightness: Brightness.light, // For iOS
           statusBarIconBrightness: Brightness.light, // For Android
           systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
         elevation: 0,
         title: const Text('Edit Profile'),
