@@ -1,15 +1,17 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:app/screens/get_transport_card/card_type.dart';
-import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/shareds/utils/images.dart';
-import 'package:app/widgets/app_styles.dart';
-import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class GetTransportCard extends StatelessWidget {
+import '../../controllers/cards_tab_controller.dart';
+import '../../shareds/utils/app_colors.dart';
+import '../../shareds/utils/images.dart';
+import '../../widgets/app_styles.dart';
+import '../../widgets/standard_button.dart';
+import '../get_transport_card/card_type.dart';
+
+class CardsTabScreen extends GetView<CardsTabController> {
+  const CardsTabScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +24,15 @@ class GetTransportCard extends StatelessWidget {
           systemNavigationBarColor: navigationBarBackground,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
-        backgroundColor: background,
-        elevation: 0,
         centerTitle: true,
+        leading: null,
+        automaticallyImplyLeading: false,
         title: Text(
-          'Get Transport Card',
+          controller.title,
           style: appStyles(20, titleActive, FontWeight.w600),
         ),
+        elevation: 0,
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Padding(
