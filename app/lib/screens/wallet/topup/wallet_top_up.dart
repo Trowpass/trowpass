@@ -2,6 +2,7 @@ import 'package:app/shareds/utils/border_radius.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -21,10 +22,39 @@ class WalletTopUpScreen extends StatelessWidget {
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
         circularProgressColor: primaryColor,
-        appIcon: appLogo(50, 50),
+        appIcon: appLogo(70, 70),
         child: GestureDetector(
           onTap: () => Get.focusScope!.unfocus(),
           child: Scaffold(
+            backgroundColor: background,
+            appBar: AppBar(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: primaryColor,
+            statusBarBrightness: Brightness.light, // For iOS
+            statusBarIconBrightness: Brightness.light, // For Android
+            systemNavigationBarColor: navigationBarBackground,
+            systemNavigationBarIconBrightness: Brightness.light,
+          ),
+                elevation: 0.0,
+                backgroundColor: background,
+                title: Text('Topup your wallet',
+                    style: appStyles(18, titleActive, FontWeight.w600)),
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                    icon: const Icon(Icons.notifications_outlined,
+                        color: Colors.black),
+                    onPressed: () {
+                      Get.back();
+                    },
+                  )
+                ],
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Get.back();
+                  },
+                )),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.all(20),

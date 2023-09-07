@@ -4,11 +4,13 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../controllers/sign_up_business_controller.dart';
 import '../../widgets/app_logo.dart';
+import '../../widgets/password_strength_bar.dart';
 
 class SignUpScreenBusiness extends StatelessWidget {
   SignUpScreenBusiness({super.key});
@@ -26,6 +28,13 @@ class SignUpScreenBusiness extends StatelessWidget {
             child: Scaffold(
                 backgroundColor: background,
                 appBar: AppBar(
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarColor: primaryColor,
+                    statusBarBrightness: Brightness.light, // For iOS
+                    statusBarIconBrightness: Brightness.light, // For Android
+                    systemNavigationBarColor: navigationBarBackground,
+                    systemNavigationBarIconBrightness: Brightness.light,
+                  ),
                   backgroundColor: background,
                   elevation: 0.0,
                   leading: IconButton(
@@ -60,104 +69,91 @@ class SignUpScreenBusiness extends StatelessWidget {
                               children: [
                                 TextInputForm(
                                   enabled: true,
-                                  inputController:
-                                      businessController.businessNameController,
+                                  inputController: businessController.businessNameController,
                                   textLabel: 'Business Name',
                                   textHint: 'Business Name',
-                                  validatorMessage:
-                                      'Please enter a valid business name',
+                                  validatorMessage: 'Please enter a valid business name',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
                                     Icons.business_rounded,
-                                    size: 30,
+                                    size: 24,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController:
-                                      businessController.emailController,
+                                  inputController: businessController.emailController,
                                   textLabel: 'Company Email',
                                   textHint: 'Company Email',
-                                  validatorMessage:
-                                      'Please enter a valid email',
+                                  validatorMessage: 'Please enter a valid email',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
                                     Icons.email_outlined,
-                                    size: 30,
+                                    size: 24,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController:
-                                      businessController.passwordController,
+                                  inputController: businessController.passwordController,
                                   textLabel: 'Password',
                                   textHint: 'Password',
-                                  validatorMessage:
-                                      'Please enter a valid password',
-                                  isPassword: true,
+                                  validatorMessage: 'Please enter a valid password',
+                                  isPassword: businessController.isPasswordHidden.value,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
                                     Icons.lock,
-                                    size: 30,
+                                    size: 24,
                                   ),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                  child: Stack(
-                                    children: <Widget>[
-                                      SizedBox.expand(
-                                        child: LinearProgressIndicator(
-                                            value: businessController
-                                                .strength.value,
-                                            backgroundColor: Colors.grey[300],
-                                            color: businessController
-                                                        .strength.value <=
-                                                    1 / 4
-                                                ? Colors.red
-                                                : businessController
-                                                            .strength.value ==
-                                                        2 / 4
-                                                    ? Colors.yellow
-                                                    : businessController
-                                                                .strength
-                                                                .value ==
-                                                            3 / 4
-                                                        ? Colors.blue
-                                                        : Colors.green,
-                                            minHeight: 15),
-                                      ),
-                                      Center(
-                                          child: Text(businessController
-                                              .displayText.value)),
-                                    ],
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      businessController.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                      color: businessController.isFocused.value ? primaryColor : null,
+                                      size: 24,
+                                    ),
+                                    onPressed: () {
+                                      businessController.isPasswordHidden.value = !businessController.isPasswordHidden.value;
+                                    },
                                   ),
+                                  onChanged: (value) => businessController.checkPassword(value),
                                 ),
-                                const SizedBox(height: 16),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  child: Obx(() => PasswordStrengthBar(strength: businessController.strength.value)),
+                                ),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController: businessController
-                                      .confirmPasswordController,
+                                  inputController: businessController.confirmPasswordController,
                                   textLabel: 'Confirm Password',
                                   textHint: 'Confirm password',
                                   validatorMessage: 'Passwords do not match',
-                                  isPassword: true,
+                                  isPassword: businessController.isPasswordHidden.value,
+                                  validator: (value) =>
+                                      businessController.passwordController.text != value ? 'Password do not match' : null,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
                                     Icons.lock,
-                                    size: 30,
+                                    size: 24,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(
+                                      businessController.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                      color: businessController.isFocused.value ? primaryColor : null,
+                                      size: 24,
+                                    ),
+                                    onPressed: () {
+                                      businessController.isPasswordHidden.value = !businessController.isPasswordHidden.value;
+                                    },
                                   ),
                                 ),
                                 const SizedBox(height: 25),
                                 StandardButton(
                                   text: 'SIGN UP',
                                   onPressed: () {
-                                    if (businessController.formKey.currentState!
-                                        .validate()) {
-                                      businessController.strength.value < 1 / 2
+                                    if (businessController.formKey.currentState!.validate()) {
+                                      businessController.strength.value != Strength.secure
                                           ? null
                                           : businessController.trySubmit();
                                     }

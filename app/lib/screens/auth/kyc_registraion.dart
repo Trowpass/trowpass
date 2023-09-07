@@ -27,6 +27,13 @@
 //             child: Scaffold(
 //               backgroundColor: background,
 //               appBar: AppBar(
+//                 systemOverlayStyle: const SystemUiOverlayStyle(
+//                   statusBarColor: primaryColor,
+//                   statusBarBrightness: Brightness.light, // For iOS
+//                   statusBarIconBrightness: Brightness.light, // For Android
+//                   systemNavigationBarColor: navigationBarBackground,
+//                   systemNavigationBarIconBrightness: Brightness.light,
+//                 ),
 //                 title: const Text('KYC Registration'),
 //                 centerTitle: true,
 //                 backgroundColor: primaryColor,
@@ -39,8 +46,7 @@
 //                   child: Column(children: [
 //                     ListTile(
 //                       contentPadding: EdgeInsets.zero,
-//                       title: Text('Date of Birth',
-//                           style: appStyles(18, null, FontWeight.w300)),
+//                       title: Text('Date of Birth', style: appStyles(18, null, FontWeight.w300)),
 //                       subtitle: TextInputForm(
 //                         inputController: controller.dobController,
 //                         autoCorrect: false,
@@ -64,10 +70,8 @@
 //                           );
 
 //                           if (pickedDate != null) {
-//                             String formattedDate =
-//                                 pickedDate.toUtc().toIso8601String();
-//                             print(
-//                                 "Selected Date: $formattedDate"); // Print the selected date
+//                             String formattedDate = pickedDate.toUtc().toIso8601String();
+//                             print("Selected Date: $formattedDate"); // Print the selected date
 //                             controller.dobController.text = formattedDate;
 //                             controller.selectedDOB = pickedDate;
 //                             Get.focusScope!.unfocus();
@@ -78,8 +82,7 @@
 //                     const SizedBox(height: 10),
 //                     ListTile(
 //                       contentPadding: EdgeInsets.zero,
-//                       title: Text('Bank Verification Number',
-//                           style: appStyles(18, null, FontWeight.w300)),
+//                       title: Text('Bank Verification Number', style: appStyles(18, null, FontWeight.w300)),
 //                       subtitle: TextInputForm(
 //                         inputType: TextInputType.number,
 //                         enabled: true,
@@ -95,16 +98,12 @@
 //                               Icons.close,
 //                               size: 20,
 //                             )),
-//                         inputFormatters: [
-//                           LengthLimitingTextInputFormatter(11),
-//                           FilteringTextInputFormatter.digitsOnly
-//                         ],
+//                         inputFormatters: [LengthLimitingTextInputFormatter(11), FilteringTextInputFormatter.digitsOnly],
 //                       ),
 //                     ),
 //                     ListTile(
 //                       contentPadding: EdgeInsets.zero,
-//                       title: Text('Address',
-//                           style: appStyles(18, null, FontWeight.w300)),
+//                       title: Text('Address', style: appStyles(18, null, FontWeight.w300)),
 //                       subtitle: TextInputForm(
 //                         inputType: TextInputType.text,
 //                         enabled: true,
@@ -115,8 +114,7 @@
 //                         autoCorrect: false,
 //                         prefixIcon: const Icon(Icons.memory_rounded),
 //                         suffixIcon: IconButton(
-//                             onPressed: () =>
-//                                 controller.addressController.clear(),
+//                             onPressed: () => controller.addressController.clear(),
 //                             icon: const Icon(
 //                               Icons.close,
 //                               size: 20,

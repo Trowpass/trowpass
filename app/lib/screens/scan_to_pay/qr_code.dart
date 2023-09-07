@@ -5,6 +5,7 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class ScanController extends GetxController {
@@ -22,10 +23,16 @@ class ScanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
         backgroundColor: background,
         elevation: 0.0,
-        title: Text('Trowpass QR Code',
-            style: appStyles(20, titleActive, FontWeight.w500)),
+        title: Text('Trowpass QR Code', style: appStyles(20, titleActive, FontWeight.w500)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
@@ -69,19 +76,14 @@ class ScanScreen extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: controller.selectedIndex.value == index
-                    ? line
-                    : Colors.transparent,
+                color: controller.selectedIndex.value == index ? line : Colors.transparent,
                 width: 2,
               ),
             ),
           ),
           child: Text(
             title,
-            style: appStyles(
-                18,
-                controller.selectedIndex.value == index ? line : Colors.black,
-                FontWeight.w500),
+            style: appStyles(18, controller.selectedIndex.value == index ? line : Colors.black, FontWeight.w500),
             textAlign: TextAlign.center,
           ),
         ),

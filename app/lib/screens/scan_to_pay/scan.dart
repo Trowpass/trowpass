@@ -3,7 +3,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+
+import '../../shareds/utils/app_colors.dart';
 
 class QrScanArea extends StatefulWidget {
   @override
@@ -32,14 +35,24 @@ class _QrScanAreaState extends State<QrScanArea> {
 
   @override
   Widget build(BuildContext context) => SafeArea(
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: const SystemUiOverlayStyle(
+            statusBarColor: primaryColor,
+            statusBarBrightness: Brightness.light, // For iOS
+            statusBarIconBrightness: Brightness.light, // For Android
+            systemNavigationBarColor: navigationBarBackground,
+            systemNavigationBarIconBrightness: Brightness.light,
+          ),
           child: Scaffold(
-        body: Stack(
-          alignment: Alignment.center,
-          children: [
-            buildQrView(context),
-          ],
+            body: Stack(
+              alignment: Alignment.center,
+              children: [
+                buildQrView(context),
+              ],
+            ),
+          ),
         ),
-      ));
+      );
 
   Widget buildQrView(BuildContext context) => QRView(
         key: qrKey,

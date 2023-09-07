@@ -6,6 +6,7 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
@@ -28,6 +29,13 @@ class InterWalletPayScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: background,
               appBar: AppBar(
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: primaryColor,
+                  statusBarBrightness: Brightness.light, // For iOS
+                  statusBarIconBrightness: Brightness.light, // For Android
+                  systemNavigationBarColor: navigationBarBackground,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
                 backgroundColor: background,
                 elevation: 0.0,
                 title: Text(
@@ -37,8 +45,7 @@ class InterWalletPayScreen extends StatelessWidget {
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined,
-                        color: Colors.black),
+                    icon: const Icon(Icons.notifications_outlined, color: Colors.black),
                     onPressed: () {
                       Get.back();
                     },
@@ -149,7 +156,7 @@ class PayForm extends StatelessWidget {
               text: 'Pay Now',
               onPressed: () {
                 if (payController.formKey.currentState!.validate()) {
-                  payController.InterWalletPay();
+                  payController.interWalletPay();
                 }
               },
             ),

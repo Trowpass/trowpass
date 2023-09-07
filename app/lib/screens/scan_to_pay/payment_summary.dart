@@ -5,18 +5,26 @@ import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class PaymentSummaryScreen extends StatelessWidget {
   final PaymentSummaryController paymentSummaryController = Get.put(PaymentSummaryController());
 
-   @override
+  @override
   Widget build(BuildContext context) {
     paymentSummaryController.initializeData();
     return GestureDetector(
       onTap: () => Get.focusScope!.unfocus(),
       child: Scaffold(
         appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: primaryColor,
+            statusBarBrightness: Brightness.light, // For iOS
+            statusBarIconBrightness: Brightness.light, // For Android
+            systemNavigationBarColor: navigationBarBackground,
+            systemNavigationBarIconBrightness: Brightness.light,
+          ),
           backgroundColor: background,
           elevation: 0.0,
           title: Text(

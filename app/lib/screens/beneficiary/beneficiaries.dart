@@ -2,6 +2,7 @@ import 'package:app/screens/beneficiary/add_beneficiary.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/heneficiaries_controller.dart';
@@ -15,6 +16,13 @@ class BeneficiariesScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: background,
         appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: primaryColor,
+            statusBarBrightness: Brightness.light, // For iOS
+            statusBarIconBrightness: Brightness.light, // For Android
+            systemNavigationBarColor: navigationBarBackground,
+            systemNavigationBarIconBrightness: Brightness.light,
+          ),
           title: Text(controller.title.value),
           centerTitle: true,
           backgroundColor: primaryColor,
@@ -26,10 +34,7 @@ class BeneficiariesScreen extends StatelessWidget {
                   child: Wrap(
                     alignment: WrapAlignment.center,
                     crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [
-                      Text('Add', style: appStyles(16, null, FontWeight.bold)),
-                      const Icon(Icons.add)
-                    ],
+                    children: [Text('Add', style: appStyles(16, null, FontWeight.bold)), const Icon(Icons.add)],
                   )),
             )
           ],
@@ -45,11 +50,9 @@ class BeneficiariesScreen extends StatelessWidget {
                     color: Colors.white,
                     elevation: 1,
                     shadowColor: titleActive,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                       leading: CircleAvatar(
                         backgroundColor: Colors.blueGrey,
                         child: ClipOval(

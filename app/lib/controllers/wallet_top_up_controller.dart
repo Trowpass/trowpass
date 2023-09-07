@@ -42,6 +42,7 @@ class WalletTopUpController extends GetxController {
   }
 
   checkout(BuildContext context) async {
+    Get.focusScope!.unfocus();
     isLoaded.value = true;
     int price = int.parse(topUpAmountController.text) * 100;
     paymentReference.value = 'ref_${DateTime.now().millisecondsSinceEpoch}';
@@ -65,12 +66,12 @@ class WalletTopUpController extends GetxController {
           paymentMethod: 'card',
           email: paymentEmail.value,
           currency: paymentCurrency.value));
-      Get.to(PyamentProcessing(
-        reference: response.reference!,
-        companyName: 'Trowpass',
-        recipientName: session.readRiderFullName()!,
-        amount: double.parse(topUpAmountController.text),
-      ));
+      Get.offAll(() => PyamentProcessing(
+            reference: response.reference!,
+            companyName: 'Trowpass',
+            recipientName: session.readRiderFullName()!,
+            amount: double.parse(topUpAmountController.text),
+          ));
       isLoaded.value = false;
     } else {
       isLoaded.value = false;

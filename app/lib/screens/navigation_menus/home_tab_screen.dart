@@ -12,7 +12,7 @@ class HomeTabScreen extends GetView<HomeTabController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body:  DashboardScreen(),
+      body: DashboardScreen(),
     );
   }
 }

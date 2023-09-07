@@ -3,8 +3,8 @@ import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/widgets/currency_format.dart';
 import 'package:get/get.dart';
 
-import '../screens/auth/wallet_tag.dart';
 import '../shareds/managers/get_session_manager.dart';
+import '../widgets/app_dialog.dart';
 
 class DashboardController extends GetxController {
   final showBalance = true.obs;
@@ -45,8 +45,14 @@ class DashboardController extends GetxController {
     if (response.status) {
       accountNumber.value = response.data!.accountNumber;
       balance.value = formatCurrency(response.data!.balance);
-    } else {
-      Get.to(WalletTagScreen());
     }
+  }
+
+  Future<dynamic> displayPlaceholderDialog(String pageTitle) {
+    return showAppDialog(
+      title: pageTitle,
+      subtitle: 'We have you in mind. In the main time, explore the available features. Thank you.',
+      type: DialogType.warning,
+    );
   }
 }
