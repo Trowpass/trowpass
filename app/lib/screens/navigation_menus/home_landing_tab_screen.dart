@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../controllers/home_landing_tab_controller.dart';
 import '../../widgets/bottom_bar_navigation_menu.dart';
-import 'bills_tab_screen.dart';
+import 'cards_tab_screen.dart';
 import 'history_tab_screen.dart';
 import 'home_tab_screen.dart';
 import 'user_profile.dart';
@@ -21,7 +21,7 @@ class HomeLandingTabScreen extends StatelessWidget {
                 children: [
                   const HomeTabScreen(),
                   const HistoryTabScreen(),
-                  const BillsTabScreen(),
+                  const CardsTabScreen(),
                   UserProfileScreen(),
                 ],
               )),
