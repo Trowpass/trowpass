@@ -17,14 +17,24 @@ class SetSessionManager {
   void writeAuthorizationToken(dynamic token) {
     storage.write(authorizationToken, token);
   }
-   void writeUserId(dynamic userId) {
+
+  void writeUserId(dynamic userId) {
     storage.write(userIdKey, userId);
   }
 
-  void writeUserFirstName(dynamic fn) {
-    storage.write(userFirstName, fn);
+  void writeUserFirstName(dynamic fullName) {
+    storage.write(userFirstName, fullName);
   }
-  void writeUserFullName(dynamic fullNmae) {
-    storage.write(riderFullName, fullNmae);
+
+  void writeUserFullName(dynamic fullName) {
+    storage.write(riderFullName, fullName);
+  }
+
+  void writeIsUserOnBoarded(bool onBoarded) {
+    storage.write(userOnBoarded, onBoarded);
+  }
+
+  writeIsUserLoggedIn(bool loggedIn) {
+    storage.write(userLoggedIn, loggedIn);
   }
 }
