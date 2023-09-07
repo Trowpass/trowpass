@@ -40,7 +40,7 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                 statusBarBrightness: Brightness.light, // For iOS
                 statusBarIconBrightness: Brightness.light, // For Android
                 systemNavigationBarColor: navigationBarBackground,
-                systemNavigationBarIconBrightness: Brightness.dark,
+                systemNavigationBarIconBrightness: Brightness.light,
               ),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.black),

@@ -18,7 +18,7 @@ class BillsTabScreen extends GetView<BillsTabController> {
           statusBarBrightness: Brightness.light, // For iOS
           statusBarIconBrightness: Brightness.light, // For Android
           systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
         centerTitle: true,
         title: Text(
