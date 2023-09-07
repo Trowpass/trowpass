@@ -9,12 +9,11 @@ import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
 import '../auth/edit_profile.dart';
-import '../auth/login.dart';
 import '../auth/pin/change_pin.dart';
 
 class UserProfileScreen extends StatelessWidget {
   UserProfileScreen({super.key});
-  final contoller = Get.put(UserProfileController());
+  final controller = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class UserProfileScreen extends StatelessWidget {
         elevation: 0,
         backgroundColor: background,
         title: Text(
-          contoller.title.value,
+          controller.title.value,
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
@@ -73,7 +72,7 @@ class UserProfileScreen extends StatelessWidget {
                     ),
                   ],
                 )),
-            Text(contoller.fullName.value, style: appStyles(18, null, FontWeight.bold)),
+            Text(controller.fullName.value, style: appStyles(18, null, FontWeight.bold)),
             Text(
               'Rider',
               style: appStyles(18, null, FontWeight.w300),
@@ -161,7 +160,7 @@ class UserProfileScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.zero,
               child: GestureDetector(
-                onTap: () => Get.offAll(LoginScreen()),
+                onTap: () => controller.logout(),
                 child: ListTile(
                   horizontalTitleGap: 0,
                   leading: const Icon(
