@@ -1,12 +1,10 @@
 // ignore_for_file: avoid_print, unnecessary_string_interpolations
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/widgets/currency_format.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../shareds/managers/get_session_manager.dart';
 import '../widgets/app_dialog.dart';
-import '../widgets/app_styles.dart';
 
 class DashboardController extends GetxController {
   final showBalance = true.obs;
