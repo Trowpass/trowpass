@@ -59,6 +59,14 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/app_logo.png"
+  adaptive_icon_background: "#ff092cf7"
+  min_sdk_android: 21 # android min sdk min:16, default 21
 
 # Dwongrading intl for flutter paystack
 dependency_overrides:
