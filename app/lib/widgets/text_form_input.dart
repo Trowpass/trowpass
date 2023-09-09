@@ -9,7 +9,7 @@ import '../shareds/utils/border_radius.dart';
 class TextInputForm extends StatelessWidget {
   final TextEditingController inputController;
   final String? textLabel;
-  final String textHint;
+  final String? textHint;
   final String? textError;
   final String? validatorMessage;
   final bool isPassword;
@@ -30,7 +30,7 @@ class TextInputForm extends StatelessWidget {
     Key? key,
     required this.inputController,
     this.textLabel,
-    required this.textHint,
+    this.textHint,
     this.textError,
     this.validatorMessage,
     required this.isPassword,

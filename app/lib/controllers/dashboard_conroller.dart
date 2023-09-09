@@ -10,6 +10,7 @@ class DashboardController extends GetxController {
   final userName = Rx<String>('');
   final fullName = Rx<String>('');
   final accountNumber = Rx<String>('');
+  final bankName = Rx<String>('');
   final balance = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
   final isLoaded = Rx<bool>(false);
@@ -22,6 +23,7 @@ class DashboardController extends GetxController {
     isLoaded.value = true;
     fullName.value = '';
     balance.value = '';
+    bankName.value = '';
     accountNumber.value = '';
     userProfile();
     userWallet();
@@ -43,6 +45,7 @@ class DashboardController extends GetxController {
     var response = await userController.userWalletAsync();
     if (response.status) {
       accountNumber.value = response.data!.accountNumber;
+      bankName.value = response.data!.bankName;
       balance.value = formatCurrency(response.data!.balance);
     }
   }

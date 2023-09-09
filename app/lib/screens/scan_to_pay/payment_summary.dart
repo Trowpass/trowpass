@@ -1,5 +1,5 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
-import 'package:app/controllers/payment_summary_controller.dart';
+import 'package:app/controllers/scan_to_pay_controllers/payment_summary_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';

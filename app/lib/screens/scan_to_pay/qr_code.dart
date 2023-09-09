@@ -1,12 +1,15 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:app/controllers/dashboard_conroller.dart';
 import 'package:app/screens/scan_to_pay/scan.dart';
+import 'package:app/screens/scan_to_pay/qr_data.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ScanController extends GetxController {
   final selectedIndex = 0.obs;
@@ -32,7 +35,8 @@ class ScanScreen extends StatelessWidget {
         ),
         backgroundColor: background,
         elevation: 0.0,
-        title: Text('Trowpass QR Code', style: appStyles(20, titleActive, FontWeight.w500)),
+        title: Text('Trowpass QR Code',
+            style: appStyles(20, titleActive, FontWeight.w500)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
@@ -76,14 +80,19 @@ class ScanScreen extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border(
               bottom: BorderSide(
-                color: controller.selectedIndex.value == index ? line : Colors.transparent,
+                color: controller.selectedIndex.value == index
+                    ? line
+                    : Colors.transparent,
                 width: 2,
               ),
             ),
           ),
           child: Text(
             title,
-            style: appStyles(18, controller.selectedIndex.value == index ? line : Colors.black, FontWeight.w500),
+            style: appStyles(
+                18,
+                controller.selectedIndex.value == index ? line : Colors.black,
+                FontWeight.w500),
             textAlign: TextAlign.center,
           ),
         ),
@@ -93,6 +102,13 @@ class ScanScreen extends StatelessWidget {
 }
 
 Widget _buildMyCodeTab() {
+  final controller = Get.put(DashboardController());
+  String fullName = controller.fullName.value;
+  String bankName = controller.bankName.value;
+  String accountNumber = controller.accountNumber.value;
+
+  UserData userdata = UserData(fullName, bankName, accountNumber);
+
   return Center(
       child: Column(
     children: [
@@ -106,38 +122,50 @@ Widget _buildMyCodeTab() {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Transform.translate(
-              offset: Offset(0, -190),
-              child: ClipOval(
-                  child: Image.asset(
-                profile,
-              )),
-            ),
+            // Transform.translate(
+            //   offset: Offset(0, -190),
+            //   child: ClipOval(
+            //       child: Image.asset(
+            //     profile,
+            //   )),
+            // ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 50,
                 ),
-                Text(
-                  'Daisy Bright',
-                  style: appStyles(
-                    20,
-                    titleActive,
-                    FontWeight.w500,
+                // Text(
+                //   'Daisy Bright',
+                //   style: appStyles(
+                //     20,
+                //     titleActive,
+                //     FontWeight.w500,
+                //   ),
+                // ),
+                // Text(
+                //   'Driver',
+                //   style: appStyles(
+                //     20,
+                //     titleActive,
+                //     FontWeight.w400,
+                //   ),
+                // ),
+                // Image.asset(
+                //   code,
+                // )
+                QrImageView(
+                  data:
+                      "${userdata.fullName}\n${userdata.bankName}\n${userdata.accountNumber}",
+                  version: QrVersions.auto,
+                  size: 250.0, // Adjust the size as needed
+                  foregroundColor: Colors.black,
+                  errorCorrectionLevel: QrErrorCorrectLevel.Q,
+                  embeddedImage: AssetImage(mainLogo), // Add your company logo
+                  embeddedImageStyle: QrEmbeddedImageStyle(
+                    size: Size(40, 40), // Size of the embedded image
                   ),
                 ),
-                Text(
-                  'Driver',
-                  style: appStyles(
-                    20,
-                    titleActive,
-                    FontWeight.w400,
-                  ),
-                ),
-                Image.asset(
-                  code,
-                )
               ],
             ),
           ],
