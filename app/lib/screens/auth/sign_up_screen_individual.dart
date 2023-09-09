@@ -4,10 +4,9 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../controllers/sign_up_individual_controller.dart';
-import '../../widgets/app_logo.dart';
+import '../../widgets/overlay_indeterminate_progress.dart';
 import '../../widgets/password_strength_bar.dart';
 import '../../widgets/standard_button.dart';
 import '../../widgets/text_form_input.dart';
@@ -18,11 +17,10 @@ class SignUpScreenIndividual extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: GestureDetector(
           onTap: () => Get.focusScope!.unfocus(),
           child: Scaffold(
