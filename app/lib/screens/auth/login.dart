@@ -4,14 +4,12 @@ import 'package:app/controllers/auth_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
+import 'package:app/widgets/overlay_indeterminate_progress.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
-
-import '../../widgets/app_logo.dart';
 import 'forgot_password/forgot_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -20,11 +18,10 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(

@@ -17,7 +17,7 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return Obx(() => OverlayLoaderWithAppIcon(
+//     return Obx(() => OverlayIndeterminateProgress(
 //         isLoading: controller.isLoaded.value,
 //         overlayBackgroundColor: background,
 //         circularProgressColor: primaryColor,

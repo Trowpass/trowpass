@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/widgets/app_logo.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
@@ -8,9 +7,9 @@ import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../controllers/inter_wallet_transfer_controller/pay_screen_controller.dart';
+import '../../widgets/overlay_indeterminate_progress.dart';
 
 class InterWalletPayScreen extends StatelessWidget {
   InterWalletPayScreen({super.key});
@@ -19,11 +18,10 @@ class InterWalletPayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     payController.clearTextFields();
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
           isLoading: payController.isLoaded.value,
           overlayBackgroundColor: background,
-          circularProgressColor: primaryColor,
-          appIcon: appLogo(70, 70),
+          progressColor: primaryColor,
           child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(

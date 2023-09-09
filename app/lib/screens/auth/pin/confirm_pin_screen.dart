@@ -2,13 +2,13 @@
 
 import 'package:app/controllers/confirm_pin_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/widgets/app_logo.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
+
+import '../../../widgets/overlay_indeterminate_progress.dart';
 
 class ConfirmPinScreen extends StatelessWidget {
   final ConfirmPinController controller = Get.put(ConfirmPinController());
@@ -16,11 +16,10 @@ class ConfirmPinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String? chosenPin = Get.arguments;
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: Scaffold(
           appBar: AppBar(
             systemOverlayStyle: const SystemUiOverlayStyle(

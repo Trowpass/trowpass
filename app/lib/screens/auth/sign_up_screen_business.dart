@@ -6,10 +6,9 @@ import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../controllers/sign_up_business_controller.dart';
-import '../../widgets/app_logo.dart';
+import '../../widgets/overlay_indeterminate_progress.dart';
 import '../../widgets/password_strength_bar.dart';
 
 class SignUpScreenBusiness extends StatelessWidget {
@@ -18,11 +17,10 @@ class SignUpScreenBusiness extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
         isLoading: businessController.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
