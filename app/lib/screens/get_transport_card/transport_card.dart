@@ -20,7 +20,7 @@ class GetTransportCard extends StatelessWidget {
           statusBarBrightness: Brightness.light, // For iOS
           statusBarIconBrightness: Brightness.light, // For Android
           systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
         backgroundColor: background,
         elevation: 0,
@@ -50,7 +50,7 @@ class GetTransportCard extends StatelessWidget {
                   height: 25,
                 ),
                 StandardButton(
-                  text: 'Create Virtual Card',
+                  text: 'Create Card',
                   onPressed: () {
                     Get.to(CardTypeScreen());
                   },

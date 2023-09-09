@@ -44,7 +44,7 @@ class _QrScanAreaState extends State<QrScanArea> {
             statusBarBrightness: Brightness.light, // For iOS
             statusBarIconBrightness: Brightness.light, // For Android
             systemNavigationBarColor: navigationBarBackground,
-            systemNavigationBarIconBrightness: Brightness.dark,
+            systemNavigationBarIconBrightness: Brightness.light,
           ),
           child: Scaffold(
             body: Stack(

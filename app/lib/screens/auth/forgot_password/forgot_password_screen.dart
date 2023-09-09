@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../../controllers/forgot_password_controller.dart';
 import '../../../shareds/utils/app_colors.dart';
-import '../../../widgets/app_logo.dart';
 import '../../../widgets/app_styles.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
 import '../../../widgets/standard_button.dart';
 import '../../../widgets/text_form_input.dart';
 
@@ -16,11 +15,10 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
           isLoading: controller.isLoaded.value,
           overlayBackgroundColor: background,
-          circularProgressColor: primaryColor,
-          appIcon: appLogo(70, 70),
+          progressColor: primaryColor,
           child: Scaffold(
             backgroundColor: background,
             appBar: AppBar(
@@ -29,7 +27,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 statusBarBrightness: Brightness.light, // For iOS
                 statusBarIconBrightness: Brightness.light, // For Android
                 systemNavigationBarColor: navigationBarBackground,
-                systemNavigationBarIconBrightness: Brightness.dark,
+                systemNavigationBarIconBrightness: Brightness.light,
               ),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -70,18 +68,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                           isPassword: false,
                           autoCorrect: false,
                           validator: (value) => controller.isEmailValid(value) ? null : validatorMessage,
-                          onTap: () => controller.isFocused.value = true,
-                          onChanged: (_) => controller.isFocused.value = false,
                           onFieldSubmitted: (_) => controller.isFocused.value = false,
                           prefixIcon: const Icon(
                             Icons.email_outlined,
-                            size: 30,
+                            size: 24,
                           ),
                           suffixIcon: IconButton(
                             icon: Icon(
                               Icons.cancel,
                               color: controller.isFocused.value ? primaryColor : null,
-                              size: 30,
+                              size: 24,
                             ),
                             onPressed: () => controller.emailAddressInputController.clear(),
                           ),

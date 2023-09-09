@@ -22,7 +22,7 @@ class AccountTypeScreen extends StatelessWidget {
           statusBarBrightness: Brightness.light, // For iOS
           statusBarIconBrightness: Brightness.light, // For Android
           systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
         backgroundColor: background,
         elevation: 0.0,
@@ -46,7 +46,7 @@ class AccountTypeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             StandardButton(
-              text: 'Ride Manager[Passenger]',
+              text: 'Ride Manager [Passenger]',
               onPressed: () {
                 Get.to(() => SignUpScreenIndividual());
               },
@@ -54,7 +54,7 @@ class AccountTypeScreen extends StatelessWidget {
             const SizedBox(height: 18),
             StandardButtonOutline(
               color: primaryColor,
-              text: 'Fleet Manager[Transporter]',
+              text: 'Fleet Manager [Transporter]',
               onPressed: () {
                 Get.to(() => SignUpScreenBusiness());
               },

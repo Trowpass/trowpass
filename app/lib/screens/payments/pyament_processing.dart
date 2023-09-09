@@ -3,11 +3,10 @@ import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../controllers/bloc/payment_controller.dart';
 import '../../shareds/utils/app_colors.dart';
-import '../../widgets/app_logo.dart';
+import '../../widgets/overlay_indeterminate_progress.dart';
 import '../wallet/top_up_transport_wallet_done.dart';
 
 class PyamentProcessing extends StatefulWidget {
@@ -73,15 +72,14 @@ class _PyamentProcessingState extends State<PyamentProcessing> {
         statusBarBrightness: Brightness.light, // For iOS
         statusBarIconBrightness: Brightness.light, // For Android
         systemNavigationBarColor: navigationBarBackground,
-        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
         backgroundColor: background,
-        body: OverlayLoaderWithAppIcon(
+        body: OverlayIndeterminateProgress(
           isLoading: true,
           overlayBackgroundColor: background,
-          circularProgressColor: primaryColor,
-          appIcon: appLogo(70, 70),
+          progressColor: primaryColor,
           child: Container(),
         ),
       ),

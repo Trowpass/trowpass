@@ -11,8 +11,7 @@ import 'bloc/user_controller.dart';
 
 class AuthController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController emailPhoneNumberController =
-      TextEditingController();
+  final TextEditingController emailPhoneNumberController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final isPassword = false.obs;
   final showPassword = false.obs;
@@ -32,43 +31,47 @@ class AuthController extends GetxController {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
     try {
-      var response = await userController.loginAsync(UserLoginRequest(
+      var response = await userController.loginAsync(
+        UserLoginRequest(
           phoneNumber: emailPhoneNumberController.text.trim(),
-          password: passwordController.text.trim()));
+          password: passwordController.text.trim(),
+        ),
+      );
       if (response.status) {
         session.writeAuthorizationToken(response.data!.token);
         session.writeUserId(response.data!.userId);
+        session.writeIsUserLoggedIn(true);
         Get.offAll(HomeLandingTabScreen());
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {
           Get.defaultDialog(
-              title: 'Login Failed',
-              content: Text(
-                response.message,
-                style: TextStyle(color: Colors.white),
-              ));
+            title: 'Login Failed',
+            content: Text(
+              response.message,
+              style: TextStyle(color: Colors.white),
+            ),
+          );
         } else {
           Get.defaultDialog(
-              title: 'Information',
-              content: Text(
-                response.message,
-                style: TextStyle(color: Colors.white),
-              ));
+            title: 'Information',
+            content: Text(
+              response.message,
+              style: TextStyle(color: Colors.white),
+            ),
+          );
         }
         isLoaded.value = false;
       }
     } catch (e, stackTrace) {
       print('Error: $e');
       print('Stack Trace: $stackTrace');
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
   }
 
   void createAccount() {
-    Get.offAll(const AccountTypeScreen());
+    Get.to(const AccountTypeScreen());
   }
 }

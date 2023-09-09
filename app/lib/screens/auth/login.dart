@@ -4,14 +4,12 @@ import 'package:app/controllers/auth_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
+import 'package:app/widgets/overlay_indeterminate_progress.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
-
-import '../../widgets/app_logo.dart';
 import 'forgot_password/forgot_password_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -20,22 +18,22 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
                 backgroundColor: background,
                 appBar: AppBar(
+                  automaticallyImplyLeading: false,
                   systemOverlayStyle: const SystemUiOverlayStyle(
                     statusBarColor: primaryColor,
                     statusBarBrightness: Brightness.light, // For iOS
                     statusBarIconBrightness: Brightness.light, // For Android
                     systemNavigationBarColor: navigationBarBackground,
-                    systemNavigationBarIconBrightness: Brightness.dark,
+                    systemNavigationBarIconBrightness: Brightness.light,
                   ),
                   backgroundColor: background,
                   elevation: 0.0,
@@ -59,9 +57,10 @@ class LoginScreen extends StatelessWidget {
                                     validatorMessage: 'Please enter a valid phone number',
                                     isPassword: false,
                                     autoCorrect: false,
-                                    prefixIcon: const Icon(
+                                    prefixIcon: Icon(
                                       Icons.phone_android_outlined,
-                                      size: 30,
+                                      size: 24,
+                                      color: controller.isFocused.value ? primaryColor : null,
                                     ),
                                     suffixIcon: IconButton(
                                       icon: Icon(Icons.cancel, color: controller.isFocused.value ? primaryColor : null),
@@ -79,9 +78,10 @@ class LoginScreen extends StatelessWidget {
                                     validatorMessage: 'Please enter a valid password',
                                     isPassword: !controller.isPassword.value,
                                     autoCorrect: false,
-                                    prefixIcon: const Icon(
+                                    prefixIcon: Icon(
                                       Icons.lock,
-                                      size: 30,
+                                      size: 24,
+                                      color: controller.isFocused.value ? primaryColor : null,
                                     ),
                                     suffixIcon: IconButton(
                                       icon: controller.isPassword.value
@@ -92,8 +92,6 @@ class LoginScreen extends StatelessWidget {
                                         controller.isPassword.value = !controller.isPassword.value;
                                       },
                                     ),
-                                    onTap: () => controller.isFocused.value = true,
-                                    onChanged: (_) => controller.isFocused.value = false,
                                     onFieldSubmitted: (_) => controller.isFocused.value = false,
                                   )),
                               const SizedBox(height: 03),
@@ -138,6 +136,11 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: Text(
                             'Sign Up',
+                            style: appStyles(
+                              14,
+                              primaryColor,
+                              FontWeight.w600,
+                            ),
                           ))
                     ]),
                   ),

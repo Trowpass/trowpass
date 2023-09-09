@@ -17,7 +17,7 @@
 
 //   @override
 //   Widget build(BuildContext context) {
-//     return Obx(() => OverlayLoaderWithAppIcon(
+//     return Obx(() => OverlayIndeterminateProgress(
 //         isLoading: controller.isLoaded.value,
 //         overlayBackgroundColor: background,
 //         circularProgressColor: primaryColor,
@@ -32,7 +32,7 @@
 //                   statusBarBrightness: Brightness.light, // For iOS
 //                   statusBarIconBrightness: Brightness.light, // For Android
 //                   systemNavigationBarColor: navigationBarBackground,
-//                   systemNavigationBarIconBrightness: Brightness.dark,
+//                   systemNavigationBarIconBrightness: Brightness.light,
 //                 ),
 //                 title: const Text('KYC Registration'),
 //                 centerTitle: true,

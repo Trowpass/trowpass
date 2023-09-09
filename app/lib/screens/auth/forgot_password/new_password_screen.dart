@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../../controllers/new_password_controller.dart';
 import '../../../shareds/utils/app_colors.dart';
-import '../../../widgets/app_logo.dart';
 import '../../../widgets/app_styles.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
+import '../../../widgets/password_strength_bar.dart';
 import '../../../widgets/standard_button.dart';
 import '../../../widgets/text_form_input.dart';
 
@@ -20,11 +20,10 @@ class NewPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => OverlayLoaderWithAppIcon(
+      () => OverlayIndeterminateProgress(
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: GestureDetector(
           onTap: () => Get.focusScope!.unfocus(),
           child: Scaffold(
@@ -37,7 +36,7 @@ class NewPasswordScreen extends StatelessWidget {
                 statusBarBrightness: Brightness.light, // For iOS
                 statusBarIconBrightness: Brightness.light, // For Android
                 systemNavigationBarColor: navigationBarBackground,
-                systemNavigationBarIconBrightness: Brightness.dark,
+                systemNavigationBarIconBrightness: Brightness.light,
               ),
             ),
             body: Padding(
@@ -69,24 +68,27 @@ class NewPasswordScreen extends StatelessWidget {
                               textLabel: 'New Password',
                               textHint: 'New Password',
                               validatorMessage: validatorMessage,
-                              isPassword: controller.isPassword1Hidden.value,
+                              isPassword: controller.isPasswordHidden.value,
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.lock,
-                                size: 30,
+                                size: 24,
                               ),
                               validator: (value) => value != null && value.isEmpty ? validatorMessage : null,
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  controller.isPassword1Hidden.value ? Icons.visibility_off : Icons.visibility,
+                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
                                   color: controller.isFocused.value ? primaryColor : null,
-                                  size: 30,
+                                  size: 24,
                                 ),
-                                onPressed: () => controller.isPassword1Hidden.value = !controller.isPassword1Hidden.value,
+                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
                               ),
                             );
                           }),
-                          const SizedBox(height: 13),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            child: Obx(() => PasswordStrengthBar(strength: controller.strength.value)),
+                          ),
                           Obx(() {
                             const validatorMessage = 'Password does not match';
                             return TextInputForm(
@@ -96,22 +98,19 @@ class NewPasswordScreen extends StatelessWidget {
                               textHint: 'Confirm New Password',
                               validatorMessage: validatorMessage,
                               validator: (value) => (value != controller.passwordController.text) ? validatorMessage : null,
-                              isPassword: controller.isPassword2Hidden.value,
+                              isPassword: controller.isPasswordHidden.value,
                               autoCorrect: false,
-                              onTap: () => controller.is2Focused.value = true,
-                              onChanged: (_) => controller.is2Focused.value = false,
-                              onFieldSubmitted: (_) => controller.is2Focused.value = false,
+                              onFieldSubmitted: (_) => controller.isFocused.value = false,
                               prefixIcon: const Icon(
                                 Icons.lock,
-                                size: 30,
+                                size: 24,
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  controller.isPassword2Hidden.value ? Icons.visibility_off : Icons.visibility,
-                                  color: controller.isFocused.value ? primaryColor : null,
-                                  size: 30,
+                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                  size: 24,
                                 ),
-                                onPressed: () => controller.isPassword2Hidden.value = !controller.isPassword2Hidden.value,
+                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
                               ),
                             );
                           })

@@ -4,12 +4,11 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../../controllers/wallet_top_up_controller.dart';
 import '../../../shareds/utils/app_colors.dart';
-import '../../../widgets/app_logo.dart';
 import '../../../widgets/currency_format.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
 import '../../../widgets/standard_button.dart';
 
 class WalletTopUpScreen extends StatelessWidget {
@@ -18,11 +17,10 @@ class WalletTopUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: GestureDetector(
           onTap: () => Get.focusScope!.unfocus(),
           child: Scaffold(
@@ -33,7 +31,7 @@ class WalletTopUpScreen extends StatelessWidget {
             statusBarBrightness: Brightness.light, // For iOS
             statusBarIconBrightness: Brightness.light, // For Android
             systemNavigationBarColor: navigationBarBackground,
-            systemNavigationBarIconBrightness: Brightness.dark,
+            systemNavigationBarIconBrightness: Brightness.light,
           ),
                 elevation: 0.0,
                 backgroundColor: background,

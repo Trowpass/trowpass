@@ -9,19 +9,14 @@ import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
 import '../auth/edit_profile.dart';
-import '../auth/login.dart';
 import '../auth/pin/change_pin.dart';
 
 class UserProfileScreen extends StatelessWidget {
   UserProfileScreen({super.key});
-  final contoller = Get.put(UserProfileController());
+  final controller = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark,
-    ));
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
@@ -30,14 +25,14 @@ class UserProfileScreen extends StatelessWidget {
           statusBarBrightness: Brightness.light, // For iOS
           statusBarIconBrightness: Brightness.light, // For Android
           systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.light,
         ),
         leading: null,
         automaticallyImplyLeading: false,
         elevation: 0,
         backgroundColor: background,
         title: Text(
-          contoller.title.value,
+          controller.title.value,
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
@@ -73,7 +68,7 @@ class UserProfileScreen extends StatelessWidget {
                     ),
                   ],
                 )),
-            Text(contoller.fullName.value, style: appStyles(18, null, FontWeight.bold)),
+            Text(controller.fullName.value, style: appStyles(18, null, FontWeight.bold)),
             Text(
               'Rider',
               style: appStyles(18, null, FontWeight.w300),
@@ -86,9 +81,9 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.person_2,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
                   title: Text('Edit Profile', style: appStyles(18, null, FontWeight.w500)),
                 ),
@@ -102,9 +97,9 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.lock,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
                   title: Text('Change PIN', style: appStyles(18, null, FontWeight.w500)),
                 ),
@@ -118,9 +113,9 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.work_history_rounded,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
                   title: Text('History', style: appStyles(18, null, FontWeight.w500)),
                 ),
@@ -134,9 +129,9 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.error,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
                   title: Text('KYC Registration', style: appStyles(18, null, FontWeight.w500)),
                 ),
@@ -150,9 +145,9 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.qr_code_2_rounded,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
                   title: Text('QR Code', style: appStyles(18, null, FontWeight.w500)),
                 ),
@@ -161,14 +156,14 @@ class UserProfileScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.zero,
               child: GestureDetector(
-                onTap: () => Get.offAll(LoginScreen()),
+                onTap: () => controller.logout(),
                 child: ListTile(
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.logout_rounded,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
                   title: Text('Logout', style: appStyles(18, null, FontWeight.w500)),
                 ),

@@ -1,4 +1,3 @@
-import 'package:app/screens/auth/login.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -77,7 +76,7 @@ class OnBoardingScreen extends StatelessWidget {
                     offset: 8,
                     dotWidth: 16,
                     dotHeight: 8,
-                    dotColor: scrollIndicatorColor,
+                    dotColor: greyLight,
                     activeDotColor: primaryColor,
                   ),
                 )),
@@ -87,7 +86,7 @@ class OnBoardingScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.small(
         backgroundColor: primaryColor,
         child: const Icon(Icons.arrow_forward),
-        onPressed: () => Get.offAll(LoginScreen()),
+        onPressed: () => controller.navigateToMain(),
       ),
     );
   }
