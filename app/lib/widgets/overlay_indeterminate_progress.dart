@@ -28,7 +28,7 @@ class OverlayIndeterminateProgress extends StatelessWidget {
         Visibility(
           visible: isLoading,
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+            filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0),
             child: Opacity(
               opacity: 0.3,
               child: ModalBarrier(
