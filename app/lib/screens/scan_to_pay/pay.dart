@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 import 'package:app/controllers/scan_to_pay_controllers/pay_screen_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
+import 'package:app/widgets/overlay_indeterminate_progress.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:app/widgets/text_label.dart';
@@ -16,10 +17,12 @@ class PayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   final PayController payController = Get.put(PayController());
+    final PayController payController = Get.put(PayController());
+    payController.clearTextFields();
     String? name;
     String? bank;
     String? accountNumber;
+    String? phoneNumber;
 
     if (scannedData != null) {
       final lines = scannedData!.split('\n');
@@ -27,60 +30,66 @@ class PayScreen extends StatelessWidget {
         name = lines[0];
         bank = lines[1];
         accountNumber = lines[2];
+        phoneNumber = lines[3];
       }
     }
 
     payController.nameController.text = name ?? '';
     payController.bankController.text = bank ?? '';
     payController.accountNumberController.text = accountNumber ?? '';
+    payController.phoneNumberController.text = phoneNumber ?? '';
 
-    return GestureDetector(
-      onTap: () => Get.focusScope!.unfocus(),
-      child: Scaffold(
-        backgroundColor: background,
-        appBar: AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(
-            statusBarColor: primaryColor,
-            statusBarBrightness: Brightness.light, // For iOS
-            statusBarIconBrightness: Brightness.light, // For Android
-            systemNavigationBarColor: navigationBarBackground,
-            systemNavigationBarIconBrightness: Brightness.light,
-          ),
-          backgroundColor: background,
-          elevation: 0.0,
-          title: Text(
-            "Pay",
-            style: appStyles(18, titleActive, FontWeight.w600),
-          ),
-          centerTitle: true,
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.notifications, color: Colors.black),
-              onPressed: () {
-                Get.back();
-              },
-            )
-          ],
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-                const SizedBox(height: 12),
-                PayForm(payController: payController),
+    return Obx(() => OverlayIndeterminateProgress(
+        isLoading: payController.isLoaded.value,
+        overlayBackgroundColor: background,
+        progressColor: primaryColor,
+        child: GestureDetector(
+          onTap: () => Get.focusScope!.unfocus(),
+          child: Scaffold(
+            backgroundColor: background,
+            appBar: AppBar(
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                statusBarColor: primaryColor,
+                statusBarBrightness: Brightness.light, // For iOS
+                statusBarIconBrightness: Brightness.light, // For Android
+                systemNavigationBarColor: navigationBarBackground,
+                systemNavigationBarIconBrightness: Brightness.light,
+              ),
+              backgroundColor: background,
+              elevation: 0.0,
+              title: Text(
+                "Pay",
+                style: appStyles(18, titleActive, FontWeight.w600),
+              ),
+              centerTitle: true,
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.notifications, color: Colors.black),
+                  onPressed: () {
+                    Get.back();
+                  },
+                )
               ],
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back, color: Colors.black),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 12),
+                    PayForm(payController: payController),
+                  ],
+                ),
+              ),
             ),
           ),
-        ),
-      ),
-    );
+        )));
   }
 }
 
@@ -99,7 +108,7 @@ class PayForm extends StatelessWidget {
             const SizedBox(height: 10),
             TextInputForm(
               enabled: false,
-              inputController: payController.accountNumberController,
+              inputController: payController.phoneNumberController,
               // textLabel: '08134678957462',
               // textHint: '08134678957462',
               isPassword: false,
@@ -125,13 +134,11 @@ class PayForm extends StatelessWidget {
               // textLabel: 'Amount',
               textHint: 'N1200',
               validatorMessage: 'Please enter an amount',
-              isPassword: true,
+              isPassword: false,
               autoCorrect: false,
             ),
             const SizedBox(height: 10),
-            LabelText(textLabel: "PIN"),
-            const SizedBox(height: 16),
-             LabelText(textLabel: "Narration"),
+            LabelText(textLabel: "Narration"),
             const SizedBox(height: 16),
             TextInputForm(
               enabled: true,
@@ -143,6 +150,8 @@ class PayForm extends StatelessWidget {
               validatorMessage: 'Please enter a narration',
             ),
             const SizedBox(height: 10),
+            LabelText(textLabel: "PIN"),
+            const SizedBox(height: 16),
             TextInputForm(
                 enabled: true,
                 inputController: payController.pinController,
@@ -156,7 +165,7 @@ class PayForm extends StatelessWidget {
               text: 'Continue to Pay',
               onPressed: () {
                 if (payController.formKey.currentState!.validate()) {
-                  payController.trySubmit();
+                  payController.scanToPay();
                 }
               },
             ),

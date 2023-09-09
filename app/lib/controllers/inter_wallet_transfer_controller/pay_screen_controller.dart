@@ -120,4 +120,6 @@ class PayController extends GetxController {
       isLoaded.value = false;
     }
   }
+
+
 }

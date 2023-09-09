@@ -106,8 +106,9 @@ Widget _buildMyCodeTab() {
   String fullName = controller.fullName.value;
   String bankName = controller.bankName.value;
   String accountNumber = controller.accountNumber.value;
+  String phoneNumber = controller.phoneNumber.value;
 
-  UserData userdata = UserData(fullName, bankName, accountNumber);
+  UserData userdata = UserData(fullName, bankName, accountNumber, phoneNumber);
 
   return Center(
       child: Column(
@@ -156,7 +157,7 @@ Widget _buildMyCodeTab() {
                 // )
                 QrImageView(
                   data:
-                      "${userdata.fullName}\n${userdata.bankName}\n${userdata.accountNumber}",
+                      "${userdata.fullName}\n${userdata.bankName}\n${userdata.accountNumber}\n${userdata.phoneNumber}",
                   version: QrVersions.auto,
                   size: 250.0, // Adjust the size as needed
                   foregroundColor: Colors.black,

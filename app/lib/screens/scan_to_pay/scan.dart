@@ -63,7 +63,7 @@ class _QrScanAreaState extends State<QrScanArea> {
 
   Widget buildResult() => Text(
         result != null ? 'Result : ${result!.code}' : 'scan the code',
-        maxLines: 3,
+        maxLines: 5,
       );
 
   Widget buildQrView(BuildContext context) => QRView(
