@@ -106,7 +106,7 @@ class PayForm extends StatelessWidget {
             TextInputForm(
               enabled: false,
               inputController: payController.fullNameController,
-              initialValue: payController.fullNameController.text,
+              // initialValue: payController.fullNameController.text,
               // textLabel: 'Receipient Name',
               textHint: 'Recipient Name',
               isPassword: false,

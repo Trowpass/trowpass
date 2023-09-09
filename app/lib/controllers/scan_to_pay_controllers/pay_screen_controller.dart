@@ -1,11 +1,12 @@
-// ignore_for_file: prefer_const_constructors
+// PayController.dart
+
+// ignore_for_file: unused_local_variable
 
 import 'package:app/controllers/bloc/inter_wallet_transfer_controller.dart';
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/controllers/dashboard_conroller.dart';
-import 'package:app/screens/Inter_wallet_pay/receipt.dart';
+import 'package:app/screens/scan_to_pay/receipt.dart';
 import 'package:app/services/requests/post_requests/inter_wallet_transfer_request.dart';
-import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/responses/inter_wallet_transfer_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -14,29 +15,27 @@ import 'package:get/get.dart';
 
 class PayController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController narrationController = TextEditingController();
-  final TextEditingController amountController = TextEditingController();
-  final TextEditingController pinController = TextEditingController();
+
+  final nameController = TextEditingController();
+  final bankController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final accountNumberController = TextEditingController();
+  final amountController = TextEditingController();
+  final pinController = TextEditingController();
+  final narrationController = TextEditingController();
+
 
   final isLoaded = false.obs;
 
   @override
   void onInit() {
     isLoaded.value = false;
-    // Add a listener to phoneNumberController
-    phoneNumberController.addListener(() {
-      if (phoneNumberController.text.trim().length == 11) {
-        fetchUserDataByPhoneNumber();
-      }
-    });
     super.onInit();
   }
 
   void clearTextFields() {
     phoneNumberController.clear();
-    fullNameController.clear();
+    nameController.clear();
     amountController.clear();
     narrationController.clear();
     pinController.clear();
@@ -46,34 +45,7 @@ class PayController extends GetxController {
   InterwalletController interwalletController = InterwalletController();
   UserController userController = UserController();
 
-  // Get user by phone number
-  void fetchUserDataByPhoneNumber() async {
-    if (phoneNumberController.text.trim().length == 11) {
-      isLoaded.value = true;
-      try {
-        var phoneNumber = phoneNumberController.text.trim();
-        var response = await userController
-            .userByPhoneAsync(UserByPhoneRequest(phoneNumber: phoneNumber));
-
-        if (response.status) {
-          String fullName =
-              "${response.data!.firstName} ${response.data!.lastName}";
-          fullNameController.text = fullName;
-        } else {
-          Get.defaultDialog(
-              title: 'Information', content: Text(response.message));
-        }
-        isLoaded.value = false;
-      } catch (e) {
-        Get.snackbar('Information', e.toString(),
-            backgroundColor: validationErrorColor,
-            snackPosition: SnackPosition.BOTTOM);
-        isLoaded.value = false;
-      }
-    }
-  }
-
-  Future<void> interWalletPay() async {
+  Future<void> scanToPay() async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
     try {
@@ -96,7 +68,7 @@ class PayController extends GetxController {
           data: transactionDetails,
         );
         Get.find<DashboardController>().userWallet();
-        Get.offAll(InterWalletTransferReceiptScreen(
+        Get.offAll(ScanToPayReceiptScreen(
           transactionDetails: parsedResponse,
         ));
       } else {
@@ -122,4 +94,8 @@ class PayController extends GetxController {
   }
 
 
+
+  // void trySubmit() {
+  //   Get.focusScope!.unfocus();
+  // }
 }
