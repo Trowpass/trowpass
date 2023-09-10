@@ -55,7 +55,7 @@ dependencies:
   timer_count_down: ^2.2.2
   flutter_native_splash: ^2.3.2
   smooth_page_indicator: ^1.1.0
-  
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -171,7 +171,7 @@ flutter_native_splash:
     # 640 pixels in diameter.
     # App icon without an icon background: This should be 1152×1152 pixels, and fit within a circle
     # 768 pixels in diameter.
-    image: assets/images/main_launch.png
+    # image: assets/images/main_launch.png
 
     # Splash screen background color.
     #color: "#42a5f5"
@@ -193,7 +193,7 @@ flutter_native_splash:
   # platform.
   #android: false
   #ios: false
-  #web: false
+  web: false
 
   # Platform specific images can be specified with the following parameters, which will override
   # the respective parameter.  You may specify all, selected, or none of these parameters:

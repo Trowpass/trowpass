@@ -1,10 +1,11 @@
 import 'package:app/services/requests/post_requests/credit_wallet_request.dart';
 import 'package:app/widgets/app_logo.dart';
+import 'package:app/widgets/fund_options_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:get/get.dart';
 
-import '../screens/payments/pyament_processing.dart';
+import '../screens/payments/payment_processing.dart';
 import '../screens/wallet/topup/wallet_top_up_payment_options.dart';
 import '../shareds/constants/key_constants.dart';
 import '../shareds/managers/get_session_manager.dart';
@@ -15,7 +16,7 @@ class WalletTopUpController extends GetxController {
   final accountBalance = 0.obs;
   final cardDetails = ''.obs;
   final customerName = ''.obs;
-  final generateAsteriks = ''.obs;
+  final generateAsterisk = ''.obs;
   final paymentReference = ''.obs;
   final paymentEmail = ''.obs;
   final paymentCurrency = ''.obs;
@@ -33,30 +34,26 @@ class WalletTopUpController extends GetxController {
   void onInit() {
     isLoaded.value = false;
     cardDetails.value = '**** **** **** 123401/24';
-    customerName.value = session.readRiderFullName() != null
-        ? session.readRiderFullName()!.toUpperCase()
-        : '';
+    customerName.value = session.readRiderFullName() != null ? session.readRiderFullName()!.toUpperCase() : '';
     accountBalance.value = 0;
     plugin.initialize(publicKey: paystackPublicKey);
     super.onInit();
   }
 
-  checkout(BuildContext context) async {
+  void checkoutPaystack(BuildContext context) async {
     Get.focusScope!.unfocus();
     isLoaded.value = true;
     int price = int.parse(topUpAmountController.text) * 100;
     paymentReference.value = 'ref_${DateTime.now().millisecondsSinceEpoch}';
-    paymentEmail.value = session.readRiderEmail() != null
-        ? session.readRiderEmail()!
-        : 'none@gmail.com';
+    paymentEmail.value = session.readRiderEmail() != null ? session.readRiderEmail()! : 'none@gmail.com';
     paymentCurrency.value = 'NGN';
     Charge charge = Charge()
       ..amount = price
       ..reference = paymentReference.value
       ..email = paymentEmail.value
       ..currency = paymentCurrency.value;
-    CheckoutResponse response = await plugin.checkout(context,
-        method: CheckoutMethod.card, charge: charge, logo: trowpassLogo());
+    CheckoutResponse response =
+        await plugin.checkout(context, method: CheckoutMethod.card, charge: charge, logo: trowpassLogo());
     if (response.status == true) {
       Get.focusScope!.unfocus();
       //call our service
@@ -66,7 +63,7 @@ class WalletTopUpController extends GetxController {
           paymentMethod: 'card',
           email: paymentEmail.value,
           currency: paymentCurrency.value));
-      Get.offAll(() => PyamentProcessing(
+      Get.offAll(() => PaymentProcessing(
             reference: response.reference!,
             companyName: 'Trowpass',
             recipientName: session.readRiderFullName()!,
@@ -93,8 +90,7 @@ class WalletTopUpController extends GetxController {
 
   String hideAccountBalance() {
     int balanceLen = accountBalance.value.toString().length;
-    return generateAsteriks.value =
-        List.generate(balanceLen, (index) => '*').join();
+    return generateAsterisk.value = List.generate(balanceLen, (index) => '*').join();
   }
 
   final pageIndex = 0.obs;
@@ -111,6 +107,15 @@ class WalletTopUpController extends GetxController {
       alignment: Alignment.center,
       padding: const EdgeInsets.all(5),
       child: activityLogo(70, 70),
+    );
+  }
+
+  void proceedFundWallet(BuildContext context) {
+    showFundOptionsBottomSheet(
+      context,
+      bankName: 'Access Bank',
+      accountNumber: '0092873385',
+      onOtherOptionsTap: () {},
     );
   }
 }
