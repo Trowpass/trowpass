@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialRoute: getInitialPage(),
-      initialRoute: AppRoutes.test,
+      initialRoute: getInitialPage(),
+      // initialRoute: AppRoutes.test,
       getPages: AppPages.list,
       title: 'Trowpass',
     );

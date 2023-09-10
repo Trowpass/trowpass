@@ -1,4 +1,3 @@
-import 'package:app/shareds/utils/border_radius.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ import '../../../shareds/utils/app_colors.dart';
 import '../../../widgets/currency_format.dart';
 import '../../../widgets/overlay_indeterminate_progress.dart';
 import '../../../widgets/standard_button.dart';
+import '../../../widgets/text_form_input.dart';
 
 class WalletTopUpScreen extends StatelessWidget {
   WalletTopUpScreen({super.key});
@@ -56,7 +56,7 @@ class WalletTopUpScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        padding: const EdgeInsets.only(bottom: 20),
                         child: Column(children: [
                           Container(
                             height: 200,
@@ -139,35 +139,24 @@ class WalletTopUpScreen extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: const Text('Amount'),
-                              subtitle: Form(
-                                key: controller.formKey,
-                                child: TextFormField(
-                                  keyboardType: TextInputType.number,
-                                  controller: controller.topUpAmountController,
-                                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                                  decoration: InputDecoration(
-                                    hintText: '0.0',
-                                    focusedBorder: const OutlineInputBorder(
-                                      borderSide: BorderSide(color: grayscale),
-                                    ),
-                                    enabledBorder: const OutlineInputBorder(
-                                      borderSide: BorderSide(color: grayscale),
-                                    ),
-                                    prefixIcon: const Icon(Icons.payments_outlined),
-                                    suffixIcon: IconButton(
-                                      onPressed: () {
-                                        controller.shouldEntryAmountBeCleared.value = true;
-                                        controller.clearTopUpAmount();
-                                      },
-                                      icon: const Icon(Icons.close),
-                                    ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(defaultBorderRadius),
-                                    ),
-                                  ),
+                            child: Form(
+                              key: controller.formKey,
+                              child: TextInputForm(
+                                enabled: true,
+                                isPassword: false,
+                                inputController: controller.topUpAmountController,
+                                textLabel: 'Enter amount',
+                                textHint: 'Enter amount',
+                                autoCorrect: false,
+                                prefixIcon: const Icon(Icons.payments_outlined),
+                                validator: (value) => value != null && value.isEmpty ? 'Field can\'t be empty' : null,
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    controller.showAccountBalance.value = !controller.showAccountBalance.value;
+                                  },
+                                  icon: Obx(() => controller.showAccountBalance.isFalse
+                                      ? const Icon(Icons.visibility_off_rounded)
+                                      : const Icon(Icons.visibility_rounded)),
                                 ),
                               ),
                             ),
@@ -190,7 +179,7 @@ class WalletTopUpScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
+            ), // here
           ),
         ));
   }
