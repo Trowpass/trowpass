@@ -92,7 +92,7 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.symmetric(vertical: 1),
                                   child: Text(
-                                      '${currencyFormat(context).currencySymbol}${formatCurrency(transactionDetails.data?.amount ?? 0)}',
+                                      '${currencyFormat.currencySymbol}${formatCurrency(transactionDetails.data?.amount ?? 0)}',
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16)),
