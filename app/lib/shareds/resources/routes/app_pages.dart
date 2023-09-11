@@ -1,6 +1,5 @@
 import 'package:app/screens/auth/login.dart';
 import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
-import 'package:app/widgets/widget_test.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/bindings/dashboard_tab_binding.dart';
@@ -21,10 +20,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-    ),
-    GetPage(
-      name: AppRoutes.test,
-      page: () => WidgetTest(),
-    ),
+    )
   ];
 }
