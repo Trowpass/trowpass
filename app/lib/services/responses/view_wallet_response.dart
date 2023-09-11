@@ -25,6 +25,7 @@ class WalletData {
   String name;
   String accountNumber;
   String bankName;
+  String phoneNumber;
   double balance;
   bool isActive;
   String serviceWalletId;
@@ -35,6 +36,7 @@ class WalletData {
     required this.name,
     required this.accountNumber,
     required this.bankName,
+    required this.phoneNumber,
     required this.balance,
     required this.isActive,
     required this.serviceWalletId,
@@ -46,6 +48,7 @@ class WalletData {
         name: json['name'] ?? '',
         accountNumber: json['accountNumber'] ?? '',
         bankName: json['bankName'] ?? '',
+        phoneNumber: json['phoneNumber'] ?? '',
         balance: (json['balance'] ?? 0.0).toDouble(),
         isActive: json['isActive'],
         serviceWalletId: json['serviceWalletId'],

@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: getInitialPage(),
+      // initialRoute: AppRoutes.test,
       getPages: AppPages.list,
       title: 'Trowpass',
     );

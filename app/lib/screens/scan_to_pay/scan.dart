@@ -1,9 +1,12 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, unnecessary_null_comparison
 
 import 'dart:io';
 
+import 'package:app/controllers/scan_to_pay_controllers/scan_controller.dart';
+import 'package:app/screens/scan_to_pay/scan_qr_pay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 import '../../shareds/utils/app_colors.dart';
@@ -15,8 +18,9 @@ class QrScanArea extends StatefulWidget {
 
 class _QrScanAreaState extends State<QrScanArea> {
   final qrKey = GlobalKey(debugLabel: 'QR');
-
+  Barcode? result;
   QRViewController? controller;
+  final qrScanController = Get.put(QrScanController());
 
   @override
   void dispose() {
@@ -48,10 +52,19 @@ class _QrScanAreaState extends State<QrScanArea> {
               alignment: Alignment.center,
               children: [
                 buildQrView(context),
+                Positioned(
+                  bottom: 10,
+                  child: buildResult(),
+                )
               ],
             ),
           ),
         ),
+      );
+
+  Widget buildResult() => Text(
+        result != null ? 'Result : ${result!.code}' : 'scan the code',
+        maxLines: 5,
       );
 
   Widget buildQrView(BuildContext context) => QRView(
@@ -68,5 +81,16 @@ class _QrScanAreaState extends State<QrScanArea> {
 
   void onQRViewCreated(QRViewController controller) {
     setState(() => this.controller = controller);
+
+    controller.scannedDataStream.listen((result) {
+      setState(() {
+        this.result = result;
+        qrScanController
+            .setResult(result); // Update the result in the controller
+        if (result != null) {
+          Get.to(() => ScanQrPayScreen(result.code));
+        }
+      });
+    });
   }
 }

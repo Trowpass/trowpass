@@ -24,9 +24,7 @@ class DashboardScreen extends StatelessWidget {
     return Obx(() => !controller.isLoaded.value
         ? overlayLoader(!controller.isLoaded.value)
         : RefreshIndicator(
-            onRefresh: () async {
-              await controller.userWallet();
-            },
+            onRefresh: () async => await controller.userWallet(),
             child: AnnotatedRegion<SystemUiOverlayStyle>(
               value: const SystemUiOverlayStyle(
                 statusBarColor: primaryColor,
@@ -101,7 +99,7 @@ class DashboardScreen extends StatelessWidget {
                                                   children: [
                                                     Obx(() => Text(
                                                           controller.showBalance.value
-                                                              ? '${currencyFormat(context).currencySymbol}${controller.balance.value}'
+                                                              ? '${currencyFormat.currencySymbol}${controller.balance.value}'
                                                               : '*******',
                                                           style: const TextStyle(
                                                             color: Colors.white,

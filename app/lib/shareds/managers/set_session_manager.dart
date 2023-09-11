@@ -34,7 +34,15 @@ class SetSessionManager {
     storage.write(userOnBoarded, onBoarded);
   }
 
-  writeIsUserLoggedIn(bool loggedIn) {
+  void writeIsUserLoggedIn(bool loggedIn) {
     storage.write(userLoggedIn, loggedIn);
+  }
+
+  void writeUserAccountNumber(String value) {
+    storage.write(userAccountNumber, value);
+  }
+
+  void writeUserBankName(String value) {
+    storage.write(userBankName, value);
   }
 }

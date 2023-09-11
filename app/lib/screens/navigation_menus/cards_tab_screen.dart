@@ -10,7 +10,8 @@ import '../../widgets/standard_button.dart';
 import '../get_transport_card/card_type.dart';
 
 class CardsTabScreen extends GetView<CardsTabController> {
-  const CardsTabScreen({super.key});
+  CardsTabScreen({super.key});
+  final controller = Get.put(CardsTabController());
 
   @override
   Widget build(BuildContext context) {

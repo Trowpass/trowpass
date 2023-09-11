@@ -9,19 +9,19 @@ import '../../shareds/utils/app_colors.dart';
 import '../../widgets/overlay_indeterminate_progress.dart';
 import '../wallet/top_up_transport_wallet_done.dart';
 
-class PyamentProcessing extends StatefulWidget {
+class PaymentProcessing extends StatefulWidget {
   final String reference;
   final String companyName;
   final String recipientName;
   final double amount;
-  const PyamentProcessing(
+  const PaymentProcessing(
       {super.key, required this.reference, required this.companyName, required this.recipientName, required this.amount});
 
   @override
-  State<PyamentProcessing> createState() => _PyamentProcessingState();
+  State<PaymentProcessing> createState() => _PaymentProcessingState();
 }
 
-class _PyamentProcessingState extends State<PyamentProcessing> {
+class _PaymentProcessingState extends State<PaymentProcessing> {
   PaymentController paymentController = PaymentController();
   GetSessionManager session = GetSessionManager();
 

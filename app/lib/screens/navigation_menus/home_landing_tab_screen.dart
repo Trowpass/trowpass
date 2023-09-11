@@ -21,7 +21,7 @@ class HomeLandingTabScreen extends StatelessWidget {
                 children: [
                   const HomeTabScreen(),
                   const HistoryTabScreen(),
-                  const CardsTabScreen(),
+                  CardsTabScreen(),
                   UserProfileScreen(),
                 ],
               )),

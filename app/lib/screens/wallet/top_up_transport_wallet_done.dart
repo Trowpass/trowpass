@@ -103,7 +103,7 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 1),
                               child: Text(
-                                  '${currencyFormat(context).currencySymbol}${formatCurrency(controller.transactionAmount.value)}',
+                                  '${currencyFormat.currencySymbol}${formatCurrency(controller.transactionAmount.value)}',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
