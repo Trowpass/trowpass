@@ -43,7 +43,8 @@ class DashboardController extends GetxController {
   Future userProfile() async {
     var response = await userController.userProfileAsync();
     if (response.status) {
-      var fullName2 = '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
+      var fullName2 =
+          '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
       session2.writeUserFullName(fullName2);
       fullName.value = fullName2;
     }
@@ -63,10 +64,6 @@ class DashboardController extends GetxController {
   }
 
   Future<dynamic> displayPlaceholderDialog(String pageTitle) {
-    return showAppDialog(
-      title: pageTitle,
-      subtitle: 'We have you in mind. In the main time, explore the available features. Thank you.',
-      type: DialogType.warning,
-    );
+    return placeholderDialog(pageTitle);
   }
 }

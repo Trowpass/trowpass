@@ -7,12 +7,13 @@ import 'package:get/get.dart';
 import '../screens/payments/payment_processing.dart';
 import '../services/requests/post_requests/credit_wallet_request.dart';
 import '../shareds/constants/key_constants.dart';
+import '../widgets/app_dialog.dart';
 import '../widgets/app_logo.dart';
 
 class PaymentMethodController extends GetxController {
   late Map<String, dynamic> args;
   late String amount;
-  final paymentOption = 'Pay with bank'.obs;
+  final paymentOption = 'Pay with card'.obs;
   final payWithCard = 'Pay with card'.obs;
   final payWithBank = 'Pay with bank'.obs;
 
@@ -38,7 +39,7 @@ class PaymentMethodController extends GetxController {
     if (paymentOption.value == payWithCard.value) {
       checkoutPaystack(context);
     } else {
-      Get.back();
+      placeHolderDialog(paymentOption.value);
     }
   }
 
@@ -47,7 +48,9 @@ class PaymentMethodController extends GetxController {
     isLoaded.value = true;
     int price = int.parse(amount) * 100;
     paymentReference.value = 'ref_${DateTime.now().millisecondsSinceEpoch}';
-    paymentEmail.value = session.readRiderEmail() != null ? session.readRiderEmail()! : 'none@gmail.com';
+    paymentEmail.value = session.readRiderEmail() != null
+        ? session.readRiderEmail()!
+        : 'none@gmail.com';
     paymentCurrency.value = 'NGN';
     Charge charge = Charge()
       ..amount = price

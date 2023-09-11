@@ -41,7 +41,8 @@ class PaymentMethodScreen extends StatelessWidget {
                             title: Text(
                               'Select Payment Method',
                               textAlign: TextAlign.center,
-                              style: appStyles(16, titleActive, FontWeight.bold),
+                              style:
+                                  appStyles(16, titleActive, FontWeight.bold),
                             ),
                           ),
                           Positioned(
@@ -56,10 +57,12 @@ class PaymentMethodScreen extends StatelessWidget {
                         ],
                       ),
                       //   const SizedBox(height: 8),
-                      Text('You pay', style: appStyles(14, null, FontWeight.w400)),
+                      Text('You pay',
+                          style: appStyles(14, null, FontWeight.w400)),
                       const SizedBox(height: 16),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 16),
                         decoration: BoxDecoration(
                           color: primaryColor.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(200),
@@ -70,9 +73,9 @@ class PaymentMethodScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      _buildRadio(value: controller.payWithBank.value),
-                      const SizedBox(height: 16),
                       _buildRadio(value: controller.payWithCard.value),
+                      const SizedBox(height: 16),
+                      _buildRadio(value: controller.payWithBank.value),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomCenter,
@@ -125,7 +128,9 @@ class PaymentMethodScreen extends StatelessWidget {
                   ),
                 ),
                 child: Icon(
-                  value == controller.payWithCard.value ? Icons.payment : Icons.account_balance,
+                  value == controller.payWithCard.value
+                      ? Icons.payment
+                      : Icons.account_balance,
                   color: primaryColor.withAlpha(150),
                 ),
               ),

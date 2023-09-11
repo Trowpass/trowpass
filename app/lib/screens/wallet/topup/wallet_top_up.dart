@@ -35,12 +35,15 @@ class WalletTopUpScreen extends StatelessWidget {
                 ),
                 elevation: 0.0,
                 backgroundColor: background,
-                title: Text('Topup your wallet', style: appStyles(18, titleActive, FontWeight.w600)),
+                title: Text('Topup your wallet',
+                    style: appStyles(18, titleActive, FontWeight.w600)),
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined, color: Colors.black),
+                    icon: const Icon(Icons.notifications_outlined,
+                        color: Colors.black),
                     onPressed: () {
+                      controller.topUpAmountController.text = '';
                       Get.back();
                     },
                   )
@@ -68,7 +71,8 @@ class WalletTopUpScreen extends StatelessWidget {
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 15),
                               child: Column(
                                 children: [
                                   Row(
@@ -77,14 +81,16 @@ class WalletTopUpScreen extends StatelessWidget {
                                         flex: 5,
                                         child: Text(
                                           'Credit Card',
-                                          style: appStyles(14, null, FontWeight.w300),
+                                          style: appStyles(
+                                              14, null, FontWeight.w300),
                                         ),
                                       ),
                                       Expanded(
                                         flex: 6,
                                         child: Align(
                                           alignment: Alignment.centerRight,
-                                          child: Obx(() => _buildCurrencyWidget(context)),
+                                          child: Obx(() =>
+                                              _buildCurrencyWidget(context)),
                                         ),
                                       ),
                                       const VerticalDivider(width: 0),
@@ -93,18 +99,25 @@ class WalletTopUpScreen extends StatelessWidget {
                                           alignment: Alignment.centerRight,
                                           child: IconButton(
                                             onPressed: () {
-                                              controller.showAccountBalance.value = !controller.showAccountBalance.value;
+                                              controller.showAccountBalance
+                                                      .value =
+                                                  !controller
+                                                      .showAccountBalance.value;
                                             },
-                                            icon: Obx(() => controller.showAccountBalance.isFalse
-                                                ? const Icon(Icons.visibility_off_rounded)
-                                                : const Icon(Icons.visibility_rounded)),
+                                            icon: Obx(() => controller
+                                                    .showAccountBalance.isFalse
+                                                ? const Icon(Icons
+                                                    .visibility_off_rounded)
+                                                : const Icon(
+                                                    Icons.visibility_rounded)),
                                           ),
                                         ),
                                       )
                                     ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 40),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 40),
                                     child: Row(
                                       children: [
                                         Expanded(
@@ -118,7 +131,8 @@ class WalletTopUpScreen extends StatelessWidget {
                                             alignment: Alignment.centerRight,
                                             child: Text(
                                               controller.cardDetails.value,
-                                              style: appStyles(11, null, FontWeight.w300),
+                                              style: appStyles(
+                                                  11, null, FontWeight.w300),
                                             ),
                                           ),
                                         ),
@@ -129,7 +143,8 @@ class WalletTopUpScreen extends StatelessWidget {
                                     alignment: Alignment.centerLeft,
                                     child: Text(
                                       controller.customerName.value,
-                                      style: appStyles(18, null, FontWeight.bold),
+                                      style:
+                                          appStyles(18, null, FontWeight.bold),
                                       textAlign: TextAlign.start,
                                     ),
                                   )
@@ -142,19 +157,26 @@ class WalletTopUpScreen extends StatelessWidget {
                             child: Form(
                               key: controller.formKey,
                               child: TextInputForm(
+                                inputType: TextInputType.number,
                                 enabled: true,
                                 isPassword: false,
-                                inputController: controller.topUpAmountController,
+                                inputController:
+                                    controller.topUpAmountController,
                                 textLabel: 'Enter amount',
                                 textHint: 'Enter amount',
                                 autoCorrect: false,
                                 prefixIcon: const Icon(Icons.payments_outlined),
-                                validator: (value) => value != null && value.isEmpty ? 'Field can\'t be empty' : null,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? 'Field can\'t be empty'
+                                        : null,
                                 suffixIcon: IconButton(
                                   onPressed: () {
-                                    controller.showAccountBalance.value = !controller.showAccountBalance.value;
+                                    controller.showAccountBalance.value =
+                                        !controller.showAccountBalance.value;
                                   },
-                                  icon: Obx(() => controller.showAccountBalance.isFalse
+                                  icon: Obx(() => controller
+                                          .showAccountBalance.isFalse
                                       ? const Icon(Icons.visibility_off_rounded)
                                       : const Icon(Icons.visibility_rounded)),
                                 ),
@@ -166,7 +188,8 @@ class WalletTopUpScreen extends StatelessWidget {
                             child: StandardButton(
                               text: 'Continue to pay',
                               onPressed: () {
-                                if (controller.formKey.currentState!.validate()) {
+                                if (controller.formKey.currentState!
+                                    .validate()) {
                                   controller.formKey.currentState!.save();
                                   controller.proceedFundWallet(context);
                                 }

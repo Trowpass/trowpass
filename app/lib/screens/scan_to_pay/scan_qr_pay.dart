@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
-import 'package:app/controllers/scan_to_pay_controllers/pay_screen_controller.dart';
+import 'dart:convert';
+
+import 'package:app/controllers/scan_to_pay_controllers/scan_qr_pay_screen_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/overlay_indeterminate_progress.dart';
@@ -10,14 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class PayScreen extends StatelessWidget {
+class ScanQrPayScreen extends StatelessWidget {
   final String? scannedData; // Change the type to String?
 
-  const PayScreen(this.scannedData, {Key? key}) : super(key: key);
+  const ScanQrPayScreen(this.scannedData, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final PayController payController = Get.put(PayController());
+    final ScanQrPayController payController = Get.put(ScanQrPayController());
     payController.clearTextFields();
     String? name;
     String? bank;
@@ -25,12 +27,14 @@ class PayScreen extends StatelessWidget {
     String? phoneNumber;
 
     if (scannedData != null) {
-      final lines = scannedData!.split('\n');
-      if (lines.length >= 3) {
-        name = lines[0];
-        bank = lines[1];
-        accountNumber = lines[2];
-        phoneNumber = lines[3];
+      Map userDataMap = jsonDecode(scannedData!);
+      for (var d in userDataMap.entries) {
+        if (d.key == 'PhoneNumber') {
+          phoneNumber = d.value;
+        }
+        if (d.key == 'FullName') {
+          name = d.value;
+        }
       }
     }
 
@@ -83,7 +87,7 @@ class PayScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 12),
-                    PayForm(payController: payController),
+                    ScanQrPayForm(payController: payController),
                   ],
                 ),
               ),
@@ -93,10 +97,10 @@ class PayScreen extends StatelessWidget {
   }
 }
 
-class PayForm extends StatelessWidget {
-  final PayController payController;
+class ScanQrPayForm extends StatelessWidget {
+  final ScanQrPayController payController;
 
-  PayForm({Key? key, required this.payController}) : super(key: key);
+  ScanQrPayForm({Key? key, required this.payController}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +113,6 @@ class PayForm extends StatelessWidget {
             TextInputForm(
               enabled: false,
               inputController: payController.phoneNumberController,
-              // textLabel: '08134678957462',
-              // textHint: '08134678957462',
               isPassword: false,
               autoCorrect: false,
             ),
@@ -118,10 +120,8 @@ class PayForm extends StatelessWidget {
             LabelText(textLabel: "Full Name"),
             const SizedBox(height: 16),
             TextInputForm(
-              enabled: true,
+              enabled: false,
               inputController: payController.nameController,
-              // textLabel: 'Abosede Bright',
-              // textHint: 'Abosede Bright',
               isPassword: false,
               autoCorrect: false,
             ),
@@ -129,6 +129,7 @@ class PayForm extends StatelessWidget {
             LabelText(textLabel: "Amount"),
             const SizedBox(height: 16),
             TextInputForm(
+              inputType: TextInputType.number,
               enabled: true,
               inputController: payController.amountController,
               // textLabel: 'Amount',
@@ -153,6 +154,7 @@ class PayForm extends StatelessWidget {
             LabelText(textLabel: "PIN"),
             const SizedBox(height: 16),
             TextInputForm(
+                inputType: TextInputType.number,
                 enabled: true,
                 inputController: payController.pinController,
                 // textLabel: 'Pin',
