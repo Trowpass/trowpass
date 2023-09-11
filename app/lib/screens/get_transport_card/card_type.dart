@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:app/controllers/card_type_controller.dart';
-import 'package:app/screens/get_transport_card/card_design.dart';
+import 'package:app/screens/get_transport_card/get_virtual_card.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -70,60 +70,65 @@ class CardBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Container(
-          width: double.infinity,
-          height: 150,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  icon,
-                  SizedBox(height: 10),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                      child: Text(
-                    description,
-                    style: appStyles(13, label, FontWeight.w400),
-                  )),
-                  TextButton(
-                    onPressed: () {
-                      Get.to(CardDesignScreen());
-                    },
-                    child: Text(
-                      'Get Started',
-                      style: appStyles(
-                        13,
-                        anchor,
-                        FontWeight.w500,
+    final borderRadius = BorderRadius.circular(10);
+
+    return Material(
+      borderRadius: borderRadius,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: InkWell(
+        splashColor: primaryColor.withOpacity(0.2),
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            width: double.infinity,
+            height: 150,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: borderRadius,
+            ),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    icon,
+                    SizedBox(height: 10),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                        child: Text(
+                      description,
+                      style: appStyles(13, label, FontWeight.w400),
+                    )),
+                    TextButton(
+                      onPressed: onPressed,
+                      child: Text(
+                        'Get Started',
+                        style: appStyles(
+                          13,
+                          anchor,
+                          FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

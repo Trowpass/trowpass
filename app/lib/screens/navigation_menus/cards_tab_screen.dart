@@ -9,7 +9,7 @@ import '../../widgets/app_styles.dart';
 import '../../widgets/standard_button.dart';
 import '../get_transport_card/card_type.dart';
 
-class CardsTabScreen extends GetView<CardsTabController> {
+class CardsTabScreen extends StatelessWidget {
   CardsTabScreen({super.key});
   final controller = Get.put(CardsTabController());
 
@@ -43,7 +43,7 @@ class CardsTabScreen extends GetView<CardsTabController> {
               children: [
                 Center(
                   child: Text(
-                    "Instantly get a virtual card to make tranport payment easily on your favourite transport app",
+                    "Instantly get a virtual card to make transport payment easily on your favorite transport app",
                     style: appStyles(14, titleActive, FontWeight.w300),
                   ),
                 ),
@@ -57,7 +57,7 @@ class CardsTabScreen extends GetView<CardsTabController> {
                 StandardButton(
                   text: 'Create Card',
                   onPressed: () {
-                    Get.to(CardTypeScreen());
+                    Get.to(() => CardTypeScreen());
                   },
                 ),
               ],

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class CardDesignScreen extends StatelessWidget {
+class GetVirtualCardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
