@@ -1,6 +1,5 @@
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
-import 'package:app/widgets/fund_options_bottom_sheet.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

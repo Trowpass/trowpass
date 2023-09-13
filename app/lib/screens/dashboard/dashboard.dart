@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/dashboard_conroller.dart';
+import '../../controllers/dashboard_controller.dart';
 import '../../widgets/currency_format.dart';
 import '../wallet/top_up_transport_wallet.dart';
 import '../wallet/topup/wallet_top_up.dart';

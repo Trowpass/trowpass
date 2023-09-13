@@ -56,9 +56,12 @@ class OverlayIndeterminateProgress extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  loadingMessage ?? 'Loading',
-                  style: appStyles(16, titleActive, null),
+                Material(
+                  color: Colors.transparent,
+                  child: Text(
+                    loadingMessage ?? 'Loading',
+                    style: appStyles(16, titleActive, null),
+                  ),
                 ),
               ],
             ),

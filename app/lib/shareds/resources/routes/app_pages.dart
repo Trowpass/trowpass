@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/bindings/dashboard_tab_binding.dart';
 import '../../../screens/onboarding/onboarding_screen.dart';
-import 'app_reoutes.dart';
+import 'app_routes.dart';
 
 class AppPages {
   static var list = [

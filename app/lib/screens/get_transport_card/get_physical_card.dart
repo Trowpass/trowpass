@@ -1,6 +1,4 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
-
-import 'package:app/controllers/card_design_holder_input_controller.dart';
+import 'package:app/controllers/physical_card_design_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -11,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-class GetVirtualCardScreen extends StatelessWidget {
+class GetPhysicalCardScreen extends StatelessWidget {
+  const GetPhysicalCardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +57,7 @@ class GetVirtualCardScreen extends StatelessWidget {
 }
 
 class CardHolderField extends StatelessWidget {
-  final cardDesignHolderInputController = Get.put(CardDesignHolderInputController());
+  final cardDesignHolderInputController = Get.put(PhysicalCardDesignController());
   CardHolderField({super.key});
 
   @override
@@ -66,7 +66,7 @@ class CardHolderField extends StatelessWidget {
         key: cardDesignHolderInputController.formKey,
         child: Column(
           children: [
-            LabelText(textLabel: "Enter Cardholder Name"),
+            const LabelText(textLabel: "Enter Card holder Name"),
             const SizedBox(height: 16),
             TextInputForm(
               enabled: true,

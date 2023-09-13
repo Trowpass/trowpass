@@ -1,13 +1,19 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
-
 import 'package:app/shareds/utils/images.dart';
+import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 import '../../shareds/utils/app_colors.dart';
+import '../navigation_menus/home_landing_tab_screen.dart';
 
-class CardRequestSucessfulScreen extends StatelessWidget {
+class CardRequestSuccessfulScreen extends StatelessWidget {
+  final String message;
+
+  // ignore: use_key_in_widget_constructors
+  const CardRequestSuccessfulScreen({required this.message});
+
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
@@ -32,13 +38,14 @@ class CardRequestSucessfulScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 Text(
-                  'Card request successful! You will be notified when its ready for pickup.',
-                  style: TextStyle(fontSize: 18),
+                  message,
+                  textAlign: TextAlign.center,
+                  style: appStyles(16, null, FontWeight.w500),
                 ),
                 SizedBox(height: spacing),
                 StandardButton(
                   text: 'Done',
-                  onPressed: () {},
+                  onPressed: () => Get.offAll(() => HomeLandingTabScreen()),
                 ),
               ],
             ),

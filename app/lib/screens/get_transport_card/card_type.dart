@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
 import 'package:app/controllers/card_type_controller.dart';
-import 'package:app/screens/get_transport_card/get_virtual_card.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -37,13 +36,19 @@ class CardTypeScreen extends StatelessWidget {
           children: [
             // SizedBox(height: 10),
             CardBox(
-              icon: Icon(Icons.credit_card),
+              icon: Icon(
+                Icons.credit_card,
+                color: primaryColor,
+              ),
               title: 'Virtual Debit Card',
               description: 'Instantly create a virtual card to spend on transport fare.',
               onPressed: controller.handleVirtualCardPressed,
             ),
             CardBox(
-              icon: Icon(Icons.credit_card),
+              icon: Icon(
+                Icons.credit_card,
+                color: primaryColor,
+              ),
               title: 'Physical Debit Card',
               description: 'Get a physical card to spend on transports anytime and anywhere.',
               onPressed: controller.handlePhysicalCardPressed,
@@ -72,14 +77,14 @@ class CardBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final borderRadius = BorderRadius.circular(10);
 
-    return Material(
-      borderRadius: borderRadius,
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: InkWell(
-        splashColor: primaryColor.withOpacity(0.2),
-        onTap: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Material(
+        borderRadius: borderRadius,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: InkWell(
+          splashColor: primaryColor.withOpacity(0.2),
+          onTap: onPressed,
           child: Container(
             width: double.infinity,
             height: 150,

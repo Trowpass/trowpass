@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
-import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/screens/scan_to_pay/scan.dart';
 import 'package:app/screens/scan_to_pay/qr_data.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -108,7 +108,7 @@ Widget _buildMyCodeTab() {
   String accountNumber = controller.accountNumber.value;
   String phoneNumber = controller.phoneNumber.value;
 
-  UserData userdata = UserData(fullName, bankName, accountNumber, phoneNumber);
+  UserData userData = UserData(fullName, bankName, accountNumber, phoneNumber);
 
   return Center(
       child: Column(
@@ -157,9 +157,10 @@ Widget _buildMyCodeTab() {
                 // )
                 QrImageView(
                   data:
-                      "${userdata.fullName}\n${userdata.bankName}\n${userdata.accountNumber}\n${userdata.phoneNumber}",
+                      "${userData.fullName}\n${userData.bankName}\n${userData.accountNumber}\n${userData.phoneNumber}",
                   version: QrVersions.auto,
                   size: 250.0, // Adjust the size as needed
+                  // ignore: deprecated_member_use
                   foregroundColor: Colors.black,
                   errorCorrectionLevel: QrErrorCorrectLevel.Q,
                   embeddedImage: AssetImage(mainLogo), // Add your company logo
