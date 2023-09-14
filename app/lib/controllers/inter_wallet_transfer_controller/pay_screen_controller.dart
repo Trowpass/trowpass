@@ -73,10 +73,9 @@ class PayController extends GetxController {
     }
   }
 
-  Future<void> InterWalletPay() async {
+  Future<void> interWalletPay() async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
-
     try {
       int senderUserId = session.readUserId() as int;
       var response = await interwalletController
@@ -97,7 +96,7 @@ class PayController extends GetxController {
           data: transactionDetails,
         );
         Get.find<DashboardController>().userWallet();
-        Get.to(InterWalletTransferReceiptScreen(
+        Get.offAll(InterWalletTransferReceiptScreen(
           transactionDetails: parsedResponse,
         ));
       } else {
@@ -121,4 +120,6 @@ class PayController extends GetxController {
       isLoaded.value = false;
     }
   }
+
+
 }

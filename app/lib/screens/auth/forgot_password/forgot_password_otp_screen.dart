@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 import '../../../controllers/forgot_password_otp_controller.dart';
 import '../../../shareds/utils/app_colors.dart';
-import '../../../widgets/app_logo.dart';
 import '../../../widgets/app_styles.dart';
 import '../../../widgets/circle_countdown_timer.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
 import '../../../widgets/standard_button.dart';
 
 // ignore: use_key_in_widget_constructors
@@ -25,11 +24,10 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return OverlayLoaderWithAppIcon(
+      return OverlayIndeterminateProgress(
         isLoading: controller.isLoaded.value,
         overlayBackgroundColor: background,
-        circularProgressColor: primaryColor,
-        appIcon: appLogo(70, 70),
+        progressColor: primaryColor,
         child: WillPopScope(
           onWillPop: _onWillPop,
           child: Scaffold(
@@ -37,9 +35,10 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(
                 statusBarColor: primaryColor,
-                systemNavigationBarColor: primaryColor,
-                statusBarIconBrightness: Brightness.light, // For Android
                 statusBarBrightness: Brightness.light, // For iOS
+                statusBarIconBrightness: Brightness.light, // For Android
+                systemNavigationBarColor: navigationBarBackground,
+                systemNavigationBarIconBrightness: Brightness.light,
               ),
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back, color: Colors.black),

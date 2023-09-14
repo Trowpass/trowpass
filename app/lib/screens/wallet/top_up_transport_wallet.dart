@@ -2,6 +2,7 @@ import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
 import '../../controllers/top_up_transport_wallet_controller.dart';
@@ -18,12 +19,35 @@ class TopUpTransportWalletScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
-        title: Text(controller.title.value),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: primaryColor,
+       systemOverlayStyle:  const SystemUiOverlayStyle(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.light, // For iOS
+        statusBarIconBrightness: Brightness.light, // For Android
+        systemNavigationBarColor: navigationBarBackground,
+        systemNavigationBarIconBrightness: Brightness.light,
       ),
+          title: Text(controller.title.value,
+              style: appStyles(18, titleActive, FontWeight.w600)),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: background,
+          actions: [
+            IconButton(
+              icon:
+                  const Icon(Icons.notifications_outlined, color: Colors.black),
+              onPressed: () {
+                Get.back();
+              },
+            )
+          ],
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
+            onPressed: () {
+              Get.back();
+            },
+          )),
       body: SingleChildScrollView(
           child: Padding(
         padding: const EdgeInsets.all(20),

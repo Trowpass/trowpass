@@ -1,10 +1,11 @@
 import 'package:app/repositories/user_repository.dart';
 import 'package:app/screens/auth/forgot_password/new_password_screen.dart';
 import 'package:app/services/requests/post_requests/resend_otp_request.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart' as expiry_timer;
-import 'package:timer_count_down/timer_controller.dart' as resend_timer;
+import 'package:circular_countdown_timer/circular_countdown_timer.dart'
+    as expiry_timer;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:timer_count_down/timer_controller.dart' as resend_timer;
 
 import '../shareds/utils/app_colors.dart';
 
@@ -49,7 +50,8 @@ class ForgotPasswordOtpController extends GetxController {
         countDownController.restart();
         expiryCountDownController.restart();
       } else {
-        Get.defaultDialog(title: 'Information', content: Text(response.message));
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
         isLoaded.value = false;
       }
     } catch (e) {
@@ -69,6 +71,6 @@ class ForgotPasswordOtpController extends GetxController {
     var otpThree = codeThreeController.text;
     var otpFour = codeFourController.text;
     String otpValue = '$otpOne$otpTwo$otpThree$otpFour';
-    Get.to(() => NewPasswordScreen(otp: otpValue, email: email));
+    Get.offAll(() => NewPasswordScreen(otp: otpValue, email: email));
   }
 }

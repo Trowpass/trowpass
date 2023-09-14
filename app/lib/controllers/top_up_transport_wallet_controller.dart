@@ -41,7 +41,7 @@ class TopUpTransportWalletController extends GetxController {
     if (pinTextEditController.text.length <= 4) {
       Get.snackbar('Pin validation', 'Incomplete pin length');
     } else {
-      Get.to(TopUpTransportWalletSummaryScreen());
+      Get.offAll(() => TopUpTransportWalletSummaryScreen());
     }
   }
 

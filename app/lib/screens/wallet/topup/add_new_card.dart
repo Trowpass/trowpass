@@ -21,6 +21,13 @@ class AddNewCardScreen extends StatelessWidget {
       onTap: () => Get.focusScope!.unfocus(),
       child: Scaffold(
         appBar: AppBar(
+          systemOverlayStyle: const SystemUiOverlayStyle(
+            statusBarColor: primaryColor,
+            statusBarBrightness: Brightness.light, // For iOS
+            statusBarIconBrightness: Brightness.light, // For Android
+            systemNavigationBarColor: navigationBarBackground,
+            systemNavigationBarIconBrightness: Brightness.light,
+          ),
           title: Text(controller.title.value),
           centerTitle: true,
           backgroundColor: primaryColor,
@@ -35,8 +42,7 @@ class AddNewCardScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: ListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: Text('Card Holder Name',
-                            style: appStyles(16, null, FontWeight.w500)),
+                        title: Text('Card Holder Name', style: appStyles(16, null, FontWeight.w500)),
                         subtitle: TextFormField(
                           keyboardType: TextInputType.text,
                           controller: controller.cardHolderNameController,
@@ -49,17 +55,14 @@ class AddNewCardScreen extends StatelessWidget {
                                 borderSide: BorderSide(color: grayscale),
                               ),
                               prefixIcon: const Icon(Icons.add_card_rounded),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius))),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(defaultBorderRadius))),
                         )),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: ListTile(
                         contentPadding: EdgeInsets.zero,
-                        title: Text('Card Number',
-                            style: appStyles(16, null, FontWeight.w500)),
+                        title: Text('Card Number', style: appStyles(16, null, FontWeight.w500)),
                         subtitle: TextFormField(
                           keyboardType: TextInputType.number,
                           inputFormatters: [
@@ -77,9 +80,7 @@ class AddNewCardScreen extends StatelessWidget {
                                 borderSide: BorderSide(color: grayscale),
                               ),
                               prefixIcon: const Icon(Icons.add_card_rounded),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(
-                                      defaultBorderRadius))),
+                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(defaultBorderRadius))),
                         )),
                   ),
                   Padding(
@@ -89,9 +90,7 @@ class AddNewCardScreen extends StatelessWidget {
                         Expanded(
                             child: ListTile(
                                 contentPadding: EdgeInsets.zero,
-                                title: Text('Expiry Date',
-                                    style:
-                                        appStyles(16, null, FontWeight.w500)),
+                                title: Text('Expiry Date', style: appStyles(16, null, FontWeight.w500)),
                                 subtitle: TextFormField(
                                   keyboardType: TextInputType.number,
                                   inputFormatters: [
@@ -99,21 +98,16 @@ class AddNewCardScreen extends StatelessWidget {
                                     LengthLimitingTextInputFormatter(4),
                                     CardMonthInputFormatter()
                                   ],
-                                  controller:
-                                      controller.cardExpiryDateController,
+                                  controller: controller.cardExpiryDateController,
                                   decoration: InputDecoration(
                                       hintText: 'MM/YY',
                                       focusedBorder: const OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: grayscale),
+                                        borderSide: BorderSide(color: grayscale),
                                       ),
                                       enabledBorder: const OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: grayscale),
+                                        borderSide: BorderSide(color: grayscale),
                                       ),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              defaultBorderRadius))),
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(defaultBorderRadius))),
                                 ))),
                         const VerticalDivider(
                           width: 2,
@@ -121,9 +115,7 @@ class AddNewCardScreen extends StatelessWidget {
                         Expanded(
                             child: ListTile(
                                 contentPadding: EdgeInsets.zero,
-                                title: Text('CVV',
-                                    style:
-                                        appStyles(16, null, FontWeight.w500)),
+                                title: Text('CVV', style: appStyles(16, null, FontWeight.w500)),
                                 subtitle: TextFormField(
                                   obscureText: true,
                                   keyboardType: TextInputType.number,
@@ -135,16 +127,12 @@ class AddNewCardScreen extends StatelessWidget {
                                   decoration: InputDecoration(
                                       hintText: '0000',
                                       focusedBorder: const OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: grayscale),
+                                        borderSide: BorderSide(color: grayscale),
                                       ),
                                       enabledBorder: const OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: grayscale),
+                                        borderSide: BorderSide(color: grayscale),
                                       ),
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              defaultBorderRadius))),
+                                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(defaultBorderRadius))),
                                 ))),
                       ],
                     ),

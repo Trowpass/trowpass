@@ -2,6 +2,7 @@ import 'package:app/repositories/inter_wallet_transfer_repository.dart';
 import 'package:app/services/requests/post_requests/inter_wallet_transfer_request.dart';
 import 'package:app/services/responses/inter_wallet_transfer_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
+
 import '../../shareds/managers/get_session_manager.dart';
 
 class InterwalletController {
@@ -23,13 +24,4 @@ class InterwalletController {
       return Future.error(e);
     }
   }
-
-  // Future<UserWalletResponse> userWalletAsync() async {
-  //   try {
-  //     final response = await userRepository.getUserWalletAsync();
-  //     return response;
-  //   } catch (e) {
-  //     return Future.error(e);
-  //   }
-  // }
 }

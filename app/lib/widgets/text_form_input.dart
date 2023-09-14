@@ -9,7 +9,7 @@ import '../shareds/utils/border_radius.dart';
 class TextInputForm extends StatelessWidget {
   final TextEditingController inputController;
   final String? textLabel;
-  final String textHint;
+  final String? textHint;
   final String? textError;
   final String? validatorMessage;
   final bool isPassword;
@@ -30,7 +30,7 @@ class TextInputForm extends StatelessWidget {
     Key? key,
     required this.inputController,
     this.textLabel,
-    required this.textHint,
+    this.textHint,
     this.textError,
     this.validatorMessage,
     required this.isPassword,
@@ -52,7 +52,7 @@ class TextInputForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fillColor = enabled ? Colors.transparent : filled;
-    final borderColor = enabled ? primaryColor : filled;
+    // final borderColor = enabled ? border : border;
 
     return TextFormField(
       inputFormatters: inputFormatters,
@@ -73,15 +73,15 @@ class TextInputForm extends StatelessWidget {
         errorStyle: appStyles(null, validationErrorColor, null),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(defaultBorderRadius),
-          borderSide: const BorderSide(color: primaryColor),
+          borderSide: const BorderSide(color: border),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(defaultBorderRadius),
-          borderSide: const BorderSide(color: primaryColor),
+          borderSide: const BorderSide(color: border),
         ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(defaultBorderRadius),
-          borderSide: BorderSide(color: borderColor),
+          borderSide: const BorderSide(color: border),
         ),
         filled: true,
         fillColor: fillColor,

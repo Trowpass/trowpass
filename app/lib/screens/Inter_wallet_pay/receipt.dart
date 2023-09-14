@@ -4,6 +4,7 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/app_styles.dart';
@@ -19,7 +20,15 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: const SystemUiOverlayStyle(
+        statusBarColor: primaryColor,
+        statusBarBrightness: Brightness.light, // For iOS
+        statusBarIconBrightness: Brightness.light, // For Android
+        systemNavigationBarColor: navigationBarBackground,
+        systemNavigationBarIconBrightness: Brightness.light,
+      ),
+      child: Scaffold(
         backgroundColor: primaryColor,
         body: SingleChildScrollView(
           child: Padding(
@@ -82,7 +91,7 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 1),
                               child: Text(
-                                  '${currencyFormat(context).currencySymbol}${formatCurrency(transactionDetails.data?.amount ?? 0)}',
+                                  '${currencyFormat.currencySymbol}${formatCurrency(transactionDetails.data?.amount ?? 0)}',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
@@ -192,6 +201,6 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        )));
   }
 }

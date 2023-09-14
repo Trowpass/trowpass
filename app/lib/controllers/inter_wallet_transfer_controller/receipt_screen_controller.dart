@@ -26,6 +26,6 @@ class ReceiptController extends GetxController {
   }
 
   void trySubmit() {
-    Get.to(() => HomeLandingTabScreen());
+    Get.offAll(() => HomeLandingTabScreen());
   }
 }

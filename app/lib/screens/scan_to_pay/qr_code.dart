@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
+import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/screens/scan_to_pay/qr_data.dart';
 import 'package:app/screens/scan_to_pay/scan.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class ScanController extends GetxController {
   final selectedIndex = 0.obs;
@@ -22,6 +26,13 @@ class ScanScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
         backgroundColor: background,
         elevation: 0.0,
         title: Text('Trowpass QR Code',
@@ -91,6 +102,14 @@ class ScanScreen extends StatelessWidget {
 }
 
 Widget _buildMyCodeTab() {
+  final controller = Get.put(DashboardController());
+  String fullName = controller.fullName.value;
+  String bankName = controller.bankName.value;
+  String accountNumber = controller.accountNumber.value;
+  String phoneNumber = controller.phoneNumber.value;
+
+  UserData userdata = UserData(fullName, bankName, accountNumber, phoneNumber);
+
   return Center(
       child: Column(
     children: [
@@ -104,38 +123,60 @@ Widget _buildMyCodeTab() {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Transform.translate(
-              offset: Offset(0, -190),
-              child: ClipOval(
-                  child: Image.asset(
-                profile,
-              )),
-            ),
+            // Transform.translate(
+            //   offset: Offset(0, -190),
+            //   child: ClipOval(
+            //       child: Image.asset(
+            //     profile,
+            //   )),
+            // ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 50,
                 ),
-                Text(
-                  'Daisy Bright',
-                  style: appStyles(
-                    20,
-                    titleActive,
-                    FontWeight.w500,
+                // Text(
+                //   'Daisy Bright',
+                //   style: appStyles(
+                //     20,
+                //     titleActive,
+                //     FontWeight.w500,
+                //   ),
+                // ),
+                // Text(
+                //   'Driver',
+                //   style: appStyles(
+                //     20,
+                //     titleActive,
+                //     FontWeight.w400,
+                //   ),
+                // ),
+                // Image.asset(
+                //   code,
+                // )
+                QrImageView(
+                  data:
+                      "${userdata.fullName}\n${userdata.bankName}\n${userdata.accountNumber}\n${userdata.phoneNumber}",
+                  version: QrVersions.auto,
+                  size: 250.0, // Adjust the size as needed
+                  eyeStyle: QrEyeStyle(color: Colors.black),
+                  errorCorrectionLevel: QrErrorCorrectLevel.Q,
+                  embeddedImage: AssetImage(mainLogo), // Add your company logo
+                  errorStateBuilder: (cxt, err) {
+                    return Container(
+                      child: Center(
+                        child: Text(
+                          'Oops! Something went wrong...',
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  },
+                  embeddedImageStyle: QrEmbeddedImageStyle(
+                    size: Size(40, 40), // Size of the embedded image
                   ),
                 ),
-                Text(
-                  'Driver',
-                  style: appStyles(
-                    20,
-                    titleActive,
-                    FontWeight.w400,
-                  ),
-                ),
-                Image.asset(
-                  code,
-                )
               ],
             ),
           ],

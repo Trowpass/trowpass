@@ -26,6 +26,7 @@ class TopUpTransportWalletDoneContoller extends GetxController {
   }
 
   void trySubmit() {
-    Get.to(() => HomeLandingTabScreen());
+    Get.focusScope!.unfocus();
+    Get.offAll(() => HomeLandingTabScreen());
   }
 }

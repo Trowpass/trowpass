@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
@@ -10,24 +13,33 @@ import '../auth/pin/change_pin.dart';
 
 class UserProfileScreen extends StatelessWidget {
   UserProfileScreen({super.key});
-  final contoller = Get.put(UserProfileController());
+  final controller = Get.put(UserProfileController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
         leading: null,
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: primaryColor,
-        title: Text(contoller.title.value),
+        backgroundColor: background,
+        title: Text(
+          controller.title.value,
+          style: TextStyle(color: Colors.black),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
           child: Padding(
-        padding:
-            const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+        padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,8 +68,7 @@ class UserProfileScreen extends StatelessWidget {
                     ),
                   ],
                 )),
-            Text(contoller.fullName.value,
-                style: appStyles(18, null, FontWeight.bold)),
+            Text(controller.fullName.value, style: appStyles(18, null, FontWeight.bold)),
             Text(
               'Rider',
               style: appStyles(18, null, FontWeight.w300),
@@ -70,12 +81,11 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.person_2,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Edit Profile',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('Edit Profile', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -87,12 +97,11 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.lock,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('Change PIN',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('Change PIN', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -104,12 +113,11 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.work_history_rounded,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('History',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('History', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -121,12 +129,11 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.error,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('KYC Registration',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('KYC Registration', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),
@@ -138,12 +145,27 @@ class UserProfileScreen extends StatelessWidget {
                   horizontalTitleGap: 0,
                   leading: const Icon(
                     Icons.qr_code_2_rounded,
-                    size: 30,
+                    size: 24,
                   ),
-                  trailing: const Icon(Icons.keyboard_arrow_right, size: 30),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                   contentPadding: EdgeInsets.zero,
-                  title: Text('QR Code',
-                      style: appStyles(18, null, FontWeight.w500)),
+                  title: Text('QR Code', style: appStyles(18, null, FontWeight.w500)),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.zero,
+              child: GestureDetector(
+                onTap: () => controller.logout(),
+                child: ListTile(
+                  horizontalTitleGap: 0,
+                  leading: const Icon(
+                    Icons.logout_rounded,
+                    size: 24,
+                  ),
+                  trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
+                  contentPadding: EdgeInsets.zero,
+                  title: Text('Logout', style: appStyles(18, null, FontWeight.w500)),
                 ),
               ),
             ),

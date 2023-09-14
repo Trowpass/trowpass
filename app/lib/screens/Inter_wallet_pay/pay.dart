@@ -1,15 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/widgets/app_logo.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:overlay_loader_with_app_icon/overlay_loader_with_app_icon.dart';
 
 import '../../controllers/inter_wallet_transfer_controller/pay_screen_controller.dart';
+import '../../widgets/overlay_indeterminate_progress.dart';
 
 class InterWalletPayScreen extends StatelessWidget {
   InterWalletPayScreen({super.key});
@@ -18,16 +18,22 @@ class InterWalletPayScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     payController.clearTextFields();
-    return Obx(() => OverlayLoaderWithAppIcon(
+    return Obx(() => OverlayIndeterminateProgress(
           isLoading: payController.isLoaded.value,
           overlayBackgroundColor: background,
-          circularProgressColor: primaryColor,
-          appIcon: appLogo(70, 70),
+          progressColor: primaryColor,
           child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
               backgroundColor: background,
               appBar: AppBar(
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: primaryColor,
+                  statusBarBrightness: Brightness.light, // For iOS
+                  statusBarIconBrightness: Brightness.light, // For Android
+                  systemNavigationBarColor: navigationBarBackground,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
                 backgroundColor: background,
                 elevation: 0.0,
                 title: Text(
@@ -93,7 +99,7 @@ class PayForm extends StatelessWidget {
               textHint: 'Recipient Phone Number',
               isPassword: false,
               autoCorrect: false,
-              validatorMessage: 'Please enter recepient number',
+              validatorMessage: 'Please enter recipient number',
             ),
             const SizedBox(height: 10),
             LabelText(textLabel: "Recipient Name"),
@@ -101,7 +107,7 @@ class PayForm extends StatelessWidget {
             TextInputForm(
               enabled: false,
               inputController: payController.fullNameController,
-              initialValue: payController.fullNameController.text,
+              // initialValue: payController.fullNameController.text,
               // textLabel: 'Receipient Name',
               textHint: 'Recipient Name',
               isPassword: false,
@@ -149,7 +155,7 @@ class PayForm extends StatelessWidget {
               text: 'Pay Now',
               onPressed: () {
                 if (payController.formKey.currentState!.validate()) {
-                  payController.InterWalletPay();
+                  payController.interWalletPay();
                 }
               },
             ),

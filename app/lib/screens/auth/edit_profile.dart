@@ -1,5 +1,6 @@
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
 import '../../controllers/edit_profile_controller.dart';
@@ -18,10 +19,17 @@ class EditProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: background,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
         elevation: 0,
         title: const Text('Edit Profile'),
         centerTitle: true,
-        backgroundColor: primaryColor,
+        backgroundColor: background,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -39,7 +47,7 @@ class EditProfileScreen extends StatelessWidget {
                       isPassword: false,
                       prefixIcon: const Icon(
                         Icons.photo_camera,
-                        size: 30,
+                        size: 24,
                       ),
                       isReadOnly: false,
                     ),
@@ -54,7 +62,7 @@ class EditProfileScreen extends StatelessWidget {
                       autoCorrect: false,
                       prefixIcon: const Icon(
                         Icons.person_outline_outlined,
-                        size: 30,
+                        size: 24,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -68,7 +76,7 @@ class EditProfileScreen extends StatelessWidget {
                       autoCorrect: false,
                       prefixIcon: const Icon(
                         Icons.person_outline_outlined,
-                        size: 30,
+                        size: 24,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -80,26 +88,22 @@ class EditProfileScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.place,
-                            size: 30,
+                            size: 24,
                           ),
                           labelText: 'Address',
                           labelStyle: appStyles(15, null, null),
                           hintText: 'Address',
-                          errorStyle:
-                              appStyles(null, validationErrorColor, null),
+                          errorStyle: appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           filled: true,
@@ -123,7 +127,7 @@ class EditProfileScreen extends StatelessWidget {
                       autoCorrect: false,
                       prefixIcon: const Icon(
                         Icons.phone_android,
-                        size: 30,
+                        size: 24,
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -135,26 +139,22 @@ class EditProfileScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.edit,
-                            size: 30,
+                            size: 24,
                           ),
                           labelText: 'Bio',
                           labelStyle: appStyles(15, null, null),
                           hintText: 'Bio',
-                          errorStyle:
-                              appStyles(null, validationErrorColor, null),
+                          errorStyle: appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           filled: true,

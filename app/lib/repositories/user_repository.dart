@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
@@ -17,6 +18,7 @@ import '../services/requests/post_requests/rider_registration_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../services/responses/base_response.dart';
 import '../services/responses/user_login_response.dart';
+import '../services/responses/verify_account_response.dart';
 import '../services/responses/view_profile_response.dart';
 import '../shareds/constants/endpoints.dart';
 import '../shareds/helpers/api_connection_helper.dart';
@@ -63,14 +65,14 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> verifyOtpAsync(
+  Future<VerifyAccountResponse> verifyOtpAsync(
       VerifyOtpRequest request, dynamic customerPhoneNumber) async {
     try {
       var url = '${Endpoints().verifyOtp}/$customerPhoneNumber';
       var response = await apiConnectionHelper.postDataAsync(
           requestData: request, path: url);
       if (response.data != null) {
-        return BaseResponse.fromJson(response.data);
+        return VerifyAccountResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to verify account');
       }
@@ -105,6 +107,7 @@ class UserRepository {
       return Future.error(e);
     }
   }
+
   Future<UserByPhoneResponse> getUserByPhoneAsync(
       UserByPhoneRequest request) async {
     try {
@@ -239,6 +242,24 @@ class UserRepository {
         return UserWalletResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to get user wallet details');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<BaseResponse> choosePinAsync(ChoosePinRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: Endpoints().createPin);
+      if (response.data != null) {
+        return BaseResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to create tag');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
