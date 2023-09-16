@@ -23,4 +23,7 @@ class Endpoints {
   String interWalletTransfer = 'api/v1/wallet/inter-wallet-transfer';
   String paystackVerification = 'api/v1/paystack/verify-transaction';
   String walletTopUp = 'api/v1/paystack/credit-wallet';
+  String banks = 'api/v1/transfer/banks';
+  String transportWallet = 'api/v1/transfer/top-up-transport-wallet';
+  String transportCompany = 'api/v1/transfer/transport-company/all';
 }

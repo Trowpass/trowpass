@@ -52,7 +52,7 @@ class LoginScreen extends StatelessWidget {
                                     inputType: TextInputType.number,
                                     enabled: true,
                                     inputController: controller.emailPhoneNumberController,
-                                    textLabel: 'Enter phone number',
+                                    // textLabel: 'Enter phone number',
                                     textHint: 'Enter phone number',
                                     validatorMessage: 'Please enter a valid phone number',
                                     isPassword: false,
@@ -73,7 +73,7 @@ class LoginScreen extends StatelessWidget {
                               Obx(() => TextInputForm(
                                     enabled: true,
                                     inputController: controller.passwordController,
-                                    textLabel: 'Password',
+                                    // textLabel: 'Password',
                                     textHint: 'Password',
                                     validatorMessage: 'Please enter a valid password',
                                     isPassword: !controller.isPassword.value,

@@ -162,7 +162,7 @@ Widget _buildMyCodeTab() {
                   size: 250.0, // Adjust the size as needed
                   eyeStyle: QrEyeStyle(color: Colors.black),
                   errorCorrectionLevel: QrErrorCorrectLevel.Q,
-                  embeddedImage: AssetImage(mainLogo), // Add your company logo
+                  embeddedImage: AssetImage(mainLogo), 
                   errorStateBuilder: (cxt, err) {
                     return Container(
                       child: Center(

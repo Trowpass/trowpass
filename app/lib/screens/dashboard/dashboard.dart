@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app/screens/Inter_wallet_pay/pay.dart';
 import 'package:app/screens/dashboard/components/custom_card.dart';
 import 'package:app/screens/dashboard/components/image_slider.dart';
@@ -66,13 +68,13 @@ class DashboardScreen extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Align(
-                                            alignment: Alignment.topRight,
-                                            child: Image.asset(qrCode),
-                                          ),
-                                        ),
+                                        // Expanded(
+                                        //   flex: 1,
+                                        //   child: Align(
+                                        //     alignment: Alignment.topRight,
+                                        //     child: Image.asset(qrCode),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                   ),
@@ -167,6 +169,7 @@ class DashboardScreen extends StatelessWidget {
                               children: [
                                 CustomCard(
                                   imagePath: scan,
+                                    color: Color.fromRGBO(46, 189, 77, 0.1),
                                   text: 'Scan to Pay',
                                   onTap: () {
                                     Get.to(() => ScanScreen());
@@ -174,6 +177,7 @@ class DashboardScreen extends StatelessWidget {
                                 ),
                                 CustomCard(
                                   imagePath: topup,
+                                    color: Color.fromRGBO(241, 195, 78, 0.1),
                                   text: 'Topup Transport Wallet',
                                   onTap: () {
                                     Get.to(TopUpTransportWalletScreen());
@@ -181,38 +185,45 @@ class DashboardScreen extends StatelessWidget {
                                 ),
                                 CustomCard(
                                   imagePath: loan,
+                                    color: Color.fromRGBO(9, 44, 247, 0.1),
                                   text: 'Get Transport Loan',
                                   onTap: () => controller.displayPlaceholderDialog('Get Transport Loan'),
                                 ),
                                 CustomCard(
                                   imagePath: card,
+                                    color: Color.fromRGBO(116, 51, 255, 0.1),
                                   text: 'Transport Card',
                                   onTap: () => controller.displayPlaceholderDialog('Transport Card'),
                                 ),
                                 CustomCard(
                                   imagePath: book,
+                                    color: Color.fromRGBO(231, 27, 27, 0.1),
                                   text: 'Book a Bus',
                                   onTap: () => controller.displayPlaceholderDialog('Book a Bus'),
                                 ),
                                 CustomCard(
                                   imagePath: send,
                                   text: 'Send Money',
+                                  color: Color.fromRGBO(46, 189, 78, 0.1),
                                   onTap: () {
                                     Get.to(InterWalletPayScreen());
                                   },
                                 ),
                                 CustomCard(
-                                  imagePath: book,
-                                  text: 'Transports Pay',
+                                  imagePath: drop,
+                                    color: Color.fromRGBO(241, 195, 78, 0.1),
+                                  text: 'Pick n Drop',
                                   onTap: () => controller.displayPlaceholderDialog('Transports Pay'),
                                 ),
                                 CustomCard(
                                   imagePath: flight,
+                                    color: Color.fromRGBO(9, 44, 247, 0.1),
                                   text: 'Book Flight',
                                   onTap: () => controller.displayPlaceholderDialog('Book Flight'),
                                 ),
                                 CustomCard(
                                   imagePath: train,
+                                    color: Color.fromRGBO(60, 123, 245, 0.1),
                                   text: 'Train Ticket',
                                   onTap: () => controller.displayPlaceholderDialog('Train Ticket'),
                                 ),

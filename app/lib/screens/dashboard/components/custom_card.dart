@@ -8,11 +8,13 @@ class CustomCard extends StatelessWidget {
   final String imagePath;
   final String text;
   final VoidCallback onTap;
+  final Color color;
 
   const CustomCard({
     required this.imagePath,
     required this.text,
     required this.onTap,
+    required this.color
   });
 
   @override
@@ -25,20 +27,21 @@ class CustomCard extends StatelessWidget {
           width: double.infinity,
           // height: 64,
           decoration: BoxDecoration(
-            color: background,
+            color: color,
             borderRadius: BorderRadius.circular(cardBorderRadius),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 5,
-                offset: Offset(0, 2),
-              ),
-            ],
+            // boxShadow: [
+            //   BoxShadow(
+            //     color: Colors.black.withOpacity(0.1),
+            //     // blurRadius: 5,
+            //     offset: Offset(0, 2),
+            //   ),
+            // ],
           ),
           padding: EdgeInsets.all(14),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+               SizedBox(height: 12),
               Image.asset(imagePath),
               SizedBox(height: 12),
               Flexible(
@@ -46,7 +49,7 @@ class CustomCard extends StatelessWidget {
                   text,
                   style: appStyles(
                     9,
-                    primaryColor,
+                    titleActive,
                     FontWeight.w600,
                   ),
                 ),

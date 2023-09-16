@@ -64,7 +64,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                             TextInputForm(
                               enabled: true,
                               inputController: controller.firstNameController,
-                              textLabel: 'First Name',
+                              // textLabel: 'First Name',
                               textHint: 'First Name',
                               validatorMessage: 'Please enter first name',
                               isPassword: false,
@@ -78,7 +78,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                             TextInputForm(
                               enabled: true,
                               inputController: controller.lastNameController,
-                              textLabel: 'Last Name',
+                              // textLabel: 'Last Name',
                               textHint: 'Last Name',
                               validatorMessage: 'Please enter last name',
                               isPassword: false,
@@ -93,7 +93,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               inputType: TextInputType.emailAddress,
                               enabled: true,
                               inputController: controller.emailController,
-                              textLabel: 'Email',
+                              // textLabel: 'Email',
                               textHint: 'Email',
                               validatorMessage: 'Please enter your email',
                               isPassword: false,
@@ -108,7 +108,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               inputType: TextInputType.phone,
                               enabled: true,
                               inputController: controller.phoneNumberController,
-                              textLabel: 'Phone Number',
+                              // textLabel: 'Phone Number',
                               textHint: 'Phone Number',
                               validatorMessage: 'Please enter a valid number',
                               isPassword: false,
@@ -137,7 +137,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                             TextInputForm(
                               enabled: true,
                               inputController: controller.passwordController,
-                              textLabel: 'Password',
+                              // textLabel: 'Password',
                               textHint: 'Password',
                               isPassword: controller.isPasswordHidden.value,
                               autoCorrect: false,
@@ -162,7 +162,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                             TextInputForm(
                               enabled: true,
                               inputController: controller.confirmPasswordController,
-                              textLabel: 'Confirm Password',
+                              // textLabel: 'Confirm Password',
                               textHint: 'Confirm password',
                               validatorMessage: 'Password do not match',
                               validator: (value) =>
