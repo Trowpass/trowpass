@@ -38,6 +38,11 @@ class SetSessionManager {
     storage.write(userLoggedIn, loggedIn);
   }
 
+  void logoutUser() {
+    storage.erase();
+    writeIsUserOnBoarded(true);
+  }
+
   void writeUserAccountNumber(String value) {
     storage.write(userAccountNumber, value);
   }

@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 
 import '../../controllers/cards_tab_controller.dart';
 import '../../shareds/utils/app_colors.dart';
-import '../../widgets/app_styles.dart';
 import '../card/card_display.dart';
 import '../card/card_type.dart';
 
@@ -17,15 +16,24 @@ class CardsTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
-      body: Obx(() => OverlayIndeterminateProgress(
-            progressColor: primaryColor,
-            isLoading: controller.isLoading.value,
-            overlayBackgroundColor: background,
-            child: Visibility(
-              visible: !controller.isLoading.value,
-              child: controller.shouldCreate.value ? CardTypeScreen() : CardDisplayScreen(),
-            ),
-          )),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: const SystemUiOverlayStyle(
+          statusBarColor: primaryColor,
+          statusBarBrightness: Brightness.light, // For iOS
+          statusBarIconBrightness: Brightness.light, // For Android
+          systemNavigationBarColor: navigationBarBackground,
+          systemNavigationBarIconBrightness: Brightness.light,
+        ),
+        child: Obx(() => OverlayIndeterminateProgress(
+              progressColor: primaryColor,
+              isLoading: controller.isLoading.value,
+              overlayBackgroundColor: background,
+              child: Visibility(
+                visible: !controller.isLoading.value,
+                child: controller.isVirtualCardCreated.value ? CardDisplayScreen() : CardTypeScreen(),
+              ),
+            )),
+      ),
     );
   }
 }

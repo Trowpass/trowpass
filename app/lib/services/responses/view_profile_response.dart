@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class ViewProfileResponse {
   String message;
   bool status;
@@ -16,8 +17,7 @@ class ViewProfileResponse {
       message: json['message'] ?? '',
       status: json['status'],
       responseCode: json['responseCode'] ?? '',
-      data:
-          json['data'] != null ? ViewProfileData.fromJson(json['data']) : null,
+      data: json['data'] != null ? ViewProfileData.fromJson(json['data']) : null,
     );
   }
 }
@@ -36,6 +36,7 @@ class ViewProfileData {
   String accountType;
   bool isActive;
   DateTime? dateOfBirth;
+  bool isVirtualCardCreated;
   String placeOfBirth;
   DateTime? accountUpgradedAt;
   String privateQrCode;
@@ -57,6 +58,7 @@ class ViewProfileData {
     required this.accountType,
     required this.isActive,
     required this.dateOfBirth,
+    required this.isVirtualCardCreated,
     required this.placeOfBirth,
     required this.accountUpgradedAt,
     required this.privateQrCode,
@@ -79,23 +81,14 @@ class ViewProfileData {
       gender: json['gender'] ?? '',
       accountType: json['accountType'] ?? '',
       isActive: json['isActive'] ?? false,
-      dateOfBirth: json['dateOfBirth'] != null
-          ? DateTime.parse(json['dateOfBirth'])
-          : null,
+      dateOfBirth: json['dateOfBirth'] != null ? DateTime.parse(json['dateOfBirth']) : null,
       placeOfBirth: json['placeOfBirth'] ?? '',
-      accountUpgradedAt: json['accountUpgradedAt'] != null
-          ? DateTime.parse(json['accountUpgradedAt'])
-          : null,
+      accountUpgradedAt: json['accountUpgradedAt'] != null ? DateTime.parse(json['accountUpgradedAt']) : null,
       privateQrCode: json['privateQrCode'] ?? '',
-      accountDetail: json['accountDetail'] != null
-          ? AccountDetail.fromJson(json['accountDetail'])
-          : null,
-      kycDetail: json['kycDetail'] != null
-          ? KycDetail.fromJson(json['kycDetail'])
-          : null,
-      bussinessDetail: json['bussinessDetail'] != null
-          ? BussinessDetail.fromJson(json['bussinessDetail'])
-          : null,
+      accountDetail: json['accountDetail'] != null ? AccountDetail.fromJson(json['accountDetail']) : null,
+      kycDetail: json['kycDetail'] != null ? KycDetail.fromJson(json['kycDetail']) : null,
+      bussinessDetail: json['bussinessDetail'] != null ? BussinessDetail.fromJson(json['bussinessDetail']) : null,
+      isVirtualCardCreated: json[ 'isVirtualCardCreated'],
     );
   }
 }
@@ -149,8 +142,7 @@ class KycDetail {
   factory KycDetail.fromJson(Map<String, dynamic> json) {
     return KycDetail(
       bvn: json['bvn'] ?? '',
-      address:
-          json['address'] != null ? Address.fromJson(json['address']) : null,
+      address: json['address'] != null ? Address.fromJson(json['address']) : null,
     );
   }
 }
