@@ -1,4 +1,5 @@
 import 'package:app/shareds/utils/images.dart';
+import 'package:app/widgets/app_logo.dart';
 import 'package:app/widgets/overlay_indeterminate_progress.dart';
 import 'package:app/widgets/transparent_button.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class CardDisplayScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Create virtual card',
+          'Your Card',
           style: appStyles(20, titleActive, FontWeight.w600),
         ),
         actions: const <Widget>[
@@ -58,16 +59,81 @@ class CardDisplayScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Image.asset(blueCard),
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Stack(
+                  children: [
+                    Image.asset(blueCard, scale: 1.2),
+                    Positioned(
+                      top: 0,
+                      left: 0,
+                      child: appLogo(100, 100),
+                    ),
+                    Positioned(
+                      top: 8,
+                      right: 0,
+                      child: Image.asset(
+                        wifi,
+                        scale: 1.7,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 16,
+                      left: 16,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.cardNumber.value,
+                            style: appStyles(18, Colors.white, FontWeight.bold),
+                          ),
+                          const SizedBox(height: 32),
+                          RichText(
+                            text: TextSpan(
+                              style: appStyles(18, Colors.white, null),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: 'Expiry: ',
+                                  style: appStyles(18, Colors.white, null),
+                                ),
+                                TextSpan(
+                                  text: controller.expiryDate.value,
+                                  style: appStyles(18, Colors.white, FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Text(
+                            controller.customerName.value,
+                            style: appStyles(18, Colors.white, FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 16,
+                      right: 16,
+                      child: Image.asset(
+                        controller.cardType.value,
+                        scale: 1.2,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 20),
               Column(
                 children: [
                   Text(
                     controller.balance.value,
-                    style: appStyles(14, titleActive, null),
+                    style: appStyles(32, titleActive, FontWeight.bold),
                   ),
-                  const Text('Balance'),
+                  const SizedBox(height: 20),
+                  Text('Balance', style: appStyles(18, null, FontWeight.w400)),
                 ],
               ),
+              const SizedBox(height: 32),
               TransparentButton(
                 text: 'Add Money',
                 icon: const Icon(

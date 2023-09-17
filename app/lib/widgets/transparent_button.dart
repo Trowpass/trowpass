@@ -32,7 +32,7 @@ class TransparentButton extends StatelessWidget {
           splashColor: primaryColor.withOpacity(0.2),
           onTap: onTap,
           child: Container(
-            padding: contentPadding,
+            padding: contentPadding ?? const EdgeInsets.all(20),
             decoration: BoxDecoration(
               border: Border.all(color: greyLight.withOpacity(0.3)),
               borderRadius: const BorderRadius.all(
@@ -40,10 +40,14 @@ class TransparentButton extends StatelessWidget {
               ),
             ),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Visibility(
                   visible: icon != null,
-                  child: icon ?? Container(),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: icon ?? Container(),
+                  ),
                 ),
                 Text(
                   text,

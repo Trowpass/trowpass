@@ -26,7 +26,7 @@ class WalletTopUpController extends GetxController {
     isLoaded.value = false;
     cardDetails.value = '**** **** **** 123401/24';
     accountBalance.value = session.readUserAccountBalance() ?? 0.0;
-    customerName.value = session.readRiderFullName() ?? '';
+    customerName.value = (session.readRiderFullName() ?? '').toUpperCase();
     super.onInit();
   }
 

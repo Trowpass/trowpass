@@ -8,6 +8,7 @@ const subtract = 'assets/images/Substract.png';
 const success = 'assets/images/success.png';
 const masterCard = 'assets/images/master_card.png';
 const visaCard = 'assets/images/visa.png';
+const verveCard = 'assets/images/verve.png';
 const yellowCard = 'assets/images/yellow_card.png';
 const user = 'assets/images/user.png';
 const summary = 'assets/images/summary.png';
@@ -18,6 +19,7 @@ const blueCard = 'assets/images/blue_card.png';
 const design = 'assets/images/card_design.png';
 const trowpassLogo = 'assets/images/trowpass_logo.png';
 const finance = 'assets/images/finance.png';
+const wifi = 'assets/images/wifi.png';
 
 //region Icons
 const card = 'assets/icons/card.png';

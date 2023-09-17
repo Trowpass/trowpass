@@ -17,30 +17,12 @@ class CardsTabScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: primaryColor,
-          statusBarBrightness: Brightness.light, // For iOS
-          statusBarIconBrightness: Brightness.light, // For Android
-          systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.light,
-        ),
-        centerTitle: true,
-        leading: null,
-        automaticallyImplyLeading: false,
-        title: Text(
-          controller.title.value,
-          style: appStyles(20, titleActive, FontWeight.w600),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.white,
-      ),
       body: Obx(() => OverlayIndeterminateProgress(
             progressColor: primaryColor,
             isLoading: controller.isLoading.value,
             overlayBackgroundColor: background,
             child: Visibility(
-              visible: controller.isLoading.value,
+              visible: !controller.isLoading.value,
               child: controller.shouldCreate.value ? CardTypeScreen() : CardDisplayScreen(),
             ),
           )),
