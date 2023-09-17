@@ -4,7 +4,7 @@ import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../screens/get_transport_card/card_request_successful.dart';
+import '../screens/card/card_request_successful.dart';
 import '../shareds/utils/app_colors.dart';
 
 class VirtualCardDesignController extends GetxController {

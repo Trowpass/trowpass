@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 import '../../controllers/cards_tab_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../widgets/app_styles.dart';
-import '../get_transport_card/card_display.dart';
-import '../get_transport_card/card_type.dart';
+import '../card/card_display.dart';
+import '../card/card_type.dart';
 
 class CardsTabScreen extends StatelessWidget {
   CardsTabScreen({super.key});

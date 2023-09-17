@@ -1,4 +1,4 @@
-import 'package:app/screens/get_transport_card/get_virtual_card.dart';
+import 'package:app/screens/card/get_virtual_card.dart';
 import 'package:get/get.dart';
 
 import '../widgets/app_dialog.dart';
