@@ -145,6 +145,7 @@ class WalletTopUpScreen extends StatelessWidget {
                                 enabled: true,
                                 isPassword: false,
                                 inputController: controller.topUpAmountController,
+                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 textLabel: 'Enter amount',
                                 textHint: 'Enter amount',
                                 autoCorrect: false,

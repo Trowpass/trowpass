@@ -65,7 +65,7 @@ class CardDisplayScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: Stack(
-                        children: [
+                        children: <Widget>[
                           Image.asset(blueCard, scale: 1.2),
                           Positioned(
                             top: 0,
@@ -75,10 +75,7 @@ class CardDisplayScreen extends StatelessWidget {
                           Positioned(
                             top: 8,
                             right: 0,
-                            child: Image.asset(
-                              wifi,
-                              scale: 1.7,
-                            ),
+                            child: Image.asset(wifi, scale: 1.7),
                           ),
                           Positioned(
                             bottom: 16,
@@ -130,7 +127,7 @@ class CardDisplayScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     Column(
-                      children: [
+                      children: <Widget>[
                         Text(
                           controller.balance.value,
                           style: appStyles(32, titleActive, FontWeight.bold),
@@ -146,7 +143,7 @@ class CardDisplayScreen extends StatelessWidget {
                         Icons.add,
                         color: titleActive,
                       ),
-                      onTap: () => Get.to(() => const FundVirtualCardScreen()),
+                      onTap: () => Get.to(() => FundVirtualCardScreen()),
                     ),
                   ],
                 ),

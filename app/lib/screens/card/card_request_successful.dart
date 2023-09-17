@@ -8,11 +8,13 @@ import 'package:get/get.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../navigation_menus/home_landing_tab_screen.dart';
 
-class CardRequestSuccessfulScreen extends StatelessWidget {
+class SuccessScreen extends StatelessWidget {
   final String message;
+  final String imageAsset;
+  final VoidCallback onTap;
 
   // ignore: use_key_in_widget_constructors
-  const CardRequestSuccessfulScreen({required this.message});
+  const SuccessScreen({required this.message, required this.imageAsset, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +35,7 @@ class CardRequestSuccessfulScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  cardSuccess,
-                ),
+                Image.asset(imageAsset),
                 const SizedBox(height: 20),
                 Text(
                   message,
@@ -43,10 +43,7 @@ class CardRequestSuccessfulScreen extends StatelessWidget {
                   style: appStyles(16, null, FontWeight.w500),
                 ),
                 SizedBox(height: spacing),
-                StandardButton(
-                  text: 'Done',
-                  onPressed: () => Get.offAll(() => HomeLandingTabScreen()),
-                ),
+                StandardButton(text: 'Done', onPressed: onTap),
               ],
             ),
           ),
