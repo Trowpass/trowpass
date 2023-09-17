@@ -22,6 +22,8 @@ class Endpoints {
   static const String paystackVerification = 'api/v1/paystack/verify-transaction';
   static const String walletTopUp = 'api/v1/paystack/credit-wallet';
   static const String createCard = '/api/v1/card/create-virtual-card';
+  static const String fundVirtualCard = '/api/v1/card/fund-virtual-card/{userId}';
+  static const String cardDetails = '/api/v1/card/{userId}';
 
   final String? path;
   const Endpoints(this.path);

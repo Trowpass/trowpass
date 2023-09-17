@@ -8,9 +8,9 @@ import '../shareds/managers/get_session_manager.dart';
 
 class WalletTopUpController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final accountBalance = 0.obs;
+  final accountBalance = 0.0.obs;
   final cardDetails = ''.obs;
-  final customerName = ''.obs;
+  late final customerName = ''.obs;
   final generateAsterisk = ''.obs;
 
   final shouldEntryAmountBeCleared = Rx<bool>(false);
@@ -25,7 +25,8 @@ class WalletTopUpController extends GetxController {
   void onInit() {
     isLoaded.value = false;
     cardDetails.value = '**** **** **** 123401/24';
-    accountBalance.value = 0;
+    accountBalance.value = session.readUserAccountBalance() ?? 0.0;
+    customerName.value = session.readRiderFullName() ?? '';
     super.onInit();
   }
 

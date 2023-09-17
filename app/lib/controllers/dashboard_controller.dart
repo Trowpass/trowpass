@@ -27,7 +27,7 @@ class DashboardController extends GetxController {
   void onInit() {
     isLoaded.value = true;
     fullName.value = session.readRiderFullName() ?? '';
-    balance.value = '';
+    balance.value = formatCurrency(session.readUserAccountBalance() ?? 0.0);
     bankName.value = session.readUserBankName() ?? '';
     accountNumber.value = session.readUserAccountNumber() ?? '';
     phoneNumber.value = '';
@@ -55,9 +55,11 @@ class DashboardController extends GetxController {
       accountNumber.value = response.data!.accountNumber;
       bankName.value = response.data!.bankName;
       phoneNumber.value = response.data!.phoneNumber;
-      balance.value = formatCurrency(response.data!.balance);
+      double balance1 = response.data!.balance;
+      balance.value = formatCurrency(balance1);
       // save bank and account number for use later
       session2.writeUserAccountNumber(accountNumber.value);
+      session2.writeUserAccountBalance(balance1);
       session2.writeUserBankName(bankName.value);
     }
   }

@@ -45,4 +45,8 @@ class SetSessionManager {
   void writeUserBankName(String value) {
     storage.write(userBankName, value);
   }
+
+  void writeUserAccountBalance(double value) {
+    storage.write(userAccountBalance, value);
+  }
 }

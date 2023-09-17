@@ -8,3 +8,4 @@ const String userOnBoarded = 'is_onboarded';
 const String userLoggedIn = 'is_logged_in';
 const String userBankName = 'user_bank';
 const String userAccountNumber = 'user_account';
+const String userAccountBalance = 'user_account_balance';

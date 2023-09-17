@@ -33,8 +33,17 @@ class GetVirtualCardScreen extends StatelessWidget {
               backgroundColor: background,
               elevation: 0,
               centerTitle: true,
+              leading: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+              ),
               title: Text(
-                'Create virtual card',
+                'Get Transport Card',
                 style: appStyles(20, titleActive, FontWeight.w600),
               ),
             ),
@@ -44,6 +53,12 @@ class GetVirtualCardScreen extends StatelessWidget {
                 child: Center(
                   child: Column(
                     children: [
+                      Center(
+                        child: Text(
+                          "Instantly get a virtual card to make transport payment easily on your favorite transport app",
+                          style: appStyles(14, titleActive, FontWeight.w300),
+                        ),
+                      ),
                       const SizedBox(height: 40),
                       Image.asset(preview),
                       const SizedBox(height: 16),

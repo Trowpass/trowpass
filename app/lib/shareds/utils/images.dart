@@ -14,6 +14,7 @@ const summary = 'assets/images/summary.png';
 const cardSuccess = 'assets/images/card_success.png';
 const mainLogo = 'assets/images/main_logo.png';
 const preview = 'assets/images/preview.png';
+const blueCard = 'assets/images/blue_card.png';
 const design = 'assets/images/card_design.png';
 const trowpassLogo = 'assets/images/trowpass_logo.png';
 const finance = 'assets/images/finance.png';

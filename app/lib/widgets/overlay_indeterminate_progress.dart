@@ -17,7 +17,7 @@ class OverlayIndeterminateProgress extends StatelessWidget {
     this.loadingMessage,
     required this.progressColor,
     required this.isLoading,
-    required this.overlayBackgroundColor,
+    this.overlayBackgroundColor,
   });
 
   @override
@@ -33,7 +33,7 @@ class OverlayIndeterminateProgress extends StatelessWidget {
               opacity: 0.3,
               child: ModalBarrier(
                 dismissible: false,
-                color: overlayBackgroundColor?.withOpacity(0.3) ?? overlayColor,
+                color: overlayBackgroundColor?.withOpacity(0.3) ?? background.withOpacity(0.3),
               ),
             ),
           ),

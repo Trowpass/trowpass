@@ -24,4 +24,3 @@ const dialogErrorBorder = Color(0xFFDD7A7A);
 const dialogErrorBackground = Color(0xFFF7DFDF);
 const dialogWarningBorder = Color(0xFFFFB93E);
 const dialogWarningBackground = Color(0xFFFFF6E8);
-const overlayColor = Color.fromARGB(125, 119, 119, 119);

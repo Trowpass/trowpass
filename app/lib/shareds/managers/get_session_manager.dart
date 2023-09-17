@@ -16,4 +16,5 @@ class GetSessionManager {
   bool readIsUserOnBoarded() => storage.read(userOnBoarded) ?? false;
   String? readUserBankName() => storage.read(userBankName);
   String? readUserAccountNumber() => storage.read(userAccountNumber);
+  double? readUserAccountBalance() => storage.read(userAccountBalance);
 }
