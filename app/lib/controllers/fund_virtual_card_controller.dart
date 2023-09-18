@@ -1,5 +1,7 @@
 import 'package:app/repositories/cards_repository.dart';
+import 'package:app/screens/card/card_request_successful.dart';
 import 'package:app/services/requests/post_requests/fund_virtual_card.dart';
+import 'package:app/shareds/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,13 +24,21 @@ class FundVirtualCardController extends GetxController {
   }
 
   Future<void> fundVirtualCard() async {
+    final text = topUpAmountController.text;
     try {
       isLoading.value = true;
       var response = await cardsRepository.fundVirtualCardAsync(FundVirtualCardRequest(
         fromSourceAccountNumber: session.readUserAccountNumber() ?? '',
-        amount: double.parse(topUpAmountController.text),
+        amount: double.parse(text),
       ));
-      if (response.status && response.data!= null) {
+      if (response.status && response.data != null) {
+        final message = '${ngnFormatCurrency(double.parse(text))} was added to your card';
+        Get.to(() => SuccessScreen(
+              message: message,
+              imageAsset: fundCardSuccess,
+              onTap: () {},
+            ));
+        isLoading.value = false;
       } else {
         Get.defaultDialog(title: 'Information', content: Text(response.message));
         isLoading.value = false;

@@ -20,6 +20,7 @@ const design = 'assets/images/card_design.png';
 const trowpassLogo = 'assets/images/trowpass_logo.png';
 const finance = 'assets/images/finance.png';
 const wifi = 'assets/images/wifi.png';
+const fundCardSuccess = 'assets/images/success-1-1.png';
 
 //region Icons
 const card = 'assets/icons/card.png';
