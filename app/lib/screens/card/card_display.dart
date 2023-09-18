@@ -60,6 +60,7 @@ class CardDisplayScreen extends StatelessWidget {
               progressColor: primaryColor,
               overlayBackgroundColor: background,
               child: SingleChildScrollView(
+                physics: const AlwaysScrollableScrollPhysics(),
                 child: Column(
                   children: [
                     Padding(
