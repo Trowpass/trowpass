@@ -25,19 +25,12 @@ class Endpoints {
   static const String fundVirtualCard = '/api/v1/card/fund-virtual-card/{userId}';
   static const String cardDetails = '/api/v1/card/{userId}';
 
-  final String? path;
-  const Endpoints(this.path);
-
-  factory Endpoints.format({
+  static String format({
     required String basePath,
     required Map<String, dynamic> pathReplacement,
   }) {
-    return Endpoints(_EndpointFormatter(basePath).formatEndpoint(pathReplacement));
+    return _EndpointFormatter(basePath).formatEndpoint(pathReplacement);
   }
-
-  /// returns the path
-  @override
-  String toString() => path ?? '';
 }
 
 class _EndpointFormatter {

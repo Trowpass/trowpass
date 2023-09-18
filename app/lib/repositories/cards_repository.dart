@@ -37,7 +37,7 @@ class CardsRepository {
         url: Endpoints.format(
           basePath: Endpoints.cardDetails,
           pathReplacement: {'userId': session.readUserId()},
-        ).toString(),
+        ),
       );
       if (response.data != null) {
         return CardDetailsResponse.fromJson(response.data);
@@ -60,7 +60,7 @@ class CardsRepository {
         path: Endpoints.format(
           basePath: Endpoints.fundVirtualCard,
           pathReplacement: {'userId': session.readUserId()},
-        ).toString(),
+        ),
       );
       if (response.data != null) {
         return FundVirtualCardResponse.fromJson(response.data);
