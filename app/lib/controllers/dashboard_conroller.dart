@@ -18,7 +18,12 @@ class DashboardController extends GetxController {
   final balance = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
   final isLoaded = Rx<bool>(false);
+ RxDouble sliderValue = 0.0.obs;
+  final double slideWidth = 200.0;
 
+  void onSlideChanged(double value) {
+    sliderValue.value = value;
+  }
   GetSessionManager session = GetSessionManager();
   SetSessionManager session2 = SetSessionManager();
   UserController userController = UserController();

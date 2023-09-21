@@ -29,3 +29,5 @@ const drop = 'assets/icons/smart-car.png';
 const topup = 'assets/icons/wallet.png';
 const train = 'assets/icons/ticket.png';
 const configure = 'assets/icons/configure.png';
+const bank = 'assets/icons/bank.png';
+const trowpass = 'assets/icons/trowpass.png';

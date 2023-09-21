@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/inter_wallet_transfer_controller/payment_summary_controller.dart';
+import '../../../controllers/inter_wallet_transfer_controller/payment_summary_controller.dart';
 
 class InterWalletPaymentSummaryScreen extends StatelessWidget {
   final PaymentSummaryController paymentSummaryController = Get.put(PaymentSummaryController());

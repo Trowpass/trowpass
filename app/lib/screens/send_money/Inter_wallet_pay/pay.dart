@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/inter_wallet_transfer_controller/pay_screen_controller.dart';
-import '../../widgets/overlay_indeterminate_progress.dart';
+import '../../../controllers/inter_wallet_transfer_controller/pay_screen_controller.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
 
 class InterWalletPayScreen extends StatelessWidget {
   InterWalletPayScreen({super.key});

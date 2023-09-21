@@ -1,21 +1,20 @@
-import 'package:app/repositories/topup_transport_wallet_repository.dart';
-import 'package:app/services/requests/post_requests/topup_transport_wallet_request.dart';
+import 'package:app/repositories/pay_to_bank_repository.dart';
+import 'package:app/services/requests/post_requests/pay_to_bank_request.dart';
 import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
 import 'package:app/services/responses/get_all_banks_reponse.dart';
-import 'package:app/services/responses/get_all_transport_company_response.dart';
 import 'package:app/services/responses/get_user_by_account_response.dart';
-import 'package:app/services/responses/topup_transport_wallet_response.dart';
+import 'package:app/services/responses/pay_to_bank_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 import '../../shareds/managers/get_session_manager.dart';
 
-class TopupTransportWalletController {
-  final TopupTransportWalletRepository topupTransportWalletRepository = TopupTransportWalletRepository();
+class PaytToBankController {
+  final PayToBankRepository payToBankRepository = PayToBankRepository();
   final SetSessionManager session = SetSessionManager();
   final GetSessionManager getSession = GetSessionManager();
 
   Future<BanksResponse> getallBanksAsync() async {
     try {
-      final response = await topupTransportWalletRepository.getallBanksAsync();
+      final response = await payToBankRepository.getallBanksAsync();
       if (response.status) {
         return response;
       }
@@ -25,23 +24,11 @@ class TopupTransportWalletController {
     }
   }
 
-  Future<TransportCompanyResponse> getallTransportCompanyAsync() async {
-    try {
-      final response = await topupTransportWalletRepository.getallTransportCompanyAsync();
-      if (response.status) {
-        return response;
-      }
-      return Future.error(response.message);
-    } catch (e) {
-      return Future.error(e);
-    }
-  }
-
-   Future<TopUpTransportWalletResponse> topupTransportWalletAsync(
-      TopupTransportWalletRequest request) async {
+   Future<PayToBankResponse> payToBankAsync(
+      PayToBankRequest request) async {
     try {
       final response =
-          await topupTransportWalletRepository.topupTransportWalletAsync(request);
+          await payToBankRepository.payToBankAsync(request);
       if (response.status) {
         return response;
       }
@@ -54,7 +41,7 @@ class TopupTransportWalletController {
   Future<UserByAccountNumberResponse> getUserByAccountNumberAsync(
       UserByAccountNumberRequest request) async {
     try {
-      final response = await topupTransportWalletRepository.getUserByAccountNumberAsync(request);
+      final response = await payToBankRepository.getUserByAccountNumberAsync(request);
       if (response.status) {
         return response;
       }
