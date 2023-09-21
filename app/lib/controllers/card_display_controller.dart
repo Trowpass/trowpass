@@ -14,6 +14,7 @@ class CardDisplayController extends GetxController {
   final expiryDate = ''.obs;
   final cardNumber = '****************'.obs;
   final cardType = ''.obs;
+  final cvv = '***'.obs;
   final cardsRepository = CardsRepository();
   final session = GetSessionManager();
 
@@ -33,7 +34,8 @@ class CardDisplayController extends GetxController {
         final data = response.data!;
         expiryDate.value = '${data.expiryMonth}/${data.expiryYear}';
         balance.value = ngnFormatCurrency(data.balance);
-        cardNumber.value = data.encPan;
+        cardNumber.value = data.securedDataDetail?.pan ?? '';
+        cvv.value = data.securedDataDetail?.cvv ?? '';
         switch (data.brand.toLowerCase()) {
           case 'verve':
             cardType.value = verveCard;

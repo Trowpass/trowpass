@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'app_styles.dart';
 
 /// Modal types
-enum DialogType { error, success, warning }
+enum DialogType { error, success, warning, info, neutral }
 
 class _AppDialog extends StatelessWidget {
   final String title;
@@ -35,16 +35,24 @@ class _AppDialog extends StatelessWidget {
           decoration: BoxDecoration(
             color: type == DialogType.success
                 ? dialogSuccessBackground
-                : type == DialogType.error
-                    ? dialogErrorBackground
-                    : dialogWarningBackground,
+                : type == DialogType.neutral
+                    ? background
+                    : type == DialogType.info
+                        ? dialogInfoBackground
+                        : type == DialogType.error
+                            ? dialogErrorBackground
+                            : dialogWarningBackground,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
               color: type == DialogType.success
                   ? dialogSuccessBorder
-                  : type == DialogType.error
-                      ? dialogErrorBorder
-                      : dialogWarningBorder,
+                  : type == DialogType.neutral
+                      ? Colors.grey
+                      : type == DialogType.info
+                          ? line
+                          : type == DialogType.error
+                              ? dialogErrorBorder
+                              : dialogWarningBorder,
               width: 2.0,
             ),
           ),
@@ -59,9 +67,13 @@ class _AppDialog extends StatelessWidget {
                       Icons.info_outline,
                       color: type == DialogType.success
                           ? dialogSuccessBorder
-                          : type == DialogType.error
-                              ? dialogErrorBorder
-                              : dialogWarningBorder,
+                          : type == DialogType.success
+                              ? Colors.grey
+                              : type == DialogType.info
+                                  ? line
+                                  : type == DialogType.error
+                                      ? dialogErrorBorder
+                                      : dialogWarningBorder,
                     ),
                   ),
                   Text(

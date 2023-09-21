@@ -1,5 +1,5 @@
 import 'package:app/repositories/cards_repository.dart';
-import 'package:app/screens/card/card_request_successful.dart';
+import 'package:app/screens/card/success_screen.dart';
 import 'package:app/services/requests/post_requests/fund_virtual_card.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:flutter/material.dart';

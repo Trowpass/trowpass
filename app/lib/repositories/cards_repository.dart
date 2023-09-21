@@ -7,6 +7,7 @@ import 'package:app/shareds/helpers/api_connection_helper.dart';
 import 'package:dio/dio.dart';
 
 import '../services/exceptions/dio_exceptions.dart';
+import '../services/requests/put_requests/change_pin_request.dart';
 import '../services/responses/card_details_response.dart';
 import '../services/responses/fund_virtual_card_response.dart';
 import '../shareds/constants/endpoints.dart';
@@ -66,6 +67,23 @@ class CardsRepository {
         return FundVirtualCardResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to fund card');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<CreateVirtualCardResponse> changeVirtualCardPinAsync(ChangePinRequest request) async {
+    try {
+      var response = await apiConnectionHelper.updateDataAsync(requestData: request, path: Endpoints.changeVirtualCardPin);
+      if (response.data != null) {
+        return CreateVirtualCardResponse.fromJson(response.data);
+      } else {
+        throw Exception('Could not change virtual card\'s pin');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));

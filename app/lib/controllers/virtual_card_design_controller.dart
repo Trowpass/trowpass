@@ -5,7 +5,7 @@ import 'package:app/shareds/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../screens/card/card_request_successful.dart';
+import '../screens/card/success_screen.dart';
 import '../screens/navigation_menus/home_landing_tab_screen.dart';
 import '../shareds/utils/app_colors.dart';
 

@@ -86,7 +86,7 @@ class CardDisplayScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   controller.cardNumber.value,
-                                  style: appStyles(14, Colors.white, FontWeight.bold),
+                                  style: appStyles(18, Colors.white, FontWeight.bold),
                                 ),
                                 const SizedBox(height: 32),
                                 RichText(
@@ -94,7 +94,7 @@ class CardDisplayScreen extends StatelessWidget {
                                     style: appStyles(18, Colors.white, null),
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text: 'Expiry: ',
+                                        text: 'Expiry    ',
                                         style: appStyles(18, Colors.white, null),
                                       ),
                                       TextSpan(
@@ -115,12 +115,35 @@ class CardDisplayScreen extends StatelessWidget {
                           Positioned(
                             bottom: 16,
                             right: 16,
-                            child: Visibility(
-                              visible: controller.cardType.value.isNotEmpty,
-                              child: Image.asset(
-                                controller.cardType.value,
-                                scale: 1.2,
-                              ),
+                            child: Column(
+                              children: [
+                                RichText(
+                                  text: TextSpan(
+                                    style: appStyles(18, Colors.white, null),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: 'CVV    ',
+                                        style: appStyles(18, Colors.white, null),
+                                      ),
+                                      TextSpan(
+                                        text: controller.cvv.value,
+                                        style: appStyles(18, Colors.white, FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Visibility(
+                                  maintainState: true,
+                                  maintainSize: true,
+                                  maintainAnimation: true,
+                                  visible: controller.cardType.value.isNotEmpty,
+                                  child: Image.asset(
+                                    controller.cardType.value,
+                                    scale: 1.2,
+                                  ),
+                                ),
+                              ],
                             ),
                           )
                         ],

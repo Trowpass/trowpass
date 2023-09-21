@@ -5,7 +5,7 @@ import 'otp_type.dart';
 String baseUrl = getBaseUrlOnEnvironment(Environment.staging);
 
 class Endpoints {
-  static const String riderRegister = 'api/v1/auth/create';
+  static const String riderRegister  = 'api/v1/auth/create';
   static const String verifyOtp = 'api/v1/auth/verify-account';
   static const String login = 'api/v1/auth/sign-in';
   static const String createPin = 'api/v1/setting/create-pin';
@@ -24,6 +24,7 @@ class Endpoints {
   static const String createCard = '/api/v1/card/create-virtual-card';
   static const String fundVirtualCard = '/api/v1/card/fund-virtual-card/{userId}';
   static const String cardDetails = '/api/v1/card/{userId}';
+  static const String changeVirtualCardPin = '/api/v1/card/change-virtual-card-pin';
 
   static String format({
     required String basePath,

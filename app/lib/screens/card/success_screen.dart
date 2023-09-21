@@ -1,12 +1,9 @@
-import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 import '../../shareds/utils/app_colors.dart';
-import '../navigation_menus/home_landing_tab_screen.dart';
 
 class SuccessScreen extends StatelessWidget {
   final String message;
