@@ -43,7 +43,8 @@ class InterWalletPayScreen extends StatelessWidget {
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined, color: Colors.black),
+                    icon: const Icon(Icons.notifications_outlined,
+                        color: Colors.black),
                     onPressed: () {
                       Get.back();
                     },
@@ -98,7 +99,7 @@ class PayForm extends StatelessWidget {
               textHint: 'Recipient Phone Number',
               isPassword: false,
               autoCorrect: false,
-              validatorMessage: 'Please enter recepient number',
+              validatorMessage: 'Please enter recipient number',
             ),
             const SizedBox(height: 10),
             LabelText(textLabel: "Recipient Name"),

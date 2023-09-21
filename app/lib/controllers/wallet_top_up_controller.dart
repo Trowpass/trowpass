@@ -45,7 +45,8 @@ class WalletTopUpController extends GetxController {
 
   String hideAccountBalance() {
     int balanceLen = accountBalance.value.toString().length;
-    return generateAsterisk.value = List.generate(balanceLen, (index) => '*').join();
+    return generateAsterisk.value =
+        List.generate(balanceLen, (index) => '*').join();
   }
 
   final pageIndex = 0.obs;
@@ -61,7 +62,8 @@ class WalletTopUpController extends GetxController {
       accountNumber: session.readUserAccountNumber() ?? '',
       onOtherOptionsTap: () {
         final amount = topUpAmountController.text;
-        Get.to(() => PaymentMethodScreen(), fullscreenDialog: true, arguments: {'amount': amount});
+        Get.to(() => PaymentMethodScreen(),
+            fullscreenDialog: true, arguments: {'amount': amount});
       },
     );
   }

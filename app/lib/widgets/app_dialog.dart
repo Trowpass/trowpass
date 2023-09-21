@@ -8,6 +8,9 @@ import 'app_styles.dart';
 /// Modal types
 enum DialogType { error, success, warning, info, neutral }
 
+const subTitleContent =
+    'We have you in mind. In the main time, explore the available features. Thank you.';
+
 class _AppDialog extends StatelessWidget {
   final String title;
   final String subtitle;
@@ -109,5 +112,21 @@ Future<T?> showAppDialog<T>({
       type: type,
     ),
     transitionCurve: Curves.easeInOut,
+  );
+}
+
+Future<dynamic> placeholderDialog(String pageTitle) {
+  return showAppDialog(
+    title: pageTitle,
+    subtitle: subTitleContent,
+    type: DialogType.warning,
+  );
+}
+
+void placeHolderDialog(String pageTitle) {
+  showAppDialog(
+    title: pageTitle,
+    subtitle: subTitleContent,
+    type: DialogType.warning,
   );
 }

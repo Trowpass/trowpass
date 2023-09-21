@@ -1,5 +1,3 @@
-// PayController.dart
-
 // ignore_for_file: unused_local_variable
 
 import 'package:app/controllers/bloc/inter_wallet_transfer_controller.dart';
@@ -13,7 +11,7 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PayController extends GetxController {
+class ScanQrPayController extends GetxController {
   final formKey = GlobalKey<FormState>();
 
   final nameController = TextEditingController();
@@ -23,7 +21,6 @@ class PayController extends GetxController {
   final amountController = TextEditingController();
   final pinController = TextEditingController();
   final narrationController = TextEditingController();
-
 
   final isLoaded = false.obs;
 
@@ -68,9 +65,9 @@ class PayController extends GetxController {
           data: transactionDetails,
         );
         Get.find<DashboardController>().userWallet();
-        Get.offAll(ScanToPayReceiptScreen(
-          transactionDetails: parsedResponse,
-        ));
+        Get.offAll(() => ScanToPayReceiptScreen(
+              transactionDetails: parsedResponse,
+            ));
       } else {
         if (response.responseCode == "11") {
           Get.defaultDialog(
@@ -92,10 +89,4 @@ class PayController extends GetxController {
       isLoaded.value = false;
     }
   }
-
-
-
-  // void trySubmit() {
-  //   Get.focusScope!.unfocus();
-  // }
 }
