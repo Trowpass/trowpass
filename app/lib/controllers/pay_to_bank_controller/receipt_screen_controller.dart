@@ -1,24 +1,23 @@
-import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:get/get.dart';
 
-import '../screens/navigation_menus/home_landing_tab_screen.dart';
-
-class TopUpTransportWalletDoneContoller extends GetxController {
+class ReceiptController extends GetxController {
   final transactionId = Rx<String>('');
   final transactionAmount = Rx<double>(0);
   final recipientImage = Rx<String>('');
   final recipientName = Rx<String>('');
-  final companyName = Rx<String>('');
   final recipientAccountNumber = Rx<String>('');
 
-  String setTransactionId = '847474847';
+  String setTransactionId = '55546789';
+  double setTransactionAmount = 2000;
   String setRecipientImage = loginImg;
-  String setRecipientName = 'Alfred George';
+  String setRecipientName = 'Olajide Samson';
   String setRecipientAccountNumber = '0011223345';
 
   @override
   void onInit() {
+    transactionAmount.value = setTransactionAmount;
     transactionId.value = setTransactionId;
     recipientImage.value = setRecipientImage;
     recipientName.value = setRecipientName;
@@ -27,7 +26,6 @@ class TopUpTransportWalletDoneContoller extends GetxController {
   }
 
   void trySubmit() {
-    Get.focusScope!.unfocus();
     Get.offAll(() => HomeLandingTabScreen());
   }
 }

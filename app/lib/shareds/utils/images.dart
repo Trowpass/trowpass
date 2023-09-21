@@ -20,11 +20,14 @@ const finance = 'assets/images/finance.png';
 
 //region Icons
 const card = 'assets/icons/card.png';
-const flight = 'assets/icons/flight.png';
-const loan = 'assets/icons/loan.png';
+const flight = 'assets/icons/airplane.png';
+const loan = 'assets/icons/wallet-money.png';
 const scan = 'assets/icons/scan.png';
-const send = 'assets/icons/send.png';
-const book = 'assets/icons/book.png';
-const topup = 'assets/icons/topup.png';
-const train = 'assets/icons/train.png';
+const send = 'assets/icons/send-2.png';
+const book = 'assets/icons/car.png';
+const drop = 'assets/icons/smart-car.png';
+const topup = 'assets/icons/wallet.png';
+const train = 'assets/icons/ticket.png';
 const configure = 'assets/icons/configure.png';
+const bank = 'assets/icons/bank.png';
+const trowpass = 'assets/icons/trowpass.png';

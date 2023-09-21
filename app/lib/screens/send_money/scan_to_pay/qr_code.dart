@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:app/controllers/dashboard_conroller.dart';
-import 'package:app/screens/scan_to_pay/qr_data.dart';
-import 'package:app/screens/scan_to_pay/scan.dart';
+import 'package:app/screens/send_money/scan_to_pay/qr_data.dart';
+import 'package:app/screens/send_money/scan_to_pay/scan.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -162,7 +162,7 @@ Widget _buildMyCodeTab() {
                   size: 250.0, // Adjust the size as needed
                   eyeStyle: QrEyeStyle(color: Colors.black),
                   errorCorrectionLevel: QrErrorCorrectLevel.Q,
-                  embeddedImage: AssetImage(mainLogo), // Add your company logo
+                  embeddedImage: AssetImage(mainLogo), 
                   errorStateBuilder: (cxt, err) {
                     return Container(
                       child: Center(

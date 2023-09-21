@@ -12,6 +12,7 @@ const offWhite = Color(0xFFFCFCFC);
 const titleActive = Color(0xFF14142B);
 const anchor = Color(0xFF1CC8EE);
 const border = Color(0xFFD8D8D8);
+const search = Color(0xFFEFF0F6);
 const line = Color(0xFF092CF7);
 const filled = Color(0xFFEDEDED);
 const label = Color(0xFF6E7191);

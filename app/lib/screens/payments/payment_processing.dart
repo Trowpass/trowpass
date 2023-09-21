@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import '../../controllers/bloc/payment_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../widgets/overlay_indeterminate_progress.dart';
-import '../wallet/top_up_transport_wallet_done.dart';
 
 class PaymentProcessing extends StatefulWidget {
   final String reference;
@@ -31,13 +30,13 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
     try {
       var response = await paymentController.verifyPaystackTransactionAsync(paymentRef.trim());
       if (response.status) {
-        Get.offAll(() => TopUpTransportWalletDoneScreen(
-              successMessage: 'Payment was successful',
-              reference: paymentRef,
-              companyName: widget.companyName,
-              recipientName: widget.recipientName,
-              amount: widget.amount,
-            ));
+        // Get.offAll(() => TopUpTransportWalletDoneScreen(
+        //       successMessage: 'Payment was successful',
+        //       reference: paymentRef,
+        //       companyName: widget.companyName,
+        //       recipientName: widget.recipientName,
+        //       amount: widget.amount,
+        //     ));
       } else {
         AlertDialog(
           title: const Text("Payment"),

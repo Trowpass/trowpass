@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/app_styles.dart';
-import '../../widgets/currency_format.dart';
-import '../../widgets/standard_button.dart';
+import '../../../widgets/app_styles.dart';
+import '../../../widgets/currency_format.dart';
+import '../../../widgets/standard_button.dart';
 
 class InterWalletTransferReceiptScreen extends StatelessWidget {
   InterWalletTransferReceiptScreen(

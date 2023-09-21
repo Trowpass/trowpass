@@ -11,6 +11,7 @@ class Endpoints {
   String createPin = 'api/v1/setting/create-pin';
   String userProfile = 'api/v1/user/profile';
   String userByPhone = 'api/v1/user/details';
+  String userByAccountNumber = 'api/v1/transfer/verify-bank-account';
   static String forgotPassword = '/api/v1/auth/forgot-password';
   static String resetPassword = '/api/v1/auth/reset-password';
   static String resendOtpAccountVerification =
@@ -23,4 +24,8 @@ class Endpoints {
   String interWalletTransfer = 'api/v1/wallet/inter-wallet-transfer';
   String paystackVerification = 'api/v1/paystack/verify-transaction';
   String walletTopUp = 'api/v1/paystack/credit-wallet';
+  String banks = 'api/v1/transfer/banks';
+  String toBank = 'api/v1/transfer/bank-transfer';
+  String transportWallet = 'api/v1/transfer/top-up-transport-wallet';
+  String transportCompany = 'api/v1/transfer/transport-company/all';
 }
