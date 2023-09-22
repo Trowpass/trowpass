@@ -129,7 +129,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     height: 10,
                   ),
                   TextInputForm(
-                    inputType: TextInputType.number,
+                    // inputType: TextInputType.number,
                     enabled: true,
                     inputController: controller.bankNameTextEditController,
                     textHint: 'Select Bank',

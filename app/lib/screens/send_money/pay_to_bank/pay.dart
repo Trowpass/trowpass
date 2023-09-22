@@ -87,7 +87,7 @@ class PayForm extends StatelessWidget {
              LabelText(textLabel: "Bank Name"),
                  const SizedBox(height: 10),
                   TextInputForm(
-                    inputType: TextInputType.number,
+                    // inputType: TextInputType.number,
                     enabled: true,
                     inputController: payController.bankNameController,
                     textHint: 'Select Bank',

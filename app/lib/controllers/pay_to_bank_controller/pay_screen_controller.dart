@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_local_variable
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_local_variable, avoid_print, avoid_function_literals_in_foreach_calls
 
-import 'package:app/controllers/bloc/inter_wallet_transfer_controller.dart';
 import 'package:app/controllers/bloc/pay_to_bank_controller.dart';
-import 'package:app/controllers/bloc/topup_transport_wallet_controller.dart';
-import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/screens/send_money/pay_to_bank/receipt.dart';
 import 'package:app/services/requests/post_requests/pay_to_bank_request.dart';
 import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
 import 'package:app/services/responses/get_all_banks_reponse.dart';
@@ -24,12 +22,11 @@ class PayToBankController extends GetxController {
   final selectedBankName = 'Select bank'.obs;
   final isLoaded = false.obs;
   final PaytToBankController paytToBankController = PaytToBankController();
-final TopupTransportWalletController topupTransportWalletController =
-      TopupTransportWalletController();
+
   @override
   void onInit() {
     isLoaded.value = false;
-    // Add a listener to phoneNumberController
+    fetchBanks();
     accountNumberController.addListener(() {
       if (accountNumberController.text.trim().length == 10) {
         fetchUserDataByAccountNumber();
@@ -47,8 +44,6 @@ final TopupTransportWalletController topupTransportWalletController =
   }
 
   GetSessionManager session = GetSessionManager();
-  InterwalletController interwalletController = InterwalletController();
-  UserController userController = UserController();
 
   void onSetSelectedBankName(Object? value) {
     selectedBankName.value = value.toString();
@@ -62,7 +57,7 @@ final TopupTransportWalletController topupTransportWalletController =
   void fetchBanks() async {
     try {
       BanksResponse banksResponse =
-          await topupTransportWalletController.getallBanksAsync();
+          await paytToBankController.getallBanksAsync();
       if (banksResponse.status) {
         List<ResponseData> banksData = banksResponse.data;
         List<String> bankNamesList = ['Select bank'];
@@ -104,7 +99,7 @@ final TopupTransportWalletController topupTransportWalletController =
 
         if (response.status) {
           String fullName = "${response.data!.accountName}";
-          accountNumberController.text = fullName;
+          fullNameController.text = fullName;
         } else {
           Get.defaultDialog(
               title: 'Information', content: Text(response.message));
@@ -141,9 +136,9 @@ final TopupTransportWalletController topupTransportWalletController =
           data: transactionDetails,
         );
         Get.find<DashboardController>().userWallet();
-        // Get.offAll(() => TopUpTransportWalletDoneScreen(
-        //       transactionDetails: parsedResponse,
-        //     ));
+        Get.offAll(() => PayToBankReceiptScreen(
+              transactionDetails: parsedResponse,
+            ));
       } else {
         if (response.responseCode == "11") {
           Get.defaultDialog(
