@@ -188,7 +188,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               onPressed: () async {
                                 if (controller.formKey.currentState!.validate()) {
                                   controller.formKey.currentState!.save();
-                                  controller.strength.value == Strength.secure ? null : controller.registerRider();
+                                  controller.strength.value == Strength.secure ? controller.registerRider() : null;
                                 }
                               },
                             ),
