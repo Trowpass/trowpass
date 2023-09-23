@@ -32,6 +32,7 @@ class TopUpTransportWalletData {
   String? transactionMethod;
   String? bank;
   int? amount;
+  String? companyLogoPath;
 
   TopUpTransportWalletData({
     this.senderName,
@@ -42,6 +43,7 @@ class TopUpTransportWalletData {
     this.transactionType,
     this.transactionMethod,
     this.bank,
+    this.companyLogoPath,
     this.amount,
   });
 
@@ -55,6 +57,7 @@ class TopUpTransportWalletData {
         transactionType: json['transactionType'],
         transactionMethod: json['transactionMethod'],
         bank: json['bank'],
+        companyLogoPath: json['companyLogoPath'],
         amount: json['amount'],
       );
 
@@ -68,6 +71,7 @@ class TopUpTransportWalletData {
       'transactionType': transactionType,
       'transactionMethod': transactionMethod,
       'bank': bank,
+      'companyLogoPath': companyLogoPath,
       'amount': amount,
     };
   }

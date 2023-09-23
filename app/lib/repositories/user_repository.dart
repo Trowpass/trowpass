@@ -31,7 +31,7 @@ class UserRepository {
   Future<UserLoginResponse> userLoginAsync(UserLoginRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().login);
+          requestData: request, path: Endpoints.login);
       if (response.data != null) {
         return UserLoginResponse.fromJson(response.data);
       } else {
@@ -50,7 +50,7 @@ class UserRepository {
       RiderRegistrationRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().riderRegister);
+          requestData: request, path: Endpoints.riderRegister);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {
@@ -68,7 +68,7 @@ class UserRepository {
   Future<VerifyAccountResponse> verifyOtpAsync(
       VerifyOtpRequest request, dynamic customerPhoneNumber) async {
     try {
-      var url = '${Endpoints().verifyOtp}/$customerPhoneNumber';
+      var url = '${Endpoints.verifyOtp}/$customerPhoneNumber';
       var response = await apiConnectionHelper.postDataAsync(
           requestData: request, path: url);
       if (response.data != null) {
@@ -88,7 +88,7 @@ class UserRepository {
   Future<ViewProfileResponse> getUserProfileAsync() async {
     try {
       int? userId = session.readUserId();
-      var url = '${Endpoints().userProfile}/$userId';
+      var url = '${Endpoints.userProfile}/$userId';
       //
       var response = await apiConnectionHelper.getDataAsync(
         url: url,
@@ -112,7 +112,7 @@ class UserRepository {
       UserByPhoneRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().userByPhone);
+          requestData: request, path: Endpoints.userByPhone);
       if (response.data != null) {
         return UserByPhoneResponse.fromJson(response.data);
       } else {
@@ -195,7 +195,7 @@ class UserRepository {
       CreateWalletRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().createWallet);
+          requestData: request, path: Endpoints.createWallet);
       if (response.data != null) {
         return CreateWalletResponse.fromJson(response.data);
       } else {
@@ -234,7 +234,7 @@ class UserRepository {
   Future<UserWalletResponse> getUserWalletAsync() async {
     try {
       int? userId = session.readUserId();
-      var url = '${Endpoints().userWallet}/$userId';
+      var url = '${Endpoints.userWallet}/$userId';
       var response = await apiConnectionHelper.getDataAsync(
         url: url,
       );
@@ -255,7 +255,7 @@ class UserRepository {
   Future<BaseResponse> choosePinAsync(ChoosePinRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().createPin);
+          requestData: request, path: Endpoints.createPin);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {

@@ -132,7 +132,6 @@ class ScanQrPayForm extends StatelessWidget {
               inputType: TextInputType.number,
               enabled: true,
               inputController: payController.amountController,
-              // textLabel: 'Amount',
               textHint: 'N1200',
               validatorMessage: 'Please enter an amount',
               isPassword: false,
@@ -144,7 +143,6 @@ class ScanQrPayForm extends StatelessWidget {
             TextInputForm(
               enabled: true,
               inputController: payController.narrationController,
-              // textLabel: 'Narration',
               textHint: 'Narration',
               isPassword: false,
               autoCorrect: false,
@@ -157,7 +155,6 @@ class ScanQrPayForm extends StatelessWidget {
                 inputType: TextInputType.number,
                 enabled: true,
                 inputController: payController.pinController,
-                // textLabel: 'Pin',
                 textHint: '0000',
                 validatorMessage: 'Enter your pin',
                 isPassword: true,

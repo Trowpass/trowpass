@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:app/screens/send_money/Inter_wallet_pay/pay.dart';
 import 'package:app/screens/dashboard/components/custom_card.dart';
 import 'package:app/screens/dashboard/components/image_slider.dart';
 import 'package:app/screens/send_money/scan_to_pay/qr_code.dart';
@@ -13,8 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/dashboard_conroller.dart';
+import '../../controllers/dashboard_controller.dart';
 import '../../widgets/currency_format.dart';
+import '../navigation_menus/cards_tab_screen.dart';
 import '../wallet/top_up_transport_wallet.dart';
 import '../wallet/topup/wallet_top_up.dart';
 
@@ -49,46 +49,47 @@ class DashboardScreen extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.symmetric(vertical: 55),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 55),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           flex: 1,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               Text(
                                                 'Welcome back!',
-                                                style: appStyles(16, offWhite, FontWeight.w300),
+                                                style: appStyles(16, offWhite,
+                                                    FontWeight.w300),
                                               ),
                                               Text(
                                                 controller.fullName.value,
-                                                style: appStyles(18, offWhite, FontWeight.w500),
+                                                style: appStyles(18, offWhite,
+                                                    FontWeight.w500),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        // Expanded(
-                                        //   flex: 1,
-                                        //   child: Align(
-                                        //     alignment: Alignment.topRight,
-                                        //     child: Image.asset(qrCode),
-                                        //   ),
-                                        // ),
                                       ],
                                     ),
                                   ),
                                   const SizedBox(height: 36),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
                                             Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 const Text(
                                                   'Balance',
@@ -98,23 +99,32 @@ class DashboardScreen extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Row(
-                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
                                                   children: [
                                                     Obx(() => Text(
-                                                          controller.showBalance.value
+                                                          controller.showBalance
+                                                                  .value
                                                               ? '${currencyFormat.currencySymbol}${controller.balance.value}'
                                                               : '*******',
-                                                          style: const TextStyle(
+                                                          style:
+                                                              const TextStyle(
                                                             color: Colors.white,
                                                             fontSize: 16,
                                                           ),
                                                         )),
                                                     Obx(() => IconButton(
-                                                          onPressed: controller.toggleBalanceVisibility,
+                                                          onPressed: controller
+                                                              .toggleBalanceVisibility,
                                                           icon: Icon(
-                                                            controller.showBalance.value
-                                                                ? Icons.visibility_off
-                                                                : Icons.visibility,
+                                                            controller
+                                                                    .showBalance
+                                                                    .value
+                                                                ? Icons
+                                                                    .visibility_off
+                                                                : Icons
+                                                                    .visibility,
                                                             color: Colors.white,
                                                           ),
                                                         )),
@@ -129,7 +139,8 @@ class DashboardScreen extends StatelessWidget {
                                         child: Container(
                                           alignment: Alignment.centerRight,
                                           child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.end,
                                             children: [
                                               const Text(
                                                 'Account Number',
@@ -170,7 +181,7 @@ class DashboardScreen extends StatelessWidget {
                               children: [
                                 CustomCard(
                                   imagePath: scan,
-                                    color: Color.fromRGBO(46, 189, 77, 0.1),
+                                  color: Color.fromRGBO(46, 189, 77, 0.1),
                                   text: 'Scan to Pay',
                                   onTap: () {
                                     Get.to(() => ScanScreen());
@@ -178,7 +189,7 @@ class DashboardScreen extends StatelessWidget {
                                 ),
                                 CustomCard(
                                   imagePath: topup,
-                                    color: Color.fromRGBO(241, 195, 78, 0.1),
+                                  color: Color.fromRGBO(241, 195, 78, 0.1),
                                   text: 'Topup Transport Wallet',
                                   onTap: () {
                                     Get.to(TopUpTransportWalletScreen());
@@ -186,21 +197,24 @@ class DashboardScreen extends StatelessWidget {
                                 ),
                                 CustomCard(
                                   imagePath: loan,
-                                    color: Color.fromRGBO(9, 44, 247, 0.1),
+                                  color: Color.fromRGBO(9, 44, 247, 0.1),
                                   text: 'Get Transport Loan',
-                                  onTap: () => controller.displayPlaceholderDialog('Get Transport Loan'),
+                                  onTap: () =>
+                                      controller.displayPlaceholderDialog(
+                                          'Get Transport Loan'),
                                 ),
                                 CustomCard(
                                   imagePath: card,
-                                    color: Color.fromRGBO(116, 51, 255, 0.1),
+                                  color: Color.fromRGBO(116, 51, 255, 0.1),
                                   text: 'Transport Card',
-                                  onTap: () => controller.displayPlaceholderDialog('Transport Card'),
+                                  onTap: () => Get.to(CardsTabScreen()),
                                 ),
                                 CustomCard(
                                   imagePath: book,
-                                    color: Color.fromRGBO(231, 27, 27, 0.1),
+                                  color: Color.fromRGBO(231, 27, 27, 0.1),
                                   text: 'Book a Bus',
-                                  onTap: () => controller.displayPlaceholderDialog('Book a Bus'),
+                                  onTap: () => controller
+                                      .displayPlaceholderDialog('Book a Bus'),
                                 ),
                                 CustomCard(
                                   imagePath: send,
@@ -212,21 +226,25 @@ class DashboardScreen extends StatelessWidget {
                                 ),
                                 CustomCard(
                                   imagePath: drop,
-                                    color: Color.fromRGBO(241, 195, 78, 0.1),
+                                  color: Color.fromRGBO(241, 195, 78, 0.1),
                                   text: 'Pick n Drop',
-                                  onTap: () => controller.displayPlaceholderDialog('Transports Pay'),
+                                  onTap: () =>
+                                      controller.displayPlaceholderDialog(
+                                          'Transports Pay'),
                                 ),
                                 CustomCard(
                                   imagePath: flight,
-                                    color: Color.fromRGBO(9, 44, 247, 0.1),
+                                  color: Color.fromRGBO(9, 44, 247, 0.1),
                                   text: 'Book Flight',
-                                  onTap: () => controller.displayPlaceholderDialog('Book Flight'),
+                                  onTap: () => controller
+                                      .displayPlaceholderDialog('Book Flight'),
                                 ),
                                 CustomCard(
                                   imagePath: train,
-                                    color: Color.fromRGBO(60, 123, 245, 0.1),
+                                  color: Color.fromRGBO(60, 123, 245, 0.1),
                                   text: 'Train Ticket',
-                                  onTap: () => controller.displayPlaceholderDialog('Train Ticket'),
+                                  onTap: () => controller
+                                      .displayPlaceholderDialog('Train Ticket'),
                                 ),
                               ],
                             ),
@@ -254,7 +272,8 @@ class DashboardScreen extends StatelessWidget {
                     );
                   },
                 ),
-                floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+                floatingActionButtonLocation:
+                    FloatingActionButtonLocation.endFloat,
               ),
             ),
           ));

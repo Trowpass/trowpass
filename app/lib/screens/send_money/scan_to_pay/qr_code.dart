@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
-import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/screens/send_money/scan_to_pay/qr_data.dart';
 import 'package:app/screens/send_money/scan_to_pay/scan.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -123,38 +123,12 @@ Widget _buildMyCodeTab() {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            // Transform.translate(
-            //   offset: Offset(0, -190),
-            //   child: ClipOval(
-            //       child: Image.asset(
-            //     profile,
-            //   )),
-            // ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 50,
                 ),
-                // Text(
-                //   'Daisy Bright',
-                //   style: appStyles(
-                //     20,
-                //     titleActive,
-                //     FontWeight.w500,
-                //   ),
-                // ),
-                // Text(
-                //   'Driver',
-                //   style: appStyles(
-                //     20,
-                //     titleActive,
-                //     FontWeight.w400,
-                //   ),
-                // ),
-                // Image.asset(
-                //   code,
-                // )
                 QrImageView(
                   data:
                       "${userdata.fullName}\n${userdata.bankName}\n${userdata.accountNumber}\n${userdata.phoneNumber}",
@@ -162,7 +136,7 @@ Widget _buildMyCodeTab() {
                   size: 250.0, // Adjust the size as needed
                   eyeStyle: QrEyeStyle(color: Colors.black),
                   errorCorrectionLevel: QrErrorCorrectLevel.Q,
-                  embeddedImage: AssetImage(mainLogo), 
+                  embeddedImage: AssetImage(mainLogo),
                   errorStateBuilder: (cxt, err) {
                     return Container(
                       child: Center(
@@ -174,7 +148,7 @@ Widget _buildMyCodeTab() {
                     );
                   },
                   embeddedImageStyle: QrEmbeddedImageStyle(
-                    size: Size(40, 40), // Size of the embedded image
+                    size: Size(40, 40),
                   ),
                 ),
               ],

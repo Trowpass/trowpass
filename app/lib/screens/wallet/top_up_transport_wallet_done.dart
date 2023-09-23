@@ -82,11 +82,6 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                                         style: appStyles(16, null, null),
                                       ),
                                     ),
-                                    // subtitle: Align(
-                                    //   alignment: Alignment.center,
-                                    //   child: Text(
-                                    //       'Transaction ID: ${transactionDetails.transactionType}'),
-                                    // ),
                                   ),
                                 ),
                                 Padding(
@@ -155,15 +150,23 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Expanded(
-                                                flex: 1,
-                                                child: Image.asset(
-                                                    controller
-                                                        .recipientImage.value,
-                                                    height: 70,
-                                                    width: 70)),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: transactionDetails.data
+                                                            ?.companyLogoPath ==
+                                                        null
+                                                    ? Image.asset(
+                                                        controller
+                                                            .recipientImage
+                                                            .value,
+                                                        height: 70,
+                                                        width: 70)
+                                                    : Image.network(
+                                                        transactionDetails.data
+                                                                ?.companyLogoPath ??
+                                                            '')),
                                           ),
                                           Expanded(
                                               child: ListTile(

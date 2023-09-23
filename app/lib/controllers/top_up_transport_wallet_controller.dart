@@ -1,9 +1,8 @@
 // ignore_for_file: unused_local_variable, unnecessary_brace_in_string_interps, prefer_const_constructors, avoid_print, unnecessary_string_interpolations, avoid_function_literals_in_foreach_calls, unnecessary_null_comparison
 
 import 'package:app/controllers/bloc/topup_transport_wallet_controller.dart';
-import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/screens/wallet/top_up_transport_wallet_done.dart';
-import 'package:app/screens/wallet/top_up_transport_wallet_summary.dart';
 import 'package:app/services/requests/post_requests/topup_transport_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
 import 'package:app/services/responses/get_all_banks_reponse.dart';
@@ -20,7 +19,6 @@ class TopUpTransportWalletController extends GetxController {
       'Easily fund your tansport wallet without opening several apps to do so.');
   final selectedTransportCompany = 'Select company'.obs;
   final selectedBankName = 'Select bank'.obs;
-  // final accountName = Rx<String>('');
   final transportCompanyNameTextEditController = TextEditingController();
   final bankNameTextEditController = TextEditingController();
   final accountWalletNumberTextEditController = TextEditingController();
@@ -43,6 +41,13 @@ class TopUpTransportWalletController extends GetxController {
       }
     });
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    fetchTransportCompany();
+    fetchBanks();
+    super.onReady();
   }
 
   void clearTextFields() {
@@ -78,7 +83,6 @@ class TopUpTransportWalletController extends GetxController {
       if (banksResponse.status) {
         List<ResponseData> banksData = banksResponse.data;
         List<String> bankNamesList = ['Select bank'];
-        // bankNamesList.addAll(banksData.map((bank) => bank.bankName));
         banksData.forEach((bank) {
           String bankName = bank.bankName;
           int bankId = bank.id;
@@ -87,7 +91,6 @@ class TopUpTransportWalletController extends GetxController {
           bankCodeMap[bankName] = bankCode;
           bankNamesList.add('$bankName');
         });
-        // bankNames.assignAll(bankNamesList);
         allBanks = bankNamesList;
         selectedBankName.value = bankNamesList[0];
       }
@@ -104,7 +107,6 @@ class TopUpTransportWalletController extends GetxController {
     return bankIdMap[selectedBankName.value] ?? 0;
   }
 
-
   void fetchTransportCompany() async {
     try {
       TransportCompanyResponse transportCompanyResponse =
@@ -113,7 +115,6 @@ class TopUpTransportWalletController extends GetxController {
         List<TransportCompanyResponseData> transportCompanyData =
             transportCompanyResponse.data;
         List<String> transportCompaniesList = ['Select company'];
-        // transportCompaniesList.addAll(transportCompanyData.map((company) => company.name));
         transportCompaniesList.addAll(transportCompanyData.map((company) {
           transportCompanyIdMap[company.name] = company.id;
           return company.name;
@@ -206,15 +207,6 @@ class TopUpTransportWalletController extends GetxController {
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
-    }
-  }
-
-  void trySubmit() {
-    Get.focusScope!.unfocus();
-    if (pinTextEditController.text.length <= 4) {
-      Get.snackbar('Pin validation', 'Incomplete pin length');
-    } else {
-      Get.offAll(() => TopUpTransportWalletSummaryScreen());
     }
   }
 }

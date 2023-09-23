@@ -81,12 +81,10 @@ class _QrScanAreaState extends State<QrScanArea> {
 
   void onQRViewCreated(QRViewController controller) {
     setState(() => this.controller = controller);
-
     controller.scannedDataStream.listen((result) {
       setState(() {
         this.result = result;
-        qrScanController
-            .setResult(result); // Update the result in the controller
+        qrScanController.setResult(result);
         if (result != null) {
           Get.to(() => ScanQrPayScreen(result.code));
         }

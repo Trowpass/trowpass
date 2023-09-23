@@ -36,6 +36,7 @@ class ViewProfileData {
   String accountType;
   bool isActive;
   DateTime? dateOfBirth;
+  bool isVirtualCardCreated;
   String placeOfBirth;
   DateTime? accountUpgradedAt;
   String privateQrCode;
@@ -57,6 +58,7 @@ class ViewProfileData {
     required this.accountType,
     required this.isActive,
     required this.dateOfBirth,
+    required this.isVirtualCardCreated,
     required this.placeOfBirth,
     required this.accountUpgradedAt,
     required this.privateQrCode,
@@ -96,6 +98,7 @@ class ViewProfileData {
       bussinessDetail: json['bussinessDetail'] != null
           ? BussinessDetail.fromJson(json['bussinessDetail'])
           : null,
+      isVirtualCardCreated: json['isVirtualCardCreated'],
     );
   }
 }

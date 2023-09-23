@@ -2,7 +2,7 @@
 
 import 'package:app/controllers/bloc/inter_wallet_transfer_controller.dart';
 import 'package:app/controllers/bloc/user_controller.dart';
-import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/screens/send_money/scan_to_pay/receipt.dart';
 import 'package:app/services/requests/post_requests/inter_wallet_transfer_request.dart';
 import 'package:app/services/responses/inter_wallet_transfer_response.dart';

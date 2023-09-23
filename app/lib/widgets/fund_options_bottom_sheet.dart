@@ -24,7 +24,7 @@ class _FundOptionsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: background,
-      height: 420,
+      height: 335,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -46,7 +46,7 @@ class _FundOptionsBottomSheet extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                'Funding Options',
+                'Bank Account Details',
                 style: appStyles(16, titleActive, FontWeight.bold),
               ),
             ),
@@ -102,7 +102,8 @@ class _FundOptionsBottomSheet extends StatelessWidget {
                             iconSize: 16,
                             onPressed: onCopyTap ??
                                 () async {
-                                  await Clipboard.setData(ClipboardData(text: accountNumber));
+                                  await Clipboard.setData(
+                                      ClipboardData(text: accountNumber));
                                   Get.snackbar(
                                     'Success',
                                     'Account number copied to clipboard',
@@ -130,57 +131,58 @@ class _FundOptionsBottomSheet extends StatelessWidget {
               horizontalTitleGap: 0,
               leading: const Icon(Icons.info, color: gray),
               title: Text(
-                'Your wallet would be automatically funded once payment is received',
+                'Your wallet will be automatically funded once payment is received.',
                 style: appStyles(14, null, null),
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Material(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(8.0),
-              ),
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child: InkWell(
-                splashColor: primaryColor.withOpacity(0.2),
-                onTap: () {
-                  onOtherOptionsTap != null ? onOtherOptionsTap!() : null;
-                  if (autoClose ?? false) {
-                    Navigator.pop(context);
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: greyLight.withOpacity(0.3)),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(8.0),
-                    ),
-                  ),
-                  child: ListTile(
-                    leading: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        color: greyLight.withOpacity(0.5),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(8.0),
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.circle,
-                        color: primaryColor.withAlpha(150),
-                      ),
-                    ),
-                    trailing: const Icon(Icons.arrow_forward_rounded, color: titleActive),
-                    title: Text(
-                      'Other funding options',
-                      style: appStyles(14, titleActive, FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 16),
+          //   child: Material(
+          //     borderRadius: const BorderRadius.all(
+          //       Radius.circular(8.0),
+          //     ),
+          //     clipBehavior: Clip.antiAliasWithSaveLayer,
+          //     child: InkWell(
+          //       splashColor: primaryColor.withOpacity(0.2),
+          //       onTap: () {
+          //         onOtherOptionsTap != null ? onOtherOptionsTap!() : null;
+          //         if (autoClose ?? false) {
+          //           Navigator.pop(context);
+          //         }
+          //       },
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           border: Border.all(color: greyLight.withOpacity(0.3)),
+          //           borderRadius: const BorderRadius.all(
+          //             Radius.circular(8.0),
+          //           ),
+          //         ),
+          //         child: ListTile(
+          //           leading: Container(
+          //             padding: const EdgeInsets.all(8),
+          //             decoration: BoxDecoration(
+          //               color: greyLight.withOpacity(0.5),
+          //               borderRadius: const BorderRadius.all(
+          //                 Radius.circular(8.0),
+          //               ),
+          //             ),
+          //             child: Icon(
+          //               Icons.circle,
+          //               color: primaryColor.withAlpha(150),
+          //             ),
+          //           ),
+          //           trailing: const Icon(Icons.arrow_forward_rounded,
+          //               color: titleActive),
+          //           title: Text(
+          //             'Other funding options',
+          //             style: appStyles(14, titleActive, FontWeight.bold),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
@@ -199,7 +201,8 @@ Future<T?> showFundOptionsBottomSheet<T>(
   return await showModalBottomSheet<T>(
     context: context,
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.only(topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
     ),
     clipBehavior: Clip.antiAliasWithSaveLayer,
     builder: (context) => _FundOptionsBottomSheet(

@@ -41,51 +41,49 @@ class SendMoneyScreen extends StatelessWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () => Get.to(InterWalletPayScreen()),
-                    child: Card(
-                      color: Colors.white,
-                      elevation: 0.7,
-                      shadowColor: titleActive,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6)),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        leading: Image.asset(trowpass),
-                        title: Text(
-                          "Trowpass",
-                          style: appStyles(16, titleActive, FontWeight.w500),
-                        ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: () => Get.to(InterWalletPayScreen()),
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 0.7,
+                    shadowColor: titleActive,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6)),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      leading: Image.asset(trowpass),
+                      title: Text(
+                        "Trowpass",
+                        style: appStyles(16, titleActive, FontWeight.w500),
                       ),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () => Get.to(PayToBankScreen()),
-                    child: Card(
-                      color: Colors.white,
-                      elevation: 0.7,
-                      shadowColor: titleActive,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4)),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 15),
-                        leading: Image.asset(bank),
-                        title: Text(
-                          "Bank Account",
-                          style: appStyles(16, titleActive, FontWeight.w500),
-                        ),
+                ),
+                GestureDetector(
+                  onTap: () => Get.to(PayToBankScreen()),
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 0.7,
+                    shadowColor: titleActive,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
+                      leading: Image.asset(bank),
+                      title: Text(
+                        "Bank Account",
+                        style: appStyles(16, titleActive, FontWeight.w500),
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ));

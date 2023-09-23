@@ -23,8 +23,6 @@ class BankListModalSheet extends StatefulWidget {
 class _BankListModalSheetState extends State<BankListModalSheet> {
   late TextEditingController searchController;
   List<String> filteredBanks = [];
-  // final controller = Get.put(TopUpTransportWalletController());
-  // final payController = Get.put(PayToBankController());
   bool isLoading = true;
 
   @override
@@ -60,10 +58,11 @@ class _BankListModalSheetState extends State<BankListModalSheet> {
                       child: TextField(
                         controller: searchController,
                         decoration: InputDecoration(
-                          suffixIcon: Icon(Icons.cancel),
+                          suffixIcon: IconButton(
+                              onPressed: () => searchController.clear(),
+                              icon: Icon(Icons.cancel)),
                           labelStyle: appStyles(15, null, null),
                           hintText: "Search for a bank",
-                          // errorText: textError,
                           errorStyle:
                               appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
