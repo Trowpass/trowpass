@@ -43,6 +43,13 @@ class TopUpTransportWalletController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    fetchTransportCompany();
+    fetchBanks();
+    super.onReady();
+  }
+
   void clearTextFields() {
     transportCompanyNameTextEditController.clear();
     bankNameTextEditController.clear();

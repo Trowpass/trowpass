@@ -15,10 +15,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.dashboard,
       page: () => HomeLandingTabScreen(),
-      // page: () => TopUpTransportWalletDoneScreen(
-      //   transactionDetails:
-      //       TopUpTransportWalletResponse(message: 'cool', status: true),
-      // ),
       binding: DashboardTabBinding(),
     ),
     GetPage(

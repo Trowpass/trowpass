@@ -28,6 +28,12 @@ class EditProfileScreen extends StatelessWidget {
         ),
         elevation: 0,
         title: const Text('Edit Profile'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Get.back();
+          },
+        ),
         centerTitle: true,
         backgroundColor: background,
       ),
@@ -93,17 +99,21 @@ class EditProfileScreen extends StatelessWidget {
                           labelText: 'Address',
                           labelStyle: appStyles(15, null, null),
                           hintText: 'Address',
-                          errorStyle: appStyles(null, validationErrorColor, null),
+                          errorStyle:
+                              appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(defaultBorderRadius),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(defaultBorderRadius),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(defaultBorderRadius),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           filled: true,
@@ -144,17 +154,21 @@ class EditProfileScreen extends StatelessWidget {
                           labelText: 'Bio',
                           labelStyle: appStyles(15, null, null),
                           hintText: 'Bio',
-                          errorStyle: appStyles(null, validationErrorColor, null),
+                          errorStyle:
+                              appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(defaultBorderRadius),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(defaultBorderRadius),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(defaultBorderRadius),
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: primaryColor),
                           ),
                           filled: true,
