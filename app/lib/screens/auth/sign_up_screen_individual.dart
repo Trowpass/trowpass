@@ -56,7 +56,12 @@ class SignUpScreenIndividual extends StatelessWidget {
                       'Create an account with Trowpass',
                       style: appStyles(16, Colors.black, FontWeight.w400),
                     ),
-                    const SizedBox(height: 32),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Please Note: SMS will not be delivered to a Do Not Disturb (DND) number.',
+                      style: appStyles(16, Colors.black, FontWeight.w400), textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 22),
                     Form(
                         key: controller.formKey,
                         child: Column(
