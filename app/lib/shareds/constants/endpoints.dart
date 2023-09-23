@@ -2,7 +2,7 @@ import '../enums/environment.dart';
 import '../helpers/api_config_helper.dart';
 import 'otp_type.dart';
 
-String baseUrl = getBaseUrlOnEnvironment(Environment.staging);
+String baseUrl = getBaseUrlOnEnvironment(Environment.prod);
 
 class Endpoints {
   static const String riderRegister = 'api/v1/auth/create';
