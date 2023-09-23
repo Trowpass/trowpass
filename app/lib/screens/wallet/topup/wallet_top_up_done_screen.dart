@@ -1,34 +1,33 @@
-import 'package:app/controllers/inter_wallet_transfer_controller/receipt_screen_controller.dart';
-import 'package:app/services/responses/inter_wallet_transfer_response.dart';
+import 'package:app/controllers/wallet_top_up_done_screen_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/app_styles.dart';
-import '../../widgets/currency_format.dart';
-import '../../widgets/standard_button.dart';
+import '../../../widgets/app_styles.dart';
+import '../../../widgets/currency_format.dart';
+import '../../../widgets/standard_button.dart';
 
-class InterWalletTransferReceiptScreen extends StatelessWidget {
-  InterWalletTransferReceiptScreen(
-      {super.key, required this.transactionDetails});
-  // InterWalletTransferReceiptScreen({super.key, required InterWalletTransferResponse transactionDetails, required this.transactionDetails});
-  final InterWalletTransferResponse transactionDetails;
-  final controller = Get.put(ReceiptController());
+class WalletTopUpDoneScreen extends StatelessWidget {
+  final String successMessage;
+  final String reference;
+  final String recipientName;
+  final double amount;
+  WalletTopUpDoneScreen(
+      {super.key,
+      required this.successMessage,
+      required this.reference,
+      required this.recipientName,
+      required this.amount});
+  final controller = Get.put(WalletTopUpDoneScreenContoller());
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: const SystemUiOverlayStyle(
-        statusBarColor: primaryColor,
-        statusBarBrightness: Brightness.light, // For iOS
-        statusBarIconBrightness: Brightness.light, // For Android
-        systemNavigationBarColor: navigationBarBackground,
-        systemNavigationBarIconBrightness: Brightness.light,
-      ),
-      child: Scaffold(
+    controller.transactionId.value = reference;
+    controller.recipientName.value = recipientName;
+    controller.transactionAmount.value = amount;
+    return Scaffold(
         backgroundColor: primaryColor,
         body: SingleChildScrollView(
           child: Padding(
@@ -39,8 +38,9 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 20),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 60),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: Text(
                       'Receipt',
                       style: appStyles(20, Colors.white, FontWeight.bold),
@@ -66,7 +66,7 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 3),
                               child: Text(
-                                'Payment Successful',
+                                successMessage,
                                 style: appStyles(16, null, FontWeight.bold),
                                 textScaleFactor: 1.2,
                               ),
@@ -77,21 +77,21 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                                 title: Align(
                                   alignment: Alignment.center,
                                   child: Text(
-                                    'Fund was sent to recipient successfully',
+                                    'Wallet top up successful',
                                     style: appStyles(16, null, null),
                                   ),
                                 ),
-                                // subtitle: Align(
-                                //   alignment: Alignment.center,
-                                //   child: Text(
-                                //       'Trans ID: ${controller.transactionId.value}'),
-                                // ),
+                                subtitle: Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                      'Transaction ID: ${controller.transactionId.value}'),
+                                ),
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 1),
                               child: Text(
-                                  '${currencyFormat.currencySymbol}${formatCurrency(transactionDetails.data?.amount ?? 0)}',
+                                  '${currencyFormat.currencySymbol}${formatCurrency(controller.transactionAmount.value)}',
                                   style: const TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16)),
@@ -124,11 +124,11 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                                     offset: const Offset(0, 40),
                                     child: const DottedLine(
                                       dashColor: grayscale,
-                                      dashLength: 10,
+                                      dashLength: 6,
                                       dashGapLength: 3,
                                       lineThickness: 2,
                                       dashRadius: 1,
-                                      lineLength: 330,
+                                      lineLength: 275,
                                     ),
                                   ),
                                 ),
@@ -142,34 +142,38 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
                                   Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                        'Recipient',
+                                        controller.recipientName.value,
                                         style: appStyles(
                                             20, null, FontWeight.bold),
                                       )),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Expanded(
+                                  Padding(
+                                    padding: EdgeInsets.zero,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
                                             flex: 1,
-                                            child: Image.asset(
-                                                controller.recipientImage.value,
-                                                height: 70,
-                                                width: 70)),
-                                      ),
-                                      Expanded(
-                                          child: ListTile(
-                                              title: Text(transactionDetails
-                                                      .data?.recipientName ??
-                                                  ''),
-                                              subtitle: Text(transactionDetails
-                                                      .data
-                                                      ?.recipientPhoneNumber ??
-                                                  '')))
-                                    ],
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Image.asset(
+                                                  controller
+                                                      .recipientImage.value,
+                                                  height: 70,
+                                                  width: 70),
+                                            )),
+                                        Expanded(
+                                            flex: 5,
+                                            child: ListTile(
+                                                title: Text(controller
+                                                    .recipientName.value),
+                                                subtitle: Text(controller
+                                                    .recipientAccountNumber
+                                                    .value)))
+                                      ],
+                                    ),
                                   ),
                                   Padding(
                                       padding: const EdgeInsets.only(
@@ -201,6 +205,6 @@ class InterWalletTransferReceiptScreen extends StatelessWidget {
               ),
             ),
           ),
-        )));
+        ));
   }
 }

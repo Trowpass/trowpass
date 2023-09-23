@@ -17,9 +17,9 @@ class LabelText extends StatelessWidget {
       child: Text(
           textLabel,
           style: appStyles(
-            16,
+            15,
             label,
-            FontWeight.w500,
+            FontWeight.w400,
           ),
         ),
     );

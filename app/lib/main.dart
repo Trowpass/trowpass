@@ -1,6 +1,6 @@
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:app/shareds/resources/routes/app_pages.dart';
-import 'package:app/shareds/resources/routes/app_reoutes.dart';
+import 'package:app/shareds/resources/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

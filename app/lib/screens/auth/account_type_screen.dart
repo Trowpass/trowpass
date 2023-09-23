@@ -42,7 +42,7 @@ class AccountTypeScreen extends StatelessWidget {
           children: [
             Text(
               'Get Started as a',
-              style: appStyles(20, Colors.black, FontWeight.w300),
+              style: appStyles(20, Colors.black, FontWeight.w500),
             ),
             const SizedBox(height: 30),
             StandardButton(
