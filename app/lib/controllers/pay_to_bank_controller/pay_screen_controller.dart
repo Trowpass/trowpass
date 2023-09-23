@@ -35,6 +35,12 @@ class PayToBankController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    fetchBanks();
+    super.onReady();
+  }
+
   void clearTextFields() {
     accountNumberController.clear();
     bankNameController.clear();
