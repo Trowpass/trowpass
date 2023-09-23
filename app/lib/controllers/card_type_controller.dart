@@ -1,11 +1,20 @@
+import 'package:app/screens/card/get_virtual_card.dart';
 import 'package:get/get.dart';
 
-class CardTypeController extends GetxController {
-  void handleVirtualCardPressed() {
-    
-  }
+import '../widgets/app_dialog.dart';
 
-  void handlePhysicalCardPressed() {
-   
+class CardTypeController extends GetxController {
+  void handleVirtualCardPressed() => Get.to(() => GetVirtualCardScreen());
+
+  Future<void> handlePhysicalCardPressed() {
+    // Please note: the screen for this have already been created in GetPhysicalCardScreen, which is in the same
+    // directory as the GetVirtualCardScreen. Just replace this dialog with the navigation to that screen and
+    // continue from there
+    return showAppDialog(
+      title: 'Coming soon',
+      subtitle:
+          'We have you in mind. In the main time, create a virtual card to spend on transport fare.',
+      type: DialogType.warning,
+    );
   }
 }

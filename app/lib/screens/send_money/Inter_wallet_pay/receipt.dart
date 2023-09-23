@@ -1,4 +1,4 @@
-import 'package:app/controllers/scan_to_pay_controllers/receipt_screen_controller.dart';
+import 'package:app/controllers/inter_wallet_transfer_controller/receipt_screen_controller.dart';
 import 'package:app/services/responses/inter_wallet_transfer_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/app_styles.dart';
-import '../../widgets/currency_format.dart';
-import '../../widgets/standard_button.dart';
+import '../../../widgets/app_styles.dart';
+import '../../../widgets/currency_format.dart';
+import '../../../widgets/standard_button.dart';
 
-class ScanToPayReceiptScreen extends StatelessWidget {
-  ScanToPayReceiptScreen({super.key, required this.transactionDetails});
+class InterWalletTransferReceiptScreen extends StatelessWidget {
+  InterWalletTransferReceiptScreen(
+      {super.key, required this.transactionDetails});
   final InterWalletTransferResponse transactionDetails;
   final controller = Get.put(ReceiptController());
 
@@ -81,11 +82,6 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                         style: appStyles(16, null, null),
                                       ),
                                     ),
-                                    // subtitle: Align(
-                                    //   alignment: Alignment.center,
-                                    //   child: Text(
-                                    //       'Trans ID: ${controller.transactionId.value}'),
-                                    // ),
                                   ),
                                 ),
                                 Padding(
@@ -154,10 +150,10 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Expanded(
-                                                flex: 1,
+                                          Expanded(
+                                            flex: 1,
+                                            child: Align(
+                                                alignment: Alignment.centerLeft,
                                                 child: Image.asset(
                                                     controller
                                                         .recipientImage.value,
@@ -165,6 +161,7 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                                     width: 70)),
                                           ),
                                           Expanded(
+                                              flex: 5,
                                               child: ListTile(
                                                   title: Text(transactionDetails
                                                           .data
@@ -182,7 +179,7 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                           child: StandardButton(
                                             text: 'Done',
                                             onPressed: () {
-                                              controller.done();
+                                              controller.trySubmit();
                                             },
                                           ))
                                     ]),

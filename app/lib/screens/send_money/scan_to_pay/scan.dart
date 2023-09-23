@@ -3,13 +3,13 @@
 import 'dart:io';
 
 import 'package:app/controllers/scan_to_pay_controllers/scan_controller.dart';
-import 'package:app/screens/scan_to_pay/scan_qr_pay.dart';
+import 'package:app/screens/send_money/scan_to_pay/scan_qr_pay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import '../../shareds/utils/app_colors.dart';
+import '../../../shareds/utils/app_colors.dart';
 
 class QrScanArea extends StatefulWidget {
   @override
@@ -81,12 +81,10 @@ class _QrScanAreaState extends State<QrScanArea> {
 
   void onQRViewCreated(QRViewController controller) {
     setState(() => this.controller = controller);
-
     controller.scannedDataStream.listen((result) {
       setState(() {
         this.result = result;
-        qrScanController
-            .setResult(result); // Update the result in the controller
+        qrScanController.setResult(result);
         if (result != null) {
           Get.to(() => ScanQrPayScreen(result.code));
         }
