@@ -33,7 +33,8 @@ class OverlayIndeterminateProgress extends StatelessWidget {
               opacity: 0.3,
               child: ModalBarrier(
                 dismissible: false,
-                color: overlayBackgroundColor?.withOpacity(0.3) ?? overlayColor,
+                color: overlayBackgroundColor?.withOpacity(0.3) ??
+                    background.withOpacity(0.3),
               ),
             ),
           ),
@@ -50,15 +51,20 @@ class OverlayIndeterminateProgress extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(30)),
                     child: LinearProgressIndicator(
-                      backgroundColor: (progressColor ?? primaryColor).withOpacity(0.3),
-                      valueColor: AlwaysStoppedAnimation<Color>(progressColor ?? primaryColor),
+                      backgroundColor:
+                          (progressColor ?? primaryColor).withOpacity(0.3),
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                          progressColor ?? primaryColor),
                     ),
                   ),
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  loadingMessage ?? 'Loading',
-                  style: appStyles(16, titleActive, null),
+                Material(
+                  color: Colors.transparent,
+                  child: Text(
+                    loadingMessage ?? 'Loading',
+                    style: appStyles(16, titleActive, null),
+                  ),
                 ),
               ],
             ),

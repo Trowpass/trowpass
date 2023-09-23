@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_string_interpolations
 
 import 'dart:io';
+
 import 'package:app/services/requests/post_requests/topup_transport_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
 import 'package:app/services/responses/get_all_banks_reponse.dart';
@@ -9,6 +10,7 @@ import 'package:app/services/responses/get_user_by_account_response.dart';
 import 'package:app/services/responses/topup_transport_wallet_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
+
 import '../services/exceptions/dio_exceptions.dart';
 import '../shareds/constants/endpoints.dart';
 import '../shareds/helpers/api_connection_helper.dart';
@@ -20,7 +22,7 @@ class TopupTransportWalletRepository {
 
   Future<BanksResponse> getallBanksAsync() async {
     try {
-      var url = Endpoints().banks;
+      var url = Endpoints.banks;
       //
       var response = await apiConnectionHelper.getDataAsync(
         url: url,
@@ -42,7 +44,7 @@ class TopupTransportWalletRepository {
 
   Future<TransportCompanyResponse> getallTransportCompanyAsync() async {
     try {
-      var url = Endpoints().transportCompany;
+      var url = Endpoints.transportCompany;
       //
       var response = await apiConnectionHelper.getDataAsync(
         url: url,
@@ -62,11 +64,11 @@ class TopupTransportWalletRepository {
     }
   }
 
-    Future<TopUpTransportWalletResponse> topupTransportWalletAsync(
+  Future<TopUpTransportWalletResponse> topupTransportWalletAsync(
       TopupTransportWalletRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().transportWallet);
+          requestData: request, path: Endpoints.transportWallet);
       if (response.data != null) {
         return TopUpTransportWalletResponse.fromJson(response.data);
       } else {
@@ -81,12 +83,11 @@ class TopupTransportWalletRepository {
     }
   }
 
-    Future<UserByAccountNumberResponse> getUserByAccountNumberAsync(
+  Future<UserByAccountNumberResponse> getUserByAccountNumberAsync(
       UserByAccountNumberRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-        requestData: request, path: Endpoints().userByAccountNumber
-     );
+          requestData: request, path: Endpoints.userByAccountNumber);
       if (response.data != null) {
         return UserByAccountNumberResponse.fromJson(response.data);
       } else {
@@ -100,5 +101,4 @@ class TopupTransportWalletRepository {
       return Future.error(e);
     }
   }
-
 }

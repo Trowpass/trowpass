@@ -18,7 +18,7 @@ class InterWalletTransferRepository {
       InterWalletTransferRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().interWalletTransfer);
+          requestData: request, path: Endpoints.interWalletTransfer);
       if (response.data != null) {
         return InterWalletTransferResponse.fromJson(response.data);
       } else {

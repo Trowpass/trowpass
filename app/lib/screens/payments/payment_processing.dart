@@ -1,4 +1,5 @@
 import 'package:app/screens/wallet/topup/wallet_top_up.dart';
+import 'package:app/screens/wallet/topup/wallet_top_up_done_screen.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +15,11 @@ class PaymentProcessing extends StatefulWidget {
   final String recipientName;
   final double amount;
   const PaymentProcessing(
-      {super.key, required this.reference, required this.companyName, required this.recipientName, required this.amount});
+      {super.key,
+      required this.reference,
+      required this.companyName,
+      required this.recipientName,
+      required this.amount});
 
   @override
   State<PaymentProcessing> createState() => _PaymentProcessingState();
@@ -28,15 +33,15 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
     Get.focusScope!.unfocus();
     final paymentRef = widget.reference;
     try {
-      var response = await paymentController.verifyPaystackTransactionAsync(paymentRef.trim());
+      var response = await paymentController
+          .verifyPaystackTransactionAsync(paymentRef.trim());
       if (response.status) {
-        // Get.offAll(() => TopUpTransportWalletDoneScreen(
-        //       successMessage: 'Payment was successful',
-        //       reference: paymentRef,
-        //       companyName: widget.companyName,
-        //       recipientName: widget.recipientName,
-        //       amount: widget.amount,
-        //     ));
+        Get.offAll(() => WalletTopUpDoneScreen(
+              successMessage: 'Payment was successful',
+              reference: paymentRef,
+              recipientName: widget.recipientName,
+              amount: widget.amount,
+            ));
       } else {
         AlertDialog(
           title: const Text("Payment"),
@@ -53,7 +58,9 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
         );
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(),
+          backgroundColor: validationErrorColor,
+          snackPosition: SnackPosition.BOTTOM);
     }
   }
 

@@ -24,7 +24,8 @@ buildBottomNavigationMenu(
       bottomNavigationBarItem(icon: Icons.home_rounded, label: 'Home'),
       bottomNavigationBarItem(
           icon: Icons.work_history_rounded, label: 'History'),
-      bottomNavigationBarItem(icon: Icons.payment_rounded, label: 'Cards'),
+      bottomNavigationBarItem(
+          icon: Icons.request_quote_outlined, label: 'Bills'),
       bottomNavigationBarItem(icon: Icons.person_rounded, label: 'Profile')
     ],
   );

@@ -64,10 +64,11 @@ class _TransportCompanyListModalSheetState
                       child: TextField(
                         controller: searchController,
                         decoration: InputDecoration(
-                          suffixIcon: Icon(Icons.cancel),
+                          suffixIcon: IconButton(
+                              onPressed: () => searchController.clear(),
+                              icon: Icon(Icons.cancel)),
                           labelStyle: appStyles(15, null, null),
                           hintText: "Search transport company",
-                          // errorText: textError,
                           errorStyle:
                               appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
@@ -118,7 +119,6 @@ class _TransportCompanyListModalSheetState
                                         null) {
                                       widget.onTransportCompanySelected!(
                                           filteredTransportCompany[index]);
-                                      // Navigator.pop(context);
                                     }
                                   },
                                 ),

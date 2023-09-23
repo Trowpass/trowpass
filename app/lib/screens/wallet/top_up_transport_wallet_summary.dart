@@ -16,6 +16,7 @@ class TopUpTransportWalletSummaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: background,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: primaryColor,
@@ -24,10 +25,13 @@ class TopUpTransportWalletSummaryScreen extends StatelessWidget {
           systemNavigationBarColor: navigationBarBackground,
           systemNavigationBarIconBrightness: Brightness.light,
         ),
-        title: Text(controller.title.value),
+        title: Text(
+          controller.title.value,
+          style: appStyles(16, Colors.black, FontWeight.bold),
+        ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: primaryColor,
+        backgroundColor: background,
       ),
       body: SingleChildScrollView(
           child: Padding(
@@ -60,7 +64,8 @@ class TopUpTransportWalletSummaryScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 10, bottom: 10),
                 child: Text(
                   '${currencyFormat.currencySymbol}${formatCurrency(controller.amount.value)}',
-                  style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
               Padding(

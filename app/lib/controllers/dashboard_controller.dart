@@ -18,12 +18,13 @@ class DashboardController extends GetxController {
   final balance = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
   final isLoaded = Rx<bool>(false);
- RxDouble sliderValue = 0.0.obs;
+  RxDouble sliderValue = 0.0.obs;
   final double slideWidth = 200.0;
 
   void onSlideChanged(double value) {
     sliderValue.value = value;
   }
+
   GetSessionManager session = GetSessionManager();
   SetSessionManager session2 = SetSessionManager();
   UserController userController = UserController();
@@ -32,7 +33,7 @@ class DashboardController extends GetxController {
   void onInit() {
     isLoaded.value = true;
     fullName.value = session.readRiderFullName() ?? '';
-    balance.value = '';
+    balance.value = formatCurrency(session.readUserAccountBalance() ?? 0.0);
     bankName.value = session.readUserBankName() ?? '';
     accountNumber.value = session.readUserAccountNumber() ?? '';
     phoneNumber.value = '';
@@ -61,9 +62,10 @@ class DashboardController extends GetxController {
       accountNumber.value = response.data!.accountNumber;
       bankName.value = response.data!.bankName;
       phoneNumber.value = response.data!.phoneNumber;
-      balance.value = formatCurrency(response.data!.balance);
-      // save bank and account number for use later
+      double balance1 = response.data!.balance;
+      balance.value = formatCurrency(balance1);
       session2.writeUserAccountNumber(accountNumber.value);
+      session2.writeUserAccountBalance(balance1);
       session2.writeUserBankName(bankName.value);
     }
   }

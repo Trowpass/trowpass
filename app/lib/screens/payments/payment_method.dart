@@ -39,7 +39,7 @@ class PaymentMethodScreen extends StatelessWidget {
                         children: [
                           ListTile(
                             title: Text(
-                              'Select Payment Method',
+                              'Select Payment Option',
                               textAlign: TextAlign.center,
                               style:
                                   appStyles(16, titleActive, FontWeight.bold),
@@ -73,9 +73,9 @@ class PaymentMethodScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      _buildRadio(value: controller.payWithCard.value),
+                      _buildRadio(context, value: controller.payWithCard.value),
                       const SizedBox(height: 16),
-                      _buildRadio(value: controller.payWithBank.value),
+                      _buildRadio(context, value: controller.payWithBank.value),
                       Expanded(
                         child: Align(
                           alignment: FractionalOffset.bottomCenter,
@@ -98,7 +98,7 @@ class PaymentMethodScreen extends StatelessWidget {
         ));
   }
 
-  Widget _buildRadio({required String value}) {
+  Widget _buildRadio(BuildContext context, {required String value}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Material(
@@ -110,6 +110,10 @@ class PaymentMethodScreen extends StatelessWidget {
           splashColor: primaryColor.withOpacity(0.2),
           onTap: () {
             controller.paymentOption.value = value;
+            if (controller.paymentOption.value ==
+                controller.payWithBank.value) {
+              controller.paymentWithBankTransferDetails(context);
+            }
           },
           child: Container(
             decoration: BoxDecoration(

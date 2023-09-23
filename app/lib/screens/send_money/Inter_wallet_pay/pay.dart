@@ -95,7 +95,6 @@ class PayForm extends StatelessWidget {
                   payController.fetchUserDataByPhoneNumber();
                 }
               },
-              // textLabel: '08134678957462',
               textHint: 'Recipient Phone Number',
               isPassword: false,
               autoCorrect: false,
@@ -107,8 +106,6 @@ class PayForm extends StatelessWidget {
             TextInputForm(
               enabled: false,
               inputController: payController.fullNameController,
-              // initialValue: payController.fullNameController.text,
-              // textLabel: 'Receipient Name',
               textHint: 'Recipient Name',
               isPassword: false,
               autoCorrect: false,

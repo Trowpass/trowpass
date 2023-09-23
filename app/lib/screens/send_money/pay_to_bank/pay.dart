@@ -9,6 +9,7 @@ import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
 import '../../../widgets/overlay_indeterminate_progress.dart';
 
 class PayToBankScreen extends StatelessWidget {
@@ -84,46 +85,44 @@ class PayForm extends StatelessWidget {
         key: payController.formKey,
         child: Column(
           children: [
-             LabelText(textLabel: "Bank Name"),
-                 const SizedBox(height: 10),
-                  TextInputForm(
-                    // inputType: TextInputType.number,
-                    enabled: true,
-                    inputController: payController.bankNameController,
-                    textHint: 'Select Bank',
-                    validatorMessage: 'Please select bank',
-                    isPassword: false,
-                    autoCorrect: false,
-                    suffixIcon: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(16.0),
-                                topRight: Radius.circular(16.0)),
-                          ),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          builder: (BuildContext context) {
-                            return BankListModalSheet(
-                              onBankSelected: (selectedBank) {
-                                payController.onSetSelectedBankName(selectedBank);
-                                payController.bankNameController.text =
-                                    selectedBank;
-                                Navigator.pop(context);
-                              },
-                              allBanks: payController.allBanks,
-                              initialSelectedBank:
-                                  payController.selectedBankName.value,
-                            );
-                          },
-                        );
-                      },
-                      child: Icon(Icons.arrow_drop_down),
+            LabelText(textLabel: "Bank Name"),
+            const SizedBox(height: 10),
+            TextInputForm(
+              enabled: true,
+              inputController: payController.bankNameController,
+              textHint: 'Select Bank',
+              validatorMessage: 'Please select bank',
+              isPassword: false,
+              autoCorrect: false,
+              suffixIcon: InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.0),
+                          topRight: Radius.circular(16.0)),
                     ),
-                    initialValue: payController.bankNameController.text,
-                  ),
-                  const SizedBox(height: 10),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    builder: (BuildContext context) {
+                      return BankListModalSheet(
+                        onBankSelected: (selectedBank) {
+                          payController.onSetSelectedBankName(selectedBank);
+                          payController.bankNameController.text = selectedBank;
+                          Navigator.pop(context);
+                        },
+                        allBanks: payController.allBanks,
+                        initialSelectedBank:
+                            payController.selectedBankName.value,
+                      );
+                    },
+                  );
+                },
+                child: Icon(Icons.arrow_drop_down),
+              ),
+              initialValue: payController.bankNameController.text,
+            ),
+            const SizedBox(height: 10),
             LabelText(textLabel: "Account Number"),
             const SizedBox(height: 10),
             TextInputForm(

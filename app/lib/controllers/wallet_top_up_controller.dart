@@ -1,4 +1,3 @@
-import 'package:app/widgets/fund_options_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +7,7 @@ import '../shareds/managers/get_session_manager.dart';
 
 class WalletTopUpController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final accountBalance = 0.obs;
+  final accountBalance = 0.0.obs;
   final cardDetails = ''.obs;
   final customerName = ''.obs;
   final generateAsterisk = ''.obs;
@@ -18,21 +17,20 @@ class WalletTopUpController extends GetxController {
   final isLoaded = false.obs;
 
   final session = GetSessionManager();
-
   TextEditingController topUpAmountController = TextEditingController();
 
   @override
   void onInit() {
     isLoaded.value = false;
     cardDetails.value = '**** **** **** 123401/24';
-    accountBalance.value = 0;
-    customerName.value = session.readRiderFullName() ?? '';
+    accountBalance.value = session.readUserAccountBalance() ?? 0.0;
+    customerName.value = (session.readRiderFullName() ?? '').toUpperCase();
     super.onInit();
   }
 
   void trySubmit() {
     Get.focusScope!.unfocus();
-    Get.to(WalletTopUpPaymentOptions());
+    Get.to(() => WalletTopUpPaymentOptions());
   }
 
   void clearTopUpAmount() {
@@ -56,15 +54,8 @@ class WalletTopUpController extends GetxController {
   }
 
   void proceedFundWallet(BuildContext context) {
-    showFundOptionsBottomSheet(
-      context,
-      bankName: session.readUserBankName() ?? '',
-      accountNumber: session.readUserAccountNumber() ?? '',
-      onOtherOptionsTap: () {
-        final amount = topUpAmountController.text;
-        Get.to(() => PaymentMethodScreen(),
-            fullscreenDialog: true, arguments: {'amount': amount});
-      },
-    );
+    final amount = topUpAmountController.text;
+    Get.to(() => PaymentMethodScreen(),
+        fullscreenDialog: true, arguments: {'amount': amount});
   }
 }

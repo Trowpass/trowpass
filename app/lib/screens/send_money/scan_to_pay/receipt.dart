@@ -81,11 +81,6 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                         style: appStyles(16, null, null),
                                       ),
                                     ),
-                                    // subtitle: Align(
-                                    //   alignment: Alignment.center,
-                                    //   child: Text(
-                                    //       'Trans ID: ${controller.transactionId.value}'),
-                                    // ),
                                   ),
                                 ),
                                 Padding(
@@ -154,10 +149,10 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Expanded(
-                                                flex: 1,
+                                          Expanded(
+                                            flex: 1,
+                                            child: Align(
+                                                alignment: Alignment.centerLeft,
                                                 child: Image.asset(
                                                     controller
                                                         .recipientImage.value,
@@ -165,6 +160,7 @@ class ScanToPayReceiptScreen extends StatelessWidget {
                                                     width: 70)),
                                           ),
                                           Expanded(
+                                              flex: 5,
                                               child: ListTile(
                                                   title: Text(transactionDetails
                                                           .data

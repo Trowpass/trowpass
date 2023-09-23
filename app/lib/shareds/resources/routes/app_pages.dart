@@ -1,11 +1,10 @@
 import 'package:app/screens/auth/login.dart';
 import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
-import 'package:app/widgets/widget_test.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/bindings/dashboard_tab_binding.dart';
 import '../../../screens/onboarding/onboarding_screen.dart';
-import 'app_reoutes.dart';
+import 'app_routes.dart';
 
 class AppPages {
   static var list = [
@@ -16,15 +15,15 @@ class AppPages {
     GetPage(
       name: AppRoutes.dashboard,
       page: () => HomeLandingTabScreen(),
+      // page: () => TopUpTransportWalletDoneScreen(
+      //   transactionDetails:
+      //       TopUpTransportWalletResponse(message: 'cool', status: true),
+      // ),
       binding: DashboardTabBinding(),
     ),
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-    ),
-    GetPage(
-      name: AppRoutes.test,
-      page: () => WidgetTest(),
     ),
   ];
 }

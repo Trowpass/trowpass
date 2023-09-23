@@ -106,7 +106,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                                 controller
                                     .transportCompanyNameTextEditController
                                     .text = selectedCompany;
-                                Navigator.pop(context); // Close the modal sheet
+                                Navigator.pop(context);
                               },
                               allTransportCompany:
                                   controller.allTransportCompany,
@@ -129,7 +129,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     height: 10,
                   ),
                   TextInputForm(
-                    // inputType: TextInputType.number,
                     enabled: true,
                     inputController: controller.bankNameTextEditController,
                     textHint: 'Select Bank',
@@ -139,7 +138,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     suffixIcon: InkWell(
                       onTap: () {
                         showModalBottomSheet(
-    
                           context: context,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
@@ -169,16 +167,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  // GestureDetector(
-                  //   onTap: () => Get.to(BeneficiariesScreen()),
-                  //   child: Align(
-                  //     alignment: Alignment.centerRight,
-                  //     child: Text(
-                  //       'Select Beneficiary',
-                  //       style: appStyles(16, titleActive, FontWeight.w400),
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(
                     height: 10,
                   ),
@@ -196,7 +184,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                         controller.fetchUserDataByAccountNumber();
                       }
                     },
-                    // textLabel: 'Amount',
                     textHint: 'Account/Wallet Number',
                     validatorMessage: 'Please enter account number',
                     isPassword: false,
@@ -213,7 +200,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     inputType: TextInputType.text,
                     enabled: false,
                     inputController: controller.accountNameTextEditController,
-                    // textLabel: 'Amount',
                     textHint: 'Account Name',
                     validatorMessage: 'Please enter account name',
                     isPassword: false,
@@ -230,7 +216,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     inputType: TextInputType.number,
                     enabled: true,
                     inputController: controller.amountTextEditController,
-                    // textLabel: 'Amount',
                     textHint: '0.00',
                     validatorMessage: 'Please enter an amount',
                     isPassword: false,
@@ -247,7 +232,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     inputType: TextInputType.number,
                     enabled: true,
                     inputController: controller.pinTextEditController,
-                    // textLabel: 'Amount',
                     textHint: '0000',
                     validatorMessage: 'Enter your pin',
                     isPassword: false,

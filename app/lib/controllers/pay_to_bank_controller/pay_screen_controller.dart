@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, unused_local_variable, avoid_print, avoid_function_literals_in_foreach_calls
 
 import 'package:app/controllers/bloc/pay_to_bank_controller.dart';
-import 'package:app/controllers/dashboard_conroller.dart';
+import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/screens/send_money/pay_to_bank/receipt.dart';
 import 'package:app/services/requests/post_requests/pay_to_bank_request.dart';
 import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
