@@ -45,4 +45,37 @@ class SetSessionManager {
   void writeUserBankName(String value) {
     storage.write(userBankName, value);
   }
+
+  void logoutUser() {
+    storage.erase();
+    writeIsUserOnBoarded(true);
+  }
+
+  void writeUserAccountBalance(double value) {
+    storage.write(userAccountBalance, value);
+  }
+
+  void writeUserVirtualCardCreation(String value) {
+    storage.write(virtualCardCreation, value);
+  }
+
+  void writeVirtualCardPan(String value) {
+    storage.write(virtualCardPan, value);
+  }
+
+  void writeVirtualCardExpiration(String value) {
+    storage.write(virtualCardExpiration, value);
+  }
+
+  void writeVirtualCardCVV(String value) {
+    storage.write(virtualCardCVV, value);
+  }
+
+  void writeVirtualCardType(String value) {
+    storage.write(virtualCardType, value);
+  }
+
+  void writeVirtualCardBalance(double value) {
+    storage.write(virtualCardBalance, value);
+  }
 }

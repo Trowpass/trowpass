@@ -20,7 +20,7 @@ class PaymentRepository {
       VerifyPaystackTransactionRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().paystackVerification);
+          requestData: request, path: Endpoints.paystackVerification);
       if (response.data != null) {
         return VerifyPaystackTransactionResponse.fromJson(response.data);
       } else {
@@ -39,7 +39,7 @@ class PaymentRepository {
       TopUpWalletRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().walletTopUp);
+          requestData: request, path: Endpoints.walletTopUp);
       if (response.data != null) {
         return TopUpWalletResponse.fromJson(response.data);
       } else {
@@ -58,7 +58,7 @@ class PaymentRepository {
       CreditWalletRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints().walletTopUp);
+          requestData: request, path: Endpoints.walletTopUp);
       if (response.data != null) {
         return CreditWalletResponse.fromJson(response.data);
       } else {

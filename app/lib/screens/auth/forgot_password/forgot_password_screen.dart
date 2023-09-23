@@ -38,7 +38,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               elevation: 0,
               title: Text(
                 'Forgot Password',
-                style: appStyles(18, titleActive, FontWeight.w500),
+                style: appStyles(20, titleActive, FontWeight.w500),
               ),
               backgroundColor: background,
             ),
@@ -52,7 +52,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 8, bottom: 16),
                       child: Text(
                         'Please enter your registered email and a confirmation OTP code will be sent to you.',
-                        style: appStyles(16, null, null),
+                        style: appStyles(16, null, FontWeight.w300),
                       ),
                     ),
                     Obx(() {

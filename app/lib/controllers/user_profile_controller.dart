@@ -18,7 +18,7 @@ class UserProfileController extends GetxController {
   }
 
   void logout() {
-    session2.writeIsUserLoggedIn(false);
+    session2.logoutUser();
     Get.offAll(LoginScreen());
   }
 }

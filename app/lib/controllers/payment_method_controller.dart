@@ -7,15 +7,15 @@ import 'package:get/get.dart';
 import '../screens/payments/payment_processing.dart';
 import '../services/requests/post_requests/credit_wallet_request.dart';
 import '../shareds/constants/key_constants.dart';
-import '../widgets/app_dialog.dart';
 import '../widgets/app_logo.dart';
+import '../widgets/fund_options_bottom_sheet.dart';
 
 class PaymentMethodController extends GetxController {
   late Map<String, dynamic> args;
   late String amount;
-  final paymentOption = 'Pay with card'.obs;
-  final payWithCard = 'Pay with card'.obs;
-  final payWithBank = 'Pay with bank'.obs;
+  final paymentOption = 'Pay With Card'.obs;
+  final payWithCard = 'Pay With Card'.obs;
+  final payWithBank = 'Pay With Bank Transfer'.obs;
 
   final accountBalance = 0.obs;
   final paymentReference = ''.obs;
@@ -38,8 +38,6 @@ class PaymentMethodController extends GetxController {
   void payNow(context) {
     if (paymentOption.value == payWithCard.value) {
       checkoutPaystack(context);
-    } else {
-      placeHolderDialog(paymentOption.value);
     }
   }
 
@@ -96,5 +94,11 @@ class PaymentMethodController extends GetxController {
       padding: const EdgeInsets.all(5),
       child: activityLogo(70, 70),
     );
+  }
+
+  void paymentWithBankTransferDetails(BuildContext context) {
+    showFundOptionsBottomSheet(context,
+        bankName: session.readUserBankName() ?? '',
+        accountNumber: session.readUserAccountNumber() ?? '');
   }
 }
