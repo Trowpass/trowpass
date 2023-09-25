@@ -22,6 +22,7 @@ class Endpoints {
   static const String userWallet = 'api/v1/wallet/me';
   static const String userKyc = 'api/v1/userkyc/create-update';
   static const String createWallet = 'api/v1/wallet/create';
+  static const String reCreateWallet = 'api/v1/wallet/re-create-wallet';
   static const String interWalletTransfer =
       'api/v1/wallet/inter-wallet-transfer';
   static const String paystackVerification =

@@ -1,10 +1,15 @@
 // ignore_for_file: avoid_print, unnecessary_string_interpolations
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
+import 'package:app/screens/dashboard/dashboard.dart';
+import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/currency_format.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../screens/auth/pin/choose_pin_screen.dart';
 import '../shareds/managers/get_session_manager.dart';
 import '../widgets/app_dialog.dart';
 
@@ -52,7 +57,11 @@ class DashboardController extends GetxController {
       var fullName2 =
           '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
       session2.writeUserFullName(fullName2);
+      session2.writePinCreated(response.data!.isPinCreated);
       fullName.value = fullName2;
+      if (!response.data!.isPinCreated) {
+        Get.to(() => ChoosePinScreen());
+      }
     }
   }
 
@@ -67,6 +76,28 @@ class DashboardController extends GetxController {
       session2.writeUserAccountNumber(accountNumber.value);
       session2.writeUserAccountBalance(balance1);
       session2.writeUserBankName(bankName.value);
+    }
+  }
+
+  Future<void> reCreateWallet() async {
+    isLoaded.value = true;
+    try {
+      int userId = session.readUserId() ?? 0;
+      var response = await userController
+          .reCreateWalletAsync(ReCreateWalletRequest(userId: userId));
+      if (response.status) {
+        Get.offAll(() => DashboardScreen());
+        isLoaded.value = false;
+      } else {
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
+        isLoaded.value = false;
+      }
+    } catch (e) {
+      Get.snackbar('Information', e.toString(),
+          backgroundColor: validationErrorColor,
+          snackPosition: SnackPosition.BOTTOM);
+      isLoaded.value = false;
     }
   }
 

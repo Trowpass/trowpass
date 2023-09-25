@@ -78,4 +78,12 @@ class SetSessionManager {
   void writeVirtualCardBalance(double value) {
     storage.write(virtualCardBalance, value);
   }
+
+  void writePinCreated(bool value) {
+    storage.write(pinCreated, value);
+  }
+
+  void writeWalletCreated(bool value) {
+    storage.write(walletCreated, value);
+  }
 }

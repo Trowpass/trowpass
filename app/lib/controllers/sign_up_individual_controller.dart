@@ -68,6 +68,7 @@ class SignUpIndividualController extends GetxController {
           userAccountType: 'rider',
         ));
         if (response.status) {
+          session.writeRiderPhoneNumber(phoneNumberController.text);
           Get.offAll(() => OtpScreen(phoneNumber: phoneNumberController.text));
           isLoaded.value = false;
         } else {

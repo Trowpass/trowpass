@@ -30,6 +30,8 @@ class ViewProfileData {
   String email;
   String? bio;
   bool isAccountVerified;
+  bool isPinCreated;
+  bool isWalletCreated;
   String userAccountType;
   String customerType;
   String? gender;
@@ -52,6 +54,8 @@ class ViewProfileData {
     required this.email,
     required this.bio,
     required this.isAccountVerified,
+    required this.isPinCreated,
+    required this.isWalletCreated,
     required this.userAccountType,
     required this.customerType,
     required this.gender,
@@ -76,6 +80,8 @@ class ViewProfileData {
       email: json['email'] ?? '',
       bio: json['bio'] ?? '',
       isAccountVerified: json['isAccountVerified'] ?? false,
+      isPinCreated: json['isPinCreated'] ?? false,
+      isWalletCreated: json['isWalletCreated'] ?? false,
       userAccountType: json['userAccountType'] ?? '',
       customerType: json['customerType'] ?? '',
       gender: json['gender'] ?? '',

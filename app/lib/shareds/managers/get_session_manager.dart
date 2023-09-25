@@ -23,4 +23,6 @@ class GetSessionManager {
   String? readVirtualCardCVV() => storage.read(virtualCardCVV);
   double? readVirtualCardBalance() => storage.read(virtualCardBalance);
   String? readVirtualCardType() => storage.read(virtualCardType);
+  bool readPinCreated() => storage.read(pinCreated) ?? false;
+  bool readWalletCreated() => storage.read(walletCreated) ?? false;
 }
