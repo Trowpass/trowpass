@@ -22,7 +22,8 @@ class DashboardController extends GetxController {
   final phoneNumber = Rx<String>('');
   final balance = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
-  final isLoaded = Rx<bool>(false);
+  final isLoaded = false.obs;
+  final isCreatWalletCreated = false.obs;
   RxDouble sliderValue = 0.0.obs;
   final double slideWidth = 200.0;
 
@@ -37,6 +38,7 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = true;
+    isCreatWalletCreated.value = false;
     fullName.value = session.readRiderFullName() ?? '';
     balance.value = formatCurrency(session.readUserAccountBalance() ?? 0.0);
     bankName.value = session.readUserBankName() ?? '';
@@ -68,10 +70,10 @@ class DashboardController extends GetxController {
   Future userWallet() async {
     var response = await userController.userWalletAsync();
     if (response.status) {
-      accountNumber.value = response.data!.accountNumber;
-      bankName.value = response.data!.bankName;
-      phoneNumber.value = response.data!.phoneNumber;
-      double balance1 = response.data!.balance;
+      accountNumber.value = response.data?.accountNumber ?? '';
+      bankName.value = response.data?.bankName! ?? '';
+      phoneNumber.value = response.data?.phoneNumber ?? '';
+      double balance1 = response.data?.balance ?? 0.0;
       balance.value = formatCurrency(balance1);
       session2.writeUserAccountNumber(accountNumber.value);
       session2.writeUserAccountBalance(balance1);
@@ -79,25 +81,25 @@ class DashboardController extends GetxController {
     }
   }
 
-  Future<void> reCreateWallet() async {
-    isLoaded.value = true;
+  Future reCreateWallet() async {
+    isCreatWalletCreated.value = true;
     try {
       int userId = session.readUserId() ?? 0;
       var response = await userController
           .reCreateWalletAsync(ReCreateWalletRequest(userId: userId));
       if (response.status) {
         Get.offAll(() => DashboardScreen());
-        isLoaded.value = false;
+        isCreatWalletCreated.value = false;
       } else {
         Get.defaultDialog(
-            title: 'Information', content: Text(response.message));
-        isLoaded.value = false;
+            title: 'Information', content: Text(response.message!));
+        isCreatWalletCreated.value = false;
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
           backgroundColor: validationErrorColor,
           snackPosition: SnackPosition.BOTTOM);
-      isLoaded.value = false;
+      isCreatWalletCreated.value = false;
     }
   }
 

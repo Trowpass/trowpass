@@ -1,7 +1,7 @@
 class ReCreateWalletResponse {
-  String message;
+  String? message;
   bool status;
-  String responseCode;
+  String? responseCode;
   ReCreateWalletData? data;
 
   ReCreateWalletResponse({
@@ -13,10 +13,10 @@ class ReCreateWalletResponse {
 
   factory ReCreateWalletResponse.fromJson(Map<String, dynamic> json) {
     return ReCreateWalletResponse(
-      message: json['message'],
+      message: json['message'] ?? '',
       status: json['status'],
-      responseCode: json['responseCode'],
-      data: ReCreateWalletData.fromJson(json['data']),
+      responseCode: json['responseCode'] ?? '',
+      data: json['data'] != null ? ReCreateWalletData.fromJson(json['data']) : null,
     );
   }
 }

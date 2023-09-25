@@ -22,13 +22,13 @@ class UserWalletResponse {
 class WalletData {
   int id;
   int accountUserId;
-  String name;
-  String accountNumber;
-  String bankName;
-  String phoneNumber;
+  String? name;
+  String? accountNumber;
+  String? bankName;
+  String? phoneNumber;
   double balance;
   bool isActive;
-  String serviceWalletId;
+  String? serviceWalletId;
 
   WalletData({
     required this.id,
@@ -51,6 +51,6 @@ class WalletData {
         phoneNumber: json['phoneNumber'] ?? '',
         balance: (json['balance'] ?? 0.0).toDouble(),
         isActive: json['isActive'],
-        serviceWalletId: json['serviceWalletId'],
+        serviceWalletId: json['serviceWalletId'] ?? '',
       );
 }
