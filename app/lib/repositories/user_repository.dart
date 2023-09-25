@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/re_create_wallet_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
@@ -198,6 +200,25 @@ class UserRepository {
           requestData: request, path: Endpoints.createWallet);
       if (response.data != null) {
         return CreateWalletResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to create tag');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<ReCreateWalletResponse> reCreateWalletAsync(
+      ReCreateWalletRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: Endpoints.reCreateWallet);
+      if (response.data != null) {
+        return ReCreateWalletResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to create tag');
       }

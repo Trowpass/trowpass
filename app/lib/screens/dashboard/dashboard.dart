@@ -150,13 +150,34 @@ class DashboardScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               const SizedBox(height: 12),
-                                              Text(
-                                                controller.accountNumber.value,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
+                                              controller
+                                                      .accountNumber.isNotEmpty
+                                                  ? Text(
+                                                      controller
+                                                          .accountNumber.value,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                      ),
+                                                    )
+                                                  : GestureDetector(
+                                                      onTap: () => controller
+                                                          .reCreateWallet(),
+                                                      child: Chip(
+                                                        elevation: 20,
+                                                        padding:
+                                                            EdgeInsets.all(8),
+                                                        backgroundColor: Colors
+                                                            .yellowAccent[100],
+                                                        shadowColor: Colors
+                                                            .black, //CircleAvatar
+                                                        label: Text(
+                                                          'CREATE',
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        ), //Text
+                                                      ),
+                                                    ),
                                             ],
                                           ),
                                         ),
