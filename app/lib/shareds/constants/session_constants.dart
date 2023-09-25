@@ -15,3 +15,5 @@ const String virtualCardExpiration = 'virtual_card_expiration';
 const String virtualCardCVV = 'virtual_card_cvv';
 const String virtualCardBalance = 'virtual_card_balance';
 const String virtualCardType = "virtual_card_type";
+const String pinCreated = 'false';
+const String walletCreated = 'false';
