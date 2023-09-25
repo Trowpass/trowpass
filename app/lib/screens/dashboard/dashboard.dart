@@ -150,13 +150,35 @@ class DashboardScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               const SizedBox(height: 12),
-                                              Text(
-                                                controller.accountNumber.value,
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                ),
-                                              ),
+                                              Obx(() => controller
+                                                      .accountNumber.isNotEmpty
+                                                  ? Text(
+                                                      controller
+                                                          .accountNumber.value,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 16,
+                                                      ),
+                                                    )
+                                                  : GestureDetector(
+                                                      onTap: controller.isCreatWalletCreated.value == true ? null : 
+                                                      () => controller.reCreateWallet(),
+                                                      child: Chip(
+                                                        elevation: 20,
+                                                        padding:
+                                                            EdgeInsets.all(8),
+                                                        backgroundColor: controller.isCreatWalletCreated.value == true ? label : Colors
+                                                            .yellowAccent[100],
+                                                        shadowColor: Colors
+                                                            .black,
+                                                            avatar: controller.isCreatWalletCreated.value == true ? CircularProgressIndicator() : null,
+                                                        label: Text(controller.isCreatWalletCreated.value == true ?
+                                                          'Creating...' : 'CREATE',
+                                                          style: TextStyle(
+                                                              fontSize: 20),
+                                                        ), //Text
+                                                      ),
+                                                    )),
                                             ],
                                           ),
                                         ),

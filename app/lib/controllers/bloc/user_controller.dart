@@ -2,12 +2,14 @@ import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/repositories/user_repository.dart';
 import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/rider_registration_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/responses/base_response.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/re_create_wallet_response.dart';
 import 'package:app/services/responses/user_login_response.dart';
 import 'package:app/services/responses/view_profile_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
@@ -100,6 +102,19 @@ class UserController {
         return response;
       }
       return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<ReCreateWalletResponse> reCreateWalletAsync(
+      ReCreateWalletRequest request) async {
+    try {
+      final response = await userRepository.reCreateWalletAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message!);
     } catch (e) {
       return Future.error(e);
     }
