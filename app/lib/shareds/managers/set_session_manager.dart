@@ -86,4 +86,8 @@ class SetSessionManager {
   void writeWalletCreated(bool value) {
     storage.write(walletCreated, value);
   }
+
+  void writeBanks(dynamic value) {
+    storage.write(banks, value);
+  }
 }

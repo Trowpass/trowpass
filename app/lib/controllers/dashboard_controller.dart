@@ -1,8 +1,10 @@
 // ignore_for_file: avoid_print, unnecessary_string_interpolations
+import 'package:app/controllers/bloc/pay_to_bank_controller.dart';
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/dashboard/dashboard.dart';
 import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
+import 'package:app/services/responses/get_all_banks_reponse.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/currency_format.dart';
@@ -34,6 +36,7 @@ class DashboardController extends GetxController {
   GetSessionManager session = GetSessionManager();
   SetSessionManager session2 = SetSessionManager();
   UserController userController = UserController();
+  PaytToBankController paytToBankController = PaytToBankController();
 
   @override
   void onInit() {
@@ -46,6 +49,7 @@ class DashboardController extends GetxController {
     phoneNumber.value = '';
     userProfile();
     userWallet();
+    fetchBanks();
     super.onInit();
   }
 
@@ -105,5 +109,18 @@ class DashboardController extends GetxController {
 
   Future<dynamic> displayPlaceholderDialog(String pageTitle) {
     return placeholderDialog(pageTitle);
+  }
+
+  Future fetchBanks() async {
+    try {
+      BanksResponse banksResponse =
+          await paytToBankController.getallBanksAsync();
+      if (banksResponse.status) {
+        // final jsonString = jsonEncode(banksResponse.data);
+        session2.writeBanks(banksResponse.data);
+      }
+    } catch (e) {
+      print('Error fetching banks: $e');
+    }
   }
 }

@@ -25,4 +25,5 @@ class GetSessionManager {
   String? readVirtualCardType() => storage.read(virtualCardType);
   bool readPinCreated() => storage.read(pinCreated) ?? false;
   bool readWalletCreated() => storage.read(walletCreated) ?? false;
+  bool readBanks() => storage.read(banks);
 }

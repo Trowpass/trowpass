@@ -44,6 +44,16 @@ class ResponseData {
     required this.bankCode,
   });
 
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'isActive': isActive,
+        'createdBy': createdBy,
+        'createdAt': createdAt,
+        'bankName': bankName,
+        'shortCode': shortCode,
+        'bankCode': bankCode
+      };
+
   factory ResponseData.fromJson(Map<String, dynamic> json) {
     return ResponseData(
       id: json['id'] ?? 0,
