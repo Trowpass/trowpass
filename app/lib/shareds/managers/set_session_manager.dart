@@ -86,4 +86,8 @@ class SetSessionManager {
   void writeWalletCreated(bool value) {
     storage.write(walletCreated, value);
   }
+
+  void writeTokenExpiration(String tokenExpires) {
+   storage.write(tokenExpiration, tokenExpires);
+  }
 }
