@@ -53,13 +53,15 @@ class AuthController extends GetxController {
           password: passwordController.text.trim(),
         ),
       );
+
       if (response.status) {
         if (shouldRememberUser.value) {
-          session.writeAuthorizationToken(response.data!.token);
-          session.writeUserId(response.data!.userId);
           session.writeIsUserLoggedIn(true);
           session.writeTokenExpiration(response.data!.tokenExpires);
         }
+
+        session.writeUserId(response.data!.userId);
+        session.writeAuthorizationToken(response.data!.token);
         if (!response.data!.loginData!.isAccountVerified) {
           String phoneNumber = getSession.readRiderPhoneNumber() ?? '';
           //send new otp
