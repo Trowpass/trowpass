@@ -18,3 +18,4 @@ const String pinCreated = 'false';
 const String walletCreated = 'false';
 const String virtualCardCreated = 'false';
 const String accountType = 'account_type';
+const String tokenExpiration = 'token_expiration';

@@ -26,4 +26,14 @@ class GetSessionManager {
   bool readWalletCreated() => storage.read(walletCreated) ?? false;
   bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
   String readAccountType() => storage.read(accountType);
+  String readTokenExpires() => storage.read(tokenExpiration) ?? '';
+
+  bool readIsTokenExpired() {
+    try {
+      final date = DateTime.parse(readTokenExpires());
+      return DateTime.now().isAfter(date);
+    } catch (err) {
+      return true;
+    }
+  }
 }
