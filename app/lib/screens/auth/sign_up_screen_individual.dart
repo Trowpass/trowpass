@@ -1,5 +1,6 @@
 import 'package:app/screens/auth/login.dart';
 import 'package:app/shareds/utils/app_colors.dart';
+import 'package:app/widgets/app_dialog.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -59,7 +60,8 @@ class SignUpScreenIndividual extends StatelessWidget {
                     const SizedBox(height: 10),
                     Text(
                       'Please Note: SMS will not be delivered to a Do Not Disturb (DND) number.',
-                      style: appStyles(16, Colors.black, FontWeight.w400), textAlign: TextAlign.center,
+                      style: appStyles(16, Colors.black, FontWeight.w400),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 22),
                     Form(
@@ -191,9 +193,22 @@ class SignUpScreenIndividual extends StatelessWidget {
                             StandardButton(
                               text: 'SIGN UP',
                               onPressed: () async {
-                                if (controller.formKey.currentState!.validate()) {
-                                  controller.formKey.currentState!.save();
-                                  controller.strength.value == Strength.secure ? controller.registerRider() : null;
+                                final isValidated = controller.formKey.currentState!.validate();
+                                var isPasswordSecure = controller.strength.value == Strength.secure;
+
+                                if (isValidated) {
+                                  if (isPasswordSecure) {
+                                    controller.formKey.currentState!.save();
+                                    controller.registerRider();
+                                  } else {
+                                    showAppDialog(
+                                      type: DialogType.warning,
+                                      title: 'Password not secure',
+                                      subtitle: 'Password should be at least 8 characters long and include a mix of'
+                                          ' uppercase and lowercase letters, numbers,'
+                                          ' and special characters (such as !, @, #, \$, etc.) for added security',
+                                    );
+                                  }
                                 }
                               },
                             ),
