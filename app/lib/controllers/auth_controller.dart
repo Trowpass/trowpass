@@ -104,10 +104,13 @@ class AuthController extends GetxController {
         }
         isLoaded.value = false;
       }
-    } catch (e) {
-      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
-      isLoaded.value = false;
-    }
+    } catch (e, stackTrace) {
+      print('Error: $e');
+      print('Stack Trace: $stackTrace');
+      Get.snackbar('Information', e.toString(),
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM);
+    } 
   }
 
   void createAccount() {

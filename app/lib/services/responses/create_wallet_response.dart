@@ -2,7 +2,7 @@ class CreateWalletResponse {
   bool status;
   String message;
   String responseCode;
-  ResponseData data;
+  ResponseData? data;
 
   CreateWalletResponse({
     required this.status,
@@ -11,11 +11,12 @@ class CreateWalletResponse {
     required this.data,
   });
 
-  factory CreateWalletResponse.fromJson(Map<String, dynamic> json) => CreateWalletResponse(
+  factory CreateWalletResponse.fromJson(Map<String, dynamic> json) =>
+      CreateWalletResponse(
         status: json['status'] ?? '',
         message: json['message'] ?? '',
         responseCode: json['responsCode'] ?? '',
-        data: ResponseData.fromJson(json['data']),
+        data: json['data'] != null ? ResponseData.fromJson(json['data']) : null,
       );
 }
 

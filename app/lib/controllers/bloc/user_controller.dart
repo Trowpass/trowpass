@@ -7,9 +7,11 @@ import 'package:app/services/requests/post_requests/rider_registration_request.d
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
+import 'package:app/services/requests/put_requests/tier_one_request.dart';
 import 'package:app/services/responses/base_response.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
+import 'package:app/services/responses/tier_one_response.dart';
 import 'package:app/services/responses/user_login_response.dart';
 import 'package:app/services/responses/view_profile_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
@@ -73,6 +75,9 @@ class UserController {
         session.writeUserFullName(
             '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}');
         session.writeRiderEmail(response.data!.email);
+        session.writePinCreated(response.data!.isPinCreated);
+        session.writeAccountType(response.data!.accountType);
+        session.writeVirtualCardCreated(response.data!.isVirtualCardCreated);
         return response;
       }
       return Future.error(response.message);
@@ -132,6 +137,18 @@ class UserController {
   Future<BaseResponse> choosePinAsync(ChoosePinRequest request) async {
     try {
       final response = await userRepository.choosePinAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<TierOneResponse> t1AccountUpgradeAsync(TierOneRequest request) async {
+    try {
+      final response = await userRepository.t1AccountUpgradeAsync(request);
       if (response.status) {
         return response;
       }

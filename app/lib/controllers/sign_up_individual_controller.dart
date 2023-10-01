@@ -74,7 +74,9 @@ class SignUpIndividualController extends GetxController {
         }
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(), backgroundColor: validationErrorColor, snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(),
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
   }

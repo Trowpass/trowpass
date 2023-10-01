@@ -59,7 +59,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
     }
   }

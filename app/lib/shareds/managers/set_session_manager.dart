@@ -55,10 +55,6 @@ class SetSessionManager {
     storage.write(userAccountBalance, value);
   }
 
-  void writeUserVirtualCardCreation(String value) {
-    storage.write(virtualCardCreation, value);
-  }
-
   void writeVirtualCardPan(String value) {
     storage.write(virtualCardPan, value);
   }
@@ -87,6 +83,13 @@ class SetSessionManager {
     storage.write(walletCreated, value);
   }
 
+  void writeVirtualCardCreated(bool value) {
+    storage.write(walletCreated, value);
+  }
+
+  void writeAccountType(String value) {
+    storage.write(accountType, value);
+  }
   void writeTokenExpiration(String tokenExpires) {
    storage.write(tokenExpiration, tokenExpires);
   }

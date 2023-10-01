@@ -58,9 +58,8 @@ class DashboardController extends GetxController {
     if (response.status) {
       var fullName2 =
           '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
-      session2.writeUserFullName(fullName2);
-      session2.writePinCreated(response.data!.isPinCreated);
       fullName.value = fullName2;
+      session2.writeUserFullName(fullName2);
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());
       }
@@ -97,7 +96,7 @@ class DashboardController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
       isCreatWalletCreated.value = false;
     }

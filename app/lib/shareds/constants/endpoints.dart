@@ -39,6 +39,7 @@ class Endpoints {
   static const String cardDetails = '/api/v1/card/{userId}';
   static const String changeVirtualCardPin =
       '/api/v1/card/change-virtual-card-pin';
+  static const String t1_upgrade = '/api/v1/accountupgrade/t1';
 
   static String format({
     required String basePath,
