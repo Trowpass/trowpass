@@ -58,7 +58,7 @@ class OtpController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
@@ -86,7 +86,7 @@ class OtpController extends GetxController {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoaded.value = false;

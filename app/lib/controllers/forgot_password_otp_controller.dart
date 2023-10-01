@@ -58,7 +58,7 @@ class ForgotPasswordOtpController extends GetxController {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoaded.value = false;

@@ -39,6 +39,10 @@ class PaymentMethodController extends GetxController {
     if (paymentOption.value == payWithCard.value) {
       checkoutPaystack(context);
     }
+
+    if (paymentOption.value == payWithBank.value) {
+      paymentWithBankTransferDetails(context);
+    }
   }
 
   void checkoutPaystack(BuildContext context) async {

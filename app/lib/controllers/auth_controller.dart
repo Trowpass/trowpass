@@ -107,7 +107,7 @@ class AuthController extends GetxController {
       print('Error: $e');
       print('Stack Trace: $stackTrace');
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
