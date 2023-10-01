@@ -1,6 +1,5 @@
 import 'package:app/screens/auth/login.dart';
 import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/widgets/app_dialog.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -192,25 +191,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                             const SizedBox(height: 20),
                             StandardButton(
                               text: 'SIGN UP',
-                              onPressed: () async {
-                                final isValidated = controller.formKey.currentState!.validate();
-                                var isPasswordSecure = controller.strength.value == Strength.secure;
-
-                                if (isValidated) {
-                                  if (isPasswordSecure) {
-                                    controller.formKey.currentState!.save();
-                                    controller.registerRider();
-                                  } else {
-                                    showAppDialog(
-                                      type: DialogType.warning,
-                                      title: 'Password not secure',
-                                      subtitle: 'Password should be at least 8 characters long and include a mix of'
-                                          ' uppercase and lowercase letters, numbers,'
-                                          ' and special characters (such as !, @, #, \$, etc.) for added security',
-                                    );
-                                  }
-                                }
-                              },
+                              onPressed: () => controller.proceedRegister(),
                             ),
                           ],
                         )),
