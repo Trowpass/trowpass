@@ -57,9 +57,10 @@ class AuthController extends GetxController {
       if (response.status) {
         if (shouldRememberUser.value) {
           session.writeIsUserLoggedIn(true);
+          session.writeShouldRememberMe(true);
           session.writeTokenExpiration(response.data!.tokenExpires);
         }
-
+        
         session.writeUserId(response.data!.userId);
         session.writeAuthorizationToken(response.data!.token);
         if (!response.data!.loginData!.isAccountVerified) {

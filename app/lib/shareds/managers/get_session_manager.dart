@@ -36,6 +36,7 @@ class GetSessionManager {
   bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
   String readAccountType() => storage.read(accountType);
   DateTime readTokenExpires() => storage.read(tokenExpiration) ?? DateTime.now();
+  bool readShouldRememberMe() => storage.read(shouldRememberMe) ?? false;
 
   bool readIsTokenExpired() {
     try {
