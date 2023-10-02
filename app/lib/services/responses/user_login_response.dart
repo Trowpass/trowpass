@@ -24,7 +24,7 @@ class UserLoginResponse {
 class UserLoginData {
   String token;
   int userId;
-  String tokenExpires;
+  DateTime tokenExpires;
   ChecksumData? loginData;
 
   UserLoginData(
@@ -36,7 +36,7 @@ class UserLoginData {
   factory UserLoginData.fromJson(Map<String, dynamic> json) => UserLoginData(
       token: json['token'] ?? '',
       userId: json['userId'] ?? '',
-      tokenExpires: json['tokenExpires'] ?? '',
+      tokenExpires: DateTime.parse(json['tokenExpires']),
       loginData: json['loginData'] != null
           ? ChecksumData.fromJson(json['loginData'])
           : null);
