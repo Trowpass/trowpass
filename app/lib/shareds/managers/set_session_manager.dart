@@ -83,6 +83,33 @@ class SetSessionManager {
     storage.write(walletCreated, value);
   }
 
+  void writeAllBanks(String key, List<String> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeSelectedBankName(String key, String value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeBankIdMap(String key, Map<String, int> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writebankCodeMap(String key, Map<String, String> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeAllTransportCompanies(String key, List<String> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeSelectedTransportCompanies(String key, String value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeTransportCompanyIdMap(String key, Map<String, int> value) {
+  storage.writeIfNull(key, value);
+}
   void writeVirtualCardCreated(bool value) {
     storage.write(walletCreated, value);
   }

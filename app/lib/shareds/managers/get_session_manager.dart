@@ -24,6 +24,15 @@ class GetSessionManager {
   String? readVirtualCardType() => storage.read(virtualCardType);
   bool readPinCreated() => storage.read(pinCreated) ?? false;
   bool readWalletCreated() => storage.read(walletCreated) ?? false;
+  List<String> readAllBanks(String key) => (storage.read(key) as List<dynamic>?)?.cast<String>() ?? [];
+  String? readSelectedBankName(String key) => storage.read(key);
+  Map<String, int> readBankIdMap(String key) => (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
+  Map<String, String> readbankCodeMap(String key) => (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, String>() ?? {};
+  //transport
+  List<String> readAllTransportCompanies(String key) => (storage.read(key) as List<dynamic>?)?.cast<String>() ?? [];
+  String? readSelectedTransportCompanies(String key) => storage.read(key);
+  Map<String, int> readTransportCompanyIdMap(String key) =>
+    (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
   bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
   String readAccountType() => storage.read(accountType);
   String readTokenExpires() => storage.read(tokenExpiration) ?? '';

@@ -5,8 +5,6 @@ import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/screens/wallet/top_up_transport_wallet_done.dart';
 import 'package:app/services/requests/post_requests/topup_transport_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
-import 'package:app/services/responses/get_all_banks_reponse.dart';
-import 'package:app/services/responses/get_all_transport_company_response.dart';
 import 'package:app/services/responses/topup_transport_wallet_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -33,8 +31,8 @@ class TopUpTransportWalletController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = false;
-    fetchBanks();
-    fetchTransportCompany();
+    fetchBankDetailsFromSessionStorage();
+    fetchTransportCompanyDetailsFromSessionStorage();
     accountWalletNumberTextEditController.addListener(() {
       if (accountWalletNumberTextEditController.text.trim().length == 10) {
         fetchUserDataByAccountNumber();
@@ -45,8 +43,8 @@ class TopUpTransportWalletController extends GetxController {
 
   @override
   void onReady() {
-    fetchTransportCompany();
-    fetchBanks();
+    fetchBankDetailsFromSessionStorage();
+    fetchTransportCompanyDetailsFromSessionStorage();
     super.onReady();
   }
 
@@ -76,26 +74,37 @@ class TopUpTransportWalletController extends GetxController {
   Map<String, String> bankCodeMap = {};
   Map<String, int> transportCompanyIdMap = {};
 
-  void fetchBanks() async {
+  void fetchBankDetailsFromSessionStorage() {
     try {
-      BanksResponse banksResponse =
-          await topupTransportWalletController.getallBanksAsync();
-      if (banksResponse.status) {
-        List<ResponseData> banksData = banksResponse.data;
-        List<String> bankNamesList = ['Select bank'];
-        banksData.forEach((bank) {
-          String bankName = bank.bankName;
-          int bankId = bank.id;
-          String bankCode = bank.bankCode;
-          bankIdMap[bankName] = bankId;
-          bankCodeMap[bankName] = bankCode;
-          bankNamesList.add('$bankName');
-        });
-        allBanks = bankNamesList;
-        selectedBankName.value = bankNamesList[0];
-      }
+      // Retrieve bank details from session storage
+      List<String> storedBanks = session.readAllBanks('allBanks');
+      String storedSelectedBankName = session.readSelectedBankName('selectedBankName') ?? 'Select bank';
+      Map<String, int> storedBankIdMap = session.readBankIdMap('bankIdMap');
+      Map<String, String> storedBankCodeMap = session.readbankCodeMap('bankCodeMap');
+
+      // Update controller's variables with retrieved values
+      allBanks = storedBanks;
+      selectedBankName.value = storedSelectedBankName;
+      bankIdMap = storedBankIdMap;
+      bankCodeMap = storedBankCodeMap;
     } catch (e) {
-      print('Error fetching banks: $e');
+      print('Error fetching bank details from: $e');
+    }
+  }
+
+  void fetchTransportCompanyDetailsFromSessionStorage() {
+    try {
+      // Retrieve bank details from session storage
+      List<String> storedTransportCompanies = session.readAllTransportCompanies('allTransportCompanies');
+      String storedSelectedTransportCompanies = session.readSelectedTransportCompanies('selectedTransportCompany') ?? 'Select transport';
+      Map<String, int> storedTransportIdMap = session.readTransportCompanyIdMap('transportCompanyIdMap');
+
+      // Update controller's variables with retrieved values
+      allTransportCompany = storedTransportCompanies;
+      selectedTransportCompany.value = storedSelectedTransportCompanies;
+      transportCompanyIdMap = storedTransportIdMap;
+    } catch (e) {
+      print('Error fetching transport company: $e');
     }
   }
 
@@ -105,26 +114,6 @@ class TopUpTransportWalletController extends GetxController {
 
   int getSelectedBankId() {
     return bankIdMap[selectedBankName.value] ?? 0;
-  }
-
-  void fetchTransportCompany() async {
-    try {
-      TransportCompanyResponse transportCompanyResponse =
-          await topupTransportWalletController.getallTransportCompanyAsync();
-      if (transportCompanyResponse.status) {
-        List<TransportCompanyResponseData> transportCompanyData =
-            transportCompanyResponse.data;
-        List<String> transportCompaniesList = ['Select company'];
-        transportCompaniesList.addAll(transportCompanyData.map((company) {
-          transportCompanyIdMap[company.name] = company.id;
-          return company.name;
-        }));
-        allTransportCompany = transportCompaniesList;
-        selectedTransportCompany.value = transportCompaniesList[0];
-      }
-    } catch (e) {
-      print('Error fetching banks: $e');
-    }
   }
 
   int getSelectedTransportCompanyId() {

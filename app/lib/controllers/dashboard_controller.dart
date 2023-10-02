@@ -1,8 +1,11 @@
-// ignore_for_file: avoid_print, unnecessary_string_interpolations
+// ignore_for_file: avoid_print, unnecessary_string_interpolations, avoid_function_literals_in_foreach_calls
+import 'package:app/controllers/bloc/topup_transport_wallet_controller.dart';
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/dashboard/dashboard.dart';
 import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
+import 'package:app/services/responses/get_all_banks_reponse.dart';
+import 'package:app/services/responses/get_all_transport_company_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/currency_format.dart';
@@ -26,6 +29,10 @@ class DashboardController extends GetxController {
   final isCreatWalletCreated = false.obs;
   RxDouble sliderValue = 0.0.obs;
   final double slideWidth = 200.0;
+  final selectedTransportCompany = 'Select company'.obs;
+  final selectedBankName = 'Select bank'.obs;
+  final TopupTransportWalletController topupTransportWalletController =
+      TopupTransportWalletController();
 
   void onSlideChanged(double value) {
     sliderValue.value = value;
@@ -46,11 +53,104 @@ class DashboardController extends GetxController {
     phoneNumber.value = '';
     userProfile();
     userWallet();
+    fetchBanks();
+    fetchTransportCompany();
+    printSessionStorageContents();
     super.onInit();
   }
 
   void toggleBalanceVisibility() {
     showBalance.toggle();
+  }
+
+  void onSetSelectedTransportCompany(Object? value) {
+    selectedTransportCompany.value = value.toString();
+  }
+
+  void onSetSelectedBankName(Object? value) {
+    selectedBankName.value = value.toString();
+  }
+
+  List<String> allBanks = [];
+  List<String> allTransportCompany = [];
+  List<String> allBankNames = [];
+  Map<String, int> bankIdMap = {};
+  Map<String, String> bankCodeMap = {};
+  Map<String, int> transportCompanyIdMap = {};
+
+  void fetchBanks() async {
+    try {
+      BanksResponse banksResponse =
+          await topupTransportWalletController.getallBanksAsync();
+      if (banksResponse.status) {
+        List<ResponseData> banksData = banksResponse.data;
+        List<String> bankNamesList = ['Select bank'];
+        banksData.forEach((bank) {
+          String bankName = bank.bankName;
+          int bankId = bank.id;
+          String bankCode = bank.bankCode;
+          bankIdMap[bankName] = bankId;
+          bankCodeMap[bankName] = bankCode;
+          bankNamesList.add('$bankName');
+        });
+        allBanks = bankNamesList;
+        selectedBankName.value = bankNamesList[0];
+
+        // Save banks to session storage
+        session2.writeAllBanks('allBanks', allBanks);
+        session2.writeSelectedBankName(
+            'selectedBankName', selectedBankName.value);
+        session2.writeBankIdMap('bankIdMap', bankIdMap);
+        session2.writebankCodeMap('bankCodeMap', bankCodeMap);
+      }
+    } catch (e) {
+      print('Error fetching banks: $e');
+    }
+  }
+
+  void fetchTransportCompany() async {
+    try {
+      TransportCompanyResponse transportCompanyResponse =
+          await topupTransportWalletController.getallTransportCompanyAsync();
+      if (transportCompanyResponse.status) {
+        List<TransportCompanyResponseData> transportCompanyData =
+            transportCompanyResponse.data;
+        List<String> transportCompaniesList = ['Select company'];
+        transportCompanyData.forEach((company) {
+          String name = company.name;
+          int transportId = company.id;
+          transportCompanyIdMap[name] = transportId;
+          transportCompaniesList.add('$name');
+        });
+        // transportCompaniesList.addAll(transportCompanyData.map((company) {
+        //   transportCompanyIdMap[company.name] = company.id;
+        //   return company.name;
+        // }));
+        allTransportCompany = transportCompaniesList;
+        selectedTransportCompany.value = transportCompaniesList[0];
+
+        // Save transport companies details to session storage
+        session2.writeAllTransportCompanies('allTransportCompanies', allTransportCompany);
+        session2.writeSelectedTransportCompanies('selectedTransportCompany', selectedTransportCompany.value);
+        session2.writeTransportCompanyIdMap('transportCompanyIdMap', transportCompanyIdMap);
+      }
+    } catch (e) {
+      print('Error fetching banks: $e');
+    }
+  }
+
+  void printSessionStorageContents() {
+    final Map<String, dynamic> allData = {};
+    final allKeys = session.storage.getKeys();
+
+    for (var key in allKeys) {
+      allData[key] = session.storage.read(key);
+    }
+
+    print('Session Storage Contents:');
+    allData.forEach((key, value) {
+      print('$key: $value');
+    });
   }
 
   Future userProfile() async {

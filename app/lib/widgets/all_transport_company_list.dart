@@ -34,6 +34,7 @@ class _TransportCompanyListModalSheetState
   @override
   void initState() {
     super.initState();
+    print("All company: ${widget.allTransportCompany}");
     searchController = TextEditingController();
     filteredTransportCompany.addAll(widget.allTransportCompany);
     Future.delayed(Duration(seconds: 2), () {
