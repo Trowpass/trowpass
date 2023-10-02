@@ -59,7 +59,8 @@ class SignUpScreenIndividual extends StatelessWidget {
                     const SizedBox(height: 10),
                     Text(
                       'Please Note: SMS will not be delivered to a Do Not Disturb (DND) number.',
-                      style: appStyles(16, Colors.black, FontWeight.w400), textAlign: TextAlign.center,
+                      style: appStyles(16, Colors.black, FontWeight.w400),
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 22),
                     Form(
@@ -172,7 +173,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               validatorMessage: 'Password do not match',
                               validator: (value) =>
                                   controller.passwordController.text != value ? 'Password do not match' : null,
-                              isPassword: controller.isPasswordHidden.value,
+                              isPassword: controller.isComfirmPasswordHidden.value,
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.lock,
@@ -180,22 +181,17 @@ class SignUpScreenIndividual extends StatelessWidget {
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                  controller.isComfirmPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
                                   color: controller.isFocused.value ? primaryColor : null,
                                   size: 24,
                                 ),
-                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
+                                onPressed: () => controller.isComfirmPasswordHidden.value = !controller.isComfirmPasswordHidden.value,
                               ),
                             ),
                             const SizedBox(height: 20),
                             StandardButton(
                               text: 'SIGN UP',
-                              onPressed: () async {
-                                if (controller.formKey.currentState!.validate()) {
-                                  controller.formKey.currentState!.save();
-                                  controller.strength.value == Strength.secure ? controller.registerRider() : null;
-                                }
-                              },
+                              onPressed: () => controller.proceedRegister(),
                             ),
                           ],
                         )),

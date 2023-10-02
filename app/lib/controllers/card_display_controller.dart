@@ -56,7 +56,7 @@ class CardDisplayController extends GetxController {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;

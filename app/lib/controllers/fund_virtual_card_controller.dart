@@ -1,4 +1,4 @@
-import 'package:app/repositories/cards_repository.dart';
+import 'package:app/controllers/bloc/card_controller.dart';
 import 'package:app/screens/card/card_display.dart';
 import 'package:app/screens/card/success_screen.dart';
 import 'package:app/services/requests/post_requests/fund_virtual_card.dart';
@@ -16,7 +16,7 @@ class FundVirtualCardController extends GetxController {
   final topUpAmountController = TextEditingController();
   final balance = 'Balance: 0.0'.obs;
   final session = GetSessionManager();
-  final cardsRepository = CardsRepository();
+  CardController cardController = CardController();
 
   @override
   void onInit() {
@@ -28,32 +28,43 @@ class FundVirtualCardController extends GetxController {
   Future<void> fundVirtualCard() async {
     final text = topUpAmountController.text;
     try {
-      isLoading.value = true;
-      var response =
-          await cardsRepository.fundVirtualCardAsync(FundVirtualCardRequest(
-        userId: session.readUserId(),
-        amount: int.parse(text),
-      ));
-      if (response.status) {
-        final message =
-            '${ngnFormatCurrency(double.parse(text))} was added to your card';
-        Get.to(() => SuccessScreen(
-              message: message,
-              imageAsset: fundCardSuccess,
-              onTap: () => Get.to(() => CardDisplayScreen()),
-            ));
-        isLoading.value = false;
+      //validate funding
+      var walletBalance = session.readUserAccountBalance() ?? 0.0;
+      if (walletBalance < int.parse(text)) {
+        Get.snackbar(
+          'Information',
+          'Insufficient wallet balance',
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM,
+        );
       } else {
-        Get.defaultDialog(
-            title: 'Information', content: Text(response.message));
+        isLoading.value = true;
+        var response =
+            await cardController.fundVirtualCardAsync(FundVirtualCardRequest(
+          userId: session.readUserId(),
+          amount: int.parse(text),
+        ));
+        if (response.status) {
+          final message =
+              '${ngnFormatCurrency(double.parse(text))} was added to your card';
+          Get.to(() => SuccessScreen(
+                message: message,
+                imageAsset: fundCardSuccess,
+                onTap: () => Get.to(() => CardDisplayScreen()),
+              ));
+          isLoading.value = false;
+        } else {
+          Get.defaultDialog(
+              title: 'Information', content: Text(response.message));
+          isLoading.value = false;
+        }
         isLoading.value = false;
       }
-      isLoading.value = false;
     } catch (e) {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;

@@ -2,7 +2,7 @@ class KYCResponse {
   bool status;
   String message;
   String responseCode;
-  KYCData data;
+  KYCData? data;
 
   KYCResponse({
     required this.status,
@@ -12,16 +12,15 @@ class KYCResponse {
   });
 
   factory KYCResponse.fromJson(Map<String, dynamic> json) => KYCResponse(
-        status: json['status'] ?? false,
-        message: json['message'] ?? '',
-        responseCode: json['responseCode'] ?? '',
-        data: KYCData.fromJson(json['data'] ?? {})
-      );
+      status: json['status'] ?? false,
+      message: json['message'] ?? '',
+      responseCode: json['responseCode'] ?? '',
+      data: json['data'] != null ? KYCData.fromJson(json['data']) : null);
 }
 
 class KYCData {
   String userId;
-  String user; 
+  String user;
   String bvn;
   String address;
   String dateOfBirth;
@@ -31,8 +30,8 @@ class KYCData {
   String id;
   bool isActive;
   bool isDeleted;
-  String createdBy; 
-  String modifiedBy; 
+  String createdBy;
+  String modifiedBy;
   String createdAt;
   String modifiedAt;
   KYCData({
@@ -59,11 +58,11 @@ class KYCData {
         bvn: json['bvn'] ?? '',
         address: json['address'] ?? '',
         dateOfBirth: json['dateOfBirth'] ?? '',
-        isSubmitted: json['isSubmitted'] ?? false, 
-        isApproved: json['isApproved'] ?? false, 
+        isSubmitted: json['isSubmitted'] ?? false,
+        isApproved: json['isApproved'] ?? false,
         dateSubmitted: json['dateSubmitted'] ?? '',
         id: json['id'] ?? '',
-        isActive: json['isActive'] ?? false, 
+        isActive: json['isActive'] ?? false,
         isDeleted: json['isDeleted'] ?? false,
         createdBy: json['createdBy'] ?? '',
         modifiedBy: json['modifiedBy'] ?? '',

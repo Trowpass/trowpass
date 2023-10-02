@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class CardTypeScreen extends StatelessWidget {
-  final CardTypeController controller = Get.put(CardTypeController());
+  final controller = Get.put(CardTypeController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,17 +24,20 @@ class CardTypeScreen extends StatelessWidget {
         ),
         backgroundColor: background,
         elevation: 0,
-        centerTitle: false,
+        centerTitle: true,
         title: Text(
           'What type of card do you want?',
           style: appStyles(18, titleActive, FontWeight.w600),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Get.back(),
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // SizedBox(height: 10),
             CardBox(
               icon: Icon(
                 Icons.credit_card,
@@ -43,7 +46,9 @@ class CardTypeScreen extends StatelessWidget {
               title: 'Virtual Debit Card',
               description:
                   'Instantly create a virtual card to spend on transport fare.',
-              onPressed: controller.handleVirtualCardPressed,
+              onPressed: controller.isVirtualCreated.value
+                  ? controller.handleVirtualCardDetains
+                  : controller.handleVirtualCardPressed,
             ),
             CardBox(
               icon: Icon(
@@ -63,12 +68,13 @@ class CardTypeScreen extends StatelessWidget {
 }
 
 class CardBox extends StatelessWidget {
+  final controller = Get.put(CardTypeController());
   final Icon icon;
   final String title;
   final String description;
   final VoidCallback onPressed;
 
-  const CardBox({
+  CardBox({
     required this.icon,
     required this.title,
     required this.description,
@@ -124,7 +130,9 @@ class CardBox extends StatelessWidget {
                     TextButton(
                       onPressed: onPressed,
                       child: Text(
-                        'Get Started',
+                        controller.isVirtualCreated.value
+                            ? 'Get Details'
+                            : 'Get Started',
                         style: appStyles(
                           13,
                           anchor,

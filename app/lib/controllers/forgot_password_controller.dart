@@ -45,7 +45,7 @@ class ForgotPassWordController extends GetxController {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoaded.value = false;
@@ -56,7 +56,7 @@ class ForgotPassWordController extends GetxController {
     Get.snackbar(
       'Information',
       'No implemented yet',
-      backgroundColor: validationErrorColor,
+      backgroundColor: dialogInfoBackground,
       snackPosition: SnackPosition.BOTTOM,
     );
   }

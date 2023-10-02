@@ -5,7 +5,6 @@ import 'package:app/controllers/dashboard_controller.dart';
 import 'package:app/screens/send_money/pay_to_bank/receipt.dart';
 import 'package:app/services/requests/post_requests/pay_to_bank_request.dart';
 import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
-import 'package:app/services/responses/get_all_banks_reponse.dart';
 import 'package:app/services/responses/pay_to_bank_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -26,7 +25,7 @@ class PayToBankController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = false;
-    fetchBanks();
+    fetchBankDetailsFromSessionStorage();
     accountNumberController.addListener(() {
       if (accountNumberController.text.trim().length == 10) {
         fetchUserDataByAccountNumber();
@@ -37,7 +36,7 @@ class PayToBankController extends GetxController {
 
   @override
   void onReady() {
-    fetchBanks();
+    fetchBankDetailsFromSessionStorage();
     super.onReady();
   }
 
@@ -60,28 +59,24 @@ class PayToBankController extends GetxController {
   Map<String, int> bankIdMap = {};
   Map<String, String> bankCodeMap = {};
 
-  void fetchBanks() async {
+ void fetchBankDetailsFromSessionStorage() {
     try {
-      BanksResponse banksResponse =
-          await paytToBankController.getallBanksAsync();
-      if (banksResponse.status) {
-        List<ResponseData> banksData = banksResponse.data;
-        List<String> bankNamesList = ['Select bank'];
-        // bankNamesList.addAll(banksData.map((bank) => bank.bankName));
-        banksData.forEach((bank) {
-          String bankName = bank.bankName;
-          int bankId = bank.id;
-          String bankCode = bank.bankCode;
-          bankIdMap[bankName] = bankId;
-          bankCodeMap[bankName] = bankCode;
-          bankNamesList.add('$bankName');
-        });
-        // bankNames.assignAll(bankNamesList);
-        allBanks = bankNamesList;
-        selectedBankName.value = bankNamesList[0];
-      }
+      // Retrieve bank details from session storage
+      List<String> storedBanks = session.readAllBanks('allBanks');
+      String storedSelectedBankName =
+          session.readSelectedBankName('selectedBankName') ?? 'Select bank';
+      Map<String, int> storedBankIdMap =
+          session.readBankIdMap('bankIdMap');
+      Map<String, String> storedBankCodeMap =
+          session.readbankCodeMap('bankCodeMap');
+
+      // Update controller's variables with retrieved values
+      allBanks = storedBanks;
+      selectedBankName.value = storedSelectedBankName;
+      bankIdMap = storedBankIdMap;
+      bankCodeMap = storedBankCodeMap;
     } catch (e) {
-      print('Error fetching banks: $e');
+      print('Error fetching bank details from: $e');
     }
   }
 
@@ -113,7 +108,7 @@ class PayToBankController extends GetxController {
         isLoaded.value = false;
       } catch (e) {
         Get.snackbar('Information', e.toString(),
-            backgroundColor: validationErrorColor,
+            backgroundColor: dialogInfoBackground,
             snackPosition: SnackPosition.BOTTOM);
         isLoaded.value = false;
       }
@@ -161,7 +156,7 @@ class PayToBankController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }

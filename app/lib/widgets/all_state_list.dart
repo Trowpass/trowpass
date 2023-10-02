@@ -8,35 +8,32 @@ import 'package:app/widgets/list_shimmer_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TransportCompanyListModalSheet extends StatefulWidget {
-  final void Function(String)? onTransportCompanySelected;
-  final List<String> allTransportCompany;
-  final String? initialSelectedTransportCompany;
+class StateListModalSheet extends StatefulWidget {
+  final void Function(String)? onStateSelected;
+  final List<String> allStates;
+  final String? initialSelectedState;
 
-  TransportCompanyListModalSheet({
-    this.onTransportCompanySelected,
-    required this.allTransportCompany,
-    this.initialSelectedTransportCompany,
+  StateListModalSheet({
+    this.onStateSelected,
+    required this.allStates,
+    this.initialSelectedState,
   });
 
   @override
-  _TransportCompanyListModalSheetState createState() =>
-      _TransportCompanyListModalSheetState();
+  _StateListModalSheetState createState() => _StateListModalSheetState();
 }
 
-class _TransportCompanyListModalSheetState
-    extends State<TransportCompanyListModalSheet> {
+class _StateListModalSheetState extends State<StateListModalSheet> {
   late TextEditingController searchController;
-  List<String> filteredTransportCompany = [];
+  List<String> filteredState = [];
   final controller = Get.put(TopUpTransportWalletController());
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    print("All company: ${widget.allTransportCompany}");
     searchController = TextEditingController();
-    filteredTransportCompany.addAll(widget.allTransportCompany);
+    filteredState.addAll(widget.allStates);
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
@@ -69,7 +66,7 @@ class _TransportCompanyListModalSheetState
                               onPressed: () => searchController.clear(),
                               icon: Icon(Icons.cancel)),
                           labelStyle: appStyles(15, null, null),
-                          hintText: "Search transport company",
+                          hintText: "Search state",
                           errorStyle:
                               appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
@@ -94,8 +91,7 @@ class _TransportCompanyListModalSheetState
                         ),
                         onChanged: (value) {
                           setState(() {
-                            filteredTransportCompany = widget
-                                .allTransportCompany
+                            filteredState = widget.allStates
                                 .where((bank) => bank
                                     .toLowerCase()
                                     .contains(value.toLowerCase()))
@@ -106,7 +102,7 @@ class _TransportCompanyListModalSheetState
                     ),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: filteredTransportCompany.length,
+                        itemCount: filteredState.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding:
@@ -114,12 +110,11 @@ class _TransportCompanyListModalSheetState
                             child: Column(
                               children: [
                                 ListTile(
-                                  title: Text(filteredTransportCompany[index]),
+                                  title: Text(filteredState[index]),
                                   onTap: () {
-                                    if (widget.onTransportCompanySelected !=
-                                        null) {
-                                      widget.onTransportCompanySelected!(
-                                          filteredTransportCompany[index]);
+                                    if (widget.onStateSelected != null) {
+                                      widget.onStateSelected!(
+                                          filteredState[index]);
                                     }
                                   },
                                 ),

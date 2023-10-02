@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: getInitialPage(),
-      // initialRoute: AppRoutes.test,
       getPages: AppPages.list,
       title: 'Trowpass',
     );
@@ -29,8 +28,9 @@ class MyApp extends StatelessWidget {
   String getInitialPage() {
     final isUserOnBoarded = store.readIsUserOnBoarded();
     final isUserLoggedIn = store.readIsUserLoggedIn();
+    final isTokenExpired = store.readIsTokenExpired();
 
-    if (isUserOnBoarded && !isUserLoggedIn) {
+    if (isUserOnBoarded && isTokenExpired && !isUserLoggedIn) {
       return AppRoutes.login;
     } else if (isUserOnBoarded && isUserLoggedIn) {
       return AppRoutes.dashboard;

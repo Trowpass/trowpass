@@ -66,7 +66,7 @@ class PayController extends GetxController {
         isLoaded.value = false;
       } catch (e) {
         Get.snackbar('Information', e.toString(),
-            backgroundColor: validationErrorColor,
+            backgroundColor: dialogInfoBackground,
             snackPosition: SnackPosition.BOTTOM);
         isLoaded.value = false;
       }
@@ -115,7 +115,7 @@ class PayController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }

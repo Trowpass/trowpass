@@ -19,7 +19,8 @@ class NewPasswordController extends GetxController {
   final strength = Rx(Strength.weak);
   final password = ''.obs;
   final displayText = ''.obs;
-  RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
   UserRepository userRepository = UserRepository();
 
@@ -34,8 +35,10 @@ class NewPasswordController extends GetxController {
     Get.focusScope!.unfocus();
 
     try {
-      var resetPasswordRequest = ResetPasswordRequest(otp: otp, newPassword: passwordController.text, email: email);
-      var response = await userRepository.resetPasswordAsync(resetPasswordRequest);
+      var resetPasswordRequest = ResetPasswordRequest(
+          otp: otp, newPassword: passwordController.text, email: email);
+      var response =
+          await userRepository.resetPasswordAsync(resetPasswordRequest);
 
       if (response.status) {
         isLoaded.value = false;
@@ -45,14 +48,15 @@ class NewPasswordController extends GetxController {
           () => Get.offAll(() => LoginScreen()),
         );
       } else {
-        Get.defaultDialog(title: 'Information', content: Text(response.message));
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
         isLoaded.value = false;
       }
     } catch (e) {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoaded.value = false;
