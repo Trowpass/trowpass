@@ -154,17 +154,18 @@ class PayToBankReceiptScreen extends StatelessWidget {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Expanded(
+                                          Expanded(
                                                 flex: 1,
-                                                child: Image.asset(
+                                                child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Image.asset(
                                                     controller
                                                         .recipientImage.value,
                                                     height: 70,
-                                                    width: 70)),
-                                          ),
+                                                    width: 70),
+                                          )),                                         
                                           Expanded(
+                                            flex: 5,
                                               child: ListTile(
                                                   title: Text(transactionDetails
                                                           .data

@@ -134,7 +134,6 @@ class PayForm extends StatelessWidget {
                   payController.fetchUserDataByAccountNumber();
                 }
               },
-              // textLabel: '08134678957462',
               textHint: 'Account Number',
               isPassword: false,
               autoCorrect: false,
@@ -146,9 +145,8 @@ class PayForm extends StatelessWidget {
             TextInputForm(
               enabled: false,
               inputController: payController.fullNameController,
-              // initialValue: payController.fullNameController.text,
-              // textLabel: 'Receipient Name',
               textHint: 'Beneficiary Name',
+              validatorMessage: 'Account name not resolved yet',
               isPassword: false,
               autoCorrect: false,
             ),
@@ -159,7 +157,6 @@ class PayForm extends StatelessWidget {
               inputType: TextInputType.number,
               enabled: true,
               inputController: payController.amountController,
-              // textLabel: 'Amount',
               textHint: 'N1200',
               validatorMessage: 'Please enter an amount',
               isPassword: false,

@@ -94,19 +94,18 @@ class LoginScreen extends StatelessWidget {
                                   onFieldSubmitted: (_) => controller.isFocused.value = false,
                                 )),
                             const SizedBox(height: 03),
-                            Obx(() => CheckboxListTile(
+                            Row(children: [
+                              Expanded(child: Obx(() => CheckboxListTile(
                                   dense: true,
                                   contentPadding: EdgeInsets.zero,
-                                  title: const Text('Remember me'),
+                                  title: const Text('Remember Me'),
                                   activeColor: primaryColor,
                                   value: controller.shouldRememberUser.value,
                                   onChanged: (newValue) {
                                     controller.shouldRememberUser.value = newValue ?? false;
                                   },
                                   controlAffinity: ListTileControlAffinity.leading,
-                                )),
-                            const SizedBox(height: 03),
-                            Align(
+                                ))), Expanded(child: Align(
                               alignment: Alignment.bottomRight,
                               child: TextButton(
                                 onPressed: () => Get.to(() => ForgotPasswordScreen()),
@@ -119,7 +118,8 @@ class LoginScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                            ),
+                            ))
+                            ],),                          
                             const SizedBox(height: 18),
                             StandardButton(
                               text: 'LOG IN',

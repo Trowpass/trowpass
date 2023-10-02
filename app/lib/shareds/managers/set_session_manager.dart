@@ -120,4 +120,7 @@ class SetSessionManager {
   void writeTokenExpiration(DateTime tokenExpires) {
    storage.write(tokenExpiration, tokenExpires);
   }
+   void writeShouldRememberMe(bool loggedIn) {
+    storage.write(userLoggedIn, loggedIn);
+  }
 }

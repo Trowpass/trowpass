@@ -39,16 +39,26 @@ class MyApp extends StatelessWidget {
   }
 
   String getInitialPage() {
+    String route = '';
     final isUserOnBoarded = store.readIsUserOnBoarded();
     final isUserLoggedIn = store.readIsUserLoggedIn();
     final isTokenExpired = store.readIsTokenExpired();
+    final rememberMe = store.readShouldRememberMe();
 
-    if (isUserOnBoarded && isTokenExpired && !isUserLoggedIn) {
-      return AppRoutes.login;
-    } else if (isUserOnBoarded && isUserLoggedIn) {
-      return AppRoutes.dashboard;
-    } else {
-      return AppRoutes.onboarding;
+    if(!isUserOnBoarded){
+      route = AppRoutes.onboarding;
+    }else{     
+      if(!isUserLoggedIn){
+        route = AppRoutes.login;
+      }else if(isUserLoggedIn && rememberMe && isTokenExpired){
+         route = AppRoutes.dashboard;
+      }else if(isUserLoggedIn && !rememberMe && isTokenExpired){
+         route = AppRoutes.login;
+        }
+        else{
+          route = AppRoutes.dashboard;
+      }
     }
+    return route;
   }
 }

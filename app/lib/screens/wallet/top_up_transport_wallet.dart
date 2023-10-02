@@ -101,7 +101,6 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                           builder: (BuildContext context) {
                             return TransportCompanyListModalSheet(
                               onTransportCompanySelected: (selectedCompany) {
-                                 print('Selected company: $selectedCompany');
                                 controller.onSetSelectedTransportCompany(
                                     selectedCompany);
                                 controller
@@ -202,7 +201,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     enabled: false,
                     inputController: controller.accountNameTextEditController,
                     textHint: 'Account Name',
-                    validatorMessage: 'Please enter account name',
+                    validatorMessage: 'Account name not resolved yet',
                     isPassword: false,
                     autoCorrect: false,
                   ),
