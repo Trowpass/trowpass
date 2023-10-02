@@ -17,7 +17,6 @@ class GetSessionManager {
   String? readUserBankName() => storage.read(userBankName);
   String? readUserAccountNumber() => storage.read(userAccountNumber);
   double? readUserAccountBalance() => storage.read(userAccountBalance);
-  String? readUserVirtualCardCreation() => storage.read(virtualCardCreation);
   String? readVirtualCardPan() => storage.read(virtualCardPan);
   String? readVirtualCardExpiration() => storage.read(virtualCardExpiration);
   String? readVirtualCardCVV() => storage.read(virtualCardCVV);
@@ -34,4 +33,16 @@ class GetSessionManager {
   String? readSelectedTransportCompanies(String key) => storage.read(key);
   Map<String, int> readTransportCompanyIdMap(String key) =>
     (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
+  bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
+  String readAccountType() => storage.read(accountType);
+  String readTokenExpires() => storage.read(tokenExpiration) ?? '';
+
+  bool readIsTokenExpired() {
+    try {
+      final date = DateTime.parse(readTokenExpires());
+      return DateTime.now().isAfter(date);
+    } catch (err) {
+      return true;
+    }
+  }
 }

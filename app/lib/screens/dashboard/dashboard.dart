@@ -161,19 +161,38 @@ class DashboardScreen extends StatelessWidget {
                                                       ),
                                                     )
                                                   : GestureDetector(
-                                                      onTap: controller.isCreatWalletCreated.value == true ? null : 
-                                                      () => controller.reCreateWallet(),
+                                                      onTap: controller
+                                                                  .isCreatWalletCreated
+                                                                  .value ==
+                                                              true
+                                                          ? null
+                                                          : () => controller
+                                                              .reCreateWallet(),
                                                       child: Chip(
                                                         elevation: 20,
                                                         padding:
                                                             EdgeInsets.all(8),
-                                                        backgroundColor: controller.isCreatWalletCreated.value == true ? label : Colors
-                                                            .yellowAccent[100],
-                                                        shadowColor: Colors
-                                                            .black,
-                                                            avatar: controller.isCreatWalletCreated.value == true ? CircularProgressIndicator() : null,
-                                                        label: Text(controller.isCreatWalletCreated.value == true ?
-                                                          'Creating...' : 'CREATE',
+                                                        backgroundColor: controller
+                                                                    .isCreatWalletCreated
+                                                                    .value ==
+                                                                true
+                                                            ? label
+                                                            : Colors.yellowAccent[
+                                                                100],
+                                                        shadowColor:
+                                                            Colors.black,
+                                                        avatar: controller
+                                                                    .isCreatWalletCreated
+                                                                    .value ==
+                                                                true
+                                                            ? CircularProgressIndicator()
+                                                            : null,
+                                                        label: Text(
+                                                          controller.isCreatWalletCreated
+                                                                      .value ==
+                                                                  true
+                                                              ? 'Creating...'
+                                                              : 'CREATE',
                                                           style: TextStyle(
                                                               fontSize: 20),
                                                         ), //Text
@@ -262,12 +281,12 @@ class DashboardScreen extends StatelessWidget {
                                       .displayPlaceholderDialog('Book Flight'),
                                 ),
                                 CustomCard(
-                                  imagePath: train,
-                                  color: Color.fromRGBO(60, 123, 245, 0.1),
-                                  text: 'Train Ticket',
-                                  onTap: () => controller
-                                      .displayPlaceholderDialog('Train Ticket'),
-                                ),
+                                    imagePath: train,
+                                    color: Color.fromRGBO(60, 123, 245, 0.1),
+                                    text: 'Train Ticket',
+                                    onTap: () =>
+                                        controller.displayPlaceholderDialog(
+                                            'Train Ticket')),
                               ],
                             ),
                             const SizedBox(height: 15),
