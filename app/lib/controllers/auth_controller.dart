@@ -79,13 +79,16 @@ class AuthController extends GetxController {
           Get.offAll(() => OtpScreen(phoneNumber: phoneNumber));
           isLoaded.value = false;
         } else if (!response.data!.loginData!.isPinCreated) {
+          isLoaded.value = false;
           Get.to(() => ChoosePinScreen());
         } else {
+          isLoaded.value = false;
           Get.offAll(() => HomeLandingTabScreen());
         }
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {
+          isLoaded.value = false;
           Get.defaultDialog(
             title: 'Login Failed',
             content: Text(
@@ -94,6 +97,7 @@ class AuthController extends GetxController {
             ),
           );
         } else {
+          isLoaded.value = false;
           Get.defaultDialog(
             title: 'Information',
             content: Text(
@@ -102,14 +106,12 @@ class AuthController extends GetxController {
             ),
           );
         }
-        isLoaded.value = false;
       }
-    } catch (e, stackTrace) {
-      print('Error: $e');
-      print('Stack Trace: $stackTrace');
+    } catch (e) {
       Get.snackbar('Information', e.toString(),
           backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
+      isLoaded.value = false;
     } 
   }
 

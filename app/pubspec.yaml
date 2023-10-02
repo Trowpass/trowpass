@@ -61,6 +61,8 @@ dependencies:
   path: ^1.8.3
   image_picker: ^1.0.4
   in_app_update: ^4.2.1
+  firebase_crashlytics: ^3.3.6
+  firebase_core: ^2.16.0
   # flutter_share: ^2.0.0
   # image_gallery_saver: ^2.0.3
  
