@@ -111,7 +111,7 @@ class AuthController extends GetxController {
       Get.snackbar('Information', e.toString(),
           backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
-      isLoaded.value = false;
+          isLoaded.value = false;
     } 
   }
 

@@ -101,6 +101,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                           builder: (BuildContext context) {
                             return TransportCompanyListModalSheet(
                               onTransportCompanySelected: (selectedCompany) {
+                                 print('Selected company: $selectedCompany');
                                 controller.onSetSelectedTransportCompany(
                                     selectedCompany);
                                 controller

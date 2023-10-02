@@ -173,7 +173,7 @@ class SignUpScreenIndividual extends StatelessWidget {
                               validatorMessage: 'Password do not match',
                               validator: (value) =>
                                   controller.passwordController.text != value ? 'Password do not match' : null,
-                              isPassword: controller.isPasswordHidden.value,
+                              isPassword: controller.isComfirmPasswordHidden.value,
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.lock,
@@ -181,11 +181,11 @@ class SignUpScreenIndividual extends StatelessWidget {
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                  controller.isComfirmPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
                                   color: controller.isFocused.value ? primaryColor : null,
                                   size: 24,
                                 ),
-                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
+                                onPressed: () => controller.isComfirmPasswordHidden.value = !controller.isComfirmPasswordHidden.value,
                               ),
                             ),
                             const SizedBox(height: 20),
