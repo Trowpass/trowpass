@@ -15,7 +15,6 @@ class AppPages {
     GetPage(
       name: AppRoutes.dashboard,
       page: () => HomeLandingTabScreen(),
-      // page: () => CardsTabScreen(),
       binding: DashboardTabBinding(),
     ),
     GetPage(
