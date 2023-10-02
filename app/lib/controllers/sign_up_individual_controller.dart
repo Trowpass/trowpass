@@ -31,6 +31,7 @@ class SignUpIndividualController extends GetxController {
 
   final isLoaded = false.obs;
   final isPasswordHidden = true.obs;
+  final isComfirmPasswordHidden = true.obs;
   final isFocused = false.obs;
 
   @override

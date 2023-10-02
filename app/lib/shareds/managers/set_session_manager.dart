@@ -117,7 +117,7 @@ class SetSessionManager {
   void writeAccountType(String value) {
     storage.write(accountType, value);
   }
-  void writeTokenExpiration(String tokenExpires) {
+  void writeTokenExpiration(DateTime tokenExpires) {
    storage.write(tokenExpiration, tokenExpires);
   }
 }
