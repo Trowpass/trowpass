@@ -20,7 +20,7 @@ class ForgotPasswordOtpController extends GetxController {
   var isExpiryTimeElapsed = false.obs;
 
   final resendCountdownDuration = const Duration(minutes: 1).inSeconds;
-  final expiryCountDownDuration = const Duration(minutes: 5).inSeconds;
+  final expiryCountDownDuration = const Duration(minutes: 2).inSeconds;
   final countDownController = resend_timer.CountdownController();
   final expiryCountDownController = expiry_timer.CountDownController();
 
