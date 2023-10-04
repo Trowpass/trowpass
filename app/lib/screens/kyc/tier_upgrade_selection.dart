@@ -60,6 +60,14 @@ class TierSelectionPage extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
+              Text(
+                'Upgrade your account to enjoy the boundless benefits we have for you!!',
+                textAlign: TextAlign.center,
+                style: appStyles(18, null, FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               OutlinedButton(
                   style: isT1Done == false
                       ? null
@@ -78,7 +86,7 @@ class TierSelectionPage extends StatelessWidget {
                       color: gray,
                     ),
                     title: Text(
-                      'Tier 1 Upgrade',
+                      'Tier 1 Account Upgrade',
                       style: appStyles(18, gray, FontWeight.bold),
                     ),
                     trailing: isT1Done == false
@@ -111,7 +119,7 @@ class TierSelectionPage extends StatelessWidget {
                       color: gray,
                     ),
                     title: Text(
-                      'Tier 2 Upgrade',
+                      'Tier 2 Account Upgrade',
                       style: appStyles(18, gray, FontWeight.bold),
                     ),
                     trailing: isT2Done == false
@@ -144,7 +152,7 @@ class TierSelectionPage extends StatelessWidget {
                       color: gray,
                     ),
                     title: Text(
-                      'Tier 3 Upgrade',
+                      'Tier 3 Account Upgrade',
                       style: appStyles(18, gray, FontWeight.bold),
                     ),
                     trailing: isT3Done == false

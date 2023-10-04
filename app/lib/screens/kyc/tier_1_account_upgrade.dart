@@ -45,7 +45,7 @@ class _TeirOneAccountUpgradeScreenState
                 ),
                 elevation: 0.0,
                 backgroundColor: background,
-                title: Text('Tier 1 Upgrade',
+                title: Text('Upgrading Account to Tier 1',
                     style: appStyles(18, titleActive, FontWeight.w600)),
                 centerTitle: true,
                 actions: [
@@ -97,7 +97,7 @@ class _TeirOneAccountUpgradeScreenState
                                             },
                                             icon: const Icon(
                                               Icons.close_outlined,
-                                              size: 15,
+                                              size: 20,
                                             )),
                                       ),
                                     ),
@@ -123,11 +123,21 @@ class _TeirOneAccountUpgradeScreenState
                                             onPressed: () async {
                                               DateTime? pickedDate =
                                                   await showDatePicker(
-                                                      context: context,
-                                                      initialDate:
-                                                          DateTime.now(),
-                                                      firstDate: DateTime(2000),
-                                                      lastDate: DateTime.now());
+                                                context: context,
+                                                initialDate: DateTime.now(),
+                                                firstDate: DateTime(
+                                                    DateTime.now().year - 120),
+                                                lastDate: DateTime.now(),
+                                                builder: (context, child) {
+                                                  return Theme(
+                                                      data: ThemeData.light()
+                                                          .copyWith(
+                                                        primaryColor:
+                                                            primaryColor,
+                                                      ),
+                                                      child: child!);
+                                                },
+                                              );
                                               if (pickedDate != null) {
                                                 String formattedDate =
                                                     DateFormat('yyyy-MM-dd')
@@ -139,7 +149,7 @@ class _TeirOneAccountUpgradeScreenState
                                             },
                                             icon: const Icon(
                                               Icons.calendar_month_outlined,
-                                              size: 15,
+                                              size: 20,
                                             )),
                                       ),
                                     ),
@@ -212,7 +222,7 @@ class _TeirOneAccountUpgradeScreenState
                                             },
                                             icon: const Icon(
                                               Icons.close_outlined,
-                                              size: 15,
+                                              size: 20,
                                             )),
                                       ),
                                     ),
