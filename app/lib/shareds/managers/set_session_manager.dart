@@ -130,4 +130,8 @@ class SetSessionManager {
   void writeResetPasswordToken(String value) {
     storage.write(resetPasswordToken, value);
   }
+
+  void writeQRCode(String value) {
+    storage.write(qrCode, value);
+  }
 }

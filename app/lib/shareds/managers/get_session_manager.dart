@@ -44,6 +44,7 @@ class GetSessionManager {
       storage.read(tokenExpiration) ?? DateTime.now();
   bool readShouldRememberMe() => storage.read(shouldRememberMe) ?? false;
   String readResetPasswordToken() => storage.read(resetPasswordToken);
+  String readQRCode() => storage.read(qrCode);
 
   bool readIsTokenExpired() {
     try {

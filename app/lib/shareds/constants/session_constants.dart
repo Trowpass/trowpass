@@ -25,3 +25,4 @@ const String accountType = 'account_type';
 const String tokenExpiration = 'token_expiration';
 const String shouldRememberMe = 'remember_me';
 const String resetPasswordToken = 'reset_password_token';
+const String qrCode = 'q_r_code';

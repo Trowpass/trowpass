@@ -83,6 +83,7 @@ class UserController {
         session.writePinCreated(response.data!.isPinCreated);
         session.writeAccountType(response.data!.accountType);
         session.writeVirtualCardCreated(response.data!.isVirtualCardCreated);
+        session.writeQRCode(response.data!.qr!);
         return response;
       }
       return Future.error(response.message);
