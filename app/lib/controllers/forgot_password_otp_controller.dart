@@ -1,4 +1,3 @@
-import 'package:app/repositories/user_repository.dart';
 import 'package:app/screens/auth/forgot_password/new_password_screen.dart';
 import 'package:app/services/requests/post_requests/resend_otp_request.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart'
@@ -8,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:timer_count_down/timer_controller.dart' as resend_timer;
 
 import '../shareds/utils/app_colors.dart';
+import 'bloc/user_controller.dart';
 
 class ForgotPasswordOtpController extends GetxController {
   TextEditingController codeFourController = TextEditingController();
@@ -24,7 +24,7 @@ class ForgotPasswordOtpController extends GetxController {
   final countDownController = resend_timer.CountdownController();
   final expiryCountDownController = expiry_timer.CountDownController();
 
-  final UserRepository userRepository = UserRepository();
+  final userController = UserController();
 
   @override
   void onInit() {
@@ -39,11 +39,9 @@ class ForgotPasswordOtpController extends GetxController {
   Future<void> tryResendOtpSubmit(String email) async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
-
     try {
       ResendOtpRequest request = ResendOtpRequest(email: email);
-      var response = await userRepository.resendOtpToEmailAsync(request);
-
+      var response = await userController.resendOtpToEmailAsync(request);
       if (response.status) {
         isExpiryTimeElapsed.value = false;
         isLoaded.value = false;

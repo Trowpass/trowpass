@@ -63,31 +63,42 @@ class NewPasswordScreen extends StatelessWidget {
                           Obx(() {
                             const validatorMessage = 'Password cannot be empty';
                             return TextInputForm(
-                              enabled: true,
-                              inputController: controller.passwordController,
-                              textLabel: 'New Password',
-                              textHint: 'New Password',
-                              validatorMessage: validatorMessage,
-                              isPassword: controller.isPasswordHidden.value,
-                              autoCorrect: false,
-                              prefixIcon: const Icon(
-                                Icons.lock,
-                                size: 24,
-                              ),
-                              validator: (value) => value != null && value.isEmpty ? validatorMessage : null,
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
-                                  color: controller.isFocused.value ? primaryColor : null,
+                                enabled: true,
+                                inputController: controller.passwordController,
+                                textLabel: 'New Password',
+                                textHint: 'New Password',
+                                validatorMessage: validatorMessage,
+                                isPassword: controller.isPasswordHidden.value,
+                                autoCorrect: false,
+                                prefixIcon: const Icon(
+                                  Icons.lock,
                                   size: 24,
                                 ),
-                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
-                              ),
-                            );
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? validatorMessage
+                                        : null,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    controller.isPasswordHidden.value
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: controller.isFocused.value
+                                        ? primaryColor
+                                        : null,
+                                    size: 24,
+                                  ),
+                                  onPressed: () =>
+                                      controller.isPasswordHidden.value =
+                                          !controller.isPasswordHidden.value,
+                                ),
+                                onChanged: (value) =>
+                                    controller.checkPassword(value));
                           }),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16),
-                            child: Obx(() => PasswordStrengthBar(strength: controller.strength.value)),
+                            child: Obx(() => PasswordStrengthBar(
+                                strength: controller.strength.value)),
                           ),
                           Obx(() {
                             const validatorMessage = 'Password does not match';
@@ -97,20 +108,29 @@ class NewPasswordScreen extends StatelessWidget {
                               textLabel: 'Confirm New Password',
                               textHint: 'Confirm New Password',
                               validatorMessage: validatorMessage,
-                              validator: (value) => (value != controller.passwordController.text) ? validatorMessage : null,
-                              isPassword: controller.isPasswordHidden.value,
+                              validator: (value) =>
+                                  (value != controller.passwordController.text)
+                                      ? validatorMessage
+                                      : null,
+                              isPassword:
+                                  controller.isConfirmPasswordHidden.value,
                               autoCorrect: false,
-                              onFieldSubmitted: (_) => controller.isFocused.value = false,
+                              onFieldSubmitted: (_) =>
+                                  controller.isFocused.value = false,
                               prefixIcon: const Icon(
                                 Icons.lock,
                                 size: 24,
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
+                                  controller.isConfirmPasswordHidden.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
                                   size: 24,
                                 ),
-                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
+                                onPressed: () => controller
+                                        .isConfirmPasswordHidden.value =
+                                    !controller.isConfirmPasswordHidden.value,
                               ),
                             );
                           })
@@ -121,10 +141,7 @@ class NewPasswordScreen extends StatelessWidget {
                     StandardButton(
                       text: 'Change Password',
                       onPressed: () {
-                        if (controller.formKey.currentState!.validate()) {
-                          controller.formKey.currentState!.save();
-                          controller.resetPassword(otp, email);
-                        }
+                        controller.proceedReset(otp, email);
                       },
                     ),
                   ],

@@ -108,8 +108,9 @@ class SetSessionManager {
   }
 
   void writeTransportCompanyIdMap(String key, Map<String, int> value) {
-  storage.writeIfNull(key, value);
-}
+    storage.writeIfNull(key, value);
+  }
+
   void writeVirtualCardCreated(bool value) {
     storage.write(walletCreated, value);
   }
@@ -117,10 +118,16 @@ class SetSessionManager {
   void writeAccountType(String value) {
     storage.write(accountType, value);
   }
+
   void writeTokenExpiration(DateTime tokenExpires) {
-   storage.write(tokenExpiration, tokenExpires);
+    storage.write(tokenExpiration, tokenExpires);
   }
-   void writeShouldRememberMe(bool loggedIn) {
+
+  void writeShouldRememberMe(bool loggedIn) {
     storage.write(userLoggedIn, loggedIn);
+  }
+
+  void writeResetPasswordToken(String value) {
+    storage.write(resetPasswordToken, value);
   }
 }

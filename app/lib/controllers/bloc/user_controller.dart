@@ -2,7 +2,9 @@ import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/repositories/user_repository.dart';
 import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/forget_password_request.dart';
 import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/resend_otp_request.dart';
 import 'package:app/services/requests/post_requests/rider_registration_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
@@ -11,6 +13,7 @@ import 'package:app/services/requests/put_requests/tier_one_request.dart';
 import 'package:app/services/responses/base_response.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
+import 'package:app/services/responses/request_reset_password_response.dart';
 import 'package:app/services/responses/tier_one_response.dart';
 import 'package:app/services/responses/user_login_response.dart';
 import 'package:app/services/responses/view_profile_response.dart';
@@ -18,6 +21,8 @@ import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 
+import '../../services/requests/post_requests/reset_password_request.dart';
+import '../../services/responses/reset_password_response.dart';
 import '../../services/responses/verify_account_response.dart';
 import '../../shareds/managers/get_session_manager.dart';
 
@@ -149,6 +154,44 @@ class UserController {
   Future<TierOneResponse> t1AccountUpgradeAsync(TierOneRequest request) async {
     try {
       final response = await userRepository.t1AccountUpgradeAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<RequestResetPasswordResponse> requestForgotPasswordAsync(
+      ForgetPasswordRequest request) async {
+    try {
+      final response = await userRepository.requestForgotPasswordAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<BaseResponse> resendOtpToEmailAsync(ResendOtpRequest request) async {
+    try {
+      final response = await userRepository.resendOtpToEmailAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<ResetPasswordResponse> resetPasswordAsync(
+      ResetPasswordRequest request) async {
+    try {
+      final response = await userRepository.resetPasswordAsync(request);
       if (response.status) {
         return response;
       }
