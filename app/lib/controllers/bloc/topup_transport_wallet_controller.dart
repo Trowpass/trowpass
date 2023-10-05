@@ -6,10 +6,12 @@ import 'package:app/services/responses/get_all_transport_company_response.dart';
 import 'package:app/services/responses/get_user_by_account_response.dart';
 import 'package:app/services/responses/topup_transport_wallet_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
+
 import '../../shareds/managers/get_session_manager.dart';
 
 class TopupTransportWalletController {
-  final TopupTransportWalletRepository topupTransportWalletRepository = TopupTransportWalletRepository();
+  final TopupTransportWalletRepository topupTransportWalletRepository =
+      TopupTransportWalletRepository();
   final SetSessionManager session = SetSessionManager();
   final GetSessionManager getSession = GetSessionManager();
 
@@ -21,46 +23,50 @@ class TopupTransportWalletController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch banks. Please try again!');
     }
   }
 
   Future<TransportCompanyResponse> getallTransportCompanyAsync() async {
     try {
-      final response = await topupTransportWalletRepository.getallTransportCompanyAsync();
+      final response =
+          await topupTransportWalletRepository.getallTransportCompanyAsync();
       if (response.status) {
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error(
+          'Unable to fetch transport companies. Please try again!');
     }
   }
 
-   Future<TopUpTransportWalletResponse> topupTransportWalletAsync(
+  Future<TopUpTransportWalletResponse> topupTransportWalletAsync(
       TopupTransportWalletRequest request) async {
     try {
-      final response =
-          await topupTransportWalletRepository.topupTransportWalletAsync(request);
+      final response = await topupTransportWalletRepository
+          .topupTransportWalletAsync(request);
       if (response.status) {
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error(
+          'Unable to top up transport wallet. Please try again!');
     }
   }
 
   Future<UserByAccountNumberResponse> getUserByAccountNumberAsync(
       UserByAccountNumberRequest request) async {
     try {
-      final response = await topupTransportWalletRepository.getUserByAccountNumberAsync(request);
+      final response = await topupTransportWalletRepository
+          .getUserByAccountNumberAsync(request);
       if (response.status) {
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch user. Please try again!');
     }
   }
 }
