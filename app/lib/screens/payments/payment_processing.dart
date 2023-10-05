@@ -81,6 +81,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
         systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: background,
         body: OverlayIndeterminateProgress(
           isLoading: true,

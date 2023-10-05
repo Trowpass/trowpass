@@ -15,6 +15,7 @@ class AddBeneficiaryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: primaryColor,
@@ -43,7 +44,9 @@ class AddBeneficiaryScreen extends StatelessWidget {
                                 enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: grayscale),
                                 ),
-                                border: OutlineInputBorder(borderRadius: BorderRadius.circular(defaultBorderRadius))),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        defaultBorderRadius))),
                             onChanged: (Object? newSeleted) {
                               controller.onSetSelectedBankName(newSeleted);
                             },
@@ -63,7 +66,8 @@ class AddBeneficiaryScreen extends StatelessWidget {
                       title: const Text('Account/Wallet Number'),
                       subtitle: TextInput(
                         isReadOnly: false,
-                        inputController: controller.accountWalletNumberTextEditController,
+                        inputController:
+                            controller.accountWalletNumberTextEditController,
                         textHint: 'Type here',
                         isPassword: false,
                         enabled: false,
@@ -73,7 +77,8 @@ class AddBeneficiaryScreen extends StatelessWidget {
                       title: const Text('Account Name'),
                       subtitle: TextInput(
                         isReadOnly: true,
-                        inputController: controller.accountNameTextEditController,
+                        inputController:
+                            controller.accountNameTextEditController,
                         isPassword: false,
                         enabled: false,
                       )),

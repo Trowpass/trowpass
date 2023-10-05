@@ -26,6 +26,7 @@ class OtpScreen extends StatelessWidget {
           child: WillPopScope(
             onWillPop: _onWillPop,
             child: Scaffold(
+              resizeToAvoidBottomInset: true,
               backgroundColor: background,
               appBar: AppBar(
                 automaticallyImplyLeading: false,

@@ -20,6 +20,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           overlayBackgroundColor: background,
           progressColor: primaryColor,
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: background,
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(

@@ -31,6 +31,7 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
         child: WillPopScope(
           onWillPop: _onWillPop,
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: background,
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(

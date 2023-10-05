@@ -34,6 +34,7 @@ class _TeirOneAccountUpgradeScreenState
           child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
+              resizeToAvoidBottomInset: true,
               backgroundColor: background,
               appBar: AppBar(
                 systemOverlayStyle: const SystemUiOverlayStyle(

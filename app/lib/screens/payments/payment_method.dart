@@ -23,6 +23,7 @@ class PaymentMethodScreen extends StatelessWidget {
           child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
+              resizeToAvoidBottomInset: true,
               backgroundColor: background,
               body: AnnotatedRegion<SystemUiOverlayStyle>(
                 value: const SystemUiOverlayStyle(

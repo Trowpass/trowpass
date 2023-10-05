@@ -27,6 +27,7 @@ class PayToBankReceiptScreen extends StatelessWidget {
           systemNavigationBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: primaryColor,
             body: SingleChildScrollView(
               child: Padding(
@@ -155,17 +156,17 @@ class PayToBankReceiptScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Expanded(
-                                                flex: 1,
-                                                child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Image.asset(
+                                              flex: 1,
+                                              child: Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Image.asset(
                                                     controller
                                                         .recipientImage.value,
                                                     height: 70,
                                                     width: 70),
-                                          )),                                         
+                                              )),
                                           Expanded(
-                                            flex: 5,
+                                              flex: 5,
                                               child: ListTile(
                                                   title: Text(transactionDetails
                                                           .data

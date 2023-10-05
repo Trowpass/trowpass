@@ -27,6 +27,7 @@ class ScanToPayReceiptScreen extends StatelessWidget {
           systemNavigationBarIconBrightness: Brightness.light,
         ),
         child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: primaryColor,
             body: SingleChildScrollView(
               child: Padding(

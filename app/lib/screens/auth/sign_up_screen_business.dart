@@ -24,6 +24,7 @@ class SignUpScreenBusiness extends StatelessWidget {
         child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
+                resizeToAvoidBottomInset: true,
                 backgroundColor: background,
                 appBar: AppBar(
                   systemOverlayStyle: const SystemUiOverlayStyle(
@@ -67,10 +68,12 @@ class SignUpScreenBusiness extends StatelessWidget {
                               children: [
                                 TextInputForm(
                                   enabled: true,
-                                  inputController: businessController.businessNameController,
+                                  inputController:
+                                      businessController.businessNameController,
                                   textLabel: 'Business Name',
                                   textHint: 'Business Name',
-                                  validatorMessage: 'Please enter a valid business name',
+                                  validatorMessage:
+                                      'Please enter a valid business name',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
@@ -81,10 +84,12 @@ class SignUpScreenBusiness extends StatelessWidget {
                                 const SizedBox(height: 16),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController: businessController.emailController,
+                                  inputController:
+                                      businessController.emailController,
                                   textLabel: 'Company Email',
                                   textHint: 'Company Email',
-                                  validatorMessage: 'Please enter a valid email',
+                                  validatorMessage:
+                                      'Please enter a valid email',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
@@ -95,11 +100,14 @@ class SignUpScreenBusiness extends StatelessWidget {
                                 const SizedBox(height: 16),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController: businessController.passwordController,
+                                  inputController:
+                                      businessController.passwordController,
                                   textLabel: 'Password',
                                   textHint: 'Password',
-                                  validatorMessage: 'Please enter a valid password',
-                                  isPassword: businessController.isPasswordHidden.value,
+                                  validatorMessage:
+                                      'Please enter a valid password',
+                                  isPassword:
+                                      businessController.isPasswordHidden.value,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
                                     Icons.lock,
@@ -107,29 +115,45 @@ class SignUpScreenBusiness extends StatelessWidget {
                                   ),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      businessController.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
-                                      color: businessController.isFocused.value ? primaryColor : null,
+                                      businessController.isPasswordHidden.value
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: businessController.isFocused.value
+                                          ? primaryColor
+                                          : null,
                                       size: 24,
                                     ),
                                     onPressed: () {
-                                      businessController.isPasswordHidden.value = !businessController.isPasswordHidden.value;
+                                      businessController
+                                              .isPasswordHidden.value =
+                                          !businessController
+                                              .isPasswordHidden.value;
                                     },
                                   ),
-                                  onChanged: (value) => businessController.checkPassword(value),
+                                  onChanged: (value) =>
+                                      businessController.checkPassword(value),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
-                                  child: Obx(() => PasswordStrengthBar(strength: businessController.strength.value)),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 16),
+                                  child: Obx(() => PasswordStrengthBar(
+                                      strength:
+                                          businessController.strength.value)),
                                 ),
                                 TextInputForm(
                                   enabled: true,
-                                  inputController: businessController.confirmPasswordController,
+                                  inputController: businessController
+                                      .confirmPasswordController,
                                   textLabel: 'Confirm Password',
                                   textHint: 'Confirm password',
                                   validatorMessage: 'Passwords do not match',
-                                  isPassword: businessController.isPasswordHidden.value,
-                                  validator: (value) =>
-                                      businessController.passwordController.text != value ? 'Password do not match' : null,
+                                  isPassword:
+                                      businessController.isPasswordHidden.value,
+                                  validator: (value) => businessController
+                                              .passwordController.text !=
+                                          value
+                                      ? 'Password do not match'
+                                      : null,
                                   autoCorrect: false,
                                   prefixIcon: const Icon(
                                     Icons.lock,
@@ -137,12 +161,19 @@ class SignUpScreenBusiness extends StatelessWidget {
                                   ),
                                   suffixIcon: IconButton(
                                     icon: Icon(
-                                      businessController.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
-                                      color: businessController.isFocused.value ? primaryColor : null,
+                                      businessController.isPasswordHidden.value
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: businessController.isFocused.value
+                                          ? primaryColor
+                                          : null,
                                       size: 24,
                                     ),
                                     onPressed: () {
-                                      businessController.isPasswordHidden.value = !businessController.isPasswordHidden.value;
+                                      businessController
+                                              .isPasswordHidden.value =
+                                          !businessController
+                                              .isPasswordHidden.value;
                                     },
                                   ),
                                 ),
@@ -150,8 +181,10 @@ class SignUpScreenBusiness extends StatelessWidget {
                                 StandardButton(
                                   text: 'SIGN UP',
                                   onPressed: () {
-                                    if (businessController.formKey.currentState!.validate()) {
-                                      businessController.strength.value != Strength.secure
+                                    if (businessController.formKey.currentState!
+                                        .validate()) {
+                                      businessController.strength.value !=
+                                              Strength.secure
                                           ? null
                                           : businessController.trySubmit();
                                     }
