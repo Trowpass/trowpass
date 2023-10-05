@@ -23,6 +23,7 @@ class PaymentMethodScreen extends StatelessWidget {
           child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
+              resizeToAvoidBottomInset: true,
               backgroundColor: background,
               body: AnnotatedRegion<SystemUiOverlayStyle>(
                 value: const SystemUiOverlayStyle(
@@ -72,8 +73,8 @@ class PaymentMethodScreen extends StatelessWidget {
                           style: appStyles(24, primaryColor, FontWeight.bold),
                         ),
                       ),
-                      // const SizedBox(height: 24),
-                      // _buildRadio(context, value: controller.payWithCard.value), // to be added later
+                      const SizedBox(height: 24),
+                      _buildRadio(context, value: controller.payWithCard.value),
                       const SizedBox(height: 16),
                       _buildRadio(context, value: controller.payWithBank.value),
                       Expanded(

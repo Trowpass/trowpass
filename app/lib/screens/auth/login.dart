@@ -23,6 +23,7 @@ class LoginScreen extends StatelessWidget {
           child: GestureDetector(
             onTap: () => Get.focusScope!.unfocus(),
             child: Scaffold(
+              resizeToAvoidBottomInset: true,
               backgroundColor: background,
               appBar: AppBar(
                 automaticallyImplyLeading: false,
@@ -50,81 +51,107 @@ class LoginScreen extends StatelessWidget {
                             Obx(() => TextInputForm(
                                   inputType: TextInputType.number,
                                   enabled: true,
-                                  inputController: controller.emailPhoneNumberController,
+                                  inputController:
+                                      controller.emailPhoneNumberController,
                                   // textLabel: 'Enter phone number',
                                   textHint: 'Enter phone number',
-                                  validatorMessage: 'Please enter a valid phone number',
+                                  validatorMessage:
+                                      'Please enter a valid phone number',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: Icon(
                                     Icons.phone_android_outlined,
                                     size: 24,
-                                    color: controller.isFocused.value ? primaryColor : null,
+                                    color: controller.isFocused.value
+                                        ? primaryColor
+                                        : null,
                                   ),
                                   suffixIcon: IconButton(
-                                    icon: Icon(Icons.cancel, color: controller.isFocused.value ? primaryColor : null),
+                                    icon: Icon(Icons.cancel,
+                                        color: controller.isFocused.value
+                                            ? primaryColor
+                                            : null),
                                     onPressed: () {
-                                      controller.emailPhoneNumberController.clear();
+                                      controller.emailPhoneNumberController
+                                          .clear();
                                     },
                                   ),
                                 )),
                             const SizedBox(height: 16),
                             Obx(() => TextInputForm(
                                   enabled: true,
-                                  inputController: controller.passwordController,
+                                  inputController:
+                                      controller.passwordController,
                                   // textLabel: 'Password',
                                   textHint: 'Password',
-                                  validatorMessage: 'Please enter a valid password',
+                                  validatorMessage:
+                                      'Please enter a valid password',
                                   isPassword: !controller.isPassword.value,
                                   autoCorrect: false,
                                   prefixIcon: Icon(
                                     Icons.lock,
                                     size: 24,
-                                    color: controller.isFocused.value ? primaryColor : null,
+                                    color: controller.isFocused.value
+                                        ? primaryColor
+                                        : null,
                                   ),
                                   suffixIcon: IconButton(
                                     icon: controller.isPassword.value
                                         ? const Icon(Icons.visibility_off)
                                         : const Icon(Icons.visibility),
-                                    color: controller.isFocused.value ? primaryColor : null,
+                                    color: controller.isFocused.value
+                                        ? primaryColor
+                                        : null,
                                     onPressed: () {
-                                      controller.isPassword.value = !controller.isPassword.value;
+                                      controller.isPassword.value =
+                                          !controller.isPassword.value;
                                     },
                                   ),
-                                  onFieldSubmitted: (_) => controller.isFocused.value = false,
+                                  onFieldSubmitted: (_) =>
+                                      controller.isFocused.value = false,
                                 )),
                             const SizedBox(height: 03),
-                            Row(children: [
-                              Expanded(child: Obx(() => CheckboxListTile(
-                                  dense: true,
-                                  contentPadding: EdgeInsets.zero,
-                                  title: const Text('Remember Me'),
-                                  activeColor: primaryColor,
-                                  value: controller.shouldRememberUser.value,
-                                  onChanged: (newValue) {
-                                    controller.shouldRememberUser.value = newValue ?? false;
-                                  },
-                                  controlAffinity: ListTileControlAffinity.leading,
-                                ))), Expanded(child: Align(
-                              alignment: Alignment.bottomRight,
-                              child: TextButton(
-                                onPressed: () => Get.to(() => ForgotPasswordScreen()),
-                                child: Text(
-                                  'Forgot Password?',
-                                  style: appStyles(
-                                    14,
-                                    grayscale,
-                                    FontWeight.w400,
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Obx(() => CheckboxListTile(
+                                          dense: true,
+                                          contentPadding: EdgeInsets.zero,
+                                          title: const Text('Remember Me'),
+                                          activeColor: primaryColor,
+                                          value: controller
+                                              .shouldRememberUser.value,
+                                          onChanged: (newValue) {
+                                            controller.shouldRememberUser
+                                                .value = newValue ?? false;
+                                          },
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                        ))),
+                                Expanded(
+                                    child: Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: TextButton(
+                                    onPressed: () =>
+                                        Get.to(() => ForgotPasswordScreen()),
+                                    child: Text(
+                                      'Forgot Password?',
+                                      style: appStyles(
+                                        14,
+                                        grayscale,
+                                        FontWeight.w400,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ))
-                            ],),                          
+                                ))
+                              ],
+                            ),
                             const SizedBox(height: 18),
                             StandardButton(
                               text: 'LOG IN',
                               onPressed: () {
-                                if (controller.formKey.currentState!.validate()) {
+                                if (controller.formKey.currentState!
+                                    .validate()) {
                                   controller.formKey.currentState!.save();
                                   controller.login();
                                 }

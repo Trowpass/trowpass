@@ -130,9 +130,12 @@ class DashboardController extends GetxController {
         selectedTransportCompany.value = transportCompaniesList[0];
 
         // Save transport companies details to session storage
-        session2.writeAllTransportCompanies('allTransportCompanies', allTransportCompany);
-        session2.writeSelectedTransportCompanies('selectedTransportCompany', selectedTransportCompany.value);
-        session2.writeTransportCompanyIdMap('transportCompanyIdMap', transportCompanyIdMap);
+        session2.writeAllTransportCompanies(
+            'allTransportCompanies', allTransportCompany);
+        session2.writeSelectedTransportCompanies(
+            'selectedTransportCompany', selectedTransportCompany.value);
+        session2.writeTransportCompanyIdMap(
+            'transportCompanyIdMap', transportCompanyIdMap);
       }
     } catch (e) {
       print('Error fetching banks: $e');
@@ -160,6 +163,7 @@ class DashboardController extends GetxController {
           '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
       fullName.value = fullName2;
       session2.writeUserFullName(fullName2);
+      qrCodeUrl.value = response.data!.qr!;
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());
       }

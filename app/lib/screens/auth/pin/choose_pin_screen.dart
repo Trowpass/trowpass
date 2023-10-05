@@ -14,6 +14,7 @@ class ChoosePinScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: primaryColor,
@@ -58,8 +59,11 @@ class ChoosePinScreen extends StatelessWidget {
                       child: TextFormField(
                         obscureText: true,
                         controller: controller.codeOneController,
-                        validator: (value) => value != null && value.isEmpty ? "" : null,
-                        onChanged: (value) => value.length == 1 ? FocusScope.of(context).nextFocus() : null,
+                        validator: (value) =>
+                            value != null && value.isEmpty ? "" : null,
+                        onChanged: (value) => value.length == 1
+                            ? FocusScope.of(context).nextFocus()
+                            : null,
                         decoration: InputDecoration(
                           hintText: '*',
                           errorStyle: const TextStyle(height: 0),
@@ -70,7 +74,10 @@ class ChoosePinScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineMedium,
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
-                        inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -79,9 +86,11 @@ class ChoosePinScreen extends StatelessWidget {
                       child: TextFormField(
                         obscureText: true,
                         controller: controller.codeTwoController,
-                        validator: (value) => value != null && value.isEmpty ? "" : null,
-                        onChanged: (value) =>
-                            value.length == 1 ? FocusScope.of(context).nextFocus() : FocusScope.of(context).previousFocus(),
+                        validator: (value) =>
+                            value != null && value.isEmpty ? "" : null,
+                        onChanged: (value) => value.length == 1
+                            ? FocusScope.of(context).nextFocus()
+                            : FocusScope.of(context).previousFocus(),
                         decoration: InputDecoration(
                           hintText: '*',
                           errorStyle: const TextStyle(height: 0),
@@ -92,7 +101,10 @@ class ChoosePinScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineMedium,
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
-                        inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -101,9 +113,11 @@ class ChoosePinScreen extends StatelessWidget {
                       child: TextFormField(
                         obscureText: true,
                         controller: controller.codeThreeController,
-                        validator: (value) => value != null && value.isEmpty ? "" : null,
-                        onChanged: (value) =>
-                            value.length == 1 ? FocusScope.of(context).nextFocus() : FocusScope.of(context).previousFocus(),
+                        validator: (value) =>
+                            value != null && value.isEmpty ? "" : null,
+                        onChanged: (value) => value.length == 1
+                            ? FocusScope.of(context).nextFocus()
+                            : FocusScope.of(context).previousFocus(),
                         decoration: InputDecoration(
                           hintText: '*',
                           errorStyle: const TextStyle(height: 0),
@@ -114,7 +128,10 @@ class ChoosePinScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineMedium,
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
-                        inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -123,8 +140,11 @@ class ChoosePinScreen extends StatelessWidget {
                       child: TextFormField(
                         obscureText: true,
                         controller: controller.codeFourController,
-                        validator: (value) => value != null && value.isEmpty ? "" : null,
-                        onChanged: (value) => value.length == 1 ? FocusScope.of(context).nextFocus() : null,
+                        validator: (value) =>
+                            value != null && value.isEmpty ? "" : null,
+                        onChanged: (value) => value.length == 1
+                            ? FocusScope.of(context).nextFocus()
+                            : null,
                         decoration: InputDecoration(
                           hintText: '*',
                           errorStyle: const TextStyle(height: 0),
@@ -135,7 +155,10 @@ class ChoosePinScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineMedium,
                         keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
-                        inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                          FilteringTextInputFormatter.digitsOnly
+                        ],
                       ),
                     ),
                   ],

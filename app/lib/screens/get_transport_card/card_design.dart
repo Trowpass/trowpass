@@ -15,6 +15,7 @@ class CardDesignScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: background,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
@@ -57,7 +58,8 @@ class CardDesignScreen extends StatelessWidget {
 }
 
 class CardHolderField extends StatelessWidget {
-  final cardDesignHolderInputController = Get.put(CardDesignHolderInputController());
+  final cardDesignHolderInputController =
+      Get.put(CardDesignHolderInputController());
   CardHolderField({super.key});
 
   @override
@@ -70,7 +72,8 @@ class CardHolderField extends StatelessWidget {
             const SizedBox(height: 16),
             TextInputForm(
               enabled: true,
-              inputController: cardDesignHolderInputController.fullNameController,
+              inputController:
+                  cardDesignHolderInputController.fullNameController,
               textLabel: 'Type here',
               textHint: 'Type here',
               isPassword: false,
@@ -80,7 +83,8 @@ class CardHolderField extends StatelessWidget {
             StandardButton(
               text: 'Get Card',
               onPressed: () {
-                if (cardDesignHolderInputController.formKey.currentState!.validate()) {
+                if (cardDesignHolderInputController.formKey.currentState!
+                    .validate()) {
                   cardDesignHolderInputController.trySubmit();
                 }
               },
