@@ -63,6 +63,7 @@ dependencies:
   in_app_update: ^4.2.1
   firebase_crashlytics: ^3.3.6
   firebase_core: ^2.16.0
+  email_validator: ^2.1.17
   # flutter_share: ^2.0.0
   # image_gallery_saver: ^2.0.3
  

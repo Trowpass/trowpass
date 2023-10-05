@@ -39,7 +39,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Login failed. Please try again!');
     }
   }
 
@@ -48,13 +48,12 @@ class UserController {
     try {
       final response = await userRepository.createRiderAccountAsync(request);
       if (response.status) {
-        //store register user phone number
         session.writeRiderPhoneNumber(request.phoneNumber);
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to create account. Please try again!');
     }
   }
 
@@ -69,7 +68,7 @@ class UserController {
       }
       return Future.error(response.message!);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to verify otp. Please try again!');
     }
   }
 
@@ -88,7 +87,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch profile. Please try again!');
     }
   }
 
@@ -101,7 +100,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to get user. Please try again!');
     }
   }
 
@@ -114,7 +113,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to create wallet. Please try again!');
     }
   }
 
@@ -127,7 +126,7 @@ class UserController {
       }
       return Future.error(response.message!);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to create wallet. Please try again!');
     }
   }
 
@@ -136,7 +135,7 @@ class UserController {
       final response = await userRepository.getUserWalletAsync();
       return response;
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch wallet. Please try again!');
     }
   }
 
@@ -148,7 +147,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unablet to set pin. Please try again!');
     }
   }
 
@@ -160,7 +159,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to upgrade account. Please try again!');
     }
   }
 
@@ -173,7 +172,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unble to complete action. Please try again!');
     }
   }
 
@@ -185,7 +184,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to resend otp. Please try again!');
     }
   }
 
@@ -198,7 +197,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to reset password. Please try again!');
     }
   }
 }
