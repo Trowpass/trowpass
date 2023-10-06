@@ -1,4 +1,4 @@
-import 'package:app/repositories/user_repository.dart';
+import 'package:app/shareds/managers/set_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +6,7 @@ import '../screens/auth/forgot_password/forgot_password_otp_screen.dart';
 import '../services/requests/post_requests/forget_password_request.dart';
 import '../shareds/helpers/api_connection_helper.dart';
 import '../shareds/utils/app_colors.dart';
+import 'bloc/user_controller.dart';
 
 class ForgotPassWordController extends GetxController {
   TextEditingController emailAddressInputController = TextEditingController();
@@ -14,7 +15,8 @@ class ForgotPassWordController extends GetxController {
   final isFocused = false.obs;
   final isLoaded = false.obs;
 
-  UserRepository userRepository = UserRepository();
+  final userController = UserController();
+  SetSessionManager session = SetSessionManager();
 
   @override
   void onInit() {
@@ -29,10 +31,10 @@ class ForgotPassWordController extends GetxController {
     try {
       var forgetPasswordRequest =
           ForgetPasswordRequest(email: emailAddressInputController.text);
-      var response = await userRepository
+      var response = await userController
           .requestForgotPasswordAsync(forgetPasswordRequest);
-
       if (response.status) {
+        session.writeResetPasswordToken(response.data!.resetToken!);
         isLoaded.value = false;
         Get.offAll(() =>
             ForgotPasswordOtpScreen(email: emailAddressInputController.text));
@@ -45,7 +47,7 @@ class ForgotPassWordController extends GetxController {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoaded.value = false;
@@ -56,7 +58,7 @@ class ForgotPassWordController extends GetxController {
     Get.snackbar(
       'Information',
       'No implemented yet',
-      backgroundColor: validationErrorColor,
+      backgroundColor: dialogInfoBackground,
       snackPosition: SnackPosition.BOTTOM,
     );
   }

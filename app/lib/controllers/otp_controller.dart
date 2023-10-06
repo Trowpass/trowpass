@@ -23,7 +23,7 @@ class OtpController extends GetxController {
   final isLoaded = false.obs;
   final isExpiryTimeElapsed = false.obs;
   final countdown = const Duration(minutes: 1).inSeconds;
-  final countDownControllerDuration = const Duration(minutes: 5).inSeconds;
+  final countDownControllerDuration = const Duration(minutes: 2).inSeconds;
   final resendCountDownController = resend_timer.CountdownController();
   final expiryCountDownController = expiry_timer.CountDownController();
 
@@ -58,7 +58,7 @@ class OtpController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
@@ -86,7 +86,7 @@ class OtpController extends GetxController {
       Get.snackbar(
         'Information',
         e.toString(),
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoaded.value = false;

@@ -11,7 +11,8 @@ import 'package:get/get.dart';
 import '../../../controllers/inter_wallet_transfer_controller/payment_summary_controller.dart';
 
 class InterWalletPaymentSummaryScreen extends StatelessWidget {
-  final PaymentSummaryController paymentSummaryController = Get.put(PaymentSummaryController());
+  final PaymentSummaryController paymentSummaryController =
+      Get.put(PaymentSummaryController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class InterWalletPaymentSummaryScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.focusScope!.unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: primaryColor,

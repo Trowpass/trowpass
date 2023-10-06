@@ -59,7 +59,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
     }
   }
@@ -81,6 +81,7 @@ class _PaymentProcessingState extends State<PaymentProcessing> {
         systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: background,
         body: OverlayIndeterminateProgress(
           isLoading: true,

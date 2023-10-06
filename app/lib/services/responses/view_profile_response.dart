@@ -1,14 +1,14 @@
 class ViewProfileResponse {
+  ViewProfileData? data;
   String message;
   bool status;
   String responseCode;
-  ViewProfileData? data;
 
   ViewProfileResponse({
+    required this.data,
     required this.message,
     required this.status,
     required this.responseCode,
-    required this.data,
   });
 
   factory ViewProfileResponse.fromJson(Map<String, dynamic> json) {
@@ -27,24 +27,24 @@ class ViewProfileData {
   String firstName;
   String lastName;
   String phoneNumber;
-  String email;
-  String? bio;
+  String? email;
+  dynamic bio;
   bool isAccountVerified;
-  bool isPinCreated;
-  bool isWalletCreated;
-  String userAccountType;
-  String customerType;
+  String? userAccountType;
+  String? customerType;
   String? gender;
   String accountType;
   bool isActive;
-  DateTime? dateOfBirth;
   bool isVirtualCardCreated;
-  String placeOfBirth;
+  bool isPinCreated;
+  bool isWalletCreated;
+  DateTime? dateOfBirth;
+  String? placeOfBirth;
   DateTime? accountUpgradedAt;
-  String privateQrCode;
+  String? qr;
   AccountDetail? accountDetail;
-  KycDetail? kycDetail;
-  BussinessDetail? bussinessDetail;
+  dynamic kycDetail;
+  dynamic bussinessDetail;
 
   ViewProfileData({
     required this.userId,
@@ -54,18 +54,18 @@ class ViewProfileData {
     required this.email,
     required this.bio,
     required this.isAccountVerified,
-    required this.isPinCreated,
-    required this.isWalletCreated,
     required this.userAccountType,
     required this.customerType,
     required this.gender,
     required this.accountType,
     required this.isActive,
-    required this.dateOfBirth,
     required this.isVirtualCardCreated,
+    required this.isPinCreated,
+    required this.isWalletCreated,
+    required this.dateOfBirth,
     required this.placeOfBirth,
     required this.accountUpgradedAt,
-    required this.privateQrCode,
+    required this.qr,
     required this.accountDetail,
     required this.kycDetail,
     required this.bussinessDetail,
@@ -79,6 +79,7 @@ class ViewProfileData {
       phoneNumber: json['phoneNumber'] ?? '',
       email: json['email'] ?? '',
       bio: json['bio'] ?? '',
+      qr: json['qr'] ?? '',
       isAccountVerified: json['isAccountVerified'] ?? false,
       isPinCreated: json['isPinCreated'] ?? false,
       isWalletCreated: json['isWalletCreated'] ?? false,
@@ -94,13 +95,10 @@ class ViewProfileData {
       accountUpgradedAt: json['accountUpgradedAt'] != null
           ? DateTime.parse(json['accountUpgradedAt'])
           : null,
-      privateQrCode: json['privateQrCode'] ?? '',
       accountDetail: json['accountDetail'] != null
           ? AccountDetail.fromJson(json['accountDetail'])
           : null,
-      kycDetail: json['kycDetail'] != null
-          ? KycDetail.fromJson(json['kycDetail'])
-          : null,
+      kycDetail: null,
       bussinessDetail: json['bussinessDetail'] != null
           ? BussinessDetail.fromJson(json['bussinessDetail'])
           : null,
@@ -142,53 +140,6 @@ class BussinessDetail {
       businessName: json['businessName'] ?? '',
       slug: json['slug'] ?? '',
       size: json['size'] ?? '',
-    );
-  }
-}
-
-class KycDetail {
-  String? bvn;
-  Address? address;
-
-  KycDetail({
-    required this.bvn,
-    required this.address,
-  });
-
-  factory KycDetail.fromJson(Map<String, dynamic> json) {
-    return KycDetail(
-      bvn: json['bvn'] ?? '',
-      address:
-          json['address'] != null ? Address.fromJson(json['address']) : null,
-    );
-  }
-}
-
-class Address {
-  String? country;
-  String? street;
-  String? city;
-  String? state;
-  String? postalCode;
-  bool isVerified;
-
-  Address({
-    required this.country,
-    required this.street,
-    required this.city,
-    required this.state,
-    required this.postalCode,
-    required this.isVerified,
-  });
-
-  factory Address.fromJson(Map<String, dynamic> json) {
-    return Address(
-      country: json['country'] ?? '',
-      street: json['street'] ?? '',
-      city: json['city'] ?? '',
-      state: json['state'] ?? '',
-      postalCode: json['postalCode'] ?? '',
-      isVerified: json['isVerified'],
     );
   }
 }

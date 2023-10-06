@@ -19,6 +19,6 @@ class OnBoardingController extends GetxController {
 
   void navigateToMain() {
     session.writeIsUserOnBoarded(true);
-    Get.offAll(LoginScreen());
+    Get.offAll(() => LoginScreen());
   }
 }

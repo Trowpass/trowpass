@@ -14,6 +14,7 @@ class BeneficiariesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: background,
         appBar: AppBar(
           systemOverlayStyle: const SystemUiOverlayStyle(
@@ -34,7 +35,10 @@ class BeneficiariesScreen extends StatelessWidget {
                   child: Wrap(
                     alignment: WrapAlignment.center,
                     crossAxisAlignment: WrapCrossAlignment.center,
-                    children: [Text('Add', style: appStyles(16, null, FontWeight.bold)), const Icon(Icons.add)],
+                    children: [
+                      Text('Add', style: appStyles(16, null, FontWeight.bold)),
+                      const Icon(Icons.add)
+                    ],
                   )),
             )
           ],
@@ -50,9 +54,11 @@ class BeneficiariesScreen extends StatelessWidget {
                     color: Colors.white,
                     elevation: 1,
                     shadowColor: titleActive,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16)),
                     child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 15),
                       leading: CircleAvatar(
                         backgroundColor: Colors.blueGrey,
                         child: ClipOval(

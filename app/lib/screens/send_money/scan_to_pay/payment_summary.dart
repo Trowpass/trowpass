@@ -9,7 +9,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class PaymentSummaryScreen extends StatelessWidget {
-  final PaymentSummaryController paymentSummaryController = Get.put(PaymentSummaryController());
+  final PaymentSummaryController paymentSummaryController =
+      Get.put(PaymentSummaryController());
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,7 @@ class PaymentSummaryScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () => Get.focusScope!.unfocus(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           systemOverlayStyle: const SystemUiOverlayStyle(
             statusBarColor: primaryColor,

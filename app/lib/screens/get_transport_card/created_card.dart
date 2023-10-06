@@ -21,6 +21,7 @@ class CardCreatedScreen extends StatelessWidget {
         systemNavigationBarIconBrightness: Brightness.light,
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Center(

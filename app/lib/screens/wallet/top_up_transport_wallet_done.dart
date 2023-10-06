@@ -140,7 +140,7 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                                       Align(
                                           alignment: Alignment.centerLeft,
                                           child: Text(
-                                            "Receipient",
+                                            "Recipient",
                                             style: appStyles(
                                                 20, null, FontWeight.bold),
                                           )),
@@ -154,21 +154,13 @@ class TopUpTransportWalletDoneScreen extends StatelessWidget {
                                             flex: 1,
                                             child: Align(
                                                 alignment: Alignment.centerLeft,
-                                                child: transactionDetails.data
-                                                            ?.companyLogoPath ==
-                                                        null
-                                                    ? Image.asset(
-                                                        controller
-                                                            .recipientImage
-                                                            .value,
-                                                        height: 70,
-                                                        width: 70)
-                                                    : Image.network(
+                                                child: Image.network(
                                                         transactionDetails.data
                                                                 ?.companyLogoPath ??
                                                             '')),
                                           ),
                                           Expanded(
+                                            flex: 5,
                                               child: ListTile(
                                                   title: Text(transactionDetails
                                                           .data

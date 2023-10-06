@@ -21,6 +21,7 @@ class GetVirtualCardScreen extends StatelessWidget {
           overlayBackgroundColor: background,
           progressColor: primaryColor,
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: background,
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(
@@ -60,10 +61,16 @@ class GetVirtualCardScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      Image.asset(preview),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Image.asset(
+                          preview,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
                       const SizedBox(height: 16),
                       StandardButton(
-                        text: 'Get Card',
+                        text: 'Get Virtual Card',
                         onPressed: () => controller.createVirtualCard(),
                       ),
                     ],
