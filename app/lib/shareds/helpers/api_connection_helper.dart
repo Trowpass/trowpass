@@ -19,10 +19,7 @@ class ApiConnectionHelper {
         }
         return false;
       },
-      headers: {
-        'Accept': '*/*',
-        'x-token' :  session.readAuthorizationToken()
-      }))
+      headers: {'Accept': '*/*', 'x-token': session.readAuthorizationToken()}))
     ..interceptors.addAll([
       AppInterceptors(),
       PrettyDioLogger(
@@ -62,6 +59,18 @@ class ApiConnectionHelper {
       Options? requestOptions,
       Map<String, dynamic>? queryParmeters}) async {
     Response response = await dio.patch(path,
+        data: jsonEncode(requestData),
+        options: requestOptions,
+        queryParameters: queryParmeters);
+    return response;
+  }
+
+  Future<Response<dynamic>> updateWithPutDataAsync(
+      {dynamic requestData,
+      required String path,
+      Options? requestOptions,
+      Map<String, dynamic>? queryParmeters}) async {
+    Response response = await dio.put(path,
         data: jsonEncode(requestData),
         options: requestOptions,
         queryParameters: queryParmeters);

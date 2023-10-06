@@ -13,11 +13,10 @@ class CardDetailsResponse {
 
   factory CardDetailsResponse.fromJson(Map<String, dynamic> json) {
     return CardDetailsResponse(
-      message: json['message'],
-      status: json['status'],
-      responseCode: json['responseCode'],
-      data: Data.fromJson(json['data']),
-    );
+        message: json['message'],
+        status: json['status'],
+        responseCode: json['responseCode'],
+        data: json['data'] != null ? Data.fromJson(json['data']) : null);
   }
 }
 

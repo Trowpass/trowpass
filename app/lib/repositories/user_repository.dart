@@ -5,8 +5,11 @@ import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
+import 'package:app/services/requests/put_requests/tier_one_request.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
+import 'package:app/services/responses/request_reset_password_response.dart';
+import 'package:app/services/responses/tier_one_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
@@ -19,6 +22,7 @@ import '../services/requests/post_requests/reset_password_request.dart';
 import '../services/requests/post_requests/rider_registration_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
 import '../services/responses/base_response.dart';
+import '../services/responses/reset_password_response.dart';
 import '../services/responses/user_login_response.dart';
 import '../services/responses/verify_account_response.dart';
 import '../services/responses/view_profile_response.dart';
@@ -129,7 +133,7 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> requestForgotPasswordAsync(
+  Future<RequestResetPasswordResponse> requestForgotPasswordAsync(
       ForgetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
@@ -138,7 +142,7 @@ class UserRepository {
       );
 
       if (response.data != null) {
-        return BaseResponse.fromJson(response.data);
+        return RequestResetPasswordResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to send request');
       }
@@ -172,7 +176,8 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> resetPasswordAsync(ResetPasswordRequest request) async {
+  Future<ResetPasswordResponse> resetPasswordAsync(
+      ResetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
@@ -180,7 +185,7 @@ class UserRepository {
       );
 
       if (response.data != null) {
-        return BaseResponse.fromJson(response.data);
+        return ResetPasswordResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to reset password');
       }
@@ -281,6 +286,26 @@ class UserRepository {
         return BaseResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to create tag');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<TierOneResponse> t1AccountUpgradeAsync(TierOneRequest request) async {
+    try {
+      int? userId = session.readUserId();
+      var url = '${Endpoints.t1_upgrade}/$userId';
+      var response = await apiConnectionHelper.updateWithPutDataAsync(
+          requestData: request, path: url);
+      if (response.data != null) {
+        return TierOneResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to upgrade account');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));

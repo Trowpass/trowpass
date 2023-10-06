@@ -1,3 +1,5 @@
+import 'package:app/widgets/app_dialog.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -32,6 +34,7 @@ class SignUpIndividualController extends GetxController {
 
   final isLoaded = false.obs;
   final isPasswordHidden = true.obs;
+  final isComfirmPasswordHidden = true.obs;
   final isFocused = false.obs;
 
   @override
@@ -53,6 +56,10 @@ class SignUpIndividualController extends GetxController {
       if (passwordController.text != confirmPasswordController.text) {
         Get.defaultDialog(
             title: 'Validation', content: const Text('Password mis-matched'));
+        isLoaded.value = false;
+      } else if (!EmailValidator.validate(emailController.text)) {
+        Get.defaultDialog(
+            title: 'Validation', content: const Text('Invalid email address'));
         isLoaded.value = false;
       } else {
         var response = await userController
@@ -79,7 +86,7 @@ class SignUpIndividualController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
       isLoaded.value = false;
     }
@@ -96,6 +103,30 @@ class SignUpIndividualController extends GetxController {
         strength.value = Strength.moderate;
       } else {
         strength.value = Strength.secure;
+      }
+    }
+  }
+
+  void proceedRegister() {
+    final isValidated = formKey.currentState!.validate();
+    var isPasswordSecure = strength.value == Strength.secure;
+
+    if (isValidated) {
+      if (isPasswordSecure) {
+        formKey.currentState!.save();
+        registerRider();
+      } else {
+        var title = 'Password not secure';
+        var subtitle =
+            'Password should be at least 8 characters long and include a mix of'
+            ' uppercase and lowercase letters, numbers,'
+            ' and special characters (such as !, @, #, \$, etc.) for added security';
+
+        showAppDialog(
+          type: DialogType.warning,
+          title: title,
+          subtitle: subtitle,
+        );
       }
     }
   }

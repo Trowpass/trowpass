@@ -14,6 +14,7 @@ class CardTypeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: background,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
@@ -39,13 +40,15 @@ class CardTypeScreen extends StatelessWidget {
             CardBox(
               icon: Icon(Icons.credit_card),
               title: 'Virtual Debit Card',
-              description: 'Instantly create a virtual card to spend on transport fare.',
+              description:
+                  'Instantly create a virtual card to spend on transport fare.',
               onPressed: controller.handleVirtualCardPressed,
             ),
             CardBox(
               icon: Icon(Icons.credit_card),
               title: 'Physical Debit Card',
-              description: 'Get a physical card to spend on transports anytime and anywhere.',
+              description:
+                  'Get a physical card to spend on transports anytime and anywhere.',
               onPressed: controller.handlePhysicalCardPressed,
             ),
           ],

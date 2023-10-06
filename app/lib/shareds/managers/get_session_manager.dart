@@ -17,7 +17,6 @@ class GetSessionManager {
   String? readUserBankName() => storage.read(userBankName);
   String? readUserAccountNumber() => storage.read(userAccountNumber);
   double? readUserAccountBalance() => storage.read(userAccountBalance);
-  String? readUserVirtualCardCreation() => storage.read(virtualCardCreation);
   String? readVirtualCardPan() => storage.read(virtualCardPan);
   String? readVirtualCardExpiration() => storage.read(virtualCardExpiration);
   String? readVirtualCardCVV() => storage.read(virtualCardCVV);
@@ -25,4 +24,33 @@ class GetSessionManager {
   String? readVirtualCardType() => storage.read(virtualCardType);
   bool readPinCreated() => storage.read(pinCreated) ?? false;
   bool readWalletCreated() => storage.read(walletCreated) ?? false;
+  List<String> readAllBanks(String key) =>
+      (storage.read(key) as List<dynamic>?)?.cast<String>() ?? [];
+  String? readSelectedBankName(String key) => storage.read(key);
+  Map<String, int> readBankIdMap(String key) =>
+      (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
+  Map<String, String> readbankCodeMap(String key) =>
+      (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, String>() ??
+      {};
+  //transport
+  List<String> readAllTransportCompanies(String key) =>
+      (storage.read(key) as List<dynamic>?)?.cast<String>() ?? [];
+  String? readSelectedTransportCompanies(String key) => storage.read(key);
+  Map<String, int> readTransportCompanyIdMap(String key) =>
+      (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
+  bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
+  String readAccountType() => storage.read(accountType);
+  DateTime readTokenExpires() =>
+      storage.read(tokenExpiration) ?? DateTime.now();
+  bool readShouldRememberMe() => storage.read(shouldRememberMe) ?? false;
+  String readResetPasswordToken() => storage.read(resetPasswordToken);
+  String readQRCode() => storage.read(qrCode);
+
+  bool readIsTokenExpired() {
+    try {
+      return DateTime.now().isAfter(readTokenExpires());
+    } catch (err) {
+      return true;
+    }
+  }
 }

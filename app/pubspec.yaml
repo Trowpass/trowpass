@@ -56,6 +56,14 @@ dependencies:
   flutter_native_splash: ^2.3.2
   smooth_page_indicator: ^1.1.0
   shimmer: ^3.0.0
+  camera: ^0.10.5+4
+  path_provider: ^2.1.1
+  path: ^1.8.3
+  image_picker: ^1.0.4
+  in_app_update: ^4.2.1
+  firebase_crashlytics: ^3.3.6
+  firebase_core: ^2.16.0
+  email_validator: ^2.1.17
   # flutter_share: ^2.0.0
   # image_gallery_saver: ^2.0.3
  

@@ -48,6 +48,7 @@ class _QrScanAreaState extends State<QrScanArea> {
             systemNavigationBarIconBrightness: Brightness.light,
           ),
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             body: Stack(
               alignment: Alignment.center,
               children: [

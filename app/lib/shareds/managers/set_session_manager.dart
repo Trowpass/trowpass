@@ -55,10 +55,6 @@ class SetSessionManager {
     storage.write(userAccountBalance, value);
   }
 
-  void writeUserVirtualCardCreation(String value) {
-    storage.write(virtualCardCreation, value);
-  }
-
   void writeVirtualCardPan(String value) {
     storage.write(virtualCardPan, value);
   }
@@ -85,5 +81,57 @@ class SetSessionManager {
 
   void writeWalletCreated(bool value) {
     storage.write(walletCreated, value);
+  }
+
+  void writeAllBanks(String key, List<String> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeSelectedBankName(String key, String value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeBankIdMap(String key, Map<String, int> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writebankCodeMap(String key, Map<String, String> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeAllTransportCompanies(String key, List<String> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeSelectedTransportCompanies(String key, String value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeTransportCompanyIdMap(String key, Map<String, int> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeVirtualCardCreated(bool value) {
+    storage.write(walletCreated, value);
+  }
+
+  void writeAccountType(String value) {
+    storage.write(accountType, value);
+  }
+
+  void writeTokenExpiration(DateTime tokenExpires) {
+    storage.write(tokenExpiration, tokenExpires);
+  }
+
+  void writeShouldRememberMe(bool loggedIn) {
+    storage.write(userLoggedIn, loggedIn);
+  }
+
+  void writeResetPasswordToken(String value) {
+    storage.write(resetPasswordToken, value);
+  }
+
+  void writeQRCode(String value) {
+    storage.write(qrCode, value);
   }
 }

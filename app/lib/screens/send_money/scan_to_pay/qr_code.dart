@@ -1,15 +1,12 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:app/controllers/dashboard_controller.dart';
-import 'package:app/screens/send_money/scan_to_pay/qr_data.dart';
 import 'package:app/screens/send_money/scan_to_pay/scan.dart';
 import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class ScanController extends GetxController {
   final selectedIndex = 0.obs;
@@ -25,6 +22,7 @@ class ScanScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: primaryColor,
@@ -103,22 +101,11 @@ class ScanScreen extends StatelessWidget {
 
 Widget _buildMyCodeTab() {
   final controller = Get.put(DashboardController());
-  String fullName = controller.fullName.value;
-  String bankName = controller.bankName.value;
-  String accountNumber = controller.accountNumber.value;
-  String phoneNumber = controller.phoneNumber.value;
-
-  UserData userdata = UserData(fullName, bankName, accountNumber, phoneNumber);
 
   return Center(
       child: Column(
     children: [
-      SizedBox(
-        height: 80,
-      ),
       Container(
-        width: 297,
-        height: 387,
         color: background,
         child: Stack(
           alignment: Alignment.center,
@@ -126,36 +113,35 @@ Widget _buildMyCodeTab() {
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
-                QrImageView(
-                  data:
-                      "${userdata.fullName}\n${userdata.bankName}\n${userdata.accountNumber}\n${userdata.phoneNumber}",
-                  version: QrVersions.auto,
-                  size: 250.0, // Adjust the size as needed
-                  eyeStyle: QrEyeStyle(color: Colors.black),
-                  errorCorrectionLevel: QrErrorCorrectLevel.Q,
-                  embeddedImage: AssetImage(mainLogo),
-                  errorStateBuilder: (cxt, err) {
-                    return Container(
-                      child: Center(
-                        child: Text(
-                          'Oops! Something went wrong...',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    );
-                  },
-                  embeddedImageStyle: QrEmbeddedImageStyle(
-                    size: Size(40, 40),
-                  ),
-                ),
+                Image.network(controller.qrCodeUrl.value,
+                    height: 450, width: 450),
+                // QrImageView(
+                //   data: controller.qrCodeUrl.value,
+                //   version: QrVersions.auto,
+                //   size: 250.0, // Adjust the size as needed
+                //   eyeStyle: QrEyeStyle(color: Colors.black),
+                //   errorCorrectionLevel: QrErrorCorrectLevel.Q,
+                //   embeddedImage: AssetImage(mainLogo),
+                //   errorStateBuilder: (cxt, err) {
+                //     return Container(
+                //       child: Center(
+                //         child: Text(
+                //           'Oops! Something went wrong...',
+                //           textAlign: TextAlign.center,
+                //         ),
+                //       ),
+                //     );
+                //   },
+                //   embeddedImageStyle: QrEmbeddedImageStyle(
+                //     size: Size(40, 40),
+                //   ),
+                // ),
               ],
             ),
           ],
         ),
       ),
+      SizedBox(height: 5),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,7 +155,6 @@ Widget _buildMyCodeTab() {
                   Icons.share,
                   color: Colors.black,
                 ),
-                SizedBox(width: 5),
                 Text(
                   'Share Code',
                   style: appStyles(16, titleActive, FontWeight.w500),
@@ -177,7 +162,7 @@ Widget _buildMyCodeTab() {
               ],
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 5),
           TextButton(
             onPressed: () {},
             child: Row(
@@ -206,7 +191,7 @@ Widget _buildScanTab() {
     child: Column(
       children: [
         SizedBox(
-          height: 20,
+          height: 10,
         ),
         Expanded(
             flex: 1,

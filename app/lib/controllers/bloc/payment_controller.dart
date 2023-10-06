@@ -25,7 +25,7 @@ class PaymentController {
       }
       return Future.error(response.message!);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to verify payment. Please try again!');
     }
   }
 
@@ -38,7 +38,7 @@ class PaymentController {
       }
       return Future.error(response.message!);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to top up wallet. Please try again!');
     }
   }
 
@@ -51,7 +51,7 @@ class PaymentController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to credit wallet. Please try again!');
     }
   }
 }

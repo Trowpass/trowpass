@@ -21,7 +21,7 @@ class InterwalletController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to transfer funds. Please try again!');
     }
   }
 }
