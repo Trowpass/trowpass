@@ -4,18 +4,18 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/border_radius.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
+
 class CustomCard extends StatelessWidget {
   final String imagePath;
   final String text;
   final VoidCallback onTap;
   final Color color;
 
-  const CustomCard({
-    required this.imagePath,
-    required this.text,
-    required this.onTap,
-    required this.color
-  });
+  const CustomCard(
+      {required this.imagePath,
+      required this.text,
+      required this.onTap,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class CustomCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               SizedBox(height: 12),
+              SizedBox(height: 12),
               Image.asset(imagePath),
               SizedBox(height: 12),
               Flexible(

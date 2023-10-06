@@ -20,6 +20,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           overlayBackgroundColor: background,
           progressColor: primaryColor,
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: background,
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(
@@ -53,6 +54,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                       child: Text(
                         'Please enter your registered email and a confirmation OTP code will be sent to you.',
                         style: appStyles(16, null, FontWeight.w300),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Obx(() {
@@ -61,14 +63,18 @@ class ForgotPasswordScreen extends StatelessWidget {
                         key: controller.formKey,
                         child: TextInputForm(
                           enabled: true,
-                          inputController: controller.emailAddressInputController,
+                          inputController:
+                              controller.emailAddressInputController,
                           textLabel: 'Email address',
                           textHint: 'Email Address',
                           validatorMessage: validatorMessage,
                           isPassword: false,
                           autoCorrect: false,
-                          validator: (value) => controller.isEmailValid(value) ? null : validatorMessage,
-                          onFieldSubmitted: (_) => controller.isFocused.value = false,
+                          validator: (value) => controller.isEmailValid(value)
+                              ? null
+                              : validatorMessage,
+                          onFieldSubmitted: (_) =>
+                              controller.isFocused.value = false,
                           prefixIcon: const Icon(
                             Icons.email_outlined,
                             size: 24,
@@ -76,10 +82,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                           suffixIcon: IconButton(
                             icon: Icon(
                               Icons.cancel,
-                              color: controller.isFocused.value ? primaryColor : null,
+                              color: controller.isFocused.value
+                                  ? primaryColor
+                                  : null,
                               size: 24,
                             ),
-                            onPressed: () => controller.emailAddressInputController.clear(),
+                            onPressed: () =>
+                                controller.emailAddressInputController.clear(),
                           ),
                         ),
                       );

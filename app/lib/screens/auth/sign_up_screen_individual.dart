@@ -24,6 +24,7 @@ class SignUpScreenIndividual extends StatelessWidget {
         child: GestureDetector(
           onTap: () => Get.focusScope!.unfocus(),
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: background,
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(
@@ -44,7 +45,8 @@ class SignUpScreenIndividual extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.only(top: 5, right: 20, left: 20, bottom: 20),
+                padding: const EdgeInsets.only(
+                    top: 5, right: 20, left: 20, bottom: 20),
                 child: Column(
                   children: [
                     Text(
@@ -70,7 +72,6 @@ class SignUpScreenIndividual extends StatelessWidget {
                             TextInputForm(
                               enabled: true,
                               inputController: controller.firstNameController,
-                              // textLabel: 'First Name',
                               textHint: 'First Name',
                               validatorMessage: 'Please enter first name',
                               isPassword: false,
@@ -84,7 +85,6 @@ class SignUpScreenIndividual extends StatelessWidget {
                             TextInputForm(
                               enabled: true,
                               inputController: controller.lastNameController,
-                              // textLabel: 'Last Name',
                               textHint: 'Last Name',
                               validatorMessage: 'Please enter last name',
                               isPassword: false,
@@ -99,7 +99,6 @@ class SignUpScreenIndividual extends StatelessWidget {
                               inputType: TextInputType.emailAddress,
                               enabled: true,
                               inputController: controller.emailController,
-                              // textLabel: 'Email',
                               textHint: 'Email',
                               validatorMessage: 'Please enter your email',
                               isPassword: false,
@@ -114,7 +113,6 @@ class SignUpScreenIndividual extends StatelessWidget {
                               inputType: TextInputType.phone,
                               enabled: true,
                               inputController: controller.phoneNumberController,
-                              // textLabel: 'Phone Number',
                               textHint: 'Phone Number',
                               validatorMessage: 'Please enter a valid number',
                               isPassword: false,
@@ -125,25 +123,9 @@ class SignUpScreenIndividual extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 10),
-                            // TextInputForm(
-                            //   inputType: TextInputType.phone,
-                            //   enabled: true,
-                            //   inputController: controller.bvnController,
-                            //   textLabel: 'BVN',
-                            //   textHint: 'Enter your BVN',
-                            //   validatorMessage: 'Please enter a valid bvn',
-                            //   isPassword: false,
-                            //   autoCorrect: false,
-                            //   prefixIcon: const Icon(
-                            //     Icons.confirmation_number_rounded,
-                            //     size: 24,
-                            //   ),
-                            // ),
-                            // const SizedBox(height: 10),
                             TextInputForm(
                               enabled: true,
                               inputController: controller.passwordController,
-                              // textLabel: 'Password',
                               textHint: 'Password',
                               isPassword: controller.isPasswordHidden.value,
                               autoCorrect: false,
@@ -153,27 +135,37 @@ class SignUpScreenIndividual extends StatelessWidget {
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  controller.isPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
-                                  color: controller.isFocused.value ? primaryColor : null,
+                                  controller.isPasswordHidden.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: controller.isFocused.value
+                                      ? primaryColor
+                                      : null,
                                   size: 24,
                                 ),
-                                onPressed: () => controller.isPasswordHidden.value = !controller.isPasswordHidden.value,
+                                onPressed: () => controller.isPasswordHidden
+                                    .value = !controller.isPasswordHidden.value,
                               ),
-                              onChanged: (value) => controller.checkPassword(value),
+                              onChanged: (value) =>
+                                  controller.checkPassword(value),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
-                              child: Obx(() => PasswordStrengthBar(strength: controller.strength.value)),
+                              child: Obx(() => PasswordStrengthBar(
+                                  strength: controller.strength.value)),
                             ),
                             TextInputForm(
                               enabled: true,
-                              inputController: controller.confirmPasswordController,
-                              // textLabel: 'Confirm Password',
+                              inputController:
+                                  controller.confirmPasswordController,
                               textHint: 'Confirm password',
                               validatorMessage: 'Password do not match',
                               validator: (value) =>
-                                  controller.passwordController.text != value ? 'Password do not match' : null,
-                              isPassword: controller.isComfirmPasswordHidden.value,
+                                  controller.passwordController.text != value
+                                      ? 'Password do not match'
+                                      : null,
+                              isPassword:
+                                  controller.isComfirmPasswordHidden.value,
                               autoCorrect: false,
                               prefixIcon: const Icon(
                                 Icons.lock,
@@ -181,11 +173,17 @@ class SignUpScreenIndividual extends StatelessWidget {
                               ),
                               suffixIcon: IconButton(
                                 icon: Icon(
-                                  controller.isComfirmPasswordHidden.value ? Icons.visibility_off : Icons.visibility,
-                                  color: controller.isFocused.value ? primaryColor : null,
+                                  controller.isComfirmPasswordHidden.value
+                                      ? Icons.visibility_off
+                                      : Icons.visibility,
+                                  color: controller.isFocused.value
+                                      ? primaryColor
+                                      : null,
                                   size: 24,
                                 ),
-                                onPressed: () => controller.isComfirmPasswordHidden.value = !controller.isComfirmPasswordHidden.value,
+                                onPressed: () => controller
+                                        .isComfirmPasswordHidden.value =
+                                    !controller.isComfirmPasswordHidden.value,
                               ),
                             ),
                             const SizedBox(height: 20),

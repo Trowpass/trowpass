@@ -1,4 +1,5 @@
 import 'package:app/widgets/app_dialog.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +20,8 @@ class SignUpIndividualController extends GetxController {
   final TextEditingController bvnController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   final password = ''.obs;
   final strength = Rx(Strength.weak);
@@ -27,7 +29,8 @@ class SignUpIndividualController extends GetxController {
   RegExp numReg = RegExp(r".*[0-9].*");
   RegExp letterReg = RegExp(r".*[A-Za-z].*");
 
-  RegExp regex = RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
+  RegExp regex =
+      RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
 
   final isLoaded = false.obs;
   final isPasswordHidden = true.obs;
@@ -51,10 +54,16 @@ class SignUpIndividualController extends GetxController {
 
     try {
       if (passwordController.text != confirmPasswordController.text) {
-        Get.defaultDialog(title: 'Validation', content: const Text('Password mis-matched'));
+        Get.defaultDialog(
+            title: 'Validation', content: const Text('Password mis-matched'));
+        isLoaded.value = false;
+      } else if (!EmailValidator.validate(emailController.text)) {
+        Get.defaultDialog(
+            title: 'Validation', content: const Text('Invalid email address'));
         isLoaded.value = false;
       } else {
-        var response = await userController.riderRegistrationAsync(RiderRegistrationRequest(
+        var response = await userController
+            .riderRegistrationAsync(RiderRegistrationRequest(
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
@@ -70,7 +79,8 @@ class SignUpIndividualController extends GetxController {
           Get.offAll(() => OtpScreen(phoneNumber: phoneNumberController.text));
           isLoaded.value = false;
         } else {
-          Get.defaultDialog(title: 'Information', content: Text(response.message));
+          Get.defaultDialog(
+              title: 'Information', content: Text(response.message));
           isLoaded.value = false;
         }
       }
@@ -107,7 +117,8 @@ class SignUpIndividualController extends GetxController {
         registerRider();
       } else {
         var title = 'Password not secure';
-        var subtitle = 'Password should be at least 8 characters long and include a mix of'
+        var subtitle =
+            'Password should be at least 8 characters long and include a mix of'
             ' uppercase and lowercase letters, numbers,'
             ' and special characters (such as !, @, #, \$, etc.) for added security';
 

@@ -2,7 +2,9 @@ import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/repositories/user_repository.dart';
 import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/forget_password_request.dart';
 import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/resend_otp_request.dart';
 import 'package:app/services/requests/post_requests/rider_registration_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
@@ -11,6 +13,7 @@ import 'package:app/services/requests/put_requests/tier_one_request.dart';
 import 'package:app/services/responses/base_response.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
+import 'package:app/services/responses/request_reset_password_response.dart';
 import 'package:app/services/responses/tier_one_response.dart';
 import 'package:app/services/responses/user_login_response.dart';
 import 'package:app/services/responses/view_profile_response.dart';
@@ -18,6 +21,8 @@ import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 
+import '../../services/requests/post_requests/reset_password_request.dart';
+import '../../services/responses/reset_password_response.dart';
 import '../../services/responses/verify_account_response.dart';
 import '../../shareds/managers/get_session_manager.dart';
 
@@ -34,7 +39,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Login failed. Please try again!');
     }
   }
 
@@ -43,13 +48,12 @@ class UserController {
     try {
       final response = await userRepository.createRiderAccountAsync(request);
       if (response.status) {
-        //store register user phone number
         session.writeRiderPhoneNumber(request.phoneNumber);
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to create account. Please try again!');
     }
   }
 
@@ -64,7 +68,7 @@ class UserController {
       }
       return Future.error(response.message!);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to verify otp. Please try again!');
     }
   }
 
@@ -78,11 +82,12 @@ class UserController {
         session.writePinCreated(response.data!.isPinCreated);
         session.writeAccountType(response.data!.accountType);
         session.writeVirtualCardCreated(response.data!.isVirtualCardCreated);
+        session.writeQRCode(response.data!.qr!);
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch profile. Please try again!');
     }
   }
 
@@ -95,7 +100,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to get user. Please try again!');
     }
   }
 
@@ -108,7 +113,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to create wallet. Please try again!');
     }
   }
 
@@ -121,7 +126,7 @@ class UserController {
       }
       return Future.error(response.message!);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to create wallet. Please try again!');
     }
   }
 
@@ -130,7 +135,7 @@ class UserController {
       final response = await userRepository.getUserWalletAsync();
       return response;
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch wallet. Please try again!');
     }
   }
 
@@ -142,7 +147,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unablet to set pin. Please try again!');
     }
   }
 
@@ -154,7 +159,45 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to upgrade account. Please try again!');
+    }
+  }
+
+  Future<RequestResetPasswordResponse> requestForgotPasswordAsync(
+      ForgetPasswordRequest request) async {
+    try {
+      final response = await userRepository.requestForgotPasswordAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unble to complete action. Please try again!');
+    }
+  }
+
+  Future<BaseResponse> resendOtpToEmailAsync(ResendOtpRequest request) async {
+    try {
+      final response = await userRepository.resendOtpToEmailAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unable to resend otp. Please try again!');
+    }
+  }
+
+  Future<ResetPasswordResponse> resetPasswordAsync(
+      ResetPasswordRequest request) async {
+    try {
+      final response = await userRepository.resetPasswordAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unable to reset password. Please try again!');
     }
   }
 }

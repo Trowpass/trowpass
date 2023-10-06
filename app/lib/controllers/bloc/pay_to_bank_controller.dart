@@ -5,6 +5,7 @@ import 'package:app/services/responses/get_all_banks_reponse.dart';
 import 'package:app/services/responses/get_user_by_account_response.dart';
 import 'package:app/services/responses/pay_to_bank_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
+
 import '../../shareds/managers/get_session_manager.dart';
 
 class PaytToBankController {
@@ -20,34 +21,33 @@ class PaytToBankController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch bank details. Please try again!');
     }
   }
 
-   Future<PayToBankResponse> payToBankAsync(
-      PayToBankRequest request) async {
+  Future<PayToBankResponse> payToBankAsync(PayToBankRequest request) async {
     try {
-      final response =
-          await payToBankRepository.payToBankAsync(request);
+      final response = await payToBankRepository.payToBankAsync(request);
       if (response.status) {
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to pay to bank. Please try again!');
     }
   }
 
   Future<UserByAccountNumberResponse> getUserByAccountNumberAsync(
       UserByAccountNumberRequest request) async {
     try {
-      final response = await payToBankRepository.getUserByAccountNumberAsync(request);
+      final response =
+          await payToBankRepository.getUserByAccountNumberAsync(request);
       if (response.status) {
         return response;
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch account. Please try again!');
     }
   }
 }

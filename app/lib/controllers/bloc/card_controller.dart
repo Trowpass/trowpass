@@ -18,7 +18,7 @@ class CardController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to create card. Please try again!');
     }
   }
 
@@ -30,7 +30,7 @@ class CardController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fetch card details. Please try again!');
     }
   }
 
@@ -43,7 +43,7 @@ class CardController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to fund card. Please try again!');
     }
   }
 
@@ -56,7 +56,7 @@ class CardController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error(e);
+      return Future.error('Unable to change card pin. Please try again!');
     }
   }
 }

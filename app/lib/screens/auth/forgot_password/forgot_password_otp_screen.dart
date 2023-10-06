@@ -31,6 +31,7 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
         child: WillPopScope(
           onWillPop: _onWillPop,
           child: Scaffold(
+            resizeToAvoidBottomInset: true,
             backgroundColor: background,
             appBar: AppBar(
               systemOverlayStyle: const SystemUiOverlayStyle(
@@ -62,7 +63,7 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 16),
                       child: Text(
-                        'Please enter the code sent to $email. It expires in 5 minutes',
+                        'Please enter the code sent to $email. It expires in 2 minutes',
                         style: appStyles(16, null, null),
                       ),
                     ),
@@ -76,8 +77,11 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                             width: 64,
                             child: TextFormField(
                               controller: controller.codeOneController,
-                              onChanged: (value) => value.length == 1 ? FocusScope.of(context).nextFocus() : null,
-                              validator: (value) => value != null && value.isEmpty ? "" : null,
+                              onChanged: (value) => value.length == 1
+                                  ? FocusScope.of(context).nextFocus()
+                                  : null,
+                              validator: (value) =>
+                                  value != null && value.isEmpty ? "" : null,
                               decoration: const InputDecoration(
                                 hintText: '*',
                                 errorStyle: TextStyle(height: 0),
@@ -99,7 +103,8 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                             width: 64,
                             child: TextFormField(
                               controller: controller.codeTwoController,
-                              validator: (value) => value != null && value.isEmpty ? "" : null,
+                              validator: (value) =>
+                                  value != null && value.isEmpty ? "" : null,
                               onChanged: (value) => value.length == 1
                                   ? FocusScope.of(context).nextFocus()
                                   : FocusScope.of(context).previousFocus(),
@@ -124,7 +129,8 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                             width: 64,
                             child: TextFormField(
                               controller: controller.codeThreeController,
-                              validator: (value) => value != null && value.isEmpty ? "" : null,
+                              validator: (value) =>
+                                  value != null && value.isEmpty ? "" : null,
                               onChanged: (value) => value.length == 1
                                   ? FocusScope.of(context).nextFocus()
                                   : FocusScope.of(context).previousFocus(),
@@ -149,8 +155,11 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                             width: 64,
                             child: TextFormField(
                               controller: controller.codeFourController,
-                              onChanged: (value) => value.isEmpty ? FocusScope.of(context).previousFocus() : null,
-                              validator: (value) => value != null && value.isEmpty ? "" : null,
+                              onChanged: (value) => value.isEmpty
+                                  ? FocusScope.of(context).previousFocus()
+                                  : null,
+                              validator: (value) =>
+                                  value != null && value.isEmpty ? "" : null,
                               decoration: const InputDecoration(
                                 hintText: '*',
                                 errorStyle: TextStyle(height: 0),
@@ -171,7 +180,8 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 15),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 30, vertical: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -183,17 +193,23 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                               controller: controller.countDownController,
                               seconds: controller.resendCountdownDuration,
                               build: (_, double time) {
-                                Duration duration = Duration(seconds: time.toInt());
+                                Duration duration =
+                                    Duration(seconds: time.toInt());
                                 int minutes = duration.inMinutes;
                                 int seconds = duration.inSeconds.remainder(60);
-                                String formattedTime = "${"$minutes".padLeft(2, "0")}:${"$seconds".padLeft(2, '0')}";
+                                String formattedTime =
+                                    "${"$minutes".padLeft(2, "0")}:${"$seconds".padLeft(2, '0')}";
 
                                 return TextButton(
-                                  onPressed: () => [controller.resendCountdownDuration, 0].contains(time)
+                                  onPressed: () => [
+                                    controller.resendCountdownDuration,
+                                    0
+                                  ].contains(time)
                                       ? controller.tryResendOtpSubmit(email)
                                       : null,
                                   child: Text(
-                                    [controller.resendCountdownDuration, 0].contains(time)
+                                    [controller.resendCountdownDuration, 0]
+                                            .contains(time)
                                         ? 'Resend'
                                         : 'Resend in $formattedTime',
                                   ),
@@ -212,7 +228,8 @@ class ForgotPasswordOtpScreen extends StatelessWidget {
                             onPressed: controller.isExpiryTimeElapsed.value
                                 ? null
                                 : () {
-                                    if (controller.formKey.currentState!.validate()) {
+                                    if (controller.formKey.currentState!
+                                        .validate()) {
                                       controller.formKey.currentState!.save();
                                       controller.finishEnterOtp(email);
                                     }

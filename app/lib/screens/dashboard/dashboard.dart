@@ -37,6 +37,7 @@ class DashboardScreen extends StatelessWidget {
                 systemNavigationBarIconBrightness: Brightness.light,
               ),
               child: Scaffold(
+                resizeToAvoidBottomInset: true,
                 body: SingleChildScrollView(
                   child: Column(
                     children: [

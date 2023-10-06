@@ -16,6 +16,7 @@ class SendMoneyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: true,
         backgroundColor: background,
         appBar: AppBar(
           systemOverlayStyle: const SystemUiOverlayStyle(
