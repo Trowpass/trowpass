@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import '../repositories/user_repository.dart';
 import '../screens/auth/login.dart';
 import '../services/responses/file_upload_response.dart';
+import '../shareds/constants/key_constants.dart';
 import '../shareds/managers/set_session_manager.dart';
 
 class UserProfileController extends GetxController {
@@ -21,12 +22,31 @@ class UserProfileController extends GetxController {
   SetSessionManager session2 = SetSessionManager();
   final userRepository = UserRepository();
   final userController = UserController();
-  var profileImage = Rx<String>('');
+  final profileImage = Rx<String>('');
+  final kycRegistrationText = ''.obs;
 
   @override
   void onInit() {
     super.onInit();
+    displayAccountType();
     getUserProfile();
+  }
+
+  void displayAccountType() {
+    String accountType = session.readAccountType();
+    switch (accountType) {
+      case t1Account:
+        kycRegistrationText.value = 'Upgrade account to T2';
+        break;
+      case t2Account:
+        kycRegistrationText.value = 'Upgrade account to T3';
+        break;
+      case t3Account:
+        kycRegistrationText.value = '';
+        break;
+      default:
+        kycRegistrationText.value = 'Upgrade account to T1';
+    }
   }
 
   Future<ViewProfileResponse> getUserProfile() async {
@@ -35,6 +55,8 @@ class UserProfileController extends GetxController {
       final response = await userRepository.getUserProfileAsync();
       if (response.status && response.data != null) {
         final data = response.data!;
+        session2.writeAccountType(data.accountType);
+        displayAccountType();
         profileImage.value = data.profilePix;
         fullName.value = '${data.firstName.capitalize} ${data.lastName.capitalize}';
         isLoading.value = false;
@@ -96,8 +118,10 @@ class UserProfileController extends GetxController {
     return await Get.dialog(
       AlertDialog(
         title: const Text('Attention'),
-        content: const Text('Please make sure to upload a square image of about 150 x 150 pixels,'
-            ' as the image will be cropped to fit this size.'),
+        content: const Text(
+          'Please make sure to upload a square image of about 150 x 150 pixels,'
+          ' as the image will be cropped to fit this size.',
+        ),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(backgroundColor: primaryColor),

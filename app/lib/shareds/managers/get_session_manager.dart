@@ -35,7 +35,7 @@ class GetSessionManager {
   Map<String, int> readTransportCompanyIdMap(String key) =>
       (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
   bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
-  String readAccountType() => storage.read(accountType);
+  String readAccountType() => storage.read(accountType) ?? '';
   DateTime readTokenExpires() => storage.read(tokenExpiration) ?? DateTime.now();
   bool readShouldRememberMe() => storage.read(shouldRememberMe) ?? false;
   String readResetPasswordToken() => storage.read(resetPasswordToken);

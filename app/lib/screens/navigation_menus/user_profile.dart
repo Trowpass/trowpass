@@ -1,5 +1,4 @@
-// ignore_for_file: prefer_const_constructors
-
+import 'package:app/screens/kyc/tier_upgrade_selection.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -37,7 +36,7 @@ class UserProfileScreen extends StatelessWidget {
         backgroundColor: background,
         title: Text(
           controller.title.value,
-          style: TextStyle(color: Colors.black),
+          style: const TextStyle(color: Colors.black),
         ),
         centerTitle: true,
       ),
@@ -74,13 +73,13 @@ class UserProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                                 placeholder: (context, url) {
-                                  return CircularProgressIndicator();
+                                  return const CircularProgressIndicator();
                                 },
                                 errorWidget: (context, url, error) => Placeholder(imageSize: imageSize),
                               ),
                               Visibility(
                                 visible: controller.isLoading.value,
-                                child: CircularProgressIndicator(
+                                child: const CircularProgressIndicator(
                                   valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                 ),
                               ),
@@ -93,10 +92,10 @@ class UserProfileScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(200),
                           color: primaryColor.withOpacity(0.9),
                           child: InkWell(
-                            customBorder: CircleBorder(),
+                            customBorder: const CircleBorder(),
                             splashColor: primaryColor.withOpacity(0.5),
                             onTap: () => controller.uploadImage(),
-                            child: Padding(
+                            child: const Padding(
                               padding: EdgeInsets.all(10),
                               child: Icon(
                                 Icons.edit_outlined,
@@ -121,7 +120,7 @@ class UserProfileScreen extends StatelessWidget {
                   customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                   onTap: () => Get.to(EditProfileScreen()),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: ListTile(
                       horizontalTitleGap: 0,
                       leading: Image.asset(userEdit),
@@ -136,7 +135,7 @@ class UserProfileScreen extends StatelessWidget {
                 customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 onTap: () => Get.to(ChangePinScreen()),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ListTile(
                     horizontalTitleGap: 0,
                     leading: Image.asset(lock),
@@ -150,14 +149,14 @@ class UserProfileScreen extends StatelessWidget {
                 customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 onTap: () {},
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ListTile(
                     horizontalTitleGap: 0,
                     leading: SvgPicture.asset(
                       history,
                       width: 28,
                       height: 28,
-                      colorFilter: ColorFilter.mode(label, BlendMode.srcIn),
+                      colorFilter: const ColorFilter.mode(label, BlendMode.srcIn),
                     ),
                     trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                     contentPadding: EdgeInsets.zero,
@@ -165,17 +164,23 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
+              Visibility(
+                visible: controller.kycRegistrationText.value.isNotEmpty,
                 child: InkWell(
                   customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  onTap: () {},
-                  child: ListTile(
-                    horizontalTitleGap: 0,
-                    leading: Image.asset(scanBarcode),
-                    trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
-                    contentPadding: EdgeInsets.zero,
-                    title: Text('KYC Registration', style: appStyles(18, null, FontWeight.w500)),
+                  onTap: () => Get.to(() => const TierSelectionPage()),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: ListTile(
+                      horizontalTitleGap: 0,
+                      leading: Image.asset(scanBarcode),
+                      trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(
+                        controller.kycRegistrationText.value,
+                        style: appStyles(18, null, FontWeight.w500),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -183,7 +188,7 @@ class UserProfileScreen extends StatelessWidget {
                 customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 onTap: () {},
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ListTile(
                     horizontalTitleGap: 0,
                     leading: Image.asset(scanBlack),
@@ -194,7 +199,7 @@ class UserProfileScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: GestureDetector(
                   onTap: () => controller.logout(),
                   child: ListTile(
@@ -228,14 +233,14 @@ class Placeholder extends StatelessWidget {
     return Container(
       width: imageSize,
       height: imageSize,
-      padding: EdgeInsets.all(18),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(18),
+      decoration: const BoxDecoration(
         color: primaryColor,
         shape: BoxShape.circle,
       ),
       child: SvgPicture.asset(
         person,
-        colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
       ),
     );
   }
