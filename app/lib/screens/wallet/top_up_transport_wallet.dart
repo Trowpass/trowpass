@@ -82,6 +82,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                   TextInputForm(
                     inputType: TextInputType.number,
                     enabled: true,
+                    readOnly: true,
                     inputController:
                         controller.transportCompanyNameTextEditController,
                     textHint: 'Select Transport Company',
@@ -130,6 +131,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                   ),
                   TextInputForm(
                     enabled: true,
+                    readOnly: true,
                     inputController: controller.bankNameTextEditController,
                     textHint: 'Select Bank',
                     validatorMessage: 'Please select bank',

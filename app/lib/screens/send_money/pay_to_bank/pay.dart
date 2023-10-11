@@ -90,6 +90,7 @@ class PayForm extends StatelessWidget {
             const SizedBox(height: 10),
             TextInputForm(
               enabled: true,
+               readOnly: true,
               inputController: payController.bankNameController,
               textHint: 'Select Bank',
               validatorMessage: 'Please select bank',
