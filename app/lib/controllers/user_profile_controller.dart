@@ -42,7 +42,7 @@ class UserProfileController extends GetxController {
       }
       return Future.error(response.message);
     } catch (e) {
-      isLoading.value = true;
+      isLoading.value = false;
       return Future.error('Unable to fetch profile picture');
     }
   }
