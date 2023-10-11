@@ -26,7 +26,7 @@ class CardsTabController extends GetxController {
     } else {
       cardDetails.value = false;
     }
-    if (accountType.isNotEmpty && accountType != t1_account) {
+    if (accountType.isNotEmpty && accountType != t1Account) {
       openUpgradeSelection.value = true;
     } else {
       openUpgradeSelection.value = false;

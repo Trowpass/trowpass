@@ -16,8 +16,7 @@ class ViewProfileResponse {
       message: json['message'] ?? '',
       status: json['status'],
       responseCode: json['responseCode'] ?? '',
-      data:
-          json['data'] != null ? ViewProfileData.fromJson(json['data']) : null,
+      data: json['data'] != null ? ViewProfileData.fromJson(json['data']) : null,
     );
   }
 }
@@ -45,6 +44,7 @@ class ViewProfileData {
   AccountDetail? accountDetail;
   dynamic kycDetail;
   dynamic bussinessDetail;
+  String profilePix;
 
   ViewProfileData({
     required this.userId,
@@ -69,6 +69,7 @@ class ViewProfileData {
     required this.accountDetail,
     required this.kycDetail,
     required this.bussinessDetail,
+    required this.profilePix,
   });
 
   factory ViewProfileData.fromJson(Map<String, dynamic> json) {
@@ -88,21 +89,14 @@ class ViewProfileData {
       gender: json['gender'] ?? '',
       accountType: json['accountType'] ?? '',
       isActive: json['isActive'] ?? false,
-      dateOfBirth: json['dateOfBirth'] != null
-          ? DateTime.parse(json['dateOfBirth'])
-          : null,
+      dateOfBirth: json['dateOfBirth'] != null ? DateTime.parse(json['dateOfBirth']) : null,
       placeOfBirth: json['placeOfBirth'] ?? '',
-      accountUpgradedAt: json['accountUpgradedAt'] != null
-          ? DateTime.parse(json['accountUpgradedAt'])
-          : null,
-      accountDetail: json['accountDetail'] != null
-          ? AccountDetail.fromJson(json['accountDetail'])
-          : null,
+      accountUpgradedAt: json['accountUpgradedAt'] != null ? DateTime.parse(json['accountUpgradedAt']) : null,
+      accountDetail: json['accountDetail'] != null ? AccountDetail.fromJson(json['accountDetail']) : null,
       kycDetail: null,
-      bussinessDetail: json['bussinessDetail'] != null
-          ? BussinessDetail.fromJson(json['bussinessDetail'])
-          : null,
+      bussinessDetail: json['bussinessDetail'] != null ? BussinessDetail.fromJson(json['bussinessDetail']) : null,
       isVirtualCardCreated: json['isVirtualCardCreated'],
+      profilePix: json["profilePix"] ?? '',
     );
   }
 }

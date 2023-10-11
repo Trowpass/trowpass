@@ -163,6 +163,7 @@ class DashboardController extends GetxController {
           '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
       fullName.value = fullName2;
       session2.writeUserFullName(fullName2);
+      session2.writeAccountType(response.data!.accountType);
       qrCodeUrl.value = response.data!.qr!;
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());
