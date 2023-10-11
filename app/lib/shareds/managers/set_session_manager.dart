@@ -134,4 +134,8 @@ class SetSessionManager {
   void writeQRCode(String value) {
     storage.write(qrCode, value);
   }
+
+  void setIsProfilePictureInfoShown(bool value) {
+    storage.write(profilePictureInfoShown, value);
+  }
 }

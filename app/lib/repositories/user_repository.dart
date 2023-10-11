@@ -7,11 +7,13 @@ import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/requests/put_requests/tier_one_request.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/file_upload_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
 import 'package:app/services/responses/request_reset_password_response.dart';
 import 'package:app/services/responses/tier_one_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
+import 'package:app/shareds/constants/file_upload_purpose.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 
@@ -36,8 +38,7 @@ class UserRepository {
 
   Future<UserLoginResponse> userLoginAsync(UserLoginRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints.login);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints.login);
       if (response.data != null) {
         return UserLoginResponse.fromJson(response.data);
       } else {
@@ -52,11 +53,9 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> createRiderAccountAsync(
-      RiderRegistrationRequest request) async {
+  Future<BaseResponse> createRiderAccountAsync(RiderRegistrationRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints.riderRegister);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints.riderRegister);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {
@@ -71,12 +70,10 @@ class UserRepository {
     }
   }
 
-  Future<VerifyAccountResponse> verifyOtpAsync(
-      VerifyOtpRequest request, dynamic customerPhoneNumber) async {
+  Future<VerifyAccountResponse> verifyOtpAsync(VerifyOtpRequest request, dynamic customerPhoneNumber) async {
     try {
       var url = '${Endpoints.verifyOtp}/$customerPhoneNumber';
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: url);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: url);
       if (response.data != null) {
         return VerifyAccountResponse.fromJson(response.data);
       } else {
@@ -114,11 +111,9 @@ class UserRepository {
     }
   }
 
-  Future<UserByPhoneResponse> getUserByPhoneAsync(
-      UserByPhoneRequest request) async {
+  Future<UserByPhoneResponse> getUserByPhoneAsync(UserByPhoneRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints.userByPhone);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints.userByPhone);
       if (response.data != null) {
         return UserByPhoneResponse.fromJson(response.data);
       } else {
@@ -133,8 +128,7 @@ class UserRepository {
     }
   }
 
-  Future<RequestResetPasswordResponse> requestForgotPasswordAsync(
-      ForgetPasswordRequest request) async {
+  Future<RequestResetPasswordResponse> requestForgotPasswordAsync(ForgetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
@@ -155,8 +149,7 @@ class UserRepository {
     }
   }
 
-  Future<BaseResponse> resendOtpToPhoneNumberAsync(
-      ResendOtpRequest request) async {
+  Future<BaseResponse> resendOtpToPhoneNumberAsync(ResendOtpRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
@@ -176,8 +169,7 @@ class UserRepository {
     }
   }
 
-  Future<ResetPasswordResponse> resetPasswordAsync(
-      ResetPasswordRequest request) async {
+  Future<ResetPasswordResponse> resetPasswordAsync(ResetPasswordRequest request) async {
     try {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
@@ -198,11 +190,9 @@ class UserRepository {
     }
   }
 
-  Future<CreateWalletResponse> createWalletAsync(
-      CreateWalletRequest request) async {
+  Future<CreateWalletResponse> createWalletAsync(CreateWalletRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints.createWallet);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints.createWallet);
       if (response.data != null) {
         return CreateWalletResponse.fromJson(response.data);
       } else {
@@ -217,11 +207,9 @@ class UserRepository {
     }
   }
 
-  Future<ReCreateWalletResponse> reCreateWalletAsync(
-      ReCreateWalletRequest request) async {
+  Future<ReCreateWalletResponse> reCreateWalletAsync(ReCreateWalletRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints.reCreateWallet);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints.reCreateWallet);
       if (response.data != null) {
         return ReCreateWalletResponse.fromJson(response.data);
       } else {
@@ -280,8 +268,7 @@ class UserRepository {
 
   Future<BaseResponse> choosePinAsync(ChoosePinRequest request) async {
     try {
-      var response = await apiConnectionHelper.postDataAsync(
-          requestData: request, path: Endpoints.createPin);
+      var response = await apiConnectionHelper.postDataAsync(requestData: request, path: Endpoints.createPin);
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);
       } else {
@@ -300,12 +287,43 @@ class UserRepository {
     try {
       int? userId = session.readUserId();
       var url = '${Endpoints.t1_upgrade}/$userId';
-      var response = await apiConnectionHelper.updateWithPutDataAsync(
-          requestData: request, path: url);
+      var response = await apiConnectionHelper.updateWithPutDataAsync(requestData: request, path: url);
       if (response.data != null) {
         return TierOneResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to upgrade account');
+      }
+    } on DioError catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<FileUploadResponse> uploadFileAsync({
+    required String filepath,
+    required FileUploadPurpose purpose,
+  }) async {
+    final data = FormData.fromMap({
+      'Purpose': purpose.toString(),
+      'UserId': session.readUserId(),
+      'File': MultipartFile.fromFileSync(
+        filepath,
+        filename: filepath.split('/').last,
+      ),
+    });
+
+    try {
+      var response = await apiConnectionHelper.postFormDataAsync(
+        path: Endpoints.fileUpload,
+        formData: data,
+      );
+      if (response.data != null) {
+        return FileUploadResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to upload document');
       }
     } on DioError catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
