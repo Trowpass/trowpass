@@ -5,6 +5,7 @@ import 'package:app/screens/auth/pin/choose_pin_screen.dart';
 import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/resend_otp_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
+import 'package:app/services/update_service/update_service.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart' as expiry_timer;
 import 'package:flutter/material.dart';
@@ -28,9 +29,12 @@ class AuthController extends GetxController {
   final isExpiryTimeElapsed = false.obs;
   final shouldRememberUser = false.obs;
 
+  UpdateService updateService = UpdateService();
+
   @override
   void onInit() {
     isLoaded.value = false;
+    updateService.checkForInAppUpdate(onUpdateSuccess, onUpdateFailure);
     super.onInit();
   }
 
@@ -118,5 +122,50 @@ class AuthController extends GetxController {
 
   void createAccount() {
     Get.to(const AccountTypeScreen());
+  }
+
+  
+void onUpdateSuccess(BuildContext context) {
+    Widget alertDialogOkButton = TextButton(
+        onPressed: () => Get.back(),
+        child: const Text('OK')
+    );
+      AlertDialog alertDialog = AlertDialog(
+        title: const Text("Update Successfully Installed"),
+        content: const Text("Trowpass has been updated successfully!"),
+        actions: [
+          alertDialogOkButton
+        ],
+      );
+      showDialog(context: context,
+          builder: (BuildContext context) {
+        return alertDialog;
+      });
+  }
+
+  void onUpdateFailure(String error, BuildContext context) {
+    Widget alertDialogTryAgainButton = TextButton(
+        onPressed: () {
+          updateService.checkForInAppUpdate(onUpdateSuccess, onUpdateFailure);
+          Get.back();
+        },
+        child: const Text("Try Again?")
+    );
+    Widget alertDialogCancelButton = TextButton(
+      onPressed: () => Get.back(),
+      child: const Text("Dismiss"),
+    );
+    AlertDialog alertDialog = AlertDialog(
+      title: const Text("Update Failed To Install"),
+      content: Text("Trowpass has failed to update because: \n $error"),
+      actions: [
+        alertDialogTryAgainButton,
+        alertDialogCancelButton
+      ],
+    );
+    showDialog(context: context,
+        builder: (BuildContext context) {
+          return alertDialog;
+        });
   }
 }
