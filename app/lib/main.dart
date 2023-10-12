@@ -1,6 +1,5 @@
+import 'package:app/screens/splash_screen.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
-import 'package:app/shareds/resources/routes/app_pages.dart';
-import 'package:app/shareds/resources/routes/app_routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -32,32 +31,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: getInitialPage(),
-      getPages: AppPages.list,
+      home: SplashScreen(),
+      // initialRoute: getInitialPage(),
+      // getPages: AppPages.list,
       title: 'Trowpass',
     );
-  }
-
-  String getInitialPage() {
-    String route = '';
-    final isUserOnBoarded = store.readIsUserOnBoarded();
-    final isUserLoggedIn = store.readIsUserLoggedIn();
-    final isTokenExpired = store.readIsTokenExpired();
-    final rememberMe = store.readShouldRememberMe();
-
-    if (!isUserOnBoarded) {
-      route = AppRoutes.onboarding;
-    } else {
-      if (!isUserLoggedIn) {
-        route = AppRoutes.login;
-      } else if (isUserLoggedIn && rememberMe && isTokenExpired) {
-        route = AppRoutes.dashboard;
-      } else if (isUserLoggedIn && !rememberMe && isTokenExpired) {
-        route = AppRoutes.login;
-      } else {
-        route = AppRoutes.dashboard;
-      }
-    }
-    return route;
   }
 }

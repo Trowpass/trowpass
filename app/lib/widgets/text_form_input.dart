@@ -23,6 +23,7 @@ class TextInputForm extends StatelessWidget {
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final bool enabled; // Added the enabled field
+  final bool readOnly;
   final List<TextInputFormatter>? inputFormatters;
   final String? Function(String?)? validator;
 
@@ -47,6 +48,7 @@ class TextInputForm extends StatelessWidget {
     this.inputFormatters, // Added the enabled parameter
     this.validator,
     String? initialValue,
+    this.readOnly = false,
   }) : super(key: key);
 
   @override
@@ -62,7 +64,8 @@ class TextInputForm extends StatelessWidget {
       controller: inputController,
       style: const TextStyle(fontSize: 15),
       enabled:
-          enabled, // Use the enabled parameter to enable or disable the input field
+          enabled,
+          readOnly: readOnly, // Use the enabled parameter to enable or disable the input field
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,

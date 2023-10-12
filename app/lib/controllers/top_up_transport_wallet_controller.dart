@@ -14,7 +14,7 @@ import 'package:get/get.dart';
 class TopUpTransportWalletController extends GetxController {
   final title = Rx<String>('Topup your transport wallet');
   final subTitle = Rx<String>(
-      'Easily fund your tansport wallet without opening several apps to do so.');
+      'Easily fund your transport wallet without opening several apps to do so.');
   final selectedTransportCompany = 'Select company'.obs;
   final selectedBankName = 'Select bank'.obs;
   final transportCompanyNameTextEditController = TextEditingController();
@@ -78,9 +78,11 @@ class TopUpTransportWalletController extends GetxController {
     try {
       // Retrieve bank details from session storage
       List<String> storedBanks = session.readAllBanks('allBanks');
-      String storedSelectedBankName = session.readSelectedBankName('selectedBankName') ?? 'Select bank';
+      String storedSelectedBankName =
+          session.readSelectedBankName('selectedBankName') ?? 'Select bank';
       Map<String, int> storedBankIdMap = session.readBankIdMap('bankIdMap');
-      Map<String, String> storedBankCodeMap = session.readbankCodeMap('bankCodeMap');
+      Map<String, String> storedBankCodeMap =
+          session.readbankCodeMap('bankCodeMap');
 
       // Update controller's variables with retrieved values
       allBanks = storedBanks;
@@ -95,9 +97,13 @@ class TopUpTransportWalletController extends GetxController {
   void fetchTransportCompanyDetailsFromSessionStorage() {
     try {
       // Retrieve bank details from session storage
-      List<String> storedTransportCompanies = session.readAllTransportCompanies('allTransportCompanies');
-      String storedSelectedTransportCompanies = session.readSelectedTransportCompanies('selectedTransportCompany') ?? 'Select transport';
-      Map<String, int> storedTransportIdMap = session.readTransportCompanyIdMap('transportCompanyIdMap');
+      List<String> storedTransportCompanies =
+          session.readAllTransportCompanies('allTransportCompanies');
+      String storedSelectedTransportCompanies =
+          session.readSelectedTransportCompanies('selectedTransportCompany') ??
+              'Select transport';
+      Map<String, int> storedTransportIdMap =
+          session.readTransportCompanyIdMap('transportCompanyIdMap');
 
       // Update controller's variables with retrieved values
       allTransportCompany = storedTransportCompanies;

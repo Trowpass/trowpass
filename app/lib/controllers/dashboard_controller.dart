@@ -163,6 +163,23 @@ class DashboardController extends GetxController {
           '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
       fullName.value = fullName2;
       session2.writeUserFullName(fullName2);
+      session2.writeAccountType(response.data!.accountType);
+      //for profile
+      if (response.data!.kycDetail != null) {
+        session2
+            .writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
+        session2.writeProfileCity(response.data!.kycDetail!.address!.city!);
+        session2
+            .writeProfileCountry(response.data!.kycDetail!.address!.country!);
+        session2.writeProfileState(response.data!.kycDetail!.address!.state!);
+        session2.writeProfileStreet(response.data!.kycDetail!.address!.street!);
+        session2.writeProfilePostalCode(
+            response.data!.kycDetail!.address!.postalCode!);
+        session2.writeProfileFN(response.data!.firstName);
+        session2.writeProfileLN(response.data!.lastName);
+        session2.writeProfilePN(response.data!.phoneNumber);
+      }
+
       qrCodeUrl.value = response.data!.qr!;
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());

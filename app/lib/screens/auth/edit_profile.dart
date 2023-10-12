@@ -1,14 +1,14 @@
 import 'package:app/shareds/utils/app_colors.dart';
+import 'package:app/widgets/all_state_list.dart';
+import 'package:app/widgets/overlay_indeterminate_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
 import '../../controllers/edit_profile_controller.dart';
 import '../../shareds/utils/border_radius.dart';
-import '../../widgets/app_styles.dart';
 import '../../widgets/standard_button.dart';
 import '../../widgets/text_form_input.dart';
-import '../../widgets/text_input.dart';
 
 class EditProfileScreen extends StatelessWidget {
   EditProfileScreen({super.key});
@@ -16,183 +16,253 @@ class EditProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: background,
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: primaryColor,
-          statusBarBrightness: Brightness.light, // For iOS
-          statusBarIconBrightness: Brightness.light, // For Android
-          systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.light,
-        ),
-        elevation: 0,
-        title: const Text('Edit Profile'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Get.back();
+    return Obx(() => OverlayIndeterminateProgress(
+        isLoading: controller.isLoaded.value,
+        overlayBackgroundColor: background,
+        progressColor: primaryColor,
+        child: GestureDetector(
+            onTap: () => Get.focusScope!.unfocus(),
+            child: Scaffold(
+              resizeToAvoidBottomInset: true,
+              backgroundColor: background,
+              appBar: AppBar(
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: primaryColor,
+                  statusBarBrightness: Brightness.light, // For iOS
+                  statusBarIconBrightness: Brightness.light, // For Android
+                  systemNavigationBarColor: navigationBarBackground,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+                elevation: 0,
+                title: const Text('Edit Profile'),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+                centerTitle: true,
+                backgroundColor: background,
+              ),
+              body: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: const Text('First Name'),
+                                subtitle: TextInputForm(
+                                  enabled: true,
+                                  inputController:
+                                      controller.firstNameController,
+                                  validatorMessage: 'Please enter first name',
+                                  isPassword: false,
+                                  autoCorrect: false,
+                                )),
+                            const SizedBox(height: 5),
+                            ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: const Text('Last Name'),
+                                subtitle: TextInputForm(
+                                  enabled: true,
+                                  inputController:
+                                      controller.lastNameController,
+                                  validatorMessage: 'Please enter last name',
+                                  isPassword: false,
+                                  autoCorrect: false,
+                                )),
+                            const SizedBox(height: 5),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Phone Number'),
+                              subtitle: TextInputForm(
+                                inputType: TextInputType.phone,
+                                enabled: true,
+                                inputController:
+                                    controller.phoneNumberController,
+                                validatorMessage: 'Please enter a valid number',
+                                isPassword: false,
+                                autoCorrect: false,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: const Text('Bio Data'),
+                                subtitle: TextInputForm(
+                                  enabled: true,
+                                  inputController: controller.bioController,
+                                  validatorMessage:
+                                      'Please enter your bio data',
+                                  isPassword: false,
+                                  autoCorrect: false,
+                                )),
+                            const SizedBox(height: 5),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Select Country'),
+                              subtitle: DropdownButtonFormField(
+                                elevation: 1,
+                                decoration: InputDecoration(
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: primaryColor),
+                                    ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(color: grayscale),
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            defaultBorderRadius))),
+                                onChanged: (Object? newSeleted) {
+                                  controller.onSetSelectedCountry(newSeleted);
+                                },
+                                isExpanded: true,
+                                validator: (value) => value == 'Select'
+                                    ? 'Please select country'
+                                    : null,
+                                value: controller.selectedCountry.value,
+                                items: controller.country.map((selectedType) {
+                                  return DropdownMenuItem(
+                                    value: selectedType,
+                                    child: Text(
+                                      selectedType,
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Select State'),
+                              subtitle: TextInputForm(
+                                onTap: () => showStateLists(context),
+                                enabled: true,
+                                readOnly: true,
+                                inputController: controller.stateController,
+                                validatorMessage: 'Please select state',
+                                isPassword: false,
+                                autoCorrect: false,
+                                suffixIcon: InkWell(
+                                  onTap: () => showStateLists(context),
+                                  child: const Icon(Icons.arrow_drop_down),
+                                ),
+                                initialValue: controller.stateController.text,
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('City/LGA'),
+                              subtitle: TextInputForm(
+                                autoCorrect: false,
+                                enabled: true,
+                                isPassword: false,
+                                inputController: controller.cityController,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? 'Field can\'t be empty'
+                                        : null,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.cityController.clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_outlined,
+                                      size: 15,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Address'),
+                              subtitle: TextInputForm(
+                                autoCorrect: false,
+                                enabled: true,
+                                isPassword: false,
+                                inputController:
+                                    controller.streetAddressController,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? 'Field can\'t be empty'
+                                        : null,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.streetAddressController
+                                          .clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_outlined,
+                                      size: 15,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Postal Code'),
+                              subtitle: TextInputForm(
+                                inputType: TextInputType.number,
+                                autoCorrect: false,
+                                enabled: true,
+                                isPassword: false,
+                                inputController:
+                                    controller.postalCodeController,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? 'Field can\'t be empty'
+                                        : null,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.postalCodeController.clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_outlined,
+                                      size: 15,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            StandardButton(
+                              text: 'Save Changes',
+                              onPressed: () async {
+                                if (controller.formKey.currentState!
+                                    .validate()) {
+                                  controller.formKey.currentState!.save();
+                                  controller.updateProfile(context);
+                                }
+                              },
+                            ),
+                          ],
+                        ))),
+              ),
+            ))));
+  }
+
+  Future<dynamic> showStateLists(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (BuildContext context) {
+        return StateListModalSheet(
+          onStateSelected: (selectedCompany) {
+            controller.onSetSelectedState(selectedCompany);
+            controller.stateController.text = selectedCompany;
+            Navigator.pop(context);
           },
-        ),
-        centerTitle: true,
-        backgroundColor: background,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(30),
-            child: Form(
-                key: controller.formKey,
-                child: Column(
-                  children: [
-                    TextInput(
-                      keyboardType: TextInputType.none,
-                      enabled: true,
-                      inputController: controller.profileController,
-                      textLabel: 'Choose file',
-                      textHint: 'Choose file',
-                      isPassword: false,
-                      prefixIcon: const Icon(
-                        Icons.photo_camera,
-                        size: 24,
-                      ),
-                      isReadOnly: false,
-                    ),
-                    const SizedBox(height: 10),
-                    TextInputForm(
-                      enabled: true,
-                      inputController: controller.firstNameController,
-                      textLabel: 'First Name',
-                      textHint: 'First Name',
-                      validatorMessage: 'Please enter first name',
-                      isPassword: false,
-                      autoCorrect: false,
-                      prefixIcon: const Icon(
-                        Icons.person_outline_outlined,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextInputForm(
-                      enabled: true,
-                      inputController: controller.lastNameController,
-                      textLabel: 'Last Name',
-                      textHint: 'Last Name',
-                      validatorMessage: 'Please enter last name',
-                      isPassword: false,
-                      autoCorrect: false,
-                      prefixIcon: const Icon(
-                        Icons.person_outline_outlined,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                        maxLines: 2,
-                        enabled: true,
-                        controller: controller.bioController,
-                        style: const TextStyle(fontSize: 15),
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            Icons.place,
-                            size: 24,
-                          ),
-                          labelText: 'Address',
-                          labelStyle: appStyles(15, null, null),
-                          hintText: 'Address',
-                          errorStyle:
-                              appStyles(null, validationErrorColor, null),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                            borderSide: const BorderSide(color: primaryColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                            borderSide: const BorderSide(color: primaryColor),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                            borderSide: const BorderSide(color: primaryColor),
-                          ),
-                          filled: true,
-                          fillColor: Colors.transparent,
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Please enter an address';
-                          }
-                          return null;
-                        }),
-                    const SizedBox(height: 10),
-                    TextInputForm(
-                      inputType: TextInputType.phone,
-                      enabled: true,
-                      inputController: controller.phoneNumberController,
-                      textLabel: 'Phone Number',
-                      textHint: 'Phone Number',
-                      validatorMessage: 'Please enter a valid number',
-                      isPassword: false,
-                      autoCorrect: false,
-                      prefixIcon: const Icon(
-                        Icons.phone_android,
-                        size: 24,
-                      ),
-                    ),
-                    const SizedBox(height: 10),
-                    TextFormField(
-                        maxLines: 2,
-                        enabled: true,
-                        controller: controller.bioController,
-                        style: const TextStyle(fontSize: 15),
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            Icons.edit,
-                            size: 24,
-                          ),
-                          labelText: 'Bio',
-                          labelStyle: appStyles(15, null, null),
-                          hintText: 'Bio',
-                          errorStyle:
-                              appStyles(null, validationErrorColor, null),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                            borderSide: const BorderSide(color: primaryColor),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                            borderSide: const BorderSide(color: primaryColor),
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
-                            borderSide: const BorderSide(color: primaryColor),
-                          ),
-                          filled: true,
-                          fillColor: Colors.transparent,
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Enter your bio data';
-                          }
-                          return null;
-                        }),
-                    const SizedBox(height: 20),
-                    StandardButton(
-                      text: 'Save Changes',
-                      onPressed: () async {
-                        if (controller.formKey.currentState!.validate()) {
-                          controller.formKey.currentState!.save();
-                        }
-                      },
-                    ),
-                  ],
-                ))),
-      ),
+          allStates: controller.states,
+          initialSelectedState: controller.selectedState.value,
+        );
+      },
     );
   }
 }
