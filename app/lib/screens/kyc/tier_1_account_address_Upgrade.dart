@@ -68,61 +68,6 @@ class TeirOneAccountAddressUpgradeScreen extends StatelessWidget {
                                   children: [
                                     ListTile(
                                       contentPadding: EdgeInsets.zero,
-                                      title: const Text('Street'),
-                                      subtitle: TextInputForm(
-                                        autoCorrect: false,
-                                        enabled: true,
-                                        isPassword: false,
-                                        inputController:
-                                            controller.streetController,
-                                        textHint: 'street address',
-                                        validator: (value) =>
-                                            value != null && value.isEmpty
-                                                ? 'Field can\'t be empty'
-                                                : null,
-                                        suffixIcon: IconButton(
-                                            onPressed: () {
-                                              controller.streetController
-                                                  .clear();
-                                            },
-                                            icon: const Icon(
-                                              Icons.close_outlined,
-                                              size: 15,
-                                            )),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    ListTile(
-                                      contentPadding: EdgeInsets.zero,
-                                      title: const Text('City'),
-                                      subtitle: TextInputForm(
-                                        autoCorrect: false,
-                                        enabled: true,
-                                        isPassword: false,
-                                        inputController:
-                                            controller.cityController,
-                                        textHint: 'city/town',
-                                        validator: (value) =>
-                                            value != null && value.isEmpty
-                                                ? 'Field can\'t be empty'
-                                                : null,
-                                        suffixIcon: IconButton(
-                                            onPressed: () {
-                                              controller.cityController.clear();
-                                            },
-                                            icon: const Icon(
-                                              Icons.close_outlined,
-                                              size: 15,
-                                            )),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    ListTile(
-                                      contentPadding: EdgeInsets.zero,
                                       title: const Text('Country'),
                                       subtitle: DropdownButtonFormField(
                                         elevation: 1,
@@ -168,7 +113,9 @@ class TeirOneAccountAddressUpgradeScreen extends StatelessWidget {
                                       contentPadding: EdgeInsets.zero,
                                       title: const Text('State'),
                                       subtitle: TextInputForm(
+                                        onTap: () => showStateLists(context),
                                         enabled: true,
+                                        readOnly: true,
                                         inputController:
                                             controller.stateController,
                                         textHint: 'Select state',
@@ -176,43 +123,67 @@ class TeirOneAccountAddressUpgradeScreen extends StatelessWidget {
                                         isPassword: false,
                                         autoCorrect: false,
                                         suffixIcon: InkWell(
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                              context: context,
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(16.0),
-                                                    topRight:
-                                                        Radius.circular(16.0)),
-                                              ),
-                                              clipBehavior:
-                                                  Clip.antiAliasWithSaveLayer,
-                                              builder: (BuildContext context) {
-                                                return StateListModalSheet(
-                                                  onStateSelected:
-                                                      (selectedCompany) {
-                                                    controller
-                                                        .onSetSelectedState(
-                                                            selectedCompany);
-                                                    controller.stateController
-                                                        .text = selectedCompany;
-                                                    Navigator.pop(context);
-                                                  },
-                                                  allStates: controller.states,
-                                                  initialSelectedState:
-                                                      controller
-                                                          .selectedState.value,
-                                                );
-                                              },
-                                            );
-                                          },
+                                          onTap: () => showStateLists(context),
                                           child:
                                               const Icon(Icons.arrow_drop_down),
                                         ),
                                         initialValue:
                                             controller.stateController.text,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      title: const Text('City/LGA'),
+                                      subtitle: TextInputForm(
+                                        autoCorrect: false,
+                                        enabled: true,
+                                        isPassword: false,
+                                        inputController:
+                                            controller.cityController,
+                                        textHint: 'city/lga',
+                                        validator: (value) =>
+                                            value != null && value.isEmpty
+                                                ? 'Field can\'t be empty'
+                                                : null,
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              controller.cityController.clear();
+                                            },
+                                            icon: const Icon(
+                                              Icons.close_outlined,
+                                              size: 15,
+                                            )),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    ListTile(
+                                      contentPadding: EdgeInsets.zero,
+                                      title: const Text('Address'),
+                                      subtitle: TextInputForm(
+                                        autoCorrect: false,
+                                        enabled: true,
+                                        isPassword: false,
+                                        inputController:
+                                            controller.streetController,
+                                        textHint: 'street address',
+                                        validator: (value) =>
+                                            value != null && value.isEmpty
+                                                ? 'Field can\'t be empty'
+                                                : null,
+                                        suffixIcon: IconButton(
+                                            onPressed: () {
+                                              controller.streetController
+                                                  .clear();
+                                            },
+                                            icon: const Icon(
+                                              Icons.close_outlined,
+                                              size: 15,
+                                            )),
                                       ),
                                     ),
                                     const SizedBox(
@@ -269,5 +240,27 @@ class TeirOneAccountAddressUpgradeScreen extends StatelessWidget {
             ), // here
           ),
         ));
+  }
+
+  Future<dynamic> showStateLists(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (BuildContext context) {
+        return StateListModalSheet(
+          onStateSelected: (selectedCompany) {
+            controller.onSetSelectedState(selectedCompany);
+            controller.stateController.text = selectedCompany;
+            Navigator.pop(context);
+          },
+          allStates: controller.states,
+          initialSelectedState: controller.selectedState.value,
+        );
+      },
+    );
   }
 }

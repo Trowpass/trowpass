@@ -10,15 +10,19 @@ import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/requests/put_requests/tier_one_request.dart';
+import 'package:app/services/requests/put_requests/update_customer_data_request.dart';
 import 'package:app/services/responses/base_response.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/file_upload_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
 import 'package:app/services/responses/request_reset_password_response.dart';
 import 'package:app/services/responses/tier_one_response.dart';
+import 'package:app/services/responses/update_customer_data_response.dart';
 import 'package:app/services/responses/user_login_response.dart';
 import 'package:app/services/responses/view_profile_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
+import 'package:app/shareds/constants/file_upload_purpose.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 
 import '../../services/requests/post_requests/reset_password_request.dart';
@@ -133,7 +137,10 @@ class UserController {
   Future<UserWalletResponse> userWalletAsync() async {
     try {
       final response = await userRepository.getUserWalletAsync();
-      return response;
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
     } catch (e) {
       return Future.error('Unable to fetch wallet. Please try again!');
     }
@@ -198,6 +205,36 @@ class UserController {
       return Future.error(response.message);
     } catch (e) {
       return Future.error('Unable to reset password. Please try again!');
+    }
+  }
+
+  Future<FileUploadResponse> uploadFileAsync({
+    required String filepath,
+    required FileUploadPurpose purpose,
+  }) async {
+    try {
+      final response = await userRepository.uploadFileAsync(
+          filepath: filepath, purpose: purpose);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unable to upload image. Please try again!');
+    }
+  }
+
+  Future<UpdateCustomerDataResponse> updateCustomerDataAsync(
+      UpdateCustomerDataRequest request) async {
+    try {
+      final response = await userRepository.updateCustomerDataAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(
+          'Unable to update customer record. Please try again!');
     }
   }
 }
