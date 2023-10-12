@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
-bottomNavigationBarItem({IconData? icon, String? label}) {
+bottomNavigationBarItem({required Widget icon, String? label}) {
   return BottomNavigationBarItem(
-    icon: Icon(
-      icon,
-      size: 24,
-    ),
+    icon: icon,
     label: label,
   );
 }

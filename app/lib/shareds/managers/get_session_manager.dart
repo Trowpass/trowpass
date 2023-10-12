@@ -39,12 +39,23 @@ class GetSessionManager {
   Map<String, int> readTransportCompanyIdMap(String key) =>
       (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
   bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
-  String readAccountType() => storage.read(accountType);
+  String readAccountType() => storage.read(accountType) ?? '';
   DateTime readTokenExpires() =>
       storage.read(tokenExpiration) ?? DateTime.now();
   bool readShouldRememberMe() => storage.read(shouldRememberMe) ?? false;
   String readResetPasswordToken() => storage.read(resetPasswordToken);
   String readQRCode() => storage.read(qrCode);
+  bool readProfilePictureInfoShown() =>
+      storage.read(profilePictureInfoShown) ?? false;
+  String readProfilePostalCode() => storage.read(profilePostalCode) ?? '';
+  String readProfileBioData() => storage.read(profileBioData) ?? '';
+  String readProfileCity() => storage.read(profileCity) ?? '';
+  String readProfileCountry() => storage.read(profileCountry) ?? '';
+  String readProfileFN() => storage.read(profileFN) ?? '';
+  String readProfileLN() => storage.read(profileLN) ?? '';
+  String readProfilePN() => storage.read(profilePN) ?? '';
+  String readProfileState() => storage.read(profileState) ?? '';
+  String readProfileStreet() => storage.read(profileStreet) ?? '';
 
   bool readIsTokenExpired() {
     try {

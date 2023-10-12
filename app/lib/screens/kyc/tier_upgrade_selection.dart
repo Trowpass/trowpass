@@ -18,11 +18,11 @@ class TierSelectionPage extends StatelessWidget {
     bool isDefault = false;
     GetSessionManager session = GetSessionManager();
     String accountType = session.readAccountType();
-    if (accountType == t1_account) {
+    if (accountType == t1Account) {
       isT1Done = true;
-    } else if (accountType == t2_account) {
+    } else if (accountType == t2Account) {
       isT2Done = true;
-    } else if (accountType == t3_account) {
+    } else if (accountType == t3Account) {
       isT3Done = true;
     } else {
       isDefault = true;

@@ -1,6 +1,9 @@
 import 'dart:io';
 
+import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/screens/kyc/tier_1_account_address_Upgrade.dart';
+import 'package:app/shareds/constants/file_upload_purpose.dart';
+import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -22,6 +25,7 @@ class TeirOneAccountUpgradeController extends GetxController {
 
   File? galleryFile;
   final picker = ImagePicker();
+  UserController userController = UserController();
 
   @override
   void onInit() async {
@@ -41,15 +45,42 @@ class TeirOneAccountUpgradeController extends GetxController {
     if (filePath.isEmpty) {
       Get.snackbar('File', 'File not selected');
     } else {
-      upgradeDataArgs = {
-        'birth_place': placeOfBirthController.text,
-        'd_o_b': DateTime.tryParse(dobController.text),
-        'gnd': selectedGender.value,
-        'file_path': filePath.value,
-        'bvn': bvnController.text
-      };
+      await uploadImage();
       Get.to(() => TeirOneAccountAddressUpgradeScreen(),
           arguments: upgradeDataArgs);
+    }
+  }
+
+  Future uploadImage() async {
+    try {
+      var response = await userController.uploadFileAsync(
+        purpose: FileUploadPurpose.profilePicture,
+        filepath: filePath.value,
+      );
+      if (response.status) {
+        upgradeDataArgs = {
+          'birth_place': placeOfBirthController.text,
+          'd_o_b': DateTime.tryParse(dobController.text),
+          'gnd': selectedGender.value,
+          'file_path': response.path,
+          'bvn': bvnController.text
+        };
+      } else {
+        Get.defaultDialog(
+          title: 'Information',
+          content: Text(
+            response.message,
+            style: const TextStyle(color: Colors.white),
+          ),
+        );
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Information',
+        e.toString(),
+        backgroundColor: dialogInfoBackground,
+        snackPosition: SnackPosition.BOTTOM,
+      );
     }
   }
 }
