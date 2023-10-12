@@ -1,5 +1,4 @@
 import 'package:app/controllers/bloc/user_controller.dart';
-import 'package:app/services/responses/view_profile_response.dart';
 import 'package:app/shareds/constants/file_upload_purpose.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../repositories/user_repository.dart';
 import '../screens/auth/login.dart';
 import '../services/responses/file_upload_response.dart';
 import '../shareds/constants/key_constants.dart';
@@ -20,52 +18,56 @@ class UserProfileController extends GetxController {
 
   GetSessionManager session = GetSessionManager();
   SetSessionManager session2 = SetSessionManager();
-  final userRepository = UserRepository();
   final userController = UserController();
   final profileImage = Rx<String>('');
   final kycRegistrationText = ''.obs;
 
   @override
   void onInit() {
-    super.onInit();
     displayAccountType();
     getUserProfile();
+    super.onInit();
   }
 
   void displayAccountType() {
     String accountType = session.readAccountType();
     switch (accountType) {
       case t1Account:
-        kycRegistrationText.value = 'Upgrade account to T2';
+        kycRegistrationText.value = 'Upgrade Account to T2';
         break;
       case t2Account:
-        kycRegistrationText.value = 'Upgrade account to T3';
+        kycRegistrationText.value = 'Upgrade Account to T3';
         break;
       case t3Account:
         kycRegistrationText.value = '';
         break;
       default:
-        kycRegistrationText.value = 'Upgrade account to T1';
+        kycRegistrationText.value = 'Upgrade Account to T1';
     }
   }
 
-  Future<ViewProfileResponse> getUserProfile() async {
+  Future getUserProfile() async {
     try {
       isLoading.value = true;
-      final response = await userRepository.getUserProfileAsync();
+      final response = await userController.userProfileAsync();
       if (response.status && response.data != null) {
         final data = response.data!;
         session2.writeAccountType(data.accountType);
         displayAccountType();
-        profileImage.value = data.profilePix;
-        fullName.value = '${data.firstName.capitalize} ${data.lastName.capitalize}';
+        profileImage.value = data.profilePix!;
+        fullName.value =
+            '${data.firstName.capitalize} ${data.lastName.capitalize}';
         isLoading.value = false;
         return response;
+      } else {
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
       }
-      return Future.error(response.message);
     } catch (e) {
+      Get.snackbar('Information', e.toString(),
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM);
       isLoading.value = false;
-      return Future.error('Unable to fetch profile picture');
     }
   }
 
@@ -78,14 +80,12 @@ class UserProfileController extends GetxController {
     try {
       if (image != null) {
         isLoading.value = true;
-        FileUploadResponse response = await userRepository.uploadFileAsync(
+        FileUploadResponse response = await userController.uploadFileAsync(
           purpose: FileUploadPurpose.profilePicture,
           filepath: image.path,
         );
-
         if (response.status) {
           await getUserProfile();
-
           Get.snackbar(
             'Success',
             'Profile picture uploaded',

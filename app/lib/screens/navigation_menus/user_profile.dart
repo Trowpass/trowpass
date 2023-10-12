@@ -1,4 +1,5 @@
 import 'package:app/screens/kyc/tier_upgrade_selection.dart';
+import 'package:app/screens/send_money/scan_to_pay/qr_code.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -42,7 +43,8 @@ class UserProfileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
+          padding:
+              const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 10),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -64,23 +66,28 @@ class UserProfileScreen extends StatelessWidget {
                                 width: imageSize,
                                 height: imageSize,
                                 imageUrl: controller.profileImage.value,
-                                imageBuilder: (context, imageProvider) => Container(
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
                                   width: imageSize,
                                   height: imageSize,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                                    image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover),
                                   ),
                                 ),
                                 placeholder: (context, url) {
                                   return const CircularProgressIndicator();
                                 },
-                                errorWidget: (context, url, error) => Placeholder(imageSize: imageSize),
+                                errorWidget: (context, url, error) =>
+                                    Placeholder(imageSize: imageSize),
                               ),
                               Visibility(
                                 visible: controller.isLoading.value,
                                 child: const CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
                                 ),
                               ),
                             ],
@@ -108,7 +115,8 @@ class UserProfileScreen extends StatelessWidget {
                       ),
                     ],
                   )),
-              Text(controller.fullName.value, style: appStyles(18, null, FontWeight.bold)),
+              Text(controller.fullName.value,
+                  style: appStyles(18, null, FontWeight.bold)),
               const SizedBox(height: 8),
               Text(
                 'Rider',
@@ -117,22 +125,26 @@ class UserProfileScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 30),
                 child: InkWell(
-                  customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  onTap: () => Get.to(EditProfileScreen()),
+                  customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  onTap: () => Get.to(() => EditProfileScreen()),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: ListTile(
                       horizontalTitleGap: 0,
                       leading: Image.asset(userEdit),
-                      trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
+                      trailing:
+                          const Icon(Icons.keyboard_arrow_right, size: 24),
                       contentPadding: EdgeInsets.zero,
-                      title: Text('Edit Profile', style: appStyles(18, null, FontWeight.w500)),
+                      title: Text('Edit Profile',
+                          style: appStyles(18, null, FontWeight.w500)),
                     ),
                   ),
                 ),
               ),
               InkWell(
-                customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
                 onTap: () => Get.to(ChangePinScreen()),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -141,40 +153,43 @@ class UserProfileScreen extends StatelessWidget {
                     leading: Image.asset(lock),
                     trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                     contentPadding: EdgeInsets.zero,
-                    title: Text('Change PIN', style: appStyles(18, null, FontWeight.w500)),
+                    title: Text('Change PIN',
+                        style: appStyles(18, null, FontWeight.w500)),
                   ),
                 ),
               ),
-              InkWell(
-                customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                onTap: () {},
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: ListTile(
-                    horizontalTitleGap: 0,
-                    leading: SvgPicture.asset(
-                      history,
-                      width: 28,
-                      height: 28,
-                      colorFilter: const ColorFilter.mode(label, BlendMode.srcIn),
-                    ),
-                    trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
-                    contentPadding: EdgeInsets.zero,
-                    title: Text('History', style: appStyles(18, null, FontWeight.w500)),
-                  ),
-                ),
-              ),
+              // InkWell(
+              //   customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+              //   onTap: () {},
+              //   child: Padding(
+              //     padding: const EdgeInsets.symmetric(horizontal: 8),
+              //     child: ListTile(
+              //       horizontalTitleGap: 0,
+              //       leading: SvgPicture.asset(
+              //         history,
+              //         width: 28,
+              //         height: 28,
+              //         colorFilter: const ColorFilter.mode(label, BlendMode.srcIn),
+              //       ),
+              //       trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
+              //       contentPadding: EdgeInsets.zero,
+              //       title: Text('History', style: appStyles(18, null, FontWeight.w500)),
+              //     ),
+              //   ),
+              // ),
               Visibility(
                 visible: controller.kycRegistrationText.value.isNotEmpty,
                 child: InkWell(
-                  customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  customBorder: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
                   onTap: () => Get.to(() => const TierSelectionPage()),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: ListTile(
                       horizontalTitleGap: 0,
                       leading: Image.asset(scanBarcode),
-                      trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
+                      trailing:
+                          const Icon(Icons.keyboard_arrow_right, size: 24),
                       contentPadding: EdgeInsets.zero,
                       title: Text(
                         controller.kycRegistrationText.value,
@@ -185,8 +200,9 @@ class UserProfileScreen extends StatelessWidget {
                 ),
               ),
               InkWell(
-                customBorder: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                onTap: () {},
+                customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+                onTap: () => Get.to(() => ScanScreen()),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ListTile(
@@ -194,7 +210,8 @@ class UserProfileScreen extends StatelessWidget {
                     leading: Image.asset(scanBlack),
                     trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                     contentPadding: EdgeInsets.zero,
-                    title: Text('QR Code', style: appStyles(18, null, FontWeight.w500)),
+                    title: Text('QR Code',
+                        style: appStyles(18, null, FontWeight.w500)),
                   ),
                 ),
               ),
@@ -208,7 +225,8 @@ class UserProfileScreen extends StatelessWidget {
                     horizontalTitleGap: 0,
                     leading: Image.asset(logout),
                     contentPadding: EdgeInsets.zero,
-                    title: Text('Logout', style: appStyles(18, null, FontWeight.w500)),
+                    title: Text('Logout',
+                        style: appStyles(18, null, FontWeight.w500)),
                   ),
                 ),
               ),

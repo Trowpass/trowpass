@@ -115,27 +115,6 @@ Widget _buildMyCodeTab() {
               children: [
                 Image.network(controller.qrCodeUrl.value,
                     height: 450, width: 450),
-                // QrImageView(
-                //   data: controller.qrCodeUrl.value,
-                //   version: QrVersions.auto,
-                //   size: 250.0, // Adjust the size as needed
-                //   eyeStyle: QrEyeStyle(color: Colors.black),
-                //   errorCorrectionLevel: QrErrorCorrectLevel.Q,
-                //   embeddedImage: AssetImage(mainLogo),
-                //   errorStateBuilder: (cxt, err) {
-                //     return Container(
-                //       child: Center(
-                //         child: Text(
-                //           'Oops! Something went wrong...',
-                //           textAlign: TextAlign.center,
-                //         ),
-                //       ),
-                //     );
-                //   },
-                //   embeddedImageStyle: QrEmbeddedImageStyle(
-                //     size: Size(40, 40),
-                //   ),
-                // ),
               ],
             ),
           ],
