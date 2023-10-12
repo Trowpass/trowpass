@@ -88,7 +88,7 @@ class AuthController extends GetxController {
           Get.to(() => ChoosePinScreen());
         } else {
           isLoaded.value = false;
-          Get.offAll(() => HomeLandingTabScreen());
+          Get.offAll(() => const HomeLandingTabScreen());
         }
       } else {
         // Check for invalid credentials specifically
