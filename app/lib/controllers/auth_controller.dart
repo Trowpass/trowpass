@@ -6,7 +6,8 @@ import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/resend_otp_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart' as expiry_timer;
+import 'package:circular_countdown_timer/circular_countdown_timer.dart'
+    as expiry_timer;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_controller.dart' as resend_timer;
@@ -17,7 +18,8 @@ import 'bloc/user_controller.dart';
 
 class AuthController extends GetxController {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController emailPhoneNumberController = TextEditingController();
+  final TextEditingController emailPhoneNumberController =
+      TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final resendCountDownController = resend_timer.CountdownController();
   final expiryCountDownController = expiry_timer.CountDownController();
@@ -53,38 +55,23 @@ class AuthController extends GetxController {
           password: passwordController.text.trim(),
         ),
       );
-
       if (response.status) {
         if (shouldRememberUser.value) {
           session.writeIsUserLoggedIn(true);
           session.writeShouldRememberMe(true);
           session.writeTokenExpiration(response.data!.tokenExpires);
         }
-        
         session.writeUserId(response.data!.userId);
         session.writeAuthorizationToken(response.data!.token);
         if (!response.data!.loginData!.isAccountVerified) {
-          String phoneNumber = getSession.readRiderPhoneNumber() ?? '';
-          //send new otp
-          ResendOtpRequest request = ResendOtpRequest(phoneNumber: phoneNumber);
-          var response = await userRepository.resendOtpToPhoneNumberAsync(request);
-          if (response.status) {
-            isLoaded.value = false;
-            isExpiryTimeElapsed.value = false;
-            resendCountDownController.restart();
-            expiryCountDownController.restart();
-          } else {
-            Get.defaultDialog(title: 'Information', content: Text(response.message));
-            isLoaded.value = false;
-          }
-          Get.offAll(() => OtpScreen(phoneNumber: phoneNumber));
-          isLoaded.value = false;
+          isLoaded.value = true;
+          gotoVerification();
         } else if (!response.data!.loginData!.isPinCreated) {
           isLoaded.value = false;
           Get.to(() => ChoosePinScreen());
         } else {
           isLoaded.value = false;
-          Get.offAll(() => HomeLandingTabScreen());
+          Get.offAll(() => const HomeLandingTabScreen());
         }
       } else {
         // Check for invalid credentials specifically
@@ -112,11 +99,28 @@ class AuthController extends GetxController {
       Get.snackbar('Information', e.toString(),
           backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
-          isLoaded.value = false;
-    } 
+      isLoaded.value = false;
+    }
   }
 
   void createAccount() {
     Get.to(const AccountTypeScreen());
+  }
+
+  Future gotoVerification() async {
+    String phoneNumber = getSession.readRiderPhoneNumber() ?? '';
+    Get.offAll(() => OtpScreen(phoneNumber: phoneNumber));
+    //send new otp
+    ResendOtpRequest request = ResendOtpRequest(phoneNumber: phoneNumber);
+    var response = await userRepository.resendOtpToPhoneNumberAsync(request);
+    if (response.status) {
+      isLoaded.value = false;
+      isExpiryTimeElapsed.value = false;
+      resendCountDownController.restart();
+      expiryCountDownController.restart();
+    } else {
+      Get.defaultDialog(title: 'Information', content: Text(response.message));
+      isLoaded.value = false;
+    }
   }
 }

@@ -3,6 +3,7 @@ class UpdateCustomerDataRequest {
   String lastName;
   String phoneNumber;
   String bio;
+  String bvn;
   UpdateCustomerDataAddress address;
 
   UpdateCustomerDataRequest({
@@ -10,6 +11,7 @@ class UpdateCustomerDataRequest {
     required this.lastName,
     required this.phoneNumber,
     required this.bio,
+    required this.bvn,
     required this.address,
   });
   Map<String, dynamic> toJson() => {
@@ -17,7 +19,8 @@ class UpdateCustomerDataRequest {
         'lastName': lastName,
         'phoneNumber': phoneNumber,
         'address': address.toJson(),
-        'bio': bio
+        'bio': bio,
+        'bvn': bvn
       };
 }
 
