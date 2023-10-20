@@ -31,12 +31,9 @@ class AuthController extends GetxController {
   final isExpiryTimeElapsed = false.obs;
   final shouldRememberUser = false.obs;
 
-  UpdateService updateService = UpdateService();
-
   @override
   void onInit() {
     isLoaded.value = false;
-    updateService.checkForInAppUpdate(onUpdateSuccess, onUpdateFailure);
     super.onInit();
   }
 
