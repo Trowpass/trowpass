@@ -50,7 +50,6 @@ class SignUpIndividualController extends GetxController {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
     String businessName = 'N/A';
-    String bvn = 'N/A';
 
     try {
       if (passwordController.text != confirmPasswordController.text) {
@@ -68,7 +67,6 @@ class SignUpIndividualController extends GetxController {
           lastName: lastNameController.text.trim(),
           email: emailController.text.trim(),
           businessName: businessName,
-          bvn: bvn,
           phoneNumber: phoneNumberController.text.trim(),
           password: passwordController.text.trim(),
           confirmPassword: confirmPasswordController.text.trim(),

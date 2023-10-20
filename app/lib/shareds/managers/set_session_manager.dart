@@ -143,6 +143,10 @@ class SetSessionManager {
     storage.write(profileBioData, value);
   }
 
+  void writeProfileBvn(String value) {
+    storage.write(profileBvn, value);
+  }
+
   void writeProfileStreet(String value) {
     storage.write(profileStreet, value);
   }

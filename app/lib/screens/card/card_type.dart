@@ -3,6 +3,7 @@
 import 'package:app/controllers/card_type_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
+import 'package:app/widgets/overlay_indeterminate_progress.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -12,59 +13,63 @@ class CardTypeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: background,
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: primaryColor,
-          statusBarBrightness: Brightness.light, // For iOS
-          statusBarIconBrightness: Brightness.light, // For Android
-          systemNavigationBarColor: navigationBarBackground,
-          systemNavigationBarIconBrightness: Brightness.light,
-        ),
-        backgroundColor: background,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          'What type of card do you want?',
-          style: appStyles(18, titleActive, FontWeight.w600),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Get.back(),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CardBox(
-              icon: Icon(
-                Icons.credit_card,
-                color: primaryColor,
-              ),
-              title: 'Virtual Debit Card',
-              description:
-                  'Instantly create a virtual card to spend on transport fare.',
-              onPressed: controller.isVirtualCreated.value
-                  ? controller.handleVirtualCardDetains
-                  : controller.handleVirtualCardPressed,
+    return Obx(() => OverlayIndeterminateProgress(
+        isLoading: controller.isLoading.value,
+        overlayBackgroundColor: background,
+        progressColor: primaryColor,
+        child: Scaffold(
+          resizeToAvoidBottomInset: true,
+          backgroundColor: background,
+          appBar: AppBar(
+            systemOverlayStyle: const SystemUiOverlayStyle(
+              statusBarColor: primaryColor,
+              statusBarBrightness: Brightness.light, // For iOS
+              statusBarIconBrightness: Brightness.light, // For Android
+              systemNavigationBarColor: navigationBarBackground,
+              systemNavigationBarIconBrightness: Brightness.light,
             ),
-            CardBox(
-              icon: Icon(
-                Icons.credit_card,
-                color: primaryColor,
-              ),
-              title: 'Physical Debit Card',
-              description:
-                  'Get a physical card to spend on transports anytime and anywhere.',
-              onPressed: controller.handlePhysicalCardPressed,
+            backgroundColor: background,
+            elevation: 0,
+            centerTitle: true,
+            title: Text(
+              'What type of card do you want?',
+              style: appStyles(18, titleActive, FontWeight.w600),
             ),
-          ],
-        ),
-      ),
-    );
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Get.back(),
+            ),
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CardBox(
+                  icon: Icon(
+                    Icons.credit_card,
+                    color: primaryColor,
+                  ),
+                  title: 'Virtual Debit Card',
+                  description:
+                      'Instantly create a virtual card to spend on transport fare.',
+                  onPressed: controller.isVirtualCreated.value
+                      ? controller.handleVirtualCardDetains
+                      : controller.createVirtualCard,
+                ),
+                CardBox(
+                  icon: Icon(
+                    Icons.credit_card,
+                    color: primaryColor,
+                  ),
+                  title: 'Physical Debit Card',
+                  description:
+                      'Get a physical card to spend on transports anytime and anywhere.',
+                  onPressed: controller.handlePhysicalCardPressed,
+                ),
+              ],
+            ),
+          ),
+        )));
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:app/controllers/bloc/user_controller.dart';
+import 'package:app/screens/kyc/tier_1_account_upgrade.dart';
 import 'package:app/services/requests/put_requests/update_customer_data_request.dart';
 import 'package:app/shareds/constants/dropdown_constants.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
@@ -7,7 +8,7 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class EditProfileController extends GetxController {
+class KycUpgradeAccountController extends GetxController {
   final formKey = GlobalKey<FormState>();
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
@@ -78,7 +79,6 @@ class EditProfileController extends GetxController {
                   country: selectedCountry.value.trim(),
                   state: selectedState.value.trim())));
       if (response.status) {
-        isLoaded.value = false;
         setSession.writeProfileBioData(bioController.text.trim());
         setSession.writeProfileBvn(bvnController.text.trim());
         setSession.writeProfileCity(cityController.text.trim());
@@ -89,18 +89,7 @@ class EditProfileController extends GetxController {
         setSession.writeProfileFN(firstNameController.text.trim());
         setSession.writeProfileLN(lastNameController.text.trim());
         setSession.writeProfilePN(phoneNumberController.text.trim());
-        Get.defaultDialog(
-          titlePadding: const EdgeInsets.only(top: 15),
-          contentPadding: const EdgeInsets.all(15),
-          title: 'Profile Update',
-          content: const Column(
-            children: [
-              Divider(),
-              Text(
-                  'Congratulations! Your profile has been updated successfully.')
-            ],
-          ),
-        );
+        Get.to(() => const TeirOneAccountUpgradeScreen());
         isLoaded.value = false;
       } else {
         isLoaded.value = false;

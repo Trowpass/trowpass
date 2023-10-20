@@ -4,7 +4,6 @@ class TierOneRequest {
   String gender;
   T1Address address;
   String imagePath;
-  String bvn;
 
   TierOneRequest({
     required this.placeOfBirth,
@@ -12,7 +11,6 @@ class TierOneRequest {
     required this.gender,
     required this.address,
     required this.imagePath,
-    required this.bvn,
   });
 
   Map<String, dynamic> toJson() => {
@@ -21,7 +19,6 @@ class TierOneRequest {
         'gender': gender,
         'address': address.toJson(),
         'imagePath': imagePath,
-        'bvn': bvn
       };
 }
 

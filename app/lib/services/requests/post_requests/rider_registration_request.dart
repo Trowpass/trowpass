@@ -4,7 +4,6 @@ class RiderRegistrationRequest {
   String phoneNumber;
   String businessName;
   String email;
-  String bvn;
   String password;
   String confirmPassword;
   String userAccountType;
@@ -15,7 +14,6 @@ class RiderRegistrationRequest {
     required this.phoneNumber,
     required this.businessName,
     required this.email,
-    required this.bvn,
     required this.password,
     required this.confirmPassword,
     required this.userAccountType,
@@ -24,7 +22,6 @@ class RiderRegistrationRequest {
         'firstName': firstName,
         'lastName': lastName,
         'email': email,
-        'bvn': bvn,
         'phoneNumber': phoneNumber,
         'businessName': businessName,
         'password': password,
