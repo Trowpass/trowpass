@@ -36,13 +36,12 @@ class CardTypeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // SizedBox(height: 10),
             CardBox(
               icon: Icon(Icons.credit_card),
               title: 'Virtual Debit Card',
               description:
                   'Instantly create a virtual card to spend on transport fare.',
-              onPressed: controller.handleVirtualCardPressed,
+              onPressed: controller.createVirtualCard,
             ),
             CardBox(
               icon: Icon(Icons.credit_card),

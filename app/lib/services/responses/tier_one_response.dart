@@ -1,7 +1,7 @@
 class TierOneResponse {
-  String message;
+  String? message;
   bool status;
-  String responseCode;
+  String? responseCode;
   TierOneResponseData? data;
 
   TierOneResponse({
@@ -13,21 +13,20 @@ class TierOneResponse {
 
   factory TierOneResponse.fromJson(Map<String, dynamic> json) =>
       TierOneResponse(
-          message: json['message'],
+          message: json['message'] ?? '',
           status: json['status'],
-          responseCode: json['responseCode'],
+          responseCode: json['responseCode'] ?? '',
           data: json['data'] != null
               ? TierOneResponseData.fromJson(json['data'])
               : null);
 }
 
 class TierOneResponseData {
-  String placeOfBirth;
+  String? placeOfBirth;
   DateTime dateOfBirth;
-  String gender;
+  String? gender;
   TierOneResponseAddress? address;
-  String imagePath;
-  String bvn;
+  String? imagePath;
 
   TierOneResponseData({
     required this.placeOfBirth,
@@ -35,27 +34,25 @@ class TierOneResponseData {
     required this.gender,
     required this.address,
     required this.imagePath,
-    required this.bvn,
   });
 
   factory TierOneResponseData.fromJson(Map<String, dynamic> json) =>
       TierOneResponseData(
-          placeOfBirth: json['placeOfBirth'],
+          placeOfBirth: json['placeOfBirth'] ?? '',
           dateOfBirth: DateTime.parse(json['dateOfBirth']),
-          gender: json['gender'],
-          imagePath: json['imagePath'],
-          bvn: json['bvn'],
+          gender: json['gender'] ?? '',
+          imagePath: json['imagePath'] ?? '',
           address: json['address'] != null
               ? TierOneResponseAddress.fromJson(json['address'])
               : null);
 }
 
 class TierOneResponseAddress {
-  String street;
-  String city;
-  String state;
-  String country;
-  String postalCode;
+  String? street;
+  String? city;
+  String? state;
+  String? country;
+  String? postalCode;
 
   TierOneResponseAddress({
     required this.street,
@@ -67,9 +64,9 @@ class TierOneResponseAddress {
 
   factory TierOneResponseAddress.fromJson(Map<String, dynamic> json) =>
       TierOneResponseAddress(
-          street: json['street'],
-          city: json['city'],
-          state: json['state'],
-          country: json['country'],
-          postalCode: json['postalCode']);
+          street: json['street'] ?? '',
+          city: json['city'] ?? '',
+          state: json['state'] ?? '',
+          country: json['country'] ?? '',
+          postalCode: json['postalCode'] ?? '');
 }
