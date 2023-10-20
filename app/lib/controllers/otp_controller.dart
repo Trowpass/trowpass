@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_controller.dart' as resend_timer;
 
-import '../repositories/user_repository.dart';
 import '../screens/auth/pin/choose_pin_screen.dart';
 import '../services/requests/post_requests/resend_otp_request.dart';
 import '../services/requests/post_requests/verify_otp_request.dart';
@@ -27,7 +26,6 @@ class OtpController extends GetxController {
   final resendCountDownController = resend_timer.CountdownController();
   final expiryCountDownController = expiry_timer.CountDownController();
 
-  final userRepository = UserRepository();
   GetSessionManager session = GetSessionManager();
   UserController userController = UserController();
 
@@ -67,16 +65,21 @@ class OtpController extends GetxController {
   Future<void> tryResendOtpSubmit(String phoneNumber) async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
-
     try {
-      ResendOtpRequest request = ResendOtpRequest(phoneNumber: phoneNumber);
-      var response = await userRepository.resendOtpToPhoneNumberAsync(request);
-
+      var response = await userController.resendOtpToPhoneNumberAsync(
+          ResendOtpRequest(phoneNumber: phoneNumber));
       if (response.status) {
         isLoaded.value = false;
         isExpiryTimeElapsed.value = false;
         resendCountDownController.restart();
         expiryCountDownController.restart();
+        Get.snackbar(
+          'Information',
+          response.message,
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        isLoaded.value = false;
       } else {
         Get.defaultDialog(
             title: 'Information', content: Text(response.message));

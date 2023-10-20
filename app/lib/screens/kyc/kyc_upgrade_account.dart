@@ -1,3 +1,4 @@
+import 'package:app/controllers/kyc_upgrade_account_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/all_state_list.dart';
 import 'package:app/widgets/overlay_indeterminate_progress.dart';
@@ -5,14 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
-import '../../controllers/edit_profile_controller.dart';
 import '../../shareds/utils/border_radius.dart';
 import '../../widgets/standard_button.dart';
 import '../../widgets/text_form_input.dart';
 
-class EditProfileScreen extends StatelessWidget {
-  EditProfileScreen({super.key});
-  final controller = Get.put(EditProfileController());
+class KycUpgradeAccountScreen extends StatelessWidget {
+  KycUpgradeAccountScreen({super.key});
+  final controller = Get.put(KycUpgradeAccountController());
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class EditProfileScreen extends StatelessWidget {
                   systemNavigationBarIconBrightness: Brightness.light,
                 ),
                 elevation: 0,
-                title: const Text('Edit Profile'),
+                title: const Text('Update Profile'),
                 leading: IconButton(
                   icon: const Icon(Icons.arrow_back, color: Colors.black),
                   onPressed: () {
@@ -242,7 +242,7 @@ class EditProfileScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 5),
                             StandardButton(
-                              text: 'Save Changes',
+                              text: 'Continue',
                               onPressed: () async {
                                 if (controller.formKey.currentState!
                                     .validate()) {

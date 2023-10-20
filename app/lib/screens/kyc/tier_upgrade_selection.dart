@@ -1,4 +1,4 @@
-import 'package:app/screens/kyc/tier_1_account_upgrade.dart';
+import 'package:app/screens/kyc/kyc_upgrade_account.dart';
 import 'package:app/shareds/constants/key_constants.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -77,7 +77,7 @@ class TierSelectionPage extends StatelessWidget {
                   onPressed: () {
                     isT1Done == true
                         ? null
-                        : Get.to(() => const TeirOneAccountUpgradeScreen());
+                        : Get.to(() => KycUpgradeAccountScreen());
                   },
                   child: ListTile(
                     horizontalTitleGap: 0,

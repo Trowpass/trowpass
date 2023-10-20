@@ -78,7 +78,7 @@ class SplashScreen extends StatelessWidget {
         break;
       case AppRoutes.login:
         Get.offAll(() => LoginScreen());
-        // Get.offAll(() => EditProfileScreen());
+        // Get.offAll(() => TeirOneAccountUpgradeScreen());
 
         break;
       case AppRoutes.dashboard:

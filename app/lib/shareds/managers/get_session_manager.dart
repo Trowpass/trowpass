@@ -49,6 +49,7 @@ class GetSessionManager {
       storage.read(profilePictureInfoShown) ?? false;
   String readProfilePostalCode() => storage.read(profilePostalCode) ?? '';
   String readProfileBioData() => storage.read(profileBioData) ?? '';
+  String readProfileBvn() => storage.read(profileBvn) ?? '';
   String readProfileCity() => storage.read(profileCity) ?? '';
   String readProfileCountry() => storage.read(profileCountry) ?? '';
   String readProfileFN() => storage.read(profileFN) ?? '';
