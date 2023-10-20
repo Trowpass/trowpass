@@ -200,36 +200,6 @@ class _TeirOneAccountUpgradeScreenState
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    ListTile(
-                                      contentPadding: EdgeInsets.zero,
-                                      title: const Text(
-                                          'Bank Verification Number'),
-                                      subtitle: TextInputForm(
-                                        inputType: TextInputType.number,
-                                        autoCorrect: false,
-                                        enabled: true,
-                                        isPassword: false,
-                                        inputController:
-                                            controller.bvnController,
-                                        textHint: 'bvn',
-                                        validator: (value) =>
-                                            value != null && value.isEmpty
-                                                ? 'Field can\'t be empty'
-                                                : null,
-                                        suffixIcon: IconButton(
-                                            onPressed: () {
-                                              controller.placeOfBirthController
-                                                  .clear();
-                                            },
-                                            icon: const Icon(
-                                              Icons.close_outlined,
-                                              size: 20,
-                                            )),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
                                     Visibility(
                                         visible: controller
                                             .isUploadButtonClicked.value,
@@ -275,7 +245,7 @@ class _TeirOneAccountUpgradeScreenState
                                                   Expanded(
                                                       flex: 2,
                                                       child: SizedBox(
-                                                        height: 50.0,
+                                                        height: 100.0,
                                                         child: controller
                                                                     .galleryFile ==
                                                                 null
@@ -320,7 +290,7 @@ class _TeirOneAccountUpgradeScreenState
                                 if (controller.formKey.currentState!
                                     .validate()) {
                                   controller.formKey.currentState!.save();
-                                  controller.getUpgradeData();
+                                  controller.submitTierOneKycUpgrade(context);
                                 }
                               },
                             ),

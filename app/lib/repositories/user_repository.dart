@@ -99,11 +99,9 @@ class UserRepository {
     try {
       int? userId = session.readUserId();
       var url = '${Endpoints.userProfile}/$userId';
-      //
       var response = await apiConnectionHelper.getDataAsync(
         url: url,
       );
-      //
       if (response.data != null) {
         return ViewProfileResponse.fromJson(response.data);
       } else {
@@ -144,7 +142,6 @@ class UserRepository {
         requestData: request,
         path: Endpoints.forgotPassword,
       );
-
       if (response.data != null) {
         return RequestResetPasswordResponse.fromJson(response.data);
       } else {

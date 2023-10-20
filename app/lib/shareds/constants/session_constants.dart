@@ -28,6 +28,7 @@ const String resetPasswordToken = 'reset_password_token';
 const String qrCode = 'q_r_code';
 const String profilePictureInfoShown = 'profilePictureInfoShown';
 const String profileBioData = 'bio_data';
+const String profileBvn = 'bvn';
 const String profileFN = 'f_n';
 const String profileLN = 'l_n';
 const String profilePN = 'p_n';

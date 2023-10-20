@@ -23,7 +23,7 @@ class AppInterceptors extends Interceptor {
 
   @override
   FutureOr<dynamic> onError(
-      DioError err, ErrorInterceptorHandler handler) async {
+      DioException err, ErrorInterceptorHandler handler) async {
     RequestOptions options = err.requestOptions;
     try {
       if (err.message == null) {
@@ -43,7 +43,7 @@ class AppInterceptors extends Interceptor {
             queryParameters: options.queryParameters);
         handler.resolve(resp);
       }
-    } on DioError catch (err) {
+    } on DioException catch (err) {
       handler.reject(err);
     }
 
