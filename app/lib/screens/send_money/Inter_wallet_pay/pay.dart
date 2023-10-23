@@ -6,9 +6,11 @@ import 'package:app/widgets/text_form_input.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/inter_wallet_transfer_controller/pay_screen_controller.dart';
+import '../../../shareds/utils/images.dart';
 import '../../../widgets/overlay_indeterminate_progress.dart';
 
 class InterWalletPayScreen extends StatelessWidget {
@@ -44,8 +46,7 @@ class InterWalletPayScreen extends StatelessWidget {
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined,
-                        color: Colors.black),
+                    icon: SvgPicture.asset(notificationIcon),
                     onPressed: () {
                       Get.back();
                     },

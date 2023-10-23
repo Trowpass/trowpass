@@ -2,6 +2,7 @@ import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/wallet_top_up_controller.dart';
@@ -40,8 +41,7 @@ class WalletTopUpScreen extends StatelessWidget {
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined,
-                        color: Colors.black),
+                     icon: SvgPicture.asset(notificationIcon),
                     onPressed: () {
                       controller.topUpAmountController.text = '';
                       Get.back();

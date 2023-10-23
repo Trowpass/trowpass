@@ -26,6 +26,8 @@ const wifi = 'assets/images/wifi.png';
 const fundCardSuccess = 'assets/images/success-1-1.png';
 const comingSoon = 'assets/images/coming_soon.png';
 const paymentImg = 'assets/images/payment.png';
+const feelingBlue = 'assets/images/feeling-blue.png';
+const notificationIcon = 'assets/icons/notification.svg';
 
 //region Icons
 const card = 'assets/icons/card.png';

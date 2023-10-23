@@ -1,49 +1,29 @@
-import 'package:app/shareds/utils/images.dart';
-
-import '../history_model.dart';
+import 'package:app/services/responses/transaction_history/payment_method.dart';
+import 'package:app/services/responses/transaction_history/payment_type.dart';
+import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 
 class DummyHistory {
-  static List<HistoryModel?> generateDummyHistory() {
-    String time = '20, May 2021';
-
-    // null is added to separate the "Today" section from the "Earlier" section
-    return [
-      HistoryModel(
-        amount: '+N2000',
-        image: profile,
-        name: 'Daisy Black',
-        time: time,
-        transactionType: TransactionType.credit,
+  static List<TransactionHistoryData?> generateDummyHistory() {
+    return List.generate(
+      5,
+      (index) => TransactionHistoryData(
+        id: 0,
+        isActive: true,
+        createdBy: 'Noah',
+        createdAt: '2023-10-23T15:43:27.961Z',
+        amount: 20000,
+        reference: '9hf9whfhf89ew',
+        status: 'status',
+        currency: 'NGN',
+        paymentMethod: PaymentMethod.externalTransfer,
+        paymentType: PaymentType.payIn,
+        source: 'Noah',
+        customerId: 'id',
+        accountId: 'accountId',
+        fee: 50,
+        drCr: 'CR',
+        transactionAt: '2023-10-23T15:43:27.964Z',
       ),
-      HistoryModel(
-        amount: '-N1500',
-        image: profile,
-        name: 'Medley White',
-        time: time,
-        transactionType: TransactionType.debit,
-      ),
-      null,
-      HistoryModel(
-        amount: '+N2000',
-        image: profile,
-        name: 'Sade Gold',
-        time: time,
-        transactionType: TransactionType.credit,
-      ),
-      HistoryModel(
-        amount: '-N1700',
-        image: profile,
-        name: 'Noah Wesley',
-        time: time,
-        transactionType: TransactionType.debit,
-      ),
-      HistoryModel(
-        amount: '+N4000',
-        image: profile,
-        name: 'Victor Brown',
-        time: time,
-        transactionType: TransactionType.credit,
-      ),
-    ];
+    );
   }
 }

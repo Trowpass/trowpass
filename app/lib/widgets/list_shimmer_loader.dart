@@ -5,8 +5,12 @@ import 'package:shimmer/shimmer.dart';
 
 class ShimmerLoading extends StatelessWidget {
   final int itemCount;
+  final Widget loadingPlaceholder;
 
-  ShimmerLoading({required this.itemCount});
+  ShimmerLoading({
+    required this.itemCount,
+    required this.loadingPlaceholder,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,13 +20,7 @@ class ShimmerLoading extends StatelessWidget {
       child: ListView.builder(
         itemCount: itemCount,
         itemBuilder: (context, index) {
-          return ListTile(
-            title: Container(
-              width: double.infinity,
-              height: 18.0,
-              color: Colors.white,
-            ),
-          );
+          return loadingPlaceholder;
         },
       ),
     );

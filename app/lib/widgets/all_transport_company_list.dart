@@ -8,6 +8,8 @@ import 'package:app/widgets/list_shimmer_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'bank_list_loading.dart';
+
 class TransportCompanyListModalSheet extends StatefulWidget {
   final void Function(String)? onTransportCompanySelected;
   final List<String> allTransportCompany;
@@ -20,12 +22,10 @@ class TransportCompanyListModalSheet extends StatefulWidget {
   });
 
   @override
-  _TransportCompanyListModalSheetState createState() =>
-      _TransportCompanyListModalSheetState();
+  _TransportCompanyListModalSheetState createState() => _TransportCompanyListModalSheetState();
 }
 
-class _TransportCompanyListModalSheetState
-    extends State<TransportCompanyListModalSheet> {
+class _TransportCompanyListModalSheetState extends State<TransportCompanyListModalSheet> {
   late TextEditingController searchController;
   List<String> filteredTransportCompany = [];
   final controller = Get.put(TopUpTransportWalletController());
@@ -57,7 +57,10 @@ class _TransportCompanyListModalSheetState
             color: Colors.white,
           ),
           child: isLoading
-              ? ShimmerLoading(itemCount: 10)
+              ? ShimmerLoading(
+                  itemCount: 10,
+                  loadingPlaceholder: const BankListLoading(),
+                )
               : Column(
                   children: [
                     Padding(
@@ -65,26 +68,20 @@ class _TransportCompanyListModalSheetState
                       child: TextField(
                         controller: searchController,
                         decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () => searchController.clear(),
-                              icon: Icon(Icons.cancel)),
+                          suffixIcon: IconButton(onPressed: () => searchController.clear(), icon: Icon(Icons.cancel)),
                           labelStyle: appStyles(15, null, null),
                           hintText: "Search transport company",
-                          errorStyle:
-                              appStyles(null, validationErrorColor, null),
+                          errorStyle: appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: search),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: search),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: search),
                           ),
                           filled: true,
@@ -94,11 +91,8 @@ class _TransportCompanyListModalSheetState
                         ),
                         onChanged: (value) {
                           setState(() {
-                            filteredTransportCompany = widget
-                                .allTransportCompany
-                                .where((bank) => bank
-                                    .toLowerCase()
-                                    .contains(value.toLowerCase()))
+                            filteredTransportCompany = widget.allTransportCompany
+                                .where((bank) => bank.toLowerCase().contains(value.toLowerCase()))
                                 .toList();
                           });
                         },
@@ -109,17 +103,14 @@ class _TransportCompanyListModalSheetState
                         itemCount: filteredTransportCompany.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(left: 18.0, right: 18.0),
+                            padding: const EdgeInsets.only(left: 18.0, right: 18.0),
                             child: Column(
                               children: [
                                 ListTile(
                                   title: Text(filteredTransportCompany[index]),
                                   onTap: () {
-                                    if (widget.onTransportCompanySelected !=
-                                        null) {
-                                      widget.onTransportCompanySelected!(
-                                          filteredTransportCompany[index]);
+                                    if (widget.onTransportCompanySelected != null) {
+                                      widget.onTransportCompanySelected!(filteredTransportCompany[index]);
                                     }
                                   },
                                 ),
