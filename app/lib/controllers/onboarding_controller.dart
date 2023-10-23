@@ -12,9 +12,9 @@ class OnBoardingController extends GetxController {
   final session = SetSessionManager();
 
   final List<OnBoardingItem> onBoardingItems = [
-    OnBoardingItem(finance, 'One app, multiple rides'),
-    OnBoardingItem(finance, 'Seamless payment on the go'),
-    OnBoardingItem(finance, 'Trowpass your No.1 travel partner'),
+    OnBoardingItem(ecoFriendlyTech, 'One app, multiple rides'),
+    OnBoardingItem(paymentProcessed, 'Seamless payment on the go'),
+    OnBoardingItem(taxiRide, 'Trowpass your No.1 travel partner'),
   ];
 
   void navigateToMain() {
