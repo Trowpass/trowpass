@@ -1,19 +1,21 @@
 import 'package:app/services/responses/transaction_history/payment_type.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/border_radius.dart';
 import '../../widgets/app_styles.dart';
+import '../screens/history/transaction_history_details.dart';
 
 class HistoryListItem extends StatelessWidget {
-  final TransactionHistoryData history;
+  final TransactionHistoryData transactHistory;
 
-  const HistoryListItem(this.history, {super.key});
+  const HistoryListItem(this.transactHistory, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    var transactionType = history.paymentType;
+    var transactionType = transactHistory.paymentType;
     var color = transactionType == PaymentType.payIn ? successColor : validationErrorColor;
 
     return Column(
@@ -22,7 +24,10 @@ class HistoryListItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(cardBorderRadius),
           child: InkWell(
             borderRadius: BorderRadius.circular(cardBorderRadius),
-            onTap: () {},
+            onTap: () => Get.to(
+              () => TransactionHistoryDetailsScreen(history: transactHistory),
+              transition: Transition.downToUp,
+            ),
             child: Ink(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -40,12 +45,12 @@ class HistoryListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          history.createdBy,
+                          transactHistory.createdBy,
                           style: appStyles(14, titleActive, FontWeight.bold),
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          history.formattedDate,
+                          transactHistory.formattedDate,
                           style: appStyles(12, gray, FontWeight.normal),
                         ),
                       ],
@@ -56,7 +61,7 @@ class HistoryListItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Text(
-                          history.displayAmount,
+                          transactHistory.displayAmount,
                           style: appStyles(14, color, FontWeight.w400),
                         ),
                       ],

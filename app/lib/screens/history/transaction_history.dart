@@ -13,9 +13,9 @@ import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/images.dart';
 import '../../widgets/app_styles.dart';
 
-class HistoryScreen extends StatelessWidget {
+class TransactionHistoryScreen extends StatelessWidget {
   // ignore: use_key_in_widget_constructors
-  HistoryScreen();
+  TransactionHistoryScreen();
   final controller = Get.put(HistoryTabController());
 
   @override
