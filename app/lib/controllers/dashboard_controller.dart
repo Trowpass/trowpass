@@ -168,7 +168,7 @@ class DashboardController extends GetxController {
       if (response.data!.kycDetail != null) {
         session2
             .writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
-        session2.writeProfileBvn(response.data!.kycDetail!.bvn!);
+        session2.writeProfileBvn(response.data!.kycDetail!.bvn);
         session2.writeProfileCity(response.data!.kycDetail!.address!.city!);
         session2
             .writeProfileCountry(response.data!.kycDetail!.address!.country!);

@@ -3,9 +3,9 @@ import 'package:app/services/responses/transaction_history/payment_type.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 
 class DummyHistory {
-  static List<TransactionHistoryData?> generateDummyHistory() {
+  static List<TransactionHistoryData> generateDummyHistory() {
     return List.generate(
-      5,
+      10,
       (index) => TransactionHistoryData(
         id: 0,
         isActive: true,

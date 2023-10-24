@@ -11,9 +11,12 @@ class HistoryTabController extends GetxController {
   var filterTypes = ['New to Old', 'Old to New', 'Monthly', 'Yearly'];
   final String title = 'History';
   final scrollController = ScrollController();
-  final historyItems = <TransactionHistoryData?>[].obs;
+  final historyItems = <TransactionHistoryData>[].obs;
   final transactionRepository = TransactionHistoryRepository();
   final isLoading = true.obs;
+  final isHistorySorted = false.obs;
+  var todayTransaction = <TransactionHistoryData>[].obs;
+  var earlierTransaction = <TransactionHistoryData>[].obs;
 
   @override
   void onInit() {
@@ -24,26 +27,25 @@ class HistoryTabController extends GetxController {
   }
 
   void filterList(String sortLabel) {
-    var listNonNull = historyItems.whereType<TransactionHistoryData>().toList();
     switch (sortLabel) {
       case "New to Old":
-        listNonNull.sort(TransactionHistoryData.sortByNewToOld);
+        historyItems.sort(TransactionHistoryData.sortByNewToOld);
         break;
       case "Old to New":
-        listNonNull.sort(TransactionHistoryData.sortByOldToNew);
+        historyItems.sort(TransactionHistoryData.sortByOldToNew);
         break;
       case "Monthly":
-        listNonNull.sort(TransactionHistoryData.sortByMonthly);
+        historyItems.sort(TransactionHistoryData.sortByMonthly);
         break;
       case "Yearly":
-        listNonNull.sort(TransactionHistoryData.sortByYearly);
+        historyItems.sort(TransactionHistoryData.sortByYearly);
         break;
       default:
         throw UnsupportedError("$sortLabel filter is not supported yet");
     }
     selectedFilterType.value = sortLabel;
     period.value = sortLabel;
-    historyItems.value = listNonNull;
+    isHistorySorted.value = true;
   }
 
   Future<void> getAllTransactionHistory() async {
@@ -53,13 +55,13 @@ class HistoryTabController extends GetxController {
       var response = await transactionRepository.getAllTransactionHistoryAsync();
       if (response.status) {
         if (response.data.isNotEmpty) {
-          var todayTransaction = response.data.where((transaction) => transaction.isTodayTransaction);
-          var earlierTransaction = response.data.where((transaction) => !transaction.isTodayTransaction);
-
-          historyItems.value = [...earlierTransaction, null, ...todayTransaction];
+          todayTransaction.value = response.data.where((transaction) => transaction.isTodayTransaction).toList();
+          earlierTransaction.value = response.data.where((transaction) => !transaction.isTodayTransaction).toList();
+          historyItems.value = [...todayTransaction, ...earlierTransaction];
         }
-        // testing
         historyItems.value = DummyHistory.generateDummyHistory();
+        earlierTransaction.value = DummyHistory.generateDummyHistory();
+        todayTransaction.value = DummyHistory.generateDummyHistory();
         isLoading.value = false;
       } else {
         Get.defaultDialog(
