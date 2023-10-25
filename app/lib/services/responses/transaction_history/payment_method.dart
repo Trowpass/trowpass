@@ -13,17 +13,17 @@ class PaymentMethod {
   @override
   String toString() {
     if (this == PaymentMethod.card) {
-      return "card";
+      return "Card";
     } else if (this == PaymentMethod.bankTransfer) {
-      return "bank_transfer";
+      return "Bank Transfer";
     } else if (this == PaymentMethod.ussd) {
-      return "ussd";
+      return "USSD";
     } else if (this == PaymentMethod.nqr) {
-      return "nqr";
+      return "NQR";
     } else if (this == PaymentMethod.internalTransfer) {
-      return "internal_transfer";
+      return "Internal Transfer";
     } else if (this == PaymentMethod.externalTransfer) {
-      return "external_transfer";
+      return "External Transfer";
     } else {
       return "unknown";
     }

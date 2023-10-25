@@ -13,7 +13,7 @@ class DummyHistory {
         createdAt: '2023-10-23T15:43:27.961Z',
         amount: 20000,
         reference: '9hf9whfhf89ew',
-        status: 'status',
+        status: 'Completed',
         currency: 'NGN',
         paymentMethod: PaymentMethod.externalTransfer,
         paymentType: PaymentType.payIn,

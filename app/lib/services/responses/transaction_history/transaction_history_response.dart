@@ -91,13 +91,26 @@ class TransactionHistoryData {
   DateTime get transactedAtDate => DateTime.parse(transactionAt);
   bool get isTodayTransaction => transactedAtDate.day == DateTime.now().day;
   String get formattedDate => DateFormat('d, MMMM y').format(transactedAtDate);
-  String get displayAmount {
+  String get formattedDateTime => DateFormat('y-MM-dd, HH:mm:ss').format(transactedAtDate);
+  String get displayFee => ngnFormatCurrency(fee);
+
+  String get displayAmountWithPS {
     if (paymentType == PaymentType.payOut) {
       return "-${ngnFormatCurrency(amount)}";
     } else if (paymentType == PaymentType.payIn) {
       return "+${ngnFormatCurrency(amount)}";
     } else {
       return '+${ngnFormatCurrency(0)}';
+    }
+  }
+
+  String get displayAmount {
+    if (paymentType == PaymentType.payOut) {
+      return ngnFormatCurrency(amount);
+    } else if (paymentType == PaymentType.payIn) {
+      return ngnFormatCurrency(amount);
+    } else {
+      return ngnFormatCurrency(0);
     }
   }
 

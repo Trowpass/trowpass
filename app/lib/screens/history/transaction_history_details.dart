@@ -1,5 +1,11 @@
+import 'dart:ffi';
+
+import 'package:app/extensions/string_casting_extension.dart';
+import 'package:app/services/responses/transaction_history/payment_type.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
+import 'package:app/shareds/utils/border_radius.dart';
+import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -37,7 +43,100 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
           },
         ),
       ),
-      body: Container(),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 8,
+              child: _buildReceipt(),
+            ),
+            Expanded(
+              flex: 2,
+              child: _buildActions(),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildActions() {
+    return Column(
+      children: [
+        StandardButton(
+          onPressed: () {},
+          text: 'Share Receipt',
+        ),
+        const SizedBox(height: 8),
+        InkWell(
+          borderRadius: BorderRadius.circular(cardBorderRadius),
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(8),
+            child: Text(
+              'Report a problem',
+              style: appStyles(14, Colors.red, null),
+            ),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildReceipt() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              history.paymentType == PaymentType.payIn ? 'TOP-UP' : 'WITHDRAWAL',
+              style: appStyles(16, Colors.black, null),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              history.displayAmount,
+              style: appStyles(22, Colors.black, FontWeight.bold),
+            ),
+            const SizedBox(height: 48),
+            _buildDetailRow('Date & Time', history.formattedDateTime),
+            const SizedBox(height: 32),
+            _buildDetailRow('Transaction Type', history.paymentType == PaymentType.payIn ? 'Deposit' : 'Withdrawal'),
+            const SizedBox(height: 32),
+            _buildDetailRow('Amount', history.displayAmount),
+            const SizedBox(height: 32),
+            _buildDetailRow('Fee', history.displayFee),
+            const SizedBox(height: 32),
+            _buildDetailRow('Payment Method', history.paymentMethod.toString()),
+            const SizedBox(height: 32),
+            _buildDetailRow('Reference Code', history.reference),
+            const SizedBox(height: 32),
+            _buildDetailRow(
+              'Status',
+              history.status.toCapitalized(),
+              textColors: [null, Colors.green],
+            ),
+            const SizedBox(height: 32),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildDetailRow(String reason, String data, {List<Color?>? textColors}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          reason,
+          style: appStyles(16, textColors?[0] ?? Colors.black, null),
+        ),
+        Text(
+          data,
+          style: appStyles(16, textColors?[1] ?? Colors.black, null),
+        ),
+      ],
     );
   }
 }

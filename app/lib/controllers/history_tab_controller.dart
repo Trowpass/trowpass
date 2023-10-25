@@ -59,9 +59,6 @@ class HistoryTabController extends GetxController {
           earlierTransaction.value = response.data.where((transaction) => !transaction.isTodayTransaction).toList();
           historyItems.value = [...todayTransaction, ...earlierTransaction];
         }
-        historyItems.value = DummyHistory.generateDummyHistory();
-        earlierTransaction.value = DummyHistory.generateDummyHistory();
-        todayTransaction.value = DummyHistory.generateDummyHistory();
         isLoading.value = false;
       } else {
         Get.defaultDialog(

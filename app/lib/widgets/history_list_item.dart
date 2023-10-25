@@ -61,7 +61,7 @@ class HistoryListItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         Text(
-                          transactHistory.displayAmount,
+                          transactHistory.displayAmountWithPS,
                           style: appStyles(14, color, FontWeight.w400),
                         ),
                       ],
