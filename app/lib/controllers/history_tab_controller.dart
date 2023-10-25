@@ -1,5 +1,4 @@
 import 'package:app/repositories/transaction_history_repository.dart';
-import 'package:app/screens/history/mock/dummy_history.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';

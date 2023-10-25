@@ -45,7 +45,7 @@ class HistoryListItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          transactHistory.createdBy,
+                          transactHistory.status.toUpperCase(),
                           style: appStyles(14, titleActive, FontWeight.bold),
                         ),
                         const SizedBox(height: 8),

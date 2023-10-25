@@ -13,7 +13,7 @@ class PaymentMethod {
   @override
   String toString() {
     if (this == PaymentMethod.card) {
-      return "Card";
+      return "Credit/Debit Card";
     } else if (this == PaymentMethod.bankTransfer) {
       return "Bank Transfer";
     } else if (this == PaymentMethod.ussd) {
@@ -25,7 +25,7 @@ class PaymentMethod {
     } else if (this == PaymentMethod.externalTransfer) {
       return "External Transfer";
     } else {
-      return "unknown";
+      return "Unknown";
     }
   }
 

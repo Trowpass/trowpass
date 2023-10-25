@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/services/responses/transaction_history/payment_type.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
@@ -10,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/app_dialog.dart';
 import '../../widgets/app_styles.dart';
 
 class TransactionHistoryDetailsScreen extends StatelessWidget {
@@ -65,13 +64,28 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
     return Column(
       children: [
         StandardButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.snackbar(
+              'Uh-oh!',
+              'Can\'t share receipt at the moment',
+              backgroundColor: dialogInfoBackground,
+              snackPosition: SnackPosition.BOTTOM,
+            );
+          },
           text: 'Share Receipt',
         ),
         const SizedBox(height: 8),
         InkWell(
           borderRadius: BorderRadius.circular(cardBorderRadius),
-          onTap: () {},
+          onTap: () {
+            showAppDialog(
+              type: DialogType.neutral,
+              title: 'Info',
+              subtitle: 'This feature isn\'t available yet. If you have a '
+                  'problem with your transaction history, please report it '
+                  'directly to customer support. We will fix it ASAP!',
+            );
+          },
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Text(
@@ -112,11 +126,7 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
             const SizedBox(height: 32),
             _buildDetailRow('Reference Code', history.reference),
             const SizedBox(height: 32),
-            _buildDetailRow(
-              'Status',
-              history.status.toCapitalized(),
-              textColors: [null, Colors.green],
-            ),
+            _buildDetailRow('Status', history.status.toCapitalized(), dataTextColor: Colors.green),
             const SizedBox(height: 32),
           ],
         ),
@@ -124,17 +134,22 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
     );
   }
 
-  _buildDetailRow(String reason, String data, {List<Color?>? textColors}) {
+  Widget _buildDetailRow(
+    String reason,
+    String data, {
+    Color? reasonTextColor,
+    Color? dataTextColor,
+  }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           reason,
-          style: appStyles(16, textColors?[0] ?? Colors.black, null),
+          style: appStyles(16, reasonTextColor ?? Colors.black, null),
         ),
         Text(
           data,
-          style: appStyles(16, textColors?[1] ?? Colors.black, null),
+          style: appStyles(16, dataTextColor ?? Colors.black, null),
         ),
       ],
     );
