@@ -50,6 +50,7 @@ class DashboardController extends GetxController {
     balance.value = formatCurrency(session.readUserAccountBalance() ?? 0.0);
     bankName.value = session.readUserBankName() ?? '';
     accountNumber.value = session.readUserAccountNumber() ?? '';
+    qrCodeUrl.value = session.readQRCode();
     phoneNumber.value = '';
     userProfile();
     userWallet();

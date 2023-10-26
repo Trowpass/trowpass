@@ -114,7 +114,7 @@ Widget _buildMyCodeTab() {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Image.network(controller.qrCodeUrl.value,
-                    height: 450, width: 450),
+                    height: 300, width: 300),
               ],
             ),
           ],
