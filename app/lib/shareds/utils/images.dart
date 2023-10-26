@@ -19,10 +19,15 @@ const blueCard = 'assets/images/blue_card.png';
 const design = 'assets/images/card_design.png';
 const trowpassLogo = 'assets/images/trowpass_logo.png';
 const finance = 'assets/images/finance.png';
+const ecoFriendlyTech = 'assets/images/eco-friendly-tech.png';
+const paymentProcessed = 'assets/images/payment-processed.png';
+const taxiRide = 'assets/images/taxi-ride.png';
 const wifi = 'assets/images/wifi.png';
 const fundCardSuccess = 'assets/images/success-1-1.png';
 const comingSoon = 'assets/images/coming_soon.png';
 const paymentImg = 'assets/images/payment.png';
+const feelingBlue = 'assets/images/feeling-blue.png';
+const notificationIcon = 'assets/icons/notification.svg';
 
 //region Icons
 const card = 'assets/icons/card.png';

@@ -8,10 +8,12 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/top_up_transport_wallet_controller.dart';
 import '../../shareds/utils/app_colors.dart';
+import '../../shareds/utils/images.dart';
 import '../../widgets/text_form_input.dart';
 
 class TopUpTransportWalletScreen extends StatelessWidget {
@@ -45,8 +47,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
               backgroundColor: background,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.notifications_outlined,
-                      color: Colors.black),
+           icon: SvgPicture.asset(notificationIcon),
                   onPressed: () {
                     Get.back();
                   },

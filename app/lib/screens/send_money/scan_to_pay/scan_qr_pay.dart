@@ -10,7 +10,10 @@ import 'package:app/widgets/text_form_input.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../../shareds/utils/images.dart';
 
 class ScanQrPayScreen extends StatelessWidget {
   final String? scannedData; // Change the type to String?
@@ -69,7 +72,7 @@ class ScanQrPayScreen extends StatelessWidget {
               centerTitle: true,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.notifications, color: Colors.black),
+                    icon: SvgPicture.asset(notificationIcon),
                   onPressed: () {
                     Get.back();
                   },

@@ -4,6 +4,7 @@ import 'package:app/controllers/top_up_transport_wallet_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/border_radius.dart';
 import 'package:app/widgets/app_styles.dart';
+import 'package:app/widgets/bank_list_loading.dart';
 import 'package:app/widgets/list_shimmer_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -54,7 +55,10 @@ class _StateListModalSheetState extends State<StateListModalSheet> {
             color: Colors.white,
           ),
           child: isLoading
-              ? ShimmerLoading(itemCount: 10)
+              ? ShimmerLoading(
+                  itemCount: 10,
+                  loadingPlaceholder: const BankListLoading(),
+                )
               : Column(
                   children: [
                     Padding(
@@ -62,26 +66,20 @@ class _StateListModalSheetState extends State<StateListModalSheet> {
                       child: TextField(
                         controller: searchController,
                         decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                              onPressed: () => searchController.clear(),
-                              icon: Icon(Icons.cancel)),
+                          suffixIcon: IconButton(onPressed: () => searchController.clear(), icon: Icon(Icons.cancel)),
                           labelStyle: appStyles(15, null, null),
                           hintText: "Search state",
-                          errorStyle:
-                              appStyles(null, validationErrorColor, null),
+                          errorStyle: appStyles(null, validationErrorColor, null),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: search),
                           ),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: search),
                           ),
                           border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.circular(defaultBorderRadius),
+                            borderRadius: BorderRadius.circular(defaultBorderRadius),
                             borderSide: const BorderSide(color: search),
                           ),
                           filled: true,
@@ -91,11 +89,8 @@ class _StateListModalSheetState extends State<StateListModalSheet> {
                         ),
                         onChanged: (value) {
                           setState(() {
-                            filteredState = widget.allStates
-                                .where((bank) => bank
-                                    .toLowerCase()
-                                    .contains(value.toLowerCase()))
-                                .toList();
+                            filteredState =
+                                widget.allStates.where((bank) => bank.toLowerCase().contains(value.toLowerCase())).toList();
                           });
                         },
                       ),
@@ -105,16 +100,14 @@ class _StateListModalSheetState extends State<StateListModalSheet> {
                         itemCount: filteredState.length,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding:
-                                const EdgeInsets.only(left: 18.0, right: 18.0),
+                            padding: const EdgeInsets.only(left: 18.0, right: 18.0),
                             child: Column(
                               children: [
                                 ListTile(
                                   title: Text(filteredState[index]),
                                   onTap: () {
                                     if (widget.onStateSelected != null) {
-                                      widget.onStateSelected!(
-                                          filteredState[index]);
+                                      widget.onStateSelected!(filteredState[index]);
                                     }
                                   },
                                 ),

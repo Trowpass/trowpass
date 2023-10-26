@@ -1,4 +1,4 @@
-import 'package:app/screens/history/history.dart';
+import 'package:app/screens/history/transaction_history.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,7 +12,7 @@ class HistoryTabScreen extends GetView<HistoryTabController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: background,
-      body: HistoryScreen(),
+      body: TransactionHistoryScreen(),
     );
   }
 }

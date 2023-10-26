@@ -5,6 +5,9 @@ import 'otp_type.dart';
 String baseUrl = getBaseUrlOnEnvironment(Environment.prod);
 
 class Endpoints {
+  static const String resendOtp = 'user/resend-otp';
+  static const String transactionHistoryAll = '/api/v1/transaction/histories/{userId}';
+  static const String transactionHistorySingle = '/api/v1/transaction/{id}/histories/details/{userId}';
   static const String riderRegister = 'api/v1/auth/create';
   static const String verifyOtp = 'api/v1/auth/verify-account';
   static const String login = 'api/v1/auth/sign-in';
