@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/app_dialog.dart';
 import '../../widgets/app_styles.dart';
 
 class TransactionHistoryDetailsScreen extends StatelessWidget {
@@ -65,12 +64,7 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
       children: [
         StandardButton(
           onPressed: () {
-            Get.snackbar(
-              'Uh-oh!',
-              'Can\'t share receipt at the moment',
-              backgroundColor: dialogInfoBackground,
-              snackPosition: SnackPosition.BOTTOM,
-            );
+            // show share bottom sheet
           },
           text: 'Share Receipt',
         ),
@@ -78,13 +72,7 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
         InkWell(
           borderRadius: BorderRadius.circular(cardBorderRadius),
           onTap: () {
-            showAppDialog(
-              type: DialogType.neutral,
-              title: 'Info',
-              subtitle: 'This feature isn\'t available yet. If you have a '
-                  'problem with your transaction history, please report it '
-                  'directly to customer support. We will fix it ASAP!',
-            );
+            // send email to sanwopay@gmail.com
           },
           child: Padding(
             padding: const EdgeInsets.all(8),
