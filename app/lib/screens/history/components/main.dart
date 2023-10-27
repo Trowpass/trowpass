@@ -3,7 +3,7 @@ import 'package:app/screens/history/components/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 
-import '../../../controllers/history_tab_controller.dart';
+import '../../../controllers/history/history_tab_controller.dart';
 import '../../../shareds/utils/app_colors.dart';
 import '../../../widgets/app_styles.dart';
 import '../../../widgets/history_list_item.dart';
