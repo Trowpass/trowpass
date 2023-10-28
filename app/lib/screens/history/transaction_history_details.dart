@@ -8,12 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+import '../../controllers/history/history_details_controller.dart';
 import '../../widgets/app_styles.dart';
 
 class TransactionHistoryDetailsScreen extends StatelessWidget {
   final TransactionHistoryData history;
+  final controller = Get.put(HistoryDetailsController());
 
-  const TransactionHistoryDetailsScreen({super.key, required this.history});
+  TransactionHistoryDetailsScreen({super.key, required this.history});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +53,7 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: _buildActions(),
+              child: _buildActions(context),
             ),
           ],
         ),
@@ -59,21 +61,17 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActions() {
+  Widget _buildActions(BuildContext context) {
     return Column(
       children: [
         StandardButton(
-          onPressed: () {
-            // show share bottom sheet
-          },
+          onPressed: () => controller.showShareBottomSheet(context),
           text: 'Share Receipt',
         ),
         const SizedBox(height: 8),
         InkWell(
           borderRadius: BorderRadius.circular(cardBorderRadius),
-          onTap: () {
-            // send email to sanwopay@gmail.com
-          },
+          onTap: () => controller.reportToSupportMail(),
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Text(
