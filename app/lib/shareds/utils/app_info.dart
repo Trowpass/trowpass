@@ -14,7 +14,7 @@ class AppInfo {
   });
 
   static Future<AppInfo> getInfo() async {
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    var packageInfo = await PackageInfo.fromPlatform();
 
     String appName = packageInfo.appName;
     String packageName = packageInfo.packageName;

@@ -61,7 +61,7 @@ class ConfirmPinController extends GetxController {
         confirmPin: pin.value,
       ));
       if (response.status) {
-        Get.offAll(() => HomeLandingTabScreen());
+        Get.offAll(() => const HomeLandingTabScreen());
       } else {
         Get.defaultDialog(
           title: 'Information',
