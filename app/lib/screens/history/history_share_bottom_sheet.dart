@@ -1,4 +1,3 @@
-import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:flutter/material.dart';
 
 import '../../shareds/utils/app_colors.dart';
@@ -7,14 +6,12 @@ import '../../widgets/transparent_button.dart';
 
 class _HistoryShareBottomSheet extends StatelessWidget {
   final bool? autoClose;
-  final TransactionHistoryData history;
   final VoidCallback onSaveAsImage;
   final VoidCallback onSaveAsPDF;
 
   const _HistoryShareBottomSheet(
     BuildContext context, {
     this.autoClose,
-    required this.history,
     required this.onSaveAsImage,
     required this.onSaveAsPDF,
   });
@@ -64,8 +61,7 @@ class _HistoryShareBottomSheet extends StatelessWidget {
 
 /// show share transaction receipt bottom sheet
 Future<T?> showHistoryShareBottomSheet<T>(
-  BuildContext context,
-  TransactionHistoryData history, {
+  BuildContext context, {
   required VoidCallback onSaveAsImage,
   required VoidCallback onSaveAsPDF,
   bool? autoClose,
@@ -82,7 +78,6 @@ Future<T?> showHistoryShareBottomSheet<T>(
     builder: (context) => _HistoryShareBottomSheet(
       context,
       autoClose: autoClose,
-      history: history,
       onSaveAsImage: onSaveAsImage,
       onSaveAsPDF: onSaveAsPDF,
     ),

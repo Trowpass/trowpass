@@ -70,7 +70,6 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
           onPressed: () {
             showHistoryShareBottomSheet(
               context,
-              history,
               onSaveAsImage: () => Get.to(() => HistoryShareImagePreview(history: history)),
               onSaveAsPDF: () => Get.to(() => HistorySharePDFPreview(history: history)),
             );
