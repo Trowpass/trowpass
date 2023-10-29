@@ -79,7 +79,7 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
         const SizedBox(height: 8),
         InkWell(
           borderRadius: BorderRadius.circular(cardBorderRadius),
-          onTap: () => controller.reportToSupportMail(),
+          onTap: controller.reportToSupportMail,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Text(
