@@ -9,6 +9,7 @@ class TransparentButton extends StatelessWidget {
   final String text;
   final EdgeInsetsGeometry? contentPadding;
   final EdgeInsetsGeometry? margin;
+  final MainAxisAlignment contentAlignment;
 
   const TransparentButton({
     super.key,
@@ -17,6 +18,7 @@ class TransparentButton extends StatelessWidget {
     required this.onTap,
     this.contentPadding,
     this.margin,
+    this.contentAlignment = MainAxisAlignment.center,
   });
 
   @override
@@ -40,7 +42,7 @@ class TransparentButton extends StatelessWidget {
               ),
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: contentAlignment,
               children: [
                 Visibility(
                   visible: icon != null,

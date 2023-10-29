@@ -1,20 +1,23 @@
-import 'package:app/extensions/string_casting_extension.dart';
-import 'package:app/services/responses/transaction_history/payment_type.dart';
+import 'package:app/screens/history/history_share_bottom_sheet.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/border_radius.dart';
+import 'package:app/screens/history/components/transaction_receipt.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../widgets/app_dialog.dart';
+import '../../controllers/history/history_details_controller.dart';
 import '../../widgets/app_styles.dart';
+import 'history_share_image_preview.dart';
+import 'history_share_pdf_preview.dart';
 
 class TransactionHistoryDetailsScreen extends StatelessWidget {
   final TransactionHistoryData history;
+  final controller = Get.put(HistoryDetailsController());
 
-  const TransactionHistoryDetailsScreen({super.key, required this.history});
+  TransactionHistoryDetailsScreen({super.key, required this.history});
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +51,11 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
           children: [
             Expanded(
               flex: 8,
-              child: _buildReceipt(),
+              child: TransactionReceipt(history: history),
             ),
             Expanded(
               flex: 2,
-              child: _buildActions(),
+              child: _buildActions(context),
             ),
           ],
         ),
@@ -60,16 +63,15 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildActions() {
+  Widget _buildActions(BuildContext context) {
     return Column(
       children: [
         StandardButton(
           onPressed: () {
-            Get.snackbar(
-              'Uh-oh!',
-              'Can\'t share receipt at the moment',
-              backgroundColor: dialogInfoBackground,
-              snackPosition: SnackPosition.BOTTOM,
+            showHistoryShareBottomSheet(
+              context,
+              onSaveAsImage: () => Get.to(() => HistoryShareImagePreview(history: history)),
+              onSaveAsPDF: () => Get.to(() => HistorySharePDFPreview(history: history)),
             );
           },
           text: 'Share Receipt',
@@ -77,15 +79,7 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
         const SizedBox(height: 8),
         InkWell(
           borderRadius: BorderRadius.circular(cardBorderRadius),
-          onTap: () {
-            showAppDialog(
-              type: DialogType.neutral,
-              title: 'Info',
-              subtitle: 'This feature isn\'t available yet. If you have a '
-                  'problem with your transaction history, please report it '
-                  'directly to customer support. We will fix it ASAP!',
-            );
-          },
+          onTap: controller.reportToSupportMail,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Text(
@@ -94,63 +88,6 @@ class TransactionHistoryDetailsScreen extends StatelessWidget {
             ),
           ),
         )
-      ],
-    );
-  }
-
-  Widget _buildReceipt() {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              history.paymentType == PaymentType.payIn ? 'TOP-UP' : 'WITHDRAWAL',
-              style: appStyles(16, Colors.black, null),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              history.displayAmount,
-              style: appStyles(22, Colors.black, FontWeight.bold),
-            ),
-            const SizedBox(height: 48),
-            _buildDetailRow('Date & Time', history.formattedDateTime),
-            const SizedBox(height: 32),
-            _buildDetailRow('Transaction Type', history.paymentType == PaymentType.payIn ? 'Deposit' : 'Withdrawal'),
-            const SizedBox(height: 32),
-            _buildDetailRow('Amount', history.displayAmount),
-            const SizedBox(height: 32),
-            _buildDetailRow('Fee', history.displayFee),
-            const SizedBox(height: 32),
-            _buildDetailRow('Payment Method', history.paymentMethod.toString()),
-            const SizedBox(height: 32),
-            _buildDetailRow('Reference Code', history.reference),
-            const SizedBox(height: 32),
-            _buildDetailRow('Status', history.status.toCapitalized(), dataTextColor: Colors.green),
-            const SizedBox(height: 32),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDetailRow(
-    String reason,
-    String data, {
-    Color? reasonTextColor,
-    Color? dataTextColor,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          reason,
-          style: appStyles(16, reasonTextColor ?? Colors.black, null),
-        ),
-        Text(
-          data,
-          style: appStyles(16, dataTextColor ?? Colors.black, null),
-        ),
       ],
     );
   }

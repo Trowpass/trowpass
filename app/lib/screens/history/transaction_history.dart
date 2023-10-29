@@ -8,7 +8,7 @@ import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/history_tab_controller.dart';
+import '../../controllers/history/history_tab_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/images.dart';
 import '../../widgets/app_styles.dart';

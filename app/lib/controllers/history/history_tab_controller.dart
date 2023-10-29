@@ -54,9 +54,9 @@ class HistoryTabController extends GetxController {
       var response = await transactionRepository.getAllTransactionHistoryAsync();
       if (response.status) {
         if (response.data.isNotEmpty) {
+          historyItems.value = response.data;
           todayTransaction.value = response.data.where((transaction) => transaction.isTodayTransaction).toList();
           earlierTransaction.value = response.data.where((transaction) => !transaction.isTodayTransaction).toList();
-          historyItems.value = [...todayTransaction, ...earlierTransaction];
         }
         isLoading.value = false;
       } else {
