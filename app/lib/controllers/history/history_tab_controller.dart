@@ -1,4 +1,3 @@
-import 'package:app/controllers/history/dummy.dart';
 import 'package:app/repositories/transaction_history_repository.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
@@ -55,13 +54,10 @@ class HistoryTabController extends GetxController {
       var response = await transactionRepository.getAllTransactionHistoryAsync();
       if (response.status) {
         if (response.data.isNotEmpty) {
+          historyItems.value = response.data;
           todayTransaction.value = response.data.where((transaction) => transaction.isTodayTransaction).toList();
           earlierTransaction.value = response.data.where((transaction) => !transaction.isTodayTransaction).toList();
-          historyItems.value = [...todayTransaction, ...earlierTransaction];
         }
-        historyItems.value = DummyHistory.generateDummyHistory();
-        earlierTransaction.value = DummyHistory.generateDummyHistory();
-        todayTransaction.value = DummyHistory.generateDummyHistory();
         isLoading.value = false;
       } else {
         Get.defaultDialog(

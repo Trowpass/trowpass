@@ -1,3 +1,4 @@
+import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:flutter/material.dart';
 
 import '../../shareds/utils/app_colors.dart';
@@ -6,10 +7,16 @@ import '../../widgets/transparent_button.dart';
 
 class _HistoryShareBottomSheet extends StatelessWidget {
   final bool? autoClose;
+  final TransactionHistoryData history;
+  final VoidCallback onSaveAsImage;
+  final VoidCallback onSaveAsPDF;
 
   const _HistoryShareBottomSheet(
     BuildContext context, {
     this.autoClose,
+    required this.history,
+    required this.onSaveAsImage,
+    required this.onSaveAsPDF,
   });
 
   @override
@@ -35,19 +42,19 @@ class _HistoryShareBottomSheet extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             'Share Transaction Receipt',
-            style: appStyles(18, null, null),
+            style: appStyles(16, titleActive, FontWeight.bold),
           ),
           const SizedBox(height: 16),
           TransparentButton(
             contentAlignment: MainAxisAlignment.start,
             text: 'Save as Image',
-            onTap: () {},
+            onTap: onSaveAsImage,
           ),
           const SizedBox(height: 8),
           TransparentButton(
             contentAlignment: MainAxisAlignment.start,
             text: 'Save as PDF',
-            onTap: () {},
+            onTap: onSaveAsPDF,
           )
         ],
       ),
@@ -57,7 +64,10 @@ class _HistoryShareBottomSheet extends StatelessWidget {
 
 /// show share transaction receipt bottom sheet
 Future<T?> showHistoryShareBottomSheet<T>(
-  BuildContext context, {
+  BuildContext context,
+  TransactionHistoryData history, {
+  required VoidCallback onSaveAsImage,
+  required VoidCallback onSaveAsPDF,
   bool? autoClose,
 }) async {
   return await showModalBottomSheet<T>(
@@ -72,6 +82,9 @@ Future<T?> showHistoryShareBottomSheet<T>(
     builder: (context) => _HistoryShareBottomSheet(
       context,
       autoClose: autoClose,
+      history: history,
+      onSaveAsImage: onSaveAsImage,
+      onSaveAsPDF: onSaveAsPDF,
     ),
   );
 }
