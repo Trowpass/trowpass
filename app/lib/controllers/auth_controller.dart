@@ -5,7 +5,6 @@ import 'package:app/screens/auth/pin/choose_pin_screen.dart';
 import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/post_requests/resend_otp_request.dart';
 import 'package:app/services/requests/post_requests/user_login_request.dart';
-import 'package:app/services/update_service/in_ap_update_service.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart'
     as expiry_timer;
@@ -34,7 +33,6 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = false;
-    InAppUpdate.checkForUpdate();
     shouldRememberUser.value = false;
     super.onInit();
   }

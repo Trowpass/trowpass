@@ -78,31 +78,37 @@ class DashboardScreen extends StatelessWidget {
                                         ),
                                         Expanded(
                                           flex: 1,
-                                          child: ElevatedButton.icon(
-                                            icon: Icon(
-                                              Icons.add,
-                                              color: primaryColor,
-                                              size: 24,
-                                            ),
-                                            onPressed: () =>
-                                                Get.to(WalletTopUpScreen()),
-                                            style: ElevatedButton.styleFrom(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          pinBorderRadius)),
-                                              backgroundColor: background,
-                                              minimumSize: const Size(
-                                                  double.infinity, 60),
-                                              side: const BorderSide(
-                                                  color: primaryColor),
-                                            ),
-                                            label: Text(
-                                              'Topup Wallet',
-                                              style: appStyles(12, primaryColor,
-                                                  FontWeight.w400),
-                                            ),
-                                          ),
+                                          child: Obx(() => controller
+                                                  .isWalletCreated.value
+                                              ? ElevatedButton.icon(
+                                                  icon: Icon(
+                                                    Icons.add,
+                                                    color: primaryColor,
+                                                    size: 24,
+                                                  ),
+                                                  onPressed: () => Get.to(
+                                                      WalletTopUpScreen()),
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                pinBorderRadius)),
+                                                    backgroundColor: background,
+                                                    minimumSize: const Size(
+                                                        double.infinity, 60),
+                                                    side: const BorderSide(
+                                                        color: primaryColor),
+                                                  ),
+                                                  label: Text(
+                                                    'Topup Wallet',
+                                                    style: appStyles(
+                                                        12,
+                                                        primaryColor,
+                                                        FontWeight.w400),
+                                                  ),
+                                                )
+                                              : Container()),
                                         ),
                                       ],
                                     ),
@@ -192,18 +198,18 @@ class DashboardScreen extends StatelessWidget {
                                                     )
                                                   : GestureDetector(
                                                       onTap: controller
-                                                                  .isCreatWalletCreated
+                                                                  .walletCreateLoader
                                                                   .value ==
                                                               true
                                                           ? null
                                                           : () => controller
-                                                              .reCreateWallet(),
+                                                              .createWallet(),
                                                       child: Chip(
                                                         elevation: 20,
                                                         padding:
                                                             EdgeInsets.all(8),
                                                         backgroundColor: controller
-                                                                    .isCreatWalletCreated
+                                                                    .walletCreateLoader
                                                                     .value ==
                                                                 true
                                                             ? label
@@ -212,13 +218,13 @@ class DashboardScreen extends StatelessWidget {
                                                         shadowColor:
                                                             Colors.black,
                                                         avatar: controller
-                                                                    .isCreatWalletCreated
+                                                                    .walletCreateLoader
                                                                     .value ==
                                                                 true
                                                             ? CircularProgressIndicator()
                                                             : null,
                                                         label: Text(
-                                                          controller.isCreatWalletCreated
+                                                          controller.walletCreateLoader
                                                                       .value ==
                                                                   true
                                                               ? 'Creating...'
@@ -240,11 +246,12 @@ class DashboardScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 3),
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Column(
                           children: [
+                            ImageSlider(),
                             GridView.count(
                               crossAxisCount: 3,
                               shrinkWrap: true,
@@ -319,8 +326,6 @@ class DashboardScreen extends StatelessWidget {
                                             'Train Ticket')),
                               ],
                             ),
-                            const SizedBox(height: 15),
-                            ImageSlider(),
                           ],
                         ),
                       ),

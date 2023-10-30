@@ -3,7 +3,7 @@ import 'package:app/controllers/bloc/topup_transport_wallet_controller.dart';
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/dashboard/dashboard.dart';
-import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/responses/get_all_banks_reponse.dart';
 import 'package:app/services/responses/get_all_transport_company_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
@@ -26,7 +26,8 @@ class DashboardController extends GetxController {
   final balance = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
   final isLoaded = false.obs;
-  final isCreatWalletCreated = false.obs;
+  final isWalletCreated = false.obs;
+  final walletCreateLoader = false.obs;
   RxDouble sliderValue = 0.0.obs;
   final double slideWidth = 200.0;
   final selectedTransportCompany = 'Select company'.obs;
@@ -45,7 +46,7 @@ class DashboardController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = true;
-    isCreatWalletCreated.value = false;
+    isWalletCreated.value = false;
     fullName.value = session.readRiderFullName() ?? '';
     balance.value = formatCurrency(session.readUserAccountBalance() ?? 0.0);
     bankName.value = session.readUserBankName() ?? '';
@@ -164,6 +165,9 @@ class DashboardController extends GetxController {
       fullName.value = fullName2;
       session2.writeUserFullName(fullName2);
       session2.writeAccountType(response.data!.accountType);
+      isWalletCreated.value =
+          response.data != null ? response.data!.isWalletCreated : false;
+      qrCodeUrl.value = response.data!.qr!;
       //for profile
       if (response.data!.kycDetail != null) {
         session2
@@ -180,8 +184,6 @@ class DashboardController extends GetxController {
         session2.writeProfileLN(response.data!.lastName);
         session2.writeProfilePN(response.data!.phoneNumber);
       }
-
-      qrCodeUrl.value = response.data!.qr!;
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());
       }
@@ -199,28 +201,33 @@ class DashboardController extends GetxController {
       session2.writeUserAccountNumber(accountNumber.value);
       session2.writeUserAccountBalance(balance1);
       session2.writeUserBankName(bankName.value);
+    } else {
+      Get.snackbar('Information', 'Please create account',
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM);
+      walletCreateLoader.value = false;
     }
   }
 
-  Future reCreateWallet() async {
-    isCreatWalletCreated.value = true;
+  Future createWallet() async {
+    walletCreateLoader.value = true;
     try {
       int userId = session.readUserId() ?? 0;
       var response = await userController
-          .reCreateWalletAsync(ReCreateWalletRequest(userId: userId));
+          .createWalletAsync(CreateWalletRequest(userId: userId));
       if (response.status) {
         Get.offAll(() => DashboardScreen());
-        isCreatWalletCreated.value = false;
+        walletCreateLoader.value = false;
       } else {
         Get.defaultDialog(
-            title: 'Information', content: Text(response.message!));
-        isCreatWalletCreated.value = false;
+            title: 'Information', content: Text(response.message));
+        walletCreateLoader.value = false;
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
           backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
-      isCreatWalletCreated.value = false;
+      walletCreateLoader.value = false;
     }
   }
 

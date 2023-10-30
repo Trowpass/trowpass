@@ -23,9 +23,9 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  final store = GetSessionManager();
-
   MyApp({super.key});
+
+  final store = GetSessionManager();
 
   @override
   Widget build(BuildContext context) {
