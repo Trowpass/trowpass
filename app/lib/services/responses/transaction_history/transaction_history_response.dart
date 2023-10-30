@@ -22,10 +22,6 @@ class TransactionHistoryResponse {
       message: json['message'],
       status: json['status'],
       responseCode: json['responseCode'],
-      // data: (json['data'] as List<dynamic>)
-      //     .map((transactionData) =>
-      //         TransactionHistoryData.fromJson(transactionData))
-      //     .toList(),
       data: json['data'] != null
           ? (json['data'] as List<dynamic>)
               .map((transactionData) =>

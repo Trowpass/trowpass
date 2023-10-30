@@ -74,17 +74,5 @@ class HistoryTabController extends GetxController {
       );
       isLoading.value = false;
     }
-    // try {
-
-    // } catch (e) {
-    //   Get.snackbar(
-    //     'Information',
-    //     e.toString(),
-    //     colorText: Colors.white,
-    //     backgroundColor: validationErrorColor,
-    //     snackPosition: SnackPosition.BOTTOM,
-    //   );
-    //   isLoading.value = false;
-    // }
   }
 }
