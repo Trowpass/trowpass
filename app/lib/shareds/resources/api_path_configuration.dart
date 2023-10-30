@@ -23,5 +23,5 @@ Map<String, dynamic> staggingBaseUrl = {
 };
 
 Map<String, dynamic> prodBaseUrl = {
-  _baseUrl: "https://trowpass-api-prod.azurewebsites.net/",
+  _baseUrl: "",
 };
