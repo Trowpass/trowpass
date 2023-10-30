@@ -1,15 +1,11 @@
 class CreateWalletRequest {
   int userId;
-  String walletName;
 
-  CreateWalletRequest(
-      {
-      required this.userId,
-      required this.walletName,
-      });
+  CreateWalletRequest({
+    required this.userId,
+  });
 
   Map<String, dynamic> toJson() => {
         'userId': userId,
-        'walletName': walletName,
       };
 }

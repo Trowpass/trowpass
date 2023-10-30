@@ -124,7 +124,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error('Unable to create wallet. Please try again!');
+      return Future.error('Unable to create wallet. Please try again later!');
     }
   }
 

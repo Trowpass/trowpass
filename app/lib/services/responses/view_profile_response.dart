@@ -150,7 +150,7 @@ class BussinessDetail {
 }
 
 class ViewProfileKycDetail {
-  dynamic bvn;
+  String? bvn;
   ViewProfileAddress? address;
 
   ViewProfileKycDetail({
@@ -159,7 +159,7 @@ class ViewProfileKycDetail {
   });
   factory ViewProfileKycDetail.fromJson(Map<String, dynamic> json) {
     return ViewProfileKycDetail(
-        bvn: json['bvn'],
+        bvn: json['bvn'] ?? '',
         address: json['address'] != null
             ? ViewProfileAddress.fromJson(json['address'])
             : null);

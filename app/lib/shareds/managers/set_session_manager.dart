@@ -47,7 +47,7 @@ class SetSessionManager {
   }
 
   void logoutUser() {
-    storage.erase();
+    // storage.erase();
     writeIsUserOnBoarded(true);
   }
 
@@ -119,7 +119,7 @@ class SetSessionManager {
     storage.write(accountType, value);
   }
 
-  void writeTokenExpiration(DateTime tokenExpires) {
+  void writeTokenExpiration(DateTime? tokenExpires) {
     storage.write(tokenExpiration, tokenExpires);
   }
 
