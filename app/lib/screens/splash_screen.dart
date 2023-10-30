@@ -72,16 +72,12 @@ class SplashScreen extends StatelessWidget {
   }
 
   void navigateToInitialRoute(String route) {
-   Get.offAll(() => HomeLandingTabScreen());
-   
     switch (route) {
       case AppRoutes.onboarding:
         Get.offAll(() => OnBoardingScreen());
         break;
       case AppRoutes.login:
         Get.offAll(() => LoginScreen());
-        // Get.offAll(() => TeirOneAccountUpgradeScreen());
-
         break;
       case AppRoutes.dashboard:
         Get.offAll(() => HomeLandingTabScreen());

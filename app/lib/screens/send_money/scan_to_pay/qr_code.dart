@@ -111,6 +111,7 @@ Widget _buildMyCodeTab() {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            SizedBox(height: 15),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
