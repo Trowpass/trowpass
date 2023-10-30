@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../services/responses/transaction_history/transaction_history_response.dart';
 import '../services/exceptions/dio_exceptions.dart';
+import '../services/responses/transaction_history/transaction_history_response.dart';
 import '../shareds/constants/endpoints.dart';
 import '../shareds/helpers/api_connection_helper.dart';
 import '../shareds/managers/get_session_manager.dart';
@@ -26,7 +26,7 @@ class TransactionHistoryRepository {
       } else {
         throw Exception('Unable to fetch transactions');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);

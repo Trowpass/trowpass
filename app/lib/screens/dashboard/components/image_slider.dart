@@ -1,9 +1,9 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, must_be_immutable
 
 import 'package:app/shareds/utils/images.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 class SliderController extends GetxController {
   var currentIndex = 0.obs;

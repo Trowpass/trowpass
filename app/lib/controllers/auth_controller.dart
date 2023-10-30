@@ -33,6 +33,7 @@ class AuthController extends GetxController {
   @override
   void onInit() {
     isLoaded.value = false;
+    shouldRememberUser.value = false;
     super.onInit();
   }
 
@@ -56,11 +57,6 @@ class AuthController extends GetxController {
         ),
       );
       if (response.status) {
-        if (shouldRememberUser.value) {
-          session.writeIsUserLoggedIn(true);
-          session.writeShouldRememberMe(true);
-          session.writeTokenExpiration(response.data!.tokenExpires);
-        }
         session.writeUserId(response.data!.userId);
         session.writeAuthorizationToken(response.data!.token);
         if (!response.data!.loginData!.isAccountVerified) {
@@ -71,6 +67,11 @@ class AuthController extends GetxController {
           Get.to(() => ChoosePinScreen());
         } else {
           isLoaded.value = false;
+          if (shouldRememberUser.value) {
+            session.writeIsUserLoggedIn(true);
+            session.writeShouldRememberMe(true);
+            session.writeTokenExpiration(response.data!.tokenExpires);
+          }
           Get.offAll(() => const HomeLandingTabScreen());
         }
       } else {
@@ -119,7 +120,10 @@ class AuthController extends GetxController {
       resendCountDownController.restart();
       expiryCountDownController.restart();
     } else {
-      Get.defaultDialog(title: 'Information', content: Text(response.message));
+      Get.defaultDialog(
+          title: 'Information',
+          content: Text(response.message),
+          backgroundColor: dialogInfoBackground);
       isLoaded.value = false;
     }
   }

@@ -6,6 +6,7 @@ import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/widgets/app_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_guid/flutter_guid.dart';
 import 'package:flutter_to_pdf/flutter_to_pdf.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -13,7 +14,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_guid/flutter_guid.dart';
 
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/app_info.dart';
@@ -26,9 +26,12 @@ class HistoryDetailsController extends GetxController {
   ExportDelegate exportDelegate = ExportDelegate();
 
   Future<Uint8List?> _generateImage() async {
-    final boundary = key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    final boundary =
+        key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
     final image = await boundary?.toImage(
-      pixelRatio: Get.context == null ? 1.0 : MediaQuery.of(Get.context!).devicePixelRatio,
+      pixelRatio: Get.context == null
+          ? 1.0
+          : MediaQuery.of(Get.context!).devicePixelRatio,
     );
     final byteData = await image?.toByteData(format: ImageByteFormat.png);
     return byteData?.buffer.asUint8List();
@@ -54,8 +57,7 @@ class HistoryDetailsController extends GetxController {
         Get.snackbar(
           'Operation unsuccessful',
           'Please grant storage write access to save image',
-          colorText: Colors.white,
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM,
         );
         break;
@@ -94,7 +96,8 @@ class HistoryDetailsController extends GetxController {
         try {
           final pdfData = await _generatePDFDocument();
           final Directory dir = await getApplicationDocumentsDirectory();
-          final File file = File('${dir.path}/Transaction-history-${Guid.newGuid.value}.pdf');
+          final File file =
+              File('${dir.path}/Transaction-history-${Guid.newGuid.value}.pdf');
           final savedFile = await file.writeAsBytes(pdfData);
           isProcessing.value = false;
           return savedFile.path.replaceFirst('file:///', '');
@@ -105,8 +108,7 @@ class HistoryDetailsController extends GetxController {
         Get.snackbar(
           'Operation unsuccessful',
           'Please grant storage write access to save pdf',
-          colorText: Colors.white,
-          backgroundColor: validationErrorColor,
+          backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM,
         );
         break;
@@ -143,7 +145,8 @@ class HistoryDetailsController extends GetxController {
         height: 180,
         type: DialogType.neutral,
         title: 'Success',
-        subtitle: 'Transaction history was saved as image to your device\'s gallery',
+        subtitle:
+            'Transaction history was saved as image to your device\'s gallery',
         actions: [
           DialogButton(
             label: 'Close',
@@ -152,7 +155,8 @@ class HistoryDetailsController extends GetxController {
           DialogButton(
             label: 'Share',
             onTap: () {
-              Share.shareXFiles([XFile(savePath)], text: 'Share Receipt as Image');
+              Share.shareXFiles([XFile(savePath)],
+                  text: 'Share Receipt as Image');
             },
           ),
         ],
@@ -161,8 +165,7 @@ class HistoryDetailsController extends GetxController {
       Get.snackbar(
         'Error',
         'Unable to save generated image to gallery',
-        colorText: Colors.white,
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -175,7 +178,8 @@ class HistoryDetailsController extends GetxController {
         height: 180,
         type: DialogType.neutral,
         title: 'Success',
-        subtitle: 'Transaction history was saved as PDF to your device\'s gallery',
+        subtitle:
+            'Transaction history was saved as PDF to your device\'s gallery',
         actions: [
           DialogButton(
             label: 'Close',
@@ -184,16 +188,17 @@ class HistoryDetailsController extends GetxController {
           DialogButton(
             label: 'Share',
             onTap: () {
-              Share.shareXFiles([XFile(savePath)], text: 'Share Receipt as PDF');
+              Share.shareXFiles([XFile(savePath)],
+                  text: 'Share Receipt as PDF');
             },
           ),
         ],
       );
     } else {
-      Get.snackbar(        'Error',
+      Get.snackbar(
+        'Error',
         'Unable to save generated pdf to gallery',
-        colorText: Colors.white,
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
     }
@@ -208,7 +213,8 @@ class HistoryDetailsController extends GetxController {
         interactive: false,
       ),
     );
-    var document = await exportDelegate.exportToPdfDocument(toPDFframeId, overrideOptions: overrideOptions);
+    var document = await exportDelegate.exportToPdfDocument(toPDFframeId,
+        overrideOptions: overrideOptions);
     return await document.save();
   }
 
@@ -217,8 +223,10 @@ class HistoryDetailsController extends GetxController {
     final deviceInfo = await DeviceInfo.getInfo();
     final appInfo = await AppInfo.getInfo();
 
-    final String subjectOfMail = 'Report Bug In ${appInfo.appName.toCapitalized()} app';
-    final String bodyOfMail = 'Dear ${appInfo.appName.toCapitalized()} Support Team,'
+    final String subjectOfMail =
+        'Report Bug In ${appInfo.appName.toCapitalized()} app';
+    final String bodyOfMail =
+        'Dear ${appInfo.appName.toCapitalized()} Support Team,'
         '%0A%0A%0A%0A'
         'Device Info:'
         '%0A%0A'
@@ -230,13 +238,13 @@ class HistoryDetailsController extends GetxController {
         '%0A'
         'OS version: ${deviceInfo?.osVersion}';
 
-    final Uri reportIssueUrl = Uri.parse('mailto:$supportMail?subject=$subjectOfMail&body=$bodyOfMail');
+    final Uri reportIssueUrl = Uri.parse(
+        'mailto:$supportMail?subject=$subjectOfMail&body=$bodyOfMail');
     if (!await launchUrl(reportIssueUrl)) {
       Get.snackbar(
         'Uh-oh!',
         'Operation was incomplete, try again',
-        colorText: Colors.white,
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
     }

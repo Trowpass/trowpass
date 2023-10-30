@@ -14,13 +14,12 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.dashboard,
-      page: () => HomeLandingTabScreen(),
+      page: () => const HomeLandingTabScreen(),
       binding: DashboardTabBinding(),
     ),
     GetPage(
       name: AppRoutes.login,
       page: () => LoginScreen(),
-      // page: () => ScanScreen(),
     )
   ];
 }

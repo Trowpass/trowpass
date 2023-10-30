@@ -1,4 +1,3 @@
-import 'package:app/extensions/strict_nulls_extension.dart';
 import 'package:app/screens/history/components/header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
@@ -65,8 +64,10 @@ class MainWidget extends StatelessWidget {
   List<Widget> _buildSlivers() {
     final sliverList = <Widget>[];
 
-    if (controller.isHistorySorted.value && controller.historyItems.isNotEmpty) {
-      sliverList.add(_buildSortedList(controller.selectedFilterType.value ?? 'New to Old'));
+    if (controller.isHistorySorted.value &&
+        controller.historyItems.isNotEmpty) {
+      sliverList.add(_buildSortedList(
+          controller.selectedFilterType.value ?? 'New to Old'));
     } else {
       if (controller.todayTransaction.isNotEmpty) {
         sliverList.add(_buildTodayList());
@@ -88,7 +89,8 @@ class MainWidget extends StatelessWidget {
       ),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
-          (context, index) => HistoryListItem(controller.earlierTransaction[index]),
+          (context, index) =>
+              HistoryListItem(controller.earlierTransaction[index]),
           childCount: controller.earlierTransaction.length,
         ),
       ),
@@ -103,7 +105,8 @@ class MainWidget extends StatelessWidget {
       ),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
-          (context, index) => HistoryListItem(controller.todayTransaction[index]),
+          (context, index) =>
+              HistoryListItem(controller.todayTransaction[index]),
           childCount: controller.todayTransaction.length,
         ),
       ),
