@@ -1,6 +1,5 @@
-import 'package:intl/intl.dart';
-
 import 'package:app/widgets/currency_format.dart';
+import 'package:intl/intl.dart';
 
 import 'payment_method.dart';
 import 'payment_type.dart';
@@ -9,7 +8,7 @@ class TransactionHistoryResponse {
   String message;
   bool status;
   String responseCode;
-  List<TransactionHistoryData> data;
+  List<TransactionHistoryData>? data;
 
   TransactionHistoryResponse({
     required this.message,
@@ -23,9 +22,16 @@ class TransactionHistoryResponse {
       message: json['message'],
       status: json['status'],
       responseCode: json['responseCode'],
-      data: (json['data'] as List<dynamic>)
-          .map((transactionData) => TransactionHistoryData.fromJson(transactionData))
-          .toList(),
+      // data: (json['data'] as List<dynamic>)
+      //     .map((transactionData) =>
+      //         TransactionHistoryData.fromJson(transactionData))
+      //     .toList(),
+      data: json['data'] != null
+          ? (json['data'] as List<dynamic>)
+              .map((transactionData) =>
+                  TransactionHistoryData.fromJson(transactionData))
+              .toList()
+          : null,
     );
   }
 }
@@ -42,7 +48,7 @@ class TransactionHistoryData {
   PaymentMethod paymentMethod;
   PaymentType paymentType;
   String source;
-  String customerId;
+  String customerName;
   String accountId;
   double fee;
   String drCr;
@@ -60,7 +66,7 @@ class TransactionHistoryData {
     required this.paymentMethod,
     required this.paymentType,
     required this.source,
-    required this.customerId,
+    required this.customerName,
     required this.accountId,
     required this.fee,
     required this.drCr,
@@ -80,7 +86,7 @@ class TransactionHistoryData {
       paymentMethod: PaymentMethod.from(method: json['paymentMethod']),
       paymentType: PaymentType.from(type: json['paymentType']),
       source: json['source'],
-      customerId: json['customerId'],
+      customerName: json['customerName'],
       accountId: json['accountId'],
       fee: json['fee'],
       drCr: json['drCr'],
@@ -91,7 +97,8 @@ class TransactionHistoryData {
   DateTime get transactedAtDate => DateTime.parse(transactionAt);
   bool get isTodayTransaction => transactedAtDate.day == DateTime.now().day;
   String get formattedDate => DateFormat('d, MMMM y').format(transactedAtDate);
-  String get formattedDateTime => DateFormat('y-MM-dd, HH:mm:ss').format(transactedAtDate);
+  String get formattedDateTime =>
+      DateFormat('y-MM-dd, HH:mm:ss').format(transactedAtDate);
   String get displayFee => ngnFormatCurrency(fee);
 
   String get displayAmountWithPS {
@@ -114,15 +121,19 @@ class TransactionHistoryData {
     }
   }
 
-  static int Function(TransactionHistoryData, TransactionHistoryData) sortByNewToOld =
+  static int Function(TransactionHistoryData, TransactionHistoryData)
+      sortByNewToOld =
       (a, b) => a.transactedAtDate.compareTo(b.transactedAtDate);
 
-  static int Function(TransactionHistoryData, TransactionHistoryData) sortByOldToNew =
+  static int Function(TransactionHistoryData, TransactionHistoryData)
+      sortByOldToNew =
       (a, b) => -(a.transactedAtDate.compareTo(b.transactedAtDate));
 
-  static int Function(TransactionHistoryData, TransactionHistoryData) sortByMonthly =
+  static int Function(TransactionHistoryData, TransactionHistoryData)
+      sortByMonthly =
       (a, b) => a.transactedAtDate.month.compareTo(b.transactedAtDate.month);
 
-  static int Function(TransactionHistoryData, TransactionHistoryData) sortByYearly =
+  static int Function(TransactionHistoryData, TransactionHistoryData)
+      sortByYearly =
       (a, b) => a.transactedAtDate.year.compareTo(b.transactedAtDate.year);
 }

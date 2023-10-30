@@ -1,4 +1,4 @@
-import 'package:app/repositories/transaction_history_repository.dart';
+import 'package:app/controllers/bloc/transaction_controller.dart';
 import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +11,7 @@ class HistoryTabController extends GetxController {
   final String title = 'History';
   final scrollController = ScrollController();
   final historyItems = <TransactionHistoryData>[].obs;
-  final transactionRepository = TransactionHistoryRepository();
+  final transactionController = TransactionController();
   final isLoading = true.obs;
   final isHistorySorted = false.obs;
   var todayTransaction = <TransactionHistoryData>[].obs;
@@ -19,10 +19,10 @@ class HistoryTabController extends GetxController {
 
   @override
   void onInit() {
-    super.onInit();
     period.value = "Today";
     isLoading.value = true;
     getAllTransactionHistory();
+    super.onInit();
   }
 
   void filterList(String sortLabel) {
@@ -50,31 +50,41 @@ class HistoryTabController extends GetxController {
   Future<void> getAllTransactionHistory() async {
     isLoading.value = true;
     Get.focusScope!.unfocus();
-    try {
-      var response = await transactionRepository.getAllTransactionHistoryAsync();
-      if (response.status) {
-        if (response.data.isNotEmpty) {
-          historyItems.value = response.data;
-          todayTransaction.value = response.data.where((transaction) => transaction.isTodayTransaction).toList();
-          earlierTransaction.value = response.data.where((transaction) => !transaction.isTodayTransaction).toList();
-        }
-        isLoading.value = false;
+    var response = await transactionController.getAllTransactionHistoryAsync();
+    if (response.status) {
+      if (response.data!.isNotEmpty) {
+        historyItems.value = response.data!;
+        todayTransaction.value = response.data!
+            .where((transaction) => transaction.isTodayTransaction)
+            .toList();
+        earlierTransaction.value = response.data!
+            .where((transaction) => !transaction.isTodayTransaction)
+            .toList();
       } else {
-        Get.defaultDialog(
-          title: 'Information',
-          content: Text(response.message),
-        );
-        isLoading.value = false;
+        historyItems.value = [];
       }
-    } catch (e) {
+      isLoading.value = false;
+    } else {
       Get.snackbar(
         'Information',
-        e.toString(),
+        response.message,
         colorText: Colors.white,
         backgroundColor: validationErrorColor,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;
     }
+    // try {
+
+    // } catch (e) {
+    //   Get.snackbar(
+    //     'Information',
+    //     e.toString(),
+    //     colorText: Colors.white,
+    //     backgroundColor: validationErrorColor,
+    //     snackPosition: SnackPosition.BOTTOM,
+    //   );
+    //   isLoading.value = false;
+    // }
   }
 }

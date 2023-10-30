@@ -94,6 +94,7 @@ class KycUpgradeAccountController extends GetxController {
       } else {
         isLoaded.value = false;
         Get.snackbar('Information', response.message,
+            backgroundColor: dialogInfoBackground,
             snackPosition: SnackPosition.BOTTOM);
       }
     } catch (e) {

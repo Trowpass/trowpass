@@ -246,11 +246,12 @@ class DashboardScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 3),
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: Column(
                           children: [
+                            ImageSlider(),
                             GridView.count(
                               crossAxisCount: 3,
                               shrinkWrap: true,
@@ -325,8 +326,6 @@ class DashboardScreen extends StatelessWidget {
                                             'Train Ticket')),
                               ],
                             ),
-                            const SizedBox(height: 15),
-                            ImageSlider(),
                           ],
                         ),
                       ),

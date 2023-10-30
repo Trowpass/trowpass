@@ -51,7 +51,6 @@ class DashboardController extends GetxController {
     balance.value = formatCurrency(session.readUserAccountBalance() ?? 0.0);
     bankName.value = session.readUserBankName() ?? '';
     accountNumber.value = session.readUserAccountNumber() ?? '';
-    qrCodeUrl.value = session.readQRCode();
     phoneNumber.value = '';
     userProfile();
     userWallet();
@@ -168,11 +167,12 @@ class DashboardController extends GetxController {
       session2.writeAccountType(response.data!.accountType);
       isWalletCreated.value =
           response.data != null ? response.data!.isWalletCreated : false;
+      qrCodeUrl.value = response.data!.qr!;
       //for profile
       if (response.data!.kycDetail != null) {
         session2
             .writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
-        session2.writeProfileBvn(response.data!.kycDetail!.bvn);
+        session2.writeProfileBvn(response.data!.kycDetail!.bvn!);
         session2.writeProfileCity(response.data!.kycDetail!.address!.city!);
         session2
             .writeProfileCountry(response.data!.kycDetail!.address!.country!);
@@ -184,8 +184,6 @@ class DashboardController extends GetxController {
         session2.writeProfileLN(response.data!.lastName);
         session2.writeProfilePN(response.data!.phoneNumber);
       }
-
-      qrCodeUrl.value = response.data!.qr!;
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());
       }
@@ -203,6 +201,11 @@ class DashboardController extends GetxController {
       session2.writeUserAccountNumber(accountNumber.value);
       session2.writeUserAccountBalance(balance1);
       session2.writeUserBankName(bankName.value);
+    } else {
+      Get.snackbar('Information', 'Please create account',
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM);
+      walletCreateLoader.value = false;
     }
   }
 

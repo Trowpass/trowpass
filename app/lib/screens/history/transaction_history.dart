@@ -61,10 +61,8 @@ class TransactionHistoryScreen extends StatelessWidget {
   }
 
   Widget _getScaffoldBody() {
-    var isProcessing = controller.isLoading.value;
     var isListEmpty = controller.historyItems.isEmpty;
-
-    return isProcessing
+    return !isListEmpty
         ? ShimmerLoading(
             itemCount: 10,
             loadingPlaceholder: const HistoryListLoading(),
