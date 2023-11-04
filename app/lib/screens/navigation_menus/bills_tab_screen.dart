@@ -1,5 +1,5 @@
 import 'package:app/widgets/app_styles.dart';
-import 'package:app/widgets/coming_soon.dart';
+import 'package:app/widgets/empty_placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -45,7 +45,7 @@ class BillsTabScreen extends StatelessWidget {
           },
         ),
       ),
-      body: const ComingSoon(),
+      body: const EmptyPlaceholder(),
     );
   }
 }

@@ -28,6 +28,7 @@ const comingSoon = 'assets/images/coming_soon.png';
 const paymentImg = 'assets/images/payment.png';
 const feelingBlue = 'assets/images/feeling-blue.png';
 const notificationIcon = 'assets/icons/notification.svg';
+const galleryIcon = 'assets/icons/gallery.svg';
 
 //region Icons
 const card = 'assets/icons/card.png';
