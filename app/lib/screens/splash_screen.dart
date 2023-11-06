@@ -86,8 +86,8 @@ class SplashScreen extends StatelessWidget {
     final endTime = store.readTokenExpires();
     if (endTime != null) {
       final DateTime dateTimeNow = DateTime.now();
-      Duration remainingTime = endTime.difference(dateTimeNow);
-      if (remainingTime.inSeconds == 0) {
+      var remainingTime = (endTime.difference(dateTimeNow).inHours / 1).round();
+      if (remainingTime == 0) {
         return true;
       }
     }
