@@ -52,20 +52,17 @@ class SplashScreen extends StatelessWidget {
     String route = '';
     final isUserOnBoarded = store.readIsUserOnBoarded();
     final isUserLoggedIn = store.readIsUserLoggedIn();
-    final isTokenExpired = store.readIsTokenExpired();
-    final rememberMe = store.readShouldRememberMe();
+    final tokenExpiredTime = store.readTokenExpires();
 
     if (!isUserOnBoarded) {
       route = AppRoutes.onboarding;
     } else {
       if (!isUserLoggedIn) {
         route = AppRoutes.login;
-      } else if (isUserLoggedIn && rememberMe && isTokenExpired) {
+      } else if (isUserLoggedIn && tokenExpiredTime == null) {
         route = AppRoutes.dashboard;
-      } else if (isUserLoggedIn && !rememberMe && isTokenExpired) {
+      } else if (isUserLoggedIn && isLogoutTimeElapsed()) {
         route = AppRoutes.login;
-      } else {
-        route = AppRoutes.dashboard;
       }
     }
     return route;
@@ -83,5 +80,17 @@ class SplashScreen extends StatelessWidget {
         Get.offAll(() => HomeLandingTabScreen());
         break;
     }
+  }
+
+  bool isLogoutTimeElapsed() {
+    final endTime = store.readTokenExpires();
+    if (endTime != null) {
+      final DateTime dateTimeNow = DateTime.now();
+      Duration remainingTime = endTime.difference(dateTimeNow);
+      if (remainingTime.inSeconds == 0) {
+        return true;
+      }
+    }
+    return false;
   }
 }

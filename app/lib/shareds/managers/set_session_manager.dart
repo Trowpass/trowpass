@@ -47,7 +47,6 @@ class SetSessionManager {
   }
 
   void logoutUser() {
-    // storage.erase();
     writeIsUserOnBoarded(true);
   }
 
@@ -124,7 +123,7 @@ class SetSessionManager {
   }
 
   void writeShouldRememberMe(bool loggedIn) {
-    storage.write(userLoggedIn, loggedIn);
+    storage.write(shouldRememberMe, loggedIn);
   }
 
   void writeResetPasswordToken(String value) {

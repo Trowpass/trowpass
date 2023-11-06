@@ -68,8 +68,7 @@ class HistoryTabController extends GetxController {
       Get.snackbar(
         'Information',
         response.message,
-        colorText: Colors.white,
-        backgroundColor: validationErrorColor,
+        backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
       isLoading.value = false;

@@ -40,8 +40,7 @@ class GetSessionManager {
       (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
   bool readVirtualCardCreated() => storage.read(virtualCardCreated) ?? false;
   String readAccountType() => storage.read(accountType) ?? '';
-  DateTime readTokenExpires() =>
-      storage.read(tokenExpiration) ?? DateTime.now();
+  DateTime? readTokenExpires() => storage.read(tokenExpiration);
   bool readShouldRememberMe() => storage.read(shouldRememberMe) ?? false;
   String readResetPasswordToken() => storage.read(resetPasswordToken);
   String readQRCode() => storage.read(qrCode) ?? '';
@@ -58,11 +57,11 @@ class GetSessionManager {
   String readProfileState() => storage.read(profileState) ?? '';
   String readProfileStreet() => storage.read(profileStreet) ?? '';
 
-  bool readIsTokenExpired() {
-    try {
-      return DateTime.now().isAfter(readTokenExpires());
-    } catch (err) {
-      return true;
-    }
-  }
+  // bool readIsTokenExpired() {
+  //   try {
+  //     return DateTime.now().isAfter(readTokenExpires());
+  //   } catch (err) {
+  //     return true;
+  //   }
+  // }
 }
