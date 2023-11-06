@@ -52,9 +52,9 @@ class AuthController extends GetxController {
     try {
       var response = await userController.loginAsync(
         UserLoginRequest(
-          phoneNumber: emailPhoneNumberController.text.trim(),
-          password: passwordController.text.trim(),
-        ),
+            phoneNumber: emailPhoneNumberController.text.trim(),
+            password: passwordController.text.trim(),
+            shouldRememberMe: shouldRememberUser.value),
       );
       if (response.status) {
         session.writeUserId(response.data!.userId);
@@ -67,11 +67,9 @@ class AuthController extends GetxController {
           Get.to(() => ChoosePinScreen());
         } else {
           isLoaded.value = false;
-          if (shouldRememberUser.value) {
-            session.writeIsUserLoggedIn(true);
-            session.writeShouldRememberMe(true);
-            session.writeTokenExpiration(response.data!.tokenExpires);
-          }
+          session.writeIsUserLoggedIn(true);
+          session.writeTokenExpiration(response.data!.tokenExpires);
+          session.writeShouldRememberMe(shouldRememberUser.value);
           Get.offAll(() => const HomeLandingTabScreen());
         }
       } else {
