@@ -138,16 +138,9 @@ class UserProfileController extends GetxController {
 
   void logout() {
     session2.logoutUser();
-    isRemember();
+    session2.writeIsUserLoggedIn(false);
+    session2.writeTokenExpiration(null);
+    session2.writeShouldRememberMe(false);
     Get.offAll(() => LoginScreen());
-  }
-
-  void isRemember() {
-    var remember = session.readShouldRememberMe();
-    if (!remember) {
-      session2.writeIsUserLoggedIn(false);
-      session2.writeTokenExpiration(null);
-      session2.writeShouldRememberMe(false);
-    }
   }
 }
