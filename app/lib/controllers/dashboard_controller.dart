@@ -1,7 +1,10 @@
 // ignore_for_file: avoid_print, unnecessary_string_interpolations, avoid_function_literals_in_foreach_calls
+import 'dart:async';
+
 import 'package:app/controllers/bloc/topup_transport_wallet_controller.dart';
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
+import 'package:app/screens/auth/login.dart';
 import 'package:app/screens/dashboard/dashboard.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/responses/get_all_banks_reponse.dart';
@@ -9,6 +12,7 @@ import 'package:app/services/responses/get_all_transport_company_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/currency_format.dart';
+import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -42,6 +46,7 @@ class DashboardController extends GetxController {
   GetSessionManager session = GetSessionManager();
   SetSessionManager session2 = SetSessionManager();
   UserController userController = UserController();
+  Cron cron = Cron();
 
   @override
   void onInit() {
@@ -52,11 +57,19 @@ class DashboardController extends GetxController {
     bankName.value = session.readUserBankName() ?? '';
     accountNumber.value = session.readUserAccountNumber() ?? '';
     phoneNumber.value = '';
-    userProfile();
-    userWallet();
-    fetchBanks();
-    fetchTransportCompany();
+    if (session.readIsUserLoggedIn()) {
+      userProfile();
+      userWallet();
+      fetchBanks();
+      fetchTransportCompany();
+      if (!session.readShouldRememberMe()) {
+        cron.schedule(Schedule.parse('*/1 * * * *'), () async {
+          logoutTimeElapsed();
+        });
+      }
+    }
     printSessionStorageContents();
+
     super.onInit();
   }
 
@@ -233,5 +246,17 @@ class DashboardController extends GetxController {
 
   Future<dynamic> displayPlaceholderDialog(String pageTitle) {
     return placeholderDialog(pageTitle);
+  }
+
+  void logoutTimeElapsed() {
+    final endTime = session.readTokenExpires();
+    if (endTime != null) {
+      final DateTime dateTimeNow = DateTime.now();
+      var remainingTime = (endTime.difference(dateTimeNow).inHours / 1).round();
+      if (remainingTime == 0) {
+        Get.offAll(() => LoginScreen());
+        cron.close();
+      }
+    }
   }
 }
