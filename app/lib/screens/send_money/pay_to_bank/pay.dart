@@ -8,8 +8,10 @@ import 'package:app/widgets/text_form_input.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../shareds/utils/images.dart';
 import '../../../widgets/overlay_indeterminate_progress.dart';
 
 class PayToBankScreen extends StatelessWidget {
@@ -45,8 +47,7 @@ class PayToBankScreen extends StatelessWidget {
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined,
-                        color: Colors.black),
+              icon: SvgPicture.asset(notificationIcon),
                     onPressed: () {
                       Get.back();
                     },
@@ -89,36 +90,16 @@ class PayForm extends StatelessWidget {
             LabelText(textLabel: "Bank Name"),
             const SizedBox(height: 10),
             TextInputForm(
+              onTap: () => showBankList(context),
               enabled: true,
+              readOnly: true,
               inputController: payController.bankNameController,
               textHint: 'Select Bank',
               validatorMessage: 'Please select bank',
               isPassword: false,
               autoCorrect: false,
               suffixIcon: InkWell(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(16.0),
-                          topRight: Radius.circular(16.0)),
-                    ),
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    builder: (BuildContext context) {
-                      return BankListModalSheet(
-                        onBankSelected: (selectedBank) {
-                          payController.onSetSelectedBankName(selectedBank);
-                          payController.bankNameController.text = selectedBank;
-                          Navigator.pop(context);
-                        },
-                        allBanks: payController.allBanks,
-                        initialSelectedBank:
-                            payController.selectedBankName.value,
-                      );
-                    },
-                  );
-                },
+                onTap: () => showBankList(context),
                 child: Icon(Icons.arrow_drop_down),
               ),
               initialValue: payController.bankNameController.text,
@@ -186,5 +167,27 @@ class PayForm extends StatelessWidget {
             ),
           ],
         ));
+  }
+
+  void showBankList(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (BuildContext context) {
+        return BankListModalSheet(
+          onBankSelected: (selectedBank) {
+            payController.onSetSelectedBankName(selectedBank);
+            payController.bankNameController.text = selectedBank;
+            Navigator.pop(context);
+          },
+          allBanks: payController.allBanks,
+          initialSelectedBank: payController.selectedBankName.value,
+        );
+      },
+    );
   }
 }

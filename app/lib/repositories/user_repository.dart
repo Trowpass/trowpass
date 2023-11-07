@@ -6,12 +6,16 @@ import 'package:app/services/requests/post_requests/re_create_wallet_request.dar
 import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/requests/put_requests/tier_one_request.dart';
+import 'package:app/services/requests/put_requests/update_customer_data_request.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/file_upload_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
 import 'package:app/services/responses/request_reset_password_response.dart';
 import 'package:app/services/responses/tier_one_response.dart';
+import 'package:app/services/responses/update_customer_data_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
+import 'package:app/shareds/constants/file_upload_purpose.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 
@@ -43,7 +47,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to login');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -62,7 +66,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to create rider\'s account');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -82,7 +86,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to verify account');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -95,17 +99,15 @@ class UserRepository {
     try {
       int? userId = session.readUserId();
       var url = '${Endpoints.userProfile}/$userId';
-      //
       var response = await apiConnectionHelper.getDataAsync(
         url: url,
       );
-      //
       if (response.data != null) {
         return ViewProfileResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to get user profile');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -124,7 +126,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to get user');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -140,13 +142,12 @@ class UserRepository {
         requestData: request,
         path: Endpoints.forgotPassword,
       );
-
       if (response.data != null) {
         return RequestResetPasswordResponse.fromJson(response.data);
       } else {
         throw Exception('Unable to send request');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -167,7 +168,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to resend otp');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -189,7 +190,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to reset password');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -208,7 +209,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to create tag');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -227,7 +228,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to create tag');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -248,7 +249,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to resend otp');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -269,7 +270,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to get user wallet details');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -287,7 +288,7 @@ class UserRepository {
       } else {
         throw Exception('Unable to create tag');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -307,7 +308,61 @@ class UserRepository {
       } else {
         throw Exception('Unable to upgrade account');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<FileUploadResponse> uploadFileAsync({
+    required String filepath,
+    required FileUploadPurpose purpose,
+  }) async {
+    final data = FormData.fromMap({
+      'Purpose': purpose.toString(),
+      'UserId': session.readUserId(),
+      'File': MultipartFile.fromFileSync(
+        filepath,
+        filename: filepath.split('/').last,
+      ),
+    });
+
+    try {
+      var response = await apiConnectionHelper.postFormDataAsync(
+        path: Endpoints.fileUpload,
+        formData: data,
+      );
+      if (response.data != null) {
+        return FileUploadResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to upload document');
+      }
+    } on DioException catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<UpdateCustomerDataResponse> updateCustomerDataAsync(
+      UpdateCustomerDataRequest request) async {
+    try {
+      int? userId = session.readUserId();
+      var url = '${Endpoints.updateCustomerData}/$userId';
+      var response = await apiConnectionHelper.updateDataAsync(
+          requestData: request, path: url);
+
+      if (response.data != null) {
+        return UpdateCustomerDataResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to update customer');
+      }
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);

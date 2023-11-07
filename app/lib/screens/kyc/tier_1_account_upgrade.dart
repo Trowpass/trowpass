@@ -10,20 +10,21 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+
+import '../../shareds/utils/images.dart';
 
 class TeirOneAccountUpgradeScreen extends StatefulWidget {
   const TeirOneAccountUpgradeScreen({super.key});
 
   @override
-  State<TeirOneAccountUpgradeScreen> createState() =>
-      _TeirOneAccountUpgradeScreenState();
+  State<TeirOneAccountUpgradeScreen> createState() => _TeirOneAccountUpgradeScreenState();
 }
 
-class _TeirOneAccountUpgradeScreenState
-    extends State<TeirOneAccountUpgradeScreen> {
+class _TeirOneAccountUpgradeScreenState extends State<TeirOneAccountUpgradeScreen> {
   final controller = Get.put(TeirOneAccountUpgradeController());
   @override
   Widget build(BuildContext context) {
@@ -46,13 +47,11 @@ class _TeirOneAccountUpgradeScreenState
                 ),
                 elevation: 0.0,
                 backgroundColor: background,
-                title: Text('Upgrading Account to Tier 1',
-                    style: appStyles(18, titleActive, FontWeight.w600)),
+                title: Text('Upgrading Account to Tier 1', style: appStyles(18, titleActive, FontWeight.w600)),
                 centerTitle: true,
                 actions: [
                   IconButton(
-                    icon: const Icon(Icons.notifications_outlined,
-                        color: Colors.black),
+                    icon: SvgPicture.asset(notificationIcon),
                     onPressed: () {
                       Get.back();
                     },
@@ -84,17 +83,13 @@ class _TeirOneAccountUpgradeScreenState
                                         autoCorrect: false,
                                         enabled: true,
                                         isPassword: false,
-                                        inputController:
-                                            controller.placeOfBirthController,
+                                        inputController: controller.placeOfBirthController,
                                         textHint: 'place of birth',
                                         validator: (value) =>
-                                            value != null && value.isEmpty
-                                                ? 'Field can\'t be empty'
-                                                : null,
+                                            value != null && value.isEmpty ? 'Field can\'t be empty' : null,
                                         suffixIcon: IconButton(
                                             onPressed: () {
-                                              controller.placeOfBirthController
-                                                  .clear();
+                                              controller.placeOfBirthController.clear();
                                             },
                                             icon: const Icon(
                                               Icons.close_outlined,
@@ -113,38 +108,28 @@ class _TeirOneAccountUpgradeScreenState
                                         inputType: TextInputType.datetime,
                                         enabled: true,
                                         isPassword: false,
-                                        inputController:
-                                            controller.dobController,
+                                        inputController: controller.dobController,
                                         textHint: 'Date of birth',
                                         validator: (value) =>
-                                            value != null && value.isEmpty
-                                                ? 'Field can\'t be empty'
-                                                : null,
+                                            value != null && value.isEmpty ? 'Field can\'t be empty' : null,
                                         suffixIcon: IconButton(
                                             onPressed: () async {
-                                              DateTime? pickedDate =
-                                                  await showDatePicker(
+                                              DateTime? pickedDate = await showDatePicker(
                                                 context: context,
                                                 initialDate: DateTime.now(),
-                                                firstDate: DateTime(
-                                                    DateTime.now().year - 120),
+                                                firstDate: DateTime(DateTime.now().year - 120),
                                                 lastDate: DateTime.now(),
                                                 builder: (context, child) {
                                                   return Theme(
-                                                      data: ThemeData.light()
-                                                          .copyWith(
-                                                        primaryColor:
-                                                            primaryColor,
+                                                      data: ThemeData.light().copyWith(
+                                                        primaryColor: primaryColor,
                                                       ),
                                                       child: child!);
                                                 },
                                               );
                                               if (pickedDate != null) {
-                                                String formattedDate =
-                                                    DateFormat('yyyy-MM-dd')
-                                                        .format(pickedDate);
-                                                controller.dobController.text =
-                                                    formattedDate;
+                                                String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+                                                controller.dobController.text = formattedDate;
                                                 Get.focusScope!.unfocus();
                                               }
                                             },
@@ -162,32 +147,22 @@ class _TeirOneAccountUpgradeScreenState
                                       title: const Text('Gender'),
                                       subtitle: DropdownButtonFormField(
                                         decoration: InputDecoration(
-                                            focusedBorder:
-                                                const OutlineInputBorder(
-                                              borderSide: BorderSide(
-                                                  color: primaryColor),
+                                            focusedBorder: const OutlineInputBorder(
+                                              borderSide: BorderSide(color: primaryColor),
                                             ),
-                                            enabledBorder:
-                                                const OutlineInputBorder(
-                                              borderSide:
-                                                  BorderSide(color: grayscale),
+                                            enabledBorder: const OutlineInputBorder(
+                                              borderSide: BorderSide(color: grayscale),
                                             ),
                                             border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        defaultBorderRadius))),
+                                                borderRadius: BorderRadius.circular(defaultBorderRadius))),
                                         onChanged: (Object? newSeleted) {
-                                          controller
-                                              .onSetSelectedGender(newSeleted);
+                                          controller.onSetSelectedGender(newSeleted);
                                         },
                                         isExpanded: true,
-                                        validator: (value) => value != null &&
-                                                value == 'Select gender'
-                                            ? 'Please select genger'
-                                            : null,
+                                        validator: (value) =>
+                                            value != null && value == 'Select gender' ? 'Please select genger' : null,
                                         value: controller.selectedGender.value,
-                                        items: controller.gender
-                                            .map((selectedType) {
+                                        items: controller.gender.map((selectedType) {
                                           return DropdownMenuItem(
                                             value: selectedType,
                                             child: Text(
@@ -200,39 +175,8 @@ class _TeirOneAccountUpgradeScreenState
                                     const SizedBox(
                                       height: 5,
                                     ),
-                                    ListTile(
-                                      contentPadding: EdgeInsets.zero,
-                                      title: const Text(
-                                          'Bank Verification Number'),
-                                      subtitle: TextInputForm(
-                                        inputType: TextInputType.number,
-                                        autoCorrect: false,
-                                        enabled: true,
-                                        isPassword: false,
-                                        inputController:
-                                            controller.bvnController,
-                                        textHint: 'bvn',
-                                        validator: (value) =>
-                                            value != null && value.isEmpty
-                                                ? 'Field can\'t be empty'
-                                                : null,
-                                        suffixIcon: IconButton(
-                                            onPressed: () {
-                                              controller.placeOfBirthController
-                                                  .clear();
-                                            },
-                                            icon: const Icon(
-                                              Icons.close_outlined,
-                                              size: 20,
-                                            )),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
                                     Visibility(
-                                        visible: controller
-                                            .isUploadButtonClicked.value,
+                                        visible: controller.isUploadButtonClicked.value,
                                         child: ListTile(
                                             contentPadding: EdgeInsets.zero,
                                             title: const Text('Your image'),
@@ -246,19 +190,14 @@ class _TeirOneAccountUpgradeScreenState
                                               },
                                               style: ElevatedButton.styleFrom(
                                                 shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            defaultBorderRadius)),
+                                                    borderRadius: BorderRadius.circular(defaultBorderRadius)),
                                                 backgroundColor: offWhite,
-                                                minimumSize: const Size(
-                                                    double.infinity, 60),
-                                                side: const BorderSide(
-                                                    color: grayscale),
+                                                minimumSize: const Size(double.infinity, 60),
+                                                side: const BorderSide(color: grayscale),
                                               ),
                                               label: Text(
                                                 'Upload from Gallery or Camera (Selfie)',
-                                                style: appStyles(
-                                                    16, gray, FontWeight.w400),
+                                                style: appStyles(16, gray, FontWeight.w400),
                                               ),
                                             ))),
                                     Visibility(
@@ -267,43 +206,31 @@ class _TeirOneAccountUpgradeScreenState
                                           contentPadding: EdgeInsets.zero,
                                           title: const Text('Your image'),
                                           subtitle: Container(
-                                              decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color: border)),
+                                              decoration: BoxDecoration(border: Border.all(color: border)),
                                               child: Row(
                                                 children: [
                                                   Expanded(
                                                       flex: 2,
                                                       child: SizedBox(
-                                                        height: 50.0,
-                                                        child: controller
-                                                                    .galleryFile ==
-                                                                null
-                                                            ? const Icon(Icons
-                                                                .broken_image_outlined)
+                                                        height: 100.0,
+                                                        child: controller.galleryFile == null
+                                                            ? const Icon(Icons.broken_image_outlined)
                                                             : Image.file(
-                                                                controller
-                                                                    .galleryFile!,
-                                                                filterQuality:
-                                                                    FilterQuality
-                                                                        .high,
-                                                                fit:
-                                                                    BoxFit.fill,
+                                                                controller.galleryFile!,
+                                                                filterQuality: FilterQuality.high,
+                                                                fit: BoxFit.fill,
                                                               ),
                                                       )),
                                                   Expanded(
                                                       flex: 5,
                                                       child: GestureDetector(
                                                         onTap: () async {
-                                                          _showPicker(
-                                                              context: context);
+                                                          _showPicker(context: context);
                                                         },
                                                         child: const ListTile(
                                                           horizontalTitleGap: 0,
-                                                          leading: Icon(Icons
-                                                              .delete_outline_outlined),
-                                                          title: Text(
-                                                              'Replace image'),
+                                                          leading: Icon(Icons.delete_outline_outlined),
+                                                          title: Text('Replace image'),
                                                         ),
                                                       ))
                                                 ],
@@ -317,10 +244,9 @@ class _TeirOneAccountUpgradeScreenState
                             child: StandardButton(
                               text: 'Continue',
                               onPressed: () {
-                                if (controller.formKey.currentState!
-                                    .validate()) {
+                                if (controller.formKey.currentState!.validate()) {
                                   controller.formKey.currentState!.save();
-                                  controller.getUpgradeData();
+                                  controller.submitTierOneKycUpgrade(context);
                                 }
                               },
                             ),
@@ -367,11 +293,8 @@ class _TeirOneAccountUpgradeScreenState
   }
 
   Future getImage(ImageSource img) async {
-    final pickedFile = await controller.picker.pickImage(
-        source: img,
-        preferredCameraDevice: CameraDevice.front,
-        requestFullMetadata: false,
-        imageQuality: 10);
+    final pickedFile = await controller.picker
+        .pickImage(source: img, preferredCameraDevice: CameraDevice.front, requestFullMetadata: false, imageQuality: 10);
     XFile? xfilePick = pickedFile;
     setState(
       () {

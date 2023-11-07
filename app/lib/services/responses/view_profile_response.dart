@@ -43,8 +43,9 @@ class ViewProfileData {
   DateTime? accountUpgradedAt;
   String? qr;
   AccountDetail? accountDetail;
-  dynamic kycDetail;
-  dynamic bussinessDetail;
+  ViewProfileKycDetail? kycDetail;
+  BussinessDetail? bussinessDetail;
+  String? profilePix;
 
   ViewProfileData({
     required this.userId,
@@ -69,6 +70,7 @@ class ViewProfileData {
     required this.accountDetail,
     required this.kycDetail,
     required this.bussinessDetail,
+    required this.profilePix,
   });
 
   factory ViewProfileData.fromJson(Map<String, dynamic> json) {
@@ -98,11 +100,14 @@ class ViewProfileData {
       accountDetail: json['accountDetail'] != null
           ? AccountDetail.fromJson(json['accountDetail'])
           : null,
-      kycDetail: null,
+      kycDetail: json['kycDetail'] != null
+          ? ViewProfileKycDetail.fromJson(json['kycDetail'])
+          : null,
       bussinessDetail: json['bussinessDetail'] != null
           ? BussinessDetail.fromJson(json['bussinessDetail'])
           : null,
       isVirtualCardCreated: json['isVirtualCardCreated'],
+      profilePix: json["profilePix"] ?? '',
     );
   }
 }
@@ -141,5 +146,51 @@ class BussinessDetail {
       slug: json['slug'] ?? '',
       size: json['size'] ?? '',
     );
+  }
+}
+
+class ViewProfileKycDetail {
+  String? bvn;
+  ViewProfileAddress? address;
+
+  ViewProfileKycDetail({
+    required this.bvn,
+    required this.address,
+  });
+  factory ViewProfileKycDetail.fromJson(Map<String, dynamic> json) {
+    return ViewProfileKycDetail(
+        bvn: json['bvn'] ?? '',
+        address: json['address'] != null
+            ? ViewProfileAddress.fromJson(json['address'])
+            : null);
+  }
+}
+
+class ViewProfileAddress {
+  String? country;
+  String? street;
+  String? city;
+  String? state;
+  String? postalCode;
+  String? bioData;
+  bool isVerified;
+
+  ViewProfileAddress(
+      {required this.country,
+      required this.street,
+      required this.city,
+      required this.state,
+      required this.postalCode,
+      required this.bioData,
+      required this.isVerified});
+  factory ViewProfileAddress.fromJson(Map<String, dynamic> json) {
+    return ViewProfileAddress(
+        country: json['country'] ?? '',
+        street: json['street'] ?? '',
+        city: json['city'] ?? '',
+        state: json['state'] ?? '',
+        postalCode: json['postalCode'] ?? '',
+        bioData: json['bioData'] ?? '',
+        isVerified: json['isVerified']);
   }
 }

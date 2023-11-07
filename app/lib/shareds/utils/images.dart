@@ -26,6 +26,8 @@ const wifi = 'assets/images/wifi.png';
 const fundCardSuccess = 'assets/images/success-1-1.png';
 const comingSoon = 'assets/images/coming_soon.png';
 const paymentImg = 'assets/images/payment.png';
+const feelingBlue = 'assets/images/feeling-blue.png';
+const notificationIcon = 'assets/icons/notification.svg';
 
 //region Icons
 const card = 'assets/icons/card.png';
@@ -40,3 +42,13 @@ const train = 'assets/icons/ticket.png';
 const configure = 'assets/icons/configure.png';
 const bank = 'assets/icons/bank.png';
 const trowpass = 'assets/icons/trowpass.png';
+const bill = 'assets/icons/bill.svg';
+const lock = 'assets/icons/lock.png';
+const logout = 'assets/icons/logout.png';
+const scanBlack = 'assets/icons/scan_black.png';
+const scanBarcode = 'assets/icons/scan-barcode.png';
+const edit = 'assets/icons/edit.png';
+const userEdit = 'assets/icons/user-edit.png';
+const home = 'assets/icons/home.svg';
+const history = 'assets/icons/note-text.svg';
+const person = 'assets/icons/person.svg';

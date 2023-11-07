@@ -47,7 +47,6 @@ class SetSessionManager {
   }
 
   void logoutUser() {
-    storage.erase();
     writeIsUserOnBoarded(true);
   }
 
@@ -119,12 +118,12 @@ class SetSessionManager {
     storage.write(accountType, value);
   }
 
-  void writeTokenExpiration(DateTime tokenExpires) {
+  void writeTokenExpiration(DateTime? tokenExpires) {
     storage.write(tokenExpiration, tokenExpires);
   }
 
   void writeShouldRememberMe(bool loggedIn) {
-    storage.write(userLoggedIn, loggedIn);
+    storage.write(shouldRememberMe, loggedIn);
   }
 
   void writeResetPasswordToken(String value) {
@@ -133,5 +132,49 @@ class SetSessionManager {
 
   void writeQRCode(String value) {
     storage.write(qrCode, value);
+  }
+
+  void setIsProfilePictureInfoShown(bool value) {
+    storage.write(profilePictureInfoShown, value);
+  }
+
+  void writeProfileBioData(String value) {
+    storage.write(profileBioData, value);
+  }
+
+  void writeProfileBvn(String value) {
+    storage.write(profileBvn, value);
+  }
+
+  void writeProfileStreet(String value) {
+    storage.write(profileStreet, value);
+  }
+
+  void writeProfileCity(String value) {
+    storage.write(profileCity, value);
+  }
+
+  void writeProfileCountry(String value) {
+    storage.write(profileCountry, value);
+  }
+
+  void writeProfileState(String value) {
+    storage.write(profileState, value);
+  }
+
+  void writeProfilePostalCode(String value) {
+    storage.write(profilePostalCode, value);
+  }
+
+  void writeProfileFN(String value) {
+    storage.write(profileFN, value);
+  }
+
+  void writeProfileLN(String value) {
+    storage.write(profileLN, value);
+  }
+
+  void writeProfilePN(String value) {
+    storage.write(profilePN, value);
   }
 }

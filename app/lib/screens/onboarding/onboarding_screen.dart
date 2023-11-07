@@ -50,7 +50,7 @@ class OnBoardingScreen extends StatelessWidget {
                         child: Text(
                           item.title,
                           textAlign: TextAlign.center,
-                          style: appStyles(22, titleActive, FontWeight.bold),
+                          style: appStyles(24, titleActive, FontWeight.bold),
                         ),
                       ),
                       Image.asset(

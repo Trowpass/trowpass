@@ -1,11 +1,14 @@
-import 'package:app/screens/kyc/tier_1_account_upgrade.dart';
+import 'package:app/screens/kyc/kyc_upgrade_account.dart';
 import 'package:app/shareds/constants/key_constants.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
+import '../../shareds/utils/images.dart';
 
 class TierSelectionPage extends StatelessWidget {
   const TierSelectionPage({super.key});
@@ -18,11 +21,11 @@ class TierSelectionPage extends StatelessWidget {
     bool isDefault = false;
     GetSessionManager session = GetSessionManager();
     String accountType = session.readAccountType();
-    if (accountType == t1_account) {
+    if (accountType == t1Account) {
       isT1Done = true;
-    } else if (accountType == t2_account) {
+    } else if (accountType == t2Account) {
       isT2Done = true;
-    } else if (accountType == t3_account) {
+    } else if (accountType == t3Account) {
       isT3Done = true;
     } else {
       isDefault = true;
@@ -39,13 +42,11 @@ class TierSelectionPage extends StatelessWidget {
           ),
           elevation: 0.0,
           backgroundColor: background,
-          title: Text('KYC Verification',
-              style: appStyles(18, titleActive, FontWeight.w600)),
+          title: Text('KYC Verification', style: appStyles(18, titleActive, FontWeight.w600)),
           centerTitle: true,
           actions: [
             IconButton(
-              icon:
-                  const Icon(Icons.notifications_outlined, color: Colors.black),
+              icon: SvgPicture.asset(notificationIcon),
               onPressed: () {
                 Get.back();
               },
@@ -71,13 +72,9 @@ class TierSelectionPage extends StatelessWidget {
               OutlinedButton(
                   style: isT1Done == false
                       ? null
-                      : OutlinedButton.styleFrom(
-                          backgroundColor: Colors.yellowAccent[100],
-                          foregroundColor: offWhite),
+                      : OutlinedButton.styleFrom(backgroundColor: Colors.yellowAccent[100], foregroundColor: offWhite),
                   onPressed: () {
-                    isT1Done == true
-                        ? null
-                        : Get.to(() => const TeirOneAccountUpgradeScreen());
+                    isT1Done == true ? null : Get.to(() => KycUpgradeAccountScreen());
                   },
                   child: ListTile(
                     horizontalTitleGap: 0,
@@ -102,15 +99,11 @@ class TierSelectionPage extends StatelessWidget {
               OutlinedButton(
                   style: isT2Done == false
                       ? null
-                      : OutlinedButton.styleFrom(
-                          backgroundColor: Colors.yellowAccent[100],
-                          foregroundColor: offWhite),
+                      : OutlinedButton.styleFrom(backgroundColor: Colors.yellowAccent[100], foregroundColor: offWhite),
                   onPressed: isDefault == true
                       ? null
                       : () {
-                          isT2Done == true
-                              ? null
-                              : null; //Get.to(() => const TeirTwoAccountUpgradeScreen())
+                          isT2Done == true ? null : null; //Get.to(() => const TeirTwoAccountUpgradeScreen())
                         },
                   child: ListTile(
                     horizontalTitleGap: 0,
@@ -135,15 +128,11 @@ class TierSelectionPage extends StatelessWidget {
               OutlinedButton(
                   style: isT3Done == false
                       ? null
-                      : OutlinedButton.styleFrom(
-                          backgroundColor: Colors.yellowAccent[100],
-                          foregroundColor: offWhite),
+                      : OutlinedButton.styleFrom(backgroundColor: Colors.yellowAccent[100], foregroundColor: offWhite),
                   onPressed: isDefault == true
                       ? null
                       : () {
-                          isT3Done == true
-                              ? null
-                              : null; //Get.to(() => const TeirThreeAccountUpgradeScreen())
+                          isT3Done == true ? null : null; //Get.to(() => const TeirThreeAccountUpgradeScreen())
                         },
                   child: ListTile(
                     horizontalTitleGap: 0,

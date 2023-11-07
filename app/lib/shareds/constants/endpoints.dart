@@ -2,9 +2,12 @@ import '../enums/environment.dart';
 import '../helpers/api_config_helper.dart';
 import 'otp_type.dart';
 
-String baseUrl = getBaseUrlOnEnvironment(Environment.staging);
+String baseUrl = getBaseUrlOnEnvironment(Environment.prod);
 
 class Endpoints {
+  static const String resendOtp = 'user/resend-otp';
+  static const String transactionHistoryAll = '/api/v1/transaction/histories/{userId}';
+  static const String transactionHistorySingle = '/api/v1/transaction/{id}/histories/details/{userId}';
   static const String riderRegister = 'api/v1/auth/create';
   static const String verifyOtp = 'api/v1/auth/verify-account';
   static const String login = 'api/v1/auth/sign-in';
@@ -39,7 +42,9 @@ class Endpoints {
   static const String cardDetails = '/api/v1/card/{userId}';
   static const String changeVirtualCardPin =
       '/api/v1/card/change-virtual-card-pin';
+  static const String updateCustomerData = '/api/v1/user';
   static const String t1_upgrade = '/api/v1/accountupgrade/t1';
+  static const String fileUpload = '/api/v1/setting/file-uploader';
 
   static String format({
     required String basePath,

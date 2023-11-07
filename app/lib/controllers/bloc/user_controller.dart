@@ -1,5 +1,6 @@
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/repositories/user_repository.dart';
+import 'package:app/screens/auth/otp.dart';
 import 'package:app/services/requests/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/post_requests/forget_password_request.dart';
@@ -10,16 +11,21 @@ import 'package:app/services/requests/post_requests/user_login_request.dart';
 import 'package:app/services/requests/post_requests/verify_otp_request.dart';
 import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
 import 'package:app/services/requests/put_requests/tier_one_request.dart';
+import 'package:app/services/requests/put_requests/update_customer_data_request.dart';
 import 'package:app/services/responses/base_response.dart';
 import 'package:app/services/responses/create_wallet_response.dart';
+import 'package:app/services/responses/file_upload_response.dart';
 import 'package:app/services/responses/re_create_wallet_response.dart';
 import 'package:app/services/responses/request_reset_password_response.dart';
 import 'package:app/services/responses/tier_one_response.dart';
+import 'package:app/services/responses/update_customer_data_response.dart';
 import 'package:app/services/responses/user_login_response.dart';
 import 'package:app/services/responses/view_profile_response.dart';
 import 'package:app/services/responses/view_user_by_phone_response.dart';
 import 'package:app/services/responses/view_wallet_response.dart';
+import 'package:app/shareds/constants/file_upload_purpose.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:get/get.dart';
 
 import '../../services/requests/post_requests/reset_password_request.dart';
 import '../../services/responses/reset_password_response.dart';
@@ -36,6 +42,11 @@ class UserController {
       final response = await userRepository.userLoginAsync(request);
       if (response.status) {
         return response;
+      } else if (!response.status &&
+          response.data == null &&
+          response.message.contains('User account not yet verified')) {
+        String phoneNumber = getSession.readRiderPhoneNumber() ?? '';
+        Get.offAll(() => OtpScreen(phoneNumber: phoneNumber));
       }
       return Future.error(response.message);
     } catch (e) {
@@ -113,7 +124,7 @@ class UserController {
       }
       return Future.error(response.message);
     } catch (e) {
-      return Future.error('Unable to create wallet. Please try again!');
+      return Future.error('Unable to create wallet. Please try again later!');
     }
   }
 
@@ -133,7 +144,10 @@ class UserController {
   Future<UserWalletResponse> userWalletAsync() async {
     try {
       final response = await userRepository.getUserWalletAsync();
-      return response;
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
     } catch (e) {
       return Future.error('Unable to fetch wallet. Please try again!');
     }
@@ -157,7 +171,7 @@ class UserController {
       if (response.status) {
         return response;
       }
-      return Future.error(response.message);
+      return Future.error(response.message!);
     } catch (e) {
       return Future.error('Unable to upgrade account. Please try again!');
     }
@@ -188,6 +202,20 @@ class UserController {
     }
   }
 
+  Future<BaseResponse> resendOtpToPhoneNumberAsync(
+      ResendOtpRequest request) async {
+    try {
+      final response =
+          await userRepository.resendOtpToPhoneNumberAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unable to resend otp. Please try again!');
+    }
+  }
+
   Future<ResetPasswordResponse> resetPasswordAsync(
       ResetPasswordRequest request) async {
     try {
@@ -198,6 +226,36 @@ class UserController {
       return Future.error(response.message);
     } catch (e) {
       return Future.error('Unable to reset password. Please try again!');
+    }
+  }
+
+  Future<FileUploadResponse> uploadFileAsync({
+    required String filepath,
+    required FileUploadPurpose purpose,
+  }) async {
+    try {
+      final response = await userRepository.uploadFileAsync(
+          filepath: filepath, purpose: purpose);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unable to upload image. Please try again!');
+    }
+  }
+
+  Future<UpdateCustomerDataResponse> updateCustomerDataAsync(
+      UpdateCustomerDataRequest request) async {
+    try {
+      final response = await userRepository.updateCustomerDataAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error(
+          'Unable to update customer record. Please try again!');
     }
   }
 }

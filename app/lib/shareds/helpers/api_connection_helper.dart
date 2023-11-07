@@ -32,60 +32,91 @@ class ApiConnectionHelper {
           maxWidth: 90),
     ]);
 
-  Future<Response<dynamic>> getDataAsync(
-      {required String url,
-      Options? requestOptions,
-      Map<String, dynamic>? queryParmeters}) async {
-    Response response = await dio.get(url,
-        options: requestOptions, queryParameters: queryParmeters);
+  Future<Response<dynamic>> getDataAsync({
+    required String url,
+    Options? requestOptions,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    Response response = await dio.get(
+      url,
+      options: requestOptions,
+      queryParameters: queryParameters,
+    );
     return response;
   }
 
-  Future<Response<dynamic>> postDataAsync(
-      {dynamic requestData,
-      required String path,
-      Options? requestOptions,
-      Map<String, dynamic>? queryParmeters}) async {
-    Response response = await dio.post(path,
-        data: jsonEncode(requestData),
-        options: requestOptions,
-        queryParameters: queryParmeters);
+  Future<Response<dynamic>> postDataAsync({
+    dynamic requestData,
+    required String path,
+    Options? requestOptions,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    Response response = await dio.post(
+      path,
+      data: jsonEncode(requestData),
+      options: requestOptions,
+      queryParameters: queryParameters,
+    );
     return response;
   }
 
-  Future<Response<dynamic>> updateDataAsync(
-      {dynamic requestData,
-      required String path,
-      Options? requestOptions,
-      Map<String, dynamic>? queryParmeters}) async {
-    Response response = await dio.patch(path,
-        data: jsonEncode(requestData),
-        options: requestOptions,
-        queryParameters: queryParmeters);
+  Future<Response<dynamic>> postFormDataAsync({
+    required String path,
+    required FormData formData,
+    Options? requestOptions,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    Response response = await dio.post(
+      path,
+      data: formData,
+      options: Options(contentType: 'multipart/form-data'),
+      queryParameters: queryParameters,
+    );
     return response;
   }
 
-  Future<Response<dynamic>> updateWithPutDataAsync(
-      {dynamic requestData,
-      required String path,
-      Options? requestOptions,
-      Map<String, dynamic>? queryParmeters}) async {
-    Response response = await dio.put(path,
-        data: jsonEncode(requestData),
-        options: requestOptions,
-        queryParameters: queryParmeters);
+  Future<Response<dynamic>> updateDataAsync({
+    dynamic requestData,
+    required String path,
+    Options? requestOptions,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    Response response = await dio.patch(
+      path,
+      data: jsonEncode(requestData),
+      options: requestOptions,
+      queryParameters: queryParameters,
+    );
     return response;
   }
 
-  Future<Response<dynamic>> deleteDataAsync(
-      {dynamic requestData,
-      required String path,
-      Options? requestOptions,
-      Map<String, dynamic>? queryParmeters}) async {
-    Response response = await dio.delete(path,
-        data: jsonEncode(requestData),
-        options: requestOptions,
-        queryParameters: queryParmeters);
+  Future<Response<dynamic>> updateWithPutDataAsync({
+    dynamic requestData,
+    required String path,
+    Options? requestOptions,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    Response response = await dio.put(
+      path,
+      data: jsonEncode(requestData),
+      options: requestOptions,
+      queryParameters: queryParameters,
+    );
+    return response;
+  }
+
+  Future<Response<dynamic>> deleteDataAsync({
+    dynamic requestData,
+    required String path,
+    Options? requestOptions,
+    Map<String, dynamic>? queryParameters,
+  }) async {
+    Response response = await dio.delete(
+      path,
+      data: jsonEncode(requestData),
+      options: requestOptions,
+      queryParameters: queryParameters,
+    );
     return response;
   }
 }

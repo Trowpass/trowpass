@@ -1,14 +1,18 @@
 // ignore_for_file: avoid_print, unnecessary_string_interpolations, avoid_function_literals_in_foreach_calls
+import 'dart:async';
+
 import 'package:app/controllers/bloc/topup_transport_wallet_controller.dart';
 import 'package:app/controllers/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
+import 'package:app/screens/auth/login.dart';
 import 'package:app/screens/dashboard/dashboard.dart';
-import 'package:app/services/requests/post_requests/re_create_wallet_request.dart';
+import 'package:app/services/requests/post_requests/create_wallet_request.dart';
 import 'package:app/services/responses/get_all_banks_reponse.dart';
 import 'package:app/services/responses/get_all_transport_company_response.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/currency_format.dart';
+import 'package:cron/cron.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +30,8 @@ class DashboardController extends GetxController {
   final balance = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
   final isLoaded = false.obs;
-  final isCreatWalletCreated = false.obs;
+  final isWalletCreated = false.obs;
+  final walletCreateLoader = false.obs;
   RxDouble sliderValue = 0.0.obs;
   final double slideWidth = 200.0;
   final selectedTransportCompany = 'Select company'.obs;
@@ -41,21 +46,30 @@ class DashboardController extends GetxController {
   GetSessionManager session = GetSessionManager();
   SetSessionManager session2 = SetSessionManager();
   UserController userController = UserController();
+  Cron cron = Cron();
 
   @override
   void onInit() {
     isLoaded.value = true;
-    isCreatWalletCreated.value = false;
+    isWalletCreated.value = false;
     fullName.value = session.readRiderFullName() ?? '';
     balance.value = formatCurrency(session.readUserAccountBalance() ?? 0.0);
     bankName.value = session.readUserBankName() ?? '';
     accountNumber.value = session.readUserAccountNumber() ?? '';
     phoneNumber.value = '';
-    userProfile();
-    userWallet();
-    fetchBanks();
-    fetchTransportCompany();
+    if (session.readIsUserLoggedIn()) {
+      userProfile();
+      userWallet();
+      fetchBanks();
+      fetchTransportCompany();
+      if (!session.readShouldRememberMe()) {
+        cron.schedule(Schedule.parse('*/1 * * * *'), () async {
+          logoutTimeElapsed();
+        });
+      }
+    }
     printSessionStorageContents();
+
     super.onInit();
   }
 
@@ -163,7 +177,26 @@ class DashboardController extends GetxController {
           '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
       fullName.value = fullName2;
       session2.writeUserFullName(fullName2);
+      session2.writeAccountType(response.data!.accountType);
+      isWalletCreated.value =
+          response.data != null ? response.data!.isWalletCreated : false;
       qrCodeUrl.value = response.data!.qr!;
+      //for profile
+      if (response.data!.kycDetail != null) {
+        session2
+            .writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
+        session2.writeProfileBvn(response.data!.kycDetail!.bvn!);
+        session2.writeProfileCity(response.data!.kycDetail!.address!.city!);
+        session2
+            .writeProfileCountry(response.data!.kycDetail!.address!.country!);
+        session2.writeProfileState(response.data!.kycDetail!.address!.state!);
+        session2.writeProfileStreet(response.data!.kycDetail!.address!.street!);
+        session2.writeProfilePostalCode(
+            response.data!.kycDetail!.address!.postalCode!);
+        session2.writeProfileFN(response.data!.firstName);
+        session2.writeProfileLN(response.data!.lastName);
+        session2.writeProfilePN(response.data!.phoneNumber);
+      }
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());
       }
@@ -181,32 +214,49 @@ class DashboardController extends GetxController {
       session2.writeUserAccountNumber(accountNumber.value);
       session2.writeUserAccountBalance(balance1);
       session2.writeUserBankName(bankName.value);
+    } else {
+      Get.snackbar('Information', 'Please create account',
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM);
+      walletCreateLoader.value = false;
     }
   }
 
-  Future reCreateWallet() async {
-    isCreatWalletCreated.value = true;
+  Future createWallet() async {
+    walletCreateLoader.value = true;
     try {
       int userId = session.readUserId() ?? 0;
       var response = await userController
-          .reCreateWalletAsync(ReCreateWalletRequest(userId: userId));
+          .createWalletAsync(CreateWalletRequest(userId: userId));
       if (response.status) {
         Get.offAll(() => DashboardScreen());
-        isCreatWalletCreated.value = false;
+        walletCreateLoader.value = false;
       } else {
         Get.defaultDialog(
-            title: 'Information', content: Text(response.message!));
-        isCreatWalletCreated.value = false;
+            title: 'Information', content: Text(response.message));
+        walletCreateLoader.value = false;
       }
     } catch (e) {
       Get.snackbar('Information', e.toString(),
           backgroundColor: dialogInfoBackground,
           snackPosition: SnackPosition.BOTTOM);
-      isCreatWalletCreated.value = false;
+      walletCreateLoader.value = false;
     }
   }
 
   Future<dynamic> displayPlaceholderDialog(String pageTitle) {
     return placeholderDialog(pageTitle);
+  }
+
+  void logoutTimeElapsed() {
+    final endTime = session.readTokenExpires();
+    if (endTime != null) {
+      final DateTime dateTimeNow = DateTime.now();
+      var remainingTime = (endTime.difference(dateTimeNow).inHours / 1).round();
+      if (remainingTime == 0) {
+        Get.offAll(() => LoginScreen());
+        cron.close();
+      }
+    }
   }
 }

@@ -1,21 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'package:app/shareds/utils/app_colors.dart';
 
 import 'app_styles.dart';
 
 /// Modal types
 enum DialogType { error, success, warning, info, neutral }
 
-const subTitleContent =
-    'We have you in mind. In the main time, explore the available features. Thank you.';
+const subTitleContent = 'We have you in mind. In the main time, explore the available features. Thank you.';
 
 class _AppDialog extends StatelessWidget {
   final String title;
   final String subtitle;
   final DialogType type;
   final double height;
+  final List<DialogButton>? actions;
 
   const _AppDialog({
     Key? key,
@@ -23,6 +24,7 @@ class _AppDialog extends StatelessWidget {
     required this.subtitle,
     required this.type,
     required this.height,
+    this.actions,
   }) : super(key: key);
 
   @override
@@ -81,15 +83,29 @@ class _AppDialog extends StatelessWidget {
                   ),
                   Text(
                     title,
-                    style: appStyles(16, Colors.black, FontWeight.w600),
+                    style: appStyles(18, Colors.black, FontWeight.w600),
                   ),
                 ],
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 16),
               Text(
                 subtitle,
-                style: appStyles(14, Colors.black, null),
-              )
+                style: appStyles(16, Colors.black, null),
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: actions == null
+                    ? []
+                    : actions!
+                        .map((e) => TextButton(
+                            onPressed: e.onTap,
+                            child: Text(
+                              e.label,
+                              style: appStyles(null, primaryColor, null),
+                            )).paddingSymmetric(horizontal: 8))
+                        .toList(),
+              ),
             ],
           ),
         ),
@@ -98,11 +114,22 @@ class _AppDialog extends StatelessWidget {
   }
 }
 
+class DialogButton {
+  final String label;
+  final VoidCallback onTap;
+
+  DialogButton({
+    required this.label,
+    required this.onTap,
+  });
+}
+
 Future<T?> showAppDialog<T>({
+  DialogType type = DialogType.success,
   double height = 150,
   required String title,
   required String subtitle,
-  DialogType type = DialogType.success,
+  List<DialogButton>? actions,
 }) {
   return Get.dialog(
     _AppDialog(
@@ -110,6 +137,7 @@ Future<T?> showAppDialog<T>({
       title: title,
       subtitle: subtitle,
       type: type,
+      actions: actions,
     ),
     transitionCurve: Curves.easeInOut,
   );

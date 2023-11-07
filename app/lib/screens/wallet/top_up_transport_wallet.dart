@@ -8,10 +8,12 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/top_up_transport_wallet_controller.dart';
 import '../../shareds/utils/app_colors.dart';
+import '../../shareds/utils/images.dart';
 import '../../widgets/text_form_input.dart';
 
 class TopUpTransportWalletScreen extends StatelessWidget {
@@ -45,8 +47,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
               backgroundColor: background,
               actions: [
                 IconButton(
-                  icon: const Icon(Icons.notifications_outlined,
-                      color: Colors.black),
+                  icon: SvgPicture.asset(notificationIcon),
                   onPressed: () {
                     Get.back();
                   },
@@ -80,8 +81,10 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     height: 10,
                   ),
                   TextInputForm(
+                    onTap: () => showTransportCompanyLists(context),
                     inputType: TextInputType.number,
                     enabled: true,
+                    readOnly: true,
                     inputController:
                         controller.transportCompanyNameTextEditController,
                     textHint: 'Select Transport Company',
@@ -89,33 +92,7 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     isPassword: false,
                     autoCorrect: false,
                     suffixIcon: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(16.0),
-                                topRight: Radius.circular(16.0)),
-                          ),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          builder: (BuildContext context) {
-                            return TransportCompanyListModalSheet(
-                              onTransportCompanySelected: (selectedCompany) {
-                                controller.onSetSelectedTransportCompany(
-                                    selectedCompany);
-                                controller
-                                    .transportCompanyNameTextEditController
-                                    .text = selectedCompany;
-                                Navigator.pop(context);
-                              },
-                              allTransportCompany:
-                                  controller.allTransportCompany,
-                              initialSelectedTransportCompany:
-                                  controller.selectedTransportCompany.value,
-                            );
-                          },
-                        );
-                      },
+                      onTap: () => showTransportCompanyLists(context),
                       child: Icon(Icons.arrow_drop_down),
                     ),
                     initialValue:
@@ -129,37 +106,16 @@ class TopUpTransportWalletScreen extends StatelessWidget {
                     height: 10,
                   ),
                   TextInputForm(
+                    onTap: () => showBankLists(context),
                     enabled: true,
+                    readOnly: true,
                     inputController: controller.bankNameTextEditController,
                     textHint: 'Select Bank',
                     validatorMessage: 'Please select bank',
                     isPassword: false,
                     autoCorrect: false,
                     suffixIcon: InkWell(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(16.0),
-                                topRight: Radius.circular(16.0)),
-                          ),
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          builder: (BuildContext context) {
-                            return BankListModalSheet(
-                              onBankSelected: (selectedBank) {
-                                controller.onSetSelectedBankName(selectedBank);
-                                controller.bankNameTextEditController.text =
-                                    selectedBank;
-                                Navigator.pop(context);
-                              },
-                              allBanks: controller.allBanks,
-                              initialSelectedBank:
-                                  controller.selectedBankName.value,
-                            );
-                          },
-                        );
-                      },
+                      onTap: () => showBankLists(context),
                       child: Icon(Icons.arrow_drop_down),
                     ),
                     initialValue: controller.bankNameTextEditController.text,
@@ -252,5 +208,51 @@ class TopUpTransportWalletScreen extends StatelessWidget {
             ),
           )),
         )));
+  }
+
+  Future<dynamic> showBankLists(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (BuildContext context) {
+        return BankListModalSheet(
+          onBankSelected: (selectedBank) {
+            controller.onSetSelectedBankName(selectedBank);
+            controller.bankNameTextEditController.text = selectedBank;
+            Navigator.pop(context);
+          },
+          allBanks: controller.allBanks,
+          initialSelectedBank: controller.selectedBankName.value,
+        );
+      },
+    );
+  }
+
+  Future<dynamic> showTransportCompanyLists(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (BuildContext context) {
+        return TransportCompanyListModalSheet(
+          onTransportCompanySelected: (selectedCompany) {
+            controller.onSetSelectedTransportCompany(selectedCompany);
+            controller.transportCompanyNameTextEditController.text =
+                selectedCompany;
+            Navigator.pop(context);
+          },
+          allTransportCompany: controller.allTransportCompany,
+          initialSelectedTransportCompany:
+              controller.selectedTransportCompany.value,
+        );
+      },
+    );
   }
 }

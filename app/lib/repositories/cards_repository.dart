@@ -25,7 +25,7 @@ class CardsRepository {
       } else {
         throw Exception('Could not create virtual card');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -47,7 +47,7 @@ class CardsRepository {
       } else {
         throw Exception('Unable to get card details');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -66,7 +66,7 @@ class CardsRepository {
       } else {
         throw Exception('Unable to fund card');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -85,7 +85,7 @@ class CardsRepository {
       } else {
         throw Exception('Could not change virtual card\'s pin');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);

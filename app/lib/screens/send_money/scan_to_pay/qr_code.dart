@@ -32,6 +32,7 @@ class ScanScreen extends StatelessWidget {
           systemNavigationBarIconBrightness: Brightness.light,
         ),
         backgroundColor: background,
+        centerTitle: true,
         elevation: 0.0,
         title: Text('Trowpass QR Code',
             style: appStyles(20, titleActive, FontWeight.w500)),
@@ -110,32 +111,12 @@ Widget _buildMyCodeTab() {
         child: Stack(
           alignment: Alignment.center,
           children: [
+            SizedBox(height: 15),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.network(controller.qrCodeUrl.value,
-                    height: 450, width: 450),
-                // QrImageView(
-                //   data: controller.qrCodeUrl.value,
-                //   version: QrVersions.auto,
-                //   size: 250.0, // Adjust the size as needed
-                //   eyeStyle: QrEyeStyle(color: Colors.black),
-                //   errorCorrectionLevel: QrErrorCorrectLevel.Q,
-                //   embeddedImage: AssetImage(mainLogo),
-                //   errorStateBuilder: (cxt, err) {
-                //     return Container(
-                //       child: Center(
-                //         child: Text(
-                //           'Oops! Something went wrong...',
-                //           textAlign: TextAlign.center,
-                //         ),
-                //       ),
-                //     );
-                //   },
-                //   embeddedImageStyle: QrEmbeddedImageStyle(
-                //     size: Size(40, 40),
-                //   ),
-                // ),
+                Obx(() => Image.network(controller.qrCodeUrl.value,
+                    height: 300, width: 300)),
               ],
             ),
           ],
