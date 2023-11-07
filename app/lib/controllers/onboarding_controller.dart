@@ -1,8 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
-
-import '../screens/auth/login.dart';
 import '../screens/onboarding/onboarding_items.dart';
 import '../shareds/utils/images.dart';
 
@@ -12,13 +13,13 @@ class OnBoardingController extends GetxController {
   final session = SetSessionManager();
 
   final List<OnBoardingItem> onBoardingItems = [
-    OnBoardingItem(finance, 'One app, multiple rides'),
-    OnBoardingItem(finance, 'Seamless payment on the go'),
-    OnBoardingItem(finance, 'Trowpass your No.1 travel partner'),
+    OnBoardingItem(finance1, 'Trowpass No.1 travel partner'),
+    OnBoardingItem(finance2, 'Seamless payment on the go'),
+    OnBoardingItem(finance3, 'One app, multiple rides'),
   ];
 
   void navigateToMain() {
     session.writeIsUserOnBoarded(true);
-    Get.offAll(() => LoginScreen());
+    Get.offAll(() => AccountTypeScreen());
   }
 }
