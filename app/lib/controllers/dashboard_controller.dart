@@ -28,7 +28,7 @@ class DashboardController extends GetxController {
   final bankName = Rx<String>('');
   final fullName = Rx<String>('');
   final isLoaded = false.obs;
-  final isQRCodeLoading = false.obs;
+  final isQRCodeLoading = true.obs;
   final isWalletCreated = false.obs;
   final phoneNumber = Rx<String>('');
   final qrCodeUrl = Rx<String>('');
@@ -54,8 +54,8 @@ class DashboardController extends GetxController {
     bankName.value = session.readUserBankName() ?? '';
     accountNumber.value = session.readUserAccountNumber() ?? '';
     phoneNumber.value = '';
-    userProfile();
-    userWallet();
+    fetchUserProfile();
+    fetchUserWallet();
     fetchBanks();
     fetchTransportCompany();
     printSessionStorageContents();
@@ -95,7 +95,6 @@ class DashboardController extends GetxController {
         allBanks = bankNamesList;
         selectedBankName.value = bankNamesList[0];
 
-        // Save banks to session storage
         session2.writeAllBanks('allBanks', allBanks);
         session2.writeSelectedBankName('selectedBankName', selectedBankName.value);
         session2.writeBankIdMap('bankIdMap', bankIdMap);
@@ -157,61 +156,94 @@ class DashboardController extends GetxController {
     }
   }
 
-  Future userProfile() async {
+  void fetchUserProfile() async {
     isQRCodeLoading.value = true;
-    var response = await userController.userProfileAsync();
-    if (response.status) {
-      var fullName2 = '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
-      fullName.value = fullName2;
-      profileImage.value = response.data!.profilePix;
-      session2.writeUserFullName(fullName2);
-      session2.writeAccountType(response.data!.accountType);
-      isWalletCreated.value = response.data != null ? response.data!.isWalletCreated : false;
-      qrCodeUrl.value = response.data!.qr!;
-      //for profile
-      if (response.data!.kycDetail != null) {
-        session2.writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
-        session2.writeProfileBvn(response.data!.kycDetail!.bvn!);
-        session2.writeProfileCity(response.data!.kycDetail!.address!.city!);
-        session2.writeProfileCountry(response.data!.kycDetail!.address!.country!);
-        session2.writeProfileState(response.data!.kycDetail!.address!.state!);
-        session2.writeProfileStreet(response.data!.kycDetail!.address!.street!);
-        session2.writeProfilePostalCode(response.data!.kycDetail!.address!.postalCode!);
-        session2.writeProfileFN(response.data!.firstName);
-        session2.writeProfileLN(response.data!.lastName);
-        session2.writeProfilePN(response.data!.phoneNumber);
+    try {
+      var response = await userController.userProfileAsync();
+      if (response.status) {
+        var fullName2 = '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
+        fullName.value = fullName2;
+        profileImage.value = response.data!.profilePix;
+        session2.writeUserFullName(fullName2);
+        session2.writeAccountType(response.data!.accountType);
+        isWalletCreated.value = response.data != null ? response.data!.isWalletCreated : false;
+        qrCodeUrl.value = response.data!.qr!;
+        //for profile
+        if (response.data!.kycDetail != null) {
+          session2.writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
+          session2.writeProfileBvn(response.data!.kycDetail!.bvn!);
+          session2.writeProfileCity(response.data!.kycDetail!.address!.city!);
+          session2.writeProfileCountry(response.data!.kycDetail!.address!.country!);
+          session2.writeProfileState(response.data!.kycDetail!.address!.state!);
+          session2.writeProfileStreet(response.data!.kycDetail!.address!.street!);
+          session2.writeProfilePostalCode(response.data!.kycDetail!.address!.postalCode!);
+          session2.writeProfileFN(response.data!.firstName);
+          session2.writeProfileLN(response.data!.lastName);
+          session2.writeProfilePN(response.data!.phoneNumber);
+        }
+        if (!response.data!.isPinCreated) {
+          Get.to(() => ChoosePinScreen());
+        }
       }
-      if (!response.data!.isPinCreated) {
-        Get.to(() => ChoosePinScreen());
-      }
-    }
-    isQRCodeLoading.value = false;
-  }
-
-  Future<void> refreshQRCode() async {
-    isQRCodeLoading.value = true;
-    var response = await userController.userProfileAsync();
-    if (response.status && response.data?.qr != null) {
-      qrCodeUrl.value = response.data!.qr!;
-    }
-    isQRCodeLoading.value = false;
-  }
-
-  Future userWallet() async {
-    var response = await userController.userWalletAsync();
-    if (response.status) {
-      accountNumber.value = response.data?.accountNumber ?? '';
-      bankName.value = response.data?.bankName! ?? '';
-      phoneNumber.value = response.data?.phoneNumber ?? '';
-      double balance1 = response.data?.balance ?? 0.0;
-      balance.value = formatCurrency(balance1);
-      session2.writeUserAccountNumber(accountNumber.value);
-      session2.writeUserAccountBalance(balance1);
-      session2.writeUserBankName(bankName.value);
-    } else {
+    } on Exception catch (e) {
       Get.snackbar(
         'Information',
-        'Please create account',
+        e.toString(),
+        colorText: Colors.white,
+        backgroundColor: dialogInfoBackground,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } finally {
+      isQRCodeLoading.value = false;
+    }
+  }
+
+  void refreshQRCode() async {
+    isQRCodeLoading.value = true;
+    try {
+      var response = await userController.userProfileAsync();
+      if (response.status && response.data?.qr != null) {
+        qrCodeUrl.value = response.data!.qr!;
+      }
+    } on Exception catch (e) {
+      Get.snackbar(
+        'Information',
+        e.toString(),
+        colorText: Colors.white,
+        backgroundColor: dialogInfoBackground,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } finally {
+      isQRCodeLoading.value = false;
+    }
+  }
+
+  void fetchUserWallet() async {
+    try {
+      var response = await userController.userWalletAsync();
+      if (response.status) {
+        accountNumber.value = response.data?.accountNumber ?? '';
+        bankName.value = response.data?.bankName! ?? '';
+        phoneNumber.value = response.data?.phoneNumber ?? '';
+        double balance1 = response.data?.balance ?? 0.0;
+        balance.value = formatCurrency(balance1);
+        session2.writeUserAccountNumber(accountNumber.value);
+        session2.writeUserAccountBalance(balance1);
+        session2.writeUserBankName(bankName.value);
+      } else {
+        Get.snackbar(
+          'Information',
+          'Please create account',
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        walletCreateLoader.value = false;
+      }
+    } on Exception catch (e) {
+      Get.snackbar(
+        'Information',
+        e.toString(),
+        colorText: Colors.white,
         backgroundColor: dialogInfoBackground,
         snackPosition: SnackPosition.BOTTOM,
       );
@@ -219,7 +251,7 @@ class DashboardController extends GetxController {
     }
   }
 
-  Future createWallet() async {
+  void createWallet() async {
     walletCreateLoader.value = true;
     try {
       final userId = session.readUserId() ?? 0;

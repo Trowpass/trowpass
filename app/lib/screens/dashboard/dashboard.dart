@@ -28,7 +28,7 @@ class DashboardScreen extends StatelessWidget {
     return Obx(() => !controller.isLoaded.value
         ? overlayLoader(!controller.isLoaded.value)
         : RefreshIndicator(
-            onRefresh: () async => await controller.userWallet(),
+            onRefresh: () async => await controller.fetchUserWallet(),
             child: AnnotatedRegion<SystemUiOverlayStyle>(
               value: const SystemUiOverlayStyle(
                 statusBarColor: primaryColor,
