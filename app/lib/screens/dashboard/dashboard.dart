@@ -58,7 +58,7 @@ class DashboardScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
-                                          flex: 1,
+                                          flex: 4,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -77,35 +77,48 @@ class DashboardScreen extends StatelessWidget {
                                           ),
                                         ),
                                         Expanded(
-                                          flex: 1,
+                                          flex: 3,
                                           child: Obx(() => controller
                                                   .isWalletCreated.value
-                                              ? ElevatedButton.icon(
-                                                  icon: Icon(
-                                                    Icons.add,
-                                                    color: primaryColor,
-                                                    size: 24,
+                                              ? Container(
+                                                  height: 50,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius: BorderRadius.circular(50),
+                                                    color: Colors
+                                                        .white, 
                                                   ),
-                                                  onPressed: () => Get.to(
-                                                      WalletTopUpScreen()),
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape: RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                pinBorderRadius)),
-                                                    backgroundColor: background,
-                                                    minimumSize: const Size(
-                                                        double.infinity, 60),
-                                                    side: const BorderSide(
-                                                        color: primaryColor),
-                                                  ),
-                                                  label: Text(
-                                                    'Topup Wallet',
-                                                    style: appStyles(
-                                                        12,
-                                                        primaryColor,
-                                                        FontWeight.w400),
+                                                  child: Center(
+                                                    child: ElevatedButton.icon(
+                                                      icon: Icon(
+                                                        Icons.add,
+                                                        color: background,
+                                                        size: 24,
+                                                      ),
+                                                      onPressed: () => Get.to(
+                                                          WalletTopUpScreen()),
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        shape: RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30)),
+                                                        backgroundColor:
+                                                            primaryColor,
+                                                        minimumSize:
+                                                            const Size(130, 40),
+                                                        side: const BorderSide(
+                                                            color:
+                                                                primaryColor),
+                                                      ),
+                                                      label: Text(
+                                                        'Topup Wallet',
+                                                        style: appStyles(
+                                                            12,
+                                                            background,
+                                                            FontWeight.w400),
+                                                      ),
+                                                    ),
                                                   ),
                                                 )
                                               : Container()),
@@ -246,12 +259,10 @@ class DashboardScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      const SizedBox(height: 3),
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.only(left: 12.0, right: 12.0),
                         child: Column(
                           children: [
-                            ImageSlider(),
                             GridView.count(
                               crossAxisCount: 3,
                               shrinkWrap: true,
@@ -326,6 +337,7 @@ class DashboardScreen extends StatelessWidget {
                                             'Train Ticket')),
                               ],
                             ),
+                            ImageSlider(),
                           ],
                         ),
                       ),
