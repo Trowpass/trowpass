@@ -136,7 +136,7 @@ class PayToBankController extends GetxController {
           responseCode: response.responseCode,
           data: transactionDetails,
         );
-        Get.find<DashboardController>().userWallet();
+        Get.find<DashboardController>().fetchUserWallet();
         Get.offAll(() => PayToBankReceiptScreen(
               transactionDetails: parsedResponse,
             ));
