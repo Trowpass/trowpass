@@ -64,7 +64,7 @@ class ScanQrPayController extends GetxController {
           responseCode: response.responseCode,
           data: transactionDetails,
         );
-        Get.find<DashboardController>().fetchUserWallet();
+        Get.find<DashboardController>().userWallet();
         Get.offAll(() => ScanToPayReceiptScreen(
               transactionDetails: parsedResponse,
             ));

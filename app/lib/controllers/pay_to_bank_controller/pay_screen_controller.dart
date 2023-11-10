@@ -59,14 +59,13 @@ class PayToBankController extends GetxController {
   Map<String, int> bankIdMap = {};
   Map<String, String> bankCodeMap = {};
 
- void fetchBankDetailsFromSessionStorage() {
+  void fetchBankDetailsFromSessionStorage() {
     try {
       // Retrieve bank details from session storage
       List<String> storedBanks = session.readAllBanks('allBanks');
       String storedSelectedBankName =
           session.readSelectedBankName('selectedBankName') ?? 'Select bank';
-      Map<String, int> storedBankIdMap =
-          session.readBankIdMap('bankIdMap');
+      Map<String, int> storedBankIdMap = session.readBankIdMap('bankIdMap');
       Map<String, String> storedBankCodeMap =
           session.readbankCodeMap('bankCodeMap');
 
@@ -136,7 +135,7 @@ class PayToBankController extends GetxController {
           responseCode: response.responseCode,
           data: transactionDetails,
         );
-        Get.find<DashboardController>().fetchUserWallet();
+        Get.find<DashboardController>().userWallet();
         Get.offAll(() => PayToBankReceiptScreen(
               transactionDetails: parsedResponse,
             ));
