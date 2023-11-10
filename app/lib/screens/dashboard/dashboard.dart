@@ -6,7 +6,6 @@ import 'package:app/screens/send_money/scan_to_pay/qr_code.dart';
 import 'package:app/screens/send_money/send_money.dart';
 import 'package:app/screens/wallet/topup/wallet_top_up.dart';
 import 'package:app/shareds/utils/app_colors.dart';
-import 'package:app/shareds/utils/border_radius.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/overlay_loader.dart';
@@ -83,9 +82,10 @@ class DashboardScreen extends StatelessWidget {
                                               ? Container(
                                                   height: 50,
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(50),
-                                                    color: Colors
-                                                        .white, 
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50),
+                                                    color: Colors.white,
                                                   ),
                                                   child: Center(
                                                     child: ElevatedButton.icon(
