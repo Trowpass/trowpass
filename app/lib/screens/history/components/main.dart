@@ -64,10 +64,8 @@ class MainWidget extends StatelessWidget {
   List<Widget> _buildSlivers() {
     final sliverList = <Widget>[];
 
-    if (controller.isHistorySorted.value &&
-        controller.historyItems.isNotEmpty) {
-      sliverList.add(_buildSortedList(
-          controller.selectedFilterType.value ?? 'New to Old'));
+    if (controller.isHistorySorted.value && controller.historyItems.isNotEmpty) {
+      sliverList.add(_buildSortedList(controller.selectedFilterType.value ?? 'New to Old'));
     } else {
       if (controller.todayTransaction.isNotEmpty) {
         sliverList.add(_buildTodayList());
@@ -89,8 +87,7 @@ class MainWidget extends StatelessWidget {
       ),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
-          (context, index) =>
-              HistoryListItem(controller.earlierTransaction[index]),
+          (context, index) => HistoryListItem(controller.earlierTransaction[index]),
           childCount: controller.earlierTransaction.length,
         ),
       ),
@@ -105,8 +102,7 @@ class MainWidget extends StatelessWidget {
       ),
       sliver: SliverList(
         delegate: SliverChildBuilderDelegate(
-          (context, index) =>
-              HistoryListItem(controller.todayTransaction[index]),
+          (context, index) => HistoryListItem(controller.todayTransaction[index]),
           childCount: controller.todayTransaction.length,
         ),
       ),
