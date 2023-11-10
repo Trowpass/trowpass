@@ -95,7 +95,7 @@ class PayController extends GetxController {
           responseCode: response.responseCode,
           data: transactionDetails,
         );
-        Get.find<DashboardController>().fetchUserWallet();
+        Get.find<DashboardController>().userWallet();
         Get.offAll(InterWalletTransferReceiptScreen(
           transactionDetails: parsedResponse,
         ));
