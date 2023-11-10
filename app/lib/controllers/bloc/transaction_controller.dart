@@ -7,6 +7,11 @@ class TransactionController {
   TransactionHistoryRepository transactionRepository = TransactionHistoryRepository();
 
   Future<TransactionHistoryResponse> getAllTransactionHistoryAsync() async {
-    return await transactionRepository.getAllTransactionHistoryAsync();
+    try {
+      final response = await transactionRepository.getAllTransactionHistoryAsync();
+      return response;
+    } catch (e) {
+      return Future.error('Unable to fetch transactions');
+    }
   }
 }
