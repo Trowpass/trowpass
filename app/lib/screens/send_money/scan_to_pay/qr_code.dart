@@ -11,19 +11,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ScanController extends GetxController {
-  final selectedIndex = 0.obs;
-
-  void selectTab(int index) {
-    selectedIndex.value = index;
-  }
-}
+import '../../../controllers/scan_to_pay_controllers/scan_controller.dart';
 
 class ScanScreen extends StatelessWidget {
   ScanScreen({super.key});
 
   final dashboardController = Get.put(DashboardController());
-  final scanController = Get.put(ScanController());
+  final scanController = Get.put(QrScanController());
 
   @override
   Widget build(BuildContext context) {
@@ -78,68 +72,71 @@ class ScanScreen extends StatelessWidget {
       () => SingleChildScrollView(
         child: Column(
           children: [
-            Material(
-              color: Colors.white,
-              elevation: 8,
-              shadowColor: Colors.black.withOpacity(0.3),
-              child: Column(
-                children: [
-                  const SizedBox(height: 8),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Visibility(
-                        visible: dashboardController.isQRCodeLoading.value,
-                        child: SizedBox(
-                          height: 350,
-                          width: double.infinity,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-                              ),
-                              const SizedBox(height: 16),
-                              Text('Retrieving QR Code...', style: appStyles(18, null, null)),
-                            ],
+            RepaintBoundary(
+              key: scanController.qrCodeKey,
+              child: Material(
+                color: Colors.white,
+                elevation: 8,
+                shadowColor: Colors.black.withOpacity(0.3),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 8),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Visibility(
+                          visible: scanController.isQRCodeLoading.value,
+                          child: SizedBox(
+                            height: 350,
+                            width: double.infinity,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                                ),
+                                const SizedBox(height: 16),
+                                Text('Retrieving QR Code...', style: appStyles(18, null, null)),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                      Visibility(
-                        visible: !dashboardController.isQRCodeLoading.value,
-                        child: CachedNetworkImage(
-                          height: 350,
-                          width: double.infinity,
-                          imageUrl: dashboardController.qrCodeUrl.value,
-                          placeholder: (_, __) => Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const CircularProgressIndicator(
-                                valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-                              ),
-                              const SizedBox(height: 16),
-                              Text('Displaying QR Code...', style: appStyles(18, null, null)),
-                            ],
-                          ).paddingAll(100),
-                          errorWidget: (_, __, ___) => _buildQRCodeErrorWidget(),
+                        Visibility(
+                          visible: !scanController.isQRCodeLoading.value,
+                          child: CachedNetworkImage(
+                            height: 350,
+                            width: double.infinity,
+                            imageUrl: scanController.qrCodeUrl.value,
+                            placeholder: (_, __) => Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
+                                ),
+                                const SizedBox(height: 16),
+                                Text('Displaying QR Code...', style: appStyles(18, null, null)),
+                              ],
+                            ).paddingAll(100),
+                            errorWidget: (_, __, ___) => _buildQRCodeErrorWidget(),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ).paddingAll(16),
             Column(
               children: [
                 const SizedBox(height: 8),
                 Visibility(
-                  visible: dashboardController.qrCodeUrl.value.isNotEmpty,
+                  visible: scanController.qrCodeUrl.value.isNotEmpty,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextButton.icon(
-                        onPressed: () {},
+                        onPressed: scanController.shareQRCode,
                         icon: const Icon(
                           Icons.share,
                           color: Colors.black,
@@ -151,7 +148,7 @@ class ScanScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 5),
                       TextButton.icon(
-                        onPressed: () {},
+                        onPressed: () => scanController.saveToGallery(true),
                         icon: const Icon(
                           Icons.download,
                           color: Colors.black,
@@ -184,6 +181,7 @@ class ScanScreen extends StatelessWidget {
                 "Scan the QR code",
                 style: appStyles(16, titleActive, FontWeight.w500),
               ),
+              const SizedBox(height: 8),
               Text(
                 "for customer information",
                 style: appStyles(16, titleActive, FontWeight.w500),
@@ -254,7 +252,7 @@ class ScanScreen extends StatelessWidget {
             size: 24,
           ),
           text: 'Try again',
-          onTap: dashboardController.refreshQRCode,
+          onTap: scanController.refreshQRCode,
         ),
       ],
     );
