@@ -90,7 +90,7 @@ class QrScanController extends GetxController {
   }
 
   Future<String?> saveToGallery(bool showDialog) async {
-    var status = await Permission.storage.request();
+    var status = await Permission.photos.request();
 
     switch (status) {
       case PermissionStatus.granted:
