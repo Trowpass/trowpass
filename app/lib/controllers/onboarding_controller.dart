@@ -1,8 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/shareds/managers/set_session_manager.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
-
-import '../screens/auth/login.dart';
 import '../screens/onboarding/onboarding_items.dart';
 import '../shareds/utils/images.dart';
 
@@ -19,6 +20,6 @@ class OnBoardingController extends GetxController {
 
   void navigateToMain() {
     session.writeIsUserOnBoarded(true);
-    Get.offAll(() => LoginScreen());
+    Get.offAll(() => AccountTypeScreen());
   }
 }

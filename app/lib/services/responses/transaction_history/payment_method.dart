@@ -1,12 +1,12 @@
 class PaymentMethod {
   String? method;
 
-  static PaymentMethod card = PaymentMethod.from(method: "card");
-  static PaymentMethod bankTransfer = PaymentMethod.from(method: "bank_transfer");
-  static PaymentMethod ussd = PaymentMethod.from(method: "ussd");
-  static PaymentMethod nqr = PaymentMethod.from(method: "nqr");
-  static PaymentMethod internalTransfer = PaymentMethod.from(method: "internal_transfer");
-  static PaymentMethod externalTransfer = PaymentMethod.from(method: "external_transfer");
+  static PaymentMethod card = PaymentMethod.from(method: "Card");
+  static PaymentMethod bankTransfer = PaymentMethod.from(method: "Bank Transfer");
+  static PaymentMethod ussd = PaymentMethod.from(method: "USSD");
+  static PaymentMethod nqr = PaymentMethod.from(method: "NQR");
+  static PaymentMethod internalTransfer = PaymentMethod.from(method: "Internal Transfer");
+  static PaymentMethod externalTransfer = PaymentMethod.from(method: "External Transfer");
 
   PaymentMethod.from({this.method});
 

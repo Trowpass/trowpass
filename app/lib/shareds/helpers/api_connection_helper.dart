@@ -4,13 +4,19 @@ import 'package:app/shareds/managers/get_session_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-import '../resources/app_interceptors.dart';
 import '../resources/routes/api_paths.dart';
 
 GetSessionManager session = GetSessionManager();
 
 class ApiConnectionHelper {
+  static const Duration receiveTimeout = Duration(minutes: 1);
+  static const Duration sendTimeout = Duration(seconds: 20);
+  static const Duration connectTimeout = Duration(seconds: 20);
+
   final Dio dio = Dio(BaseOptions(
+      sendTimeout: sendTimeout,
+      connectTimeout: connectTimeout,
+      receiveTimeout: receiveTimeout,
       baseUrl: baseUrl,
       contentType: 'application/json',
       validateStatus: (status) {
@@ -21,7 +27,7 @@ class ApiConnectionHelper {
       },
       headers: {'Accept': '*/*', 'x-token': session.readAuthorizationToken()}))
     ..interceptors.addAll([
-      AppInterceptors(),
+      // AppInterceptors(),
       PrettyDioLogger(
           requestHeader: true,
           requestBody: true,
