@@ -1,5 +1,6 @@
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
+import 'package:app/widgets/standard_button.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -83,11 +84,7 @@ class OnBoardingScreen extends StatelessWidget {
           )
         ],
       ),
-      floatingActionButton: FloatingActionButton.small(
-        backgroundColor: primaryColor,
-        child: const Icon(Icons.arrow_forward),
-        onPressed: () => controller.navigateToMain(),
-      ),
+      floatingActionButton: SizedBox(width: MediaQuery.of(context).size.width * 0.4, child: StandardButton(onPressed: () { controller.navigateToMain(); }, text: 'Get Started',))
     );
   }
 }

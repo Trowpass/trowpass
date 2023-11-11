@@ -38,7 +38,7 @@ class HistoryDetailsController extends GetxController {
   }
 
   Future<String?> _saveHistoryImageToGallery() async {
-    var status = await Permission.storage.request();
+    var status = await Permission.photos.request();
 
     switch (status) {
       case PermissionStatus.granted:
@@ -88,7 +88,7 @@ class HistoryDetailsController extends GetxController {
   }
 
   Future<String?> _saveHistoryPDFToGallery() async {
-    var status = await Permission.storage.request();
+    var status = await Permission.manageExternalStorage.request();
 
     switch (status) {
       case PermissionStatus.granted:
