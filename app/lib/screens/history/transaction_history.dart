@@ -14,15 +14,12 @@ import '../../shareds/utils/images.dart';
 import '../../widgets/app_styles.dart';
 
 class TransactionHistoryScreen extends StatelessWidget {
-  // ignore: use_key_in_widget_constructors
-  TransactionHistoryScreen();
   final controller = Get.put(HistoryTabController());
+
+  TransactionHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
-    String? selectedItem;
-
     return DefaultStickyHeaderController(
       child: Scaffold(
           backgroundColor: background,
@@ -36,6 +33,7 @@ class TransactionHistoryScreen extends StatelessWidget {
             ),
             backgroundColor: background,
             elevation: 0.0,
+            automaticallyImplyLeading: false,
             title: Text(
               controller.title,
               style: appStyles(18, titleActive, FontWeight.w600),
@@ -49,20 +47,16 @@ class TransactionHistoryScreen extends StatelessWidget {
                 },
               )
             ],
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
-              onPressed: () {
-                Get.back();
-              },
-            ),
           ),
           body: Obx(() => _getScaffoldBody())),
     );
   }
 
   Widget _getScaffoldBody() {
-    var isListEmpty = controller.historyItems.isEmpty;
-    return !isListEmpty
+    final isListEmpty = controller.historyItems.isEmpty;
+    final isProcessing = controller.isLoading.value;
+
+    return isProcessing
         ? ShimmerLoading(
             itemCount: 10,
             loadingPlaceholder: const HistoryListLoading(),

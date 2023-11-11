@@ -1,18 +1,22 @@
 class PaymentType {
   String? type;
 
-  static PaymentType payIn = PaymentType.from(type: "payIn");
-  static PaymentType payOut = PaymentType.from(type: "payOut");
+  static PaymentType payIn = PaymentType.from(type: "payin");
+  static PaymentType payOut = PaymentType.from(type: "payout");
   static PaymentType unknown = PaymentType.from(type: "unknown");
 
-  PaymentType.from({this.type});
+  PaymentType(this.type);
+
+  factory PaymentType.from({type}) {
+    return PaymentType(type);
+  }
 
   @override
   String toString() {
     if (this == PaymentType.payIn) {
-      return "payIn";
+      return "payin";
     } else {
-      return this == PaymentType.payIn ? "payIn" : "unknown";
+      return this == PaymentType.payOut ? "payout" : "unknown";
     }
   }
 

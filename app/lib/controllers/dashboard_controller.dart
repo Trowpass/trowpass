@@ -33,10 +33,8 @@ class DashboardController extends GetxController {
   final bankName = Rx<String>('');
   final fullName = Rx<String>('');
   final isLoaded = false.obs;
-  final isQRCodeLoading = true.obs;
   final isWalletCreated = false.obs;
   final phoneNumber = Rx<String>('');
-  final qrCodeUrl = Rx<String>('');
   final selectedBankName = 'Select bank'.obs;
   final selectedTransportCompany = 'Select company'.obs;
   final session = GetSessionManager();
@@ -97,8 +95,7 @@ class DashboardController extends GetxController {
 
   void fetchBanks() async {
     try {
-      BanksResponse banksResponse =
-          await topupTransportWalletController.getallBanksAsync();
+      BanksResponse banksResponse = await topupTransportWalletController.getallBanksAsync();
       if (banksResponse.status) {
         List<ResponseData> banksData = banksResponse.data;
         List<String> bankNamesList = ['Select bank'];
@@ -114,8 +111,7 @@ class DashboardController extends GetxController {
         selectedBankName.value = bankNamesList[0];
 
         session2.writeAllBanks('allBanks', allBanks);
-        session2.writeSelectedBankName(
-            'selectedBankName', selectedBankName.value);
+        session2.writeSelectedBankName('selectedBankName', selectedBankName.value);
         session2.writeBankIdMap('bankIdMap', bankIdMap);
         session2.writebankCodeMap('bankCodeMap', bankCodeMap);
       }
@@ -128,11 +124,9 @@ class DashboardController extends GetxController {
 
   void fetchTransportCompany() async {
     try {
-      final transportCompanyResponse =
-          await topupTransportWalletController.getallTransportCompanyAsync();
+      final transportCompanyResponse = await topupTransportWalletController.getallTransportCompanyAsync();
       if (transportCompanyResponse.status) {
-        List<TransportCompanyResponseData> transportCompanyData =
-            transportCompanyResponse.data;
+        List<TransportCompanyResponseData> transportCompanyData = transportCompanyResponse.data;
         List<String> transportCompaniesList = ['Select company'];
 
         for (var company in transportCompanyData) {
@@ -148,12 +142,9 @@ class DashboardController extends GetxController {
         allTransportCompany = transportCompaniesList;
         selectedTransportCompany.value = transportCompaniesList[0];
 
-        session2.writeAllTransportCompanies(
-            'allTransportCompanies', allTransportCompany);
-        session2.writeSelectedTransportCompanies(
-            'selectedTransportCompany', selectedTransportCompany.value);
-        session2.writeTransportCompanyIdMap(
-            'transportCompanyIdMap', transportCompanyIdMap);
+        session2.writeAllTransportCompanies('allTransportCompanies', allTransportCompany);
+        session2.writeSelectedTransportCompanies('selectedTransportCompany', selectedTransportCompany.value);
+        session2.writeTransportCompanyIdMap('transportCompanyIdMap', transportCompanyIdMap);
       }
     } catch (e) {
       if (kDebugMode) {
@@ -183,53 +174,28 @@ class DashboardController extends GetxController {
   Future userProfile() async {
     var response = await userController.userProfileAsync();
     if (response.status) {
-      var fullName2 =
-          '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
+      var fullName2 = '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
       fullName.value = fullName2;
       session2.writeUserFullName(fullName2);
       session2.writeAccountType(response.data!.accountType);
-      isWalletCreated.value =
-          response.data != null ? response.data!.isWalletCreated : false;
-      qrCodeUrl.value = response.data!.qr!;
+      isWalletCreated.value = response.data != null ? response.data!.isWalletCreated : false;
       //for profile
       if (response.data!.kycDetail != null) {
-        session2
-            .writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
+        session2.writeProfileBioData(response.data!.kycDetail!.address!.bioData!);
         session2.writeProfileBvn(response.data!.kycDetail!.bvn!);
         session2.writeProfileCity(response.data!.kycDetail!.address!.city!);
-        session2
-            .writeProfileCountry(response.data!.kycDetail!.address!.country!);
+        session2.writeProfileCountry(response.data!.kycDetail!.address!.country!);
         session2.writeProfileState(response.data!.kycDetail!.address!.state!);
         session2.writeProfileStreet(response.data!.kycDetail!.address!.street!);
-        session2.writeProfilePostalCode(
-            response.data!.kycDetail!.address!.postalCode!);
+        session2.writeProfilePostalCode(response.data!.kycDetail!.address!.postalCode!);
         session2.writeProfileFN(response.data!.firstName);
         session2.writeProfileLN(response.data!.lastName);
         session2.writeProfilePN(response.data!.phoneNumber);
       }
+
       if (!response.data!.isPinCreated) {
         Get.to(() => ChoosePinScreen());
       }
-    }
-  }
-
-  void refreshQRCode() async {
-    isQRCodeLoading.value = true;
-    try {
-      var response = await userController.userProfileAsync();
-      if (response.status && response.data?.qr != null) {
-        qrCodeUrl.value = response.data!.qr!;
-      }
-    } on Exception catch (e) {
-      Get.snackbar(
-        'Information',
-        e.toString(),
-        colorText: Colors.white,
-        backgroundColor: dialogInfoBackground,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    } finally {
-      isQRCodeLoading.value = false;
     }
   }
 
@@ -246,8 +212,7 @@ class DashboardController extends GetxController {
       session2.writeUserBankName(bankName.value);
     } else {
       Get.snackbar('Information', 'Please create account',
-          backgroundColor: dialogInfoBackground,
-          snackPosition: SnackPosition.BOTTOM);
+          backgroundColor: dialogInfoBackground, snackPosition: SnackPosition.BOTTOM);
       walletCreateLoader.value = false;
     }
   }
@@ -256,20 +221,16 @@ class DashboardController extends GetxController {
     walletCreateLoader.value = true;
     try {
       int userId = session.readUserId() ?? 0;
-      var response = await userController
-          .createWalletAsync(CreateWalletRequest(userId: userId));
+      var response = await userController.createWalletAsync(CreateWalletRequest(userId: userId));
       if (response.status) {
         Get.offAll(() => DashboardScreen());
         walletCreateLoader.value = false;
       } else {
-        Get.defaultDialog(
-            title: 'Information', content: Text(response.message));
+        Get.defaultDialog(title: 'Information', content: Text(response.message));
         walletCreateLoader.value = false;
       }
     } catch (e) {
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: dialogInfoBackground,
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Information', e.toString(), backgroundColor: dialogInfoBackground, snackPosition: SnackPosition.BOTTOM);
       walletCreateLoader.value = false;
     }
   }

@@ -25,6 +25,7 @@ class BillsTabScreen extends StatelessWidget {
         ),
         backgroundColor: background,
         elevation: 0.0,
+        automaticallyImplyLeading: false,
         title: Text(
           'Bills',
           style: appStyles(18, titleActive, FontWeight.w600),
@@ -38,12 +39,6 @@ class BillsTabScreen extends StatelessWidget {
             },
           )
         ],
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Get.back();
-          },
-        ),
       ),
       body: const EmptyPlaceholder(),
     );

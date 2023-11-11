@@ -75,8 +75,8 @@ dependencies:
   package_info_plus: ^4.2.0
   share_plus: ^7.2.1
   permission_handler: ^11.0.1
-  workmanager: ^0.5.2
-  quiver: ^3.2.1
+  # workmanager: ^0.5.2
+  # quiver: ^3.2.1
   cron: ^0.5.1
 
 dev_dependencies:
