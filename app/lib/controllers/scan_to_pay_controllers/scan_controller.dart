@@ -13,6 +13,7 @@ import '../../shareds/utils/app_info.dart';
 
 import '../../shareds/helpers/api_connection_helper.dart';
 import '../../shareds/utils/app_colors.dart';
+import '../../shareds/utils/device_info.dart';
 import '../../widgets/app_dialog.dart';
 import '../bloc/user_controller.dart';
 
@@ -90,7 +91,14 @@ class QrScanController extends GetxController {
   }
 
   Future<String?> saveToGallery(bool showDialog) async {
-    var status = await Permission.photos.request();
+    final deviceInfo = await DeviceInfo.getInfo();
+    PermissionStatus status;
+
+    if ((deviceInfo?.sdkInt ?? 0) >= 33) {
+      status = await Permission.photos.request();
+    } else {
+      status = await Permission.storage.request();
+    }
 
     switch (status) {
       case PermissionStatus.granted:
