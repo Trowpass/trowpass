@@ -1,9 +1,9 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/widgets/app_dialog.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_guid/flutter_guid.dart';
@@ -26,19 +26,23 @@ class HistoryDetailsController extends GetxController {
   ExportDelegate exportDelegate = ExportDelegate();
 
   Future<Uint8List?> _generateImage() async {
-    final boundary =
-        key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
+    final boundary = key.currentContext?.findRenderObject() as RenderRepaintBoundary?;
     final image = await boundary?.toImage(
-      pixelRatio: Get.context == null
-          ? 1.0
-          : MediaQuery.of(Get.context!).devicePixelRatio,
+      pixelRatio: Get.context == null ? 1.0 : MediaQuery.of(Get.context!).devicePixelRatio,
     );
     final byteData = await image?.toByteData(format: ImageByteFormat.png);
     return byteData?.buffer.asUint8List();
   }
 
   Future<String?> _saveHistoryImageToGallery() async {
-    var status = await Permission.photos.request();
+    final deviceInfo = await DeviceInfo.getInfo();
+    PermissionStatus status;
+
+    if ((deviceInfo?.sdkInt ?? 0) >= 33) {
+      status = await Permission.photos.request();
+    } else {
+      status = await Permission.storage.request();
+    }
 
     switch (status) {
       case PermissionStatus.granted:
@@ -88,16 +92,30 @@ class HistoryDetailsController extends GetxController {
   }
 
   Future<String?> _saveHistoryPDFToGallery() async {
-    var status = await Permission.manageExternalStorage.request();
+    final deviceInfo = await DeviceInfo.getInfo();
+    PermissionStatus status;
+
+    if ((deviceInfo?.sdkInt ?? 0) >= 33) {
+      status = await Permission.manageExternalStorage.request();
+    } else {
+      status = await Permission.storage.request();
+    }
 
     switch (status) {
       case PermissionStatus.granted:
         isProcessing.value = true;
         try {
+          Directory? dir;
           final pdfData = await _generatePDFDocument();
-          final Directory dir = await getApplicationDocumentsDirectory();
-          final File file =
-              File('${dir.path}/Transaction-history-${Guid.newGuid.value}.pdf');
+
+          if (defaultTargetPlatform == TargetPlatform.android) {
+            dir = await getExternalStorageDirectory();
+            if (dir == null) return null;
+          } else {
+            dir = await getApplicationDocumentsDirectory();
+          }
+
+          final File file = File('${dir.path}/Transaction-history-${Guid.newGuid.value}.pdf');
           final savedFile = await file.writeAsBytes(pdfData);
           isProcessing.value = false;
           return savedFile.path.replaceFirst('file:///', '');
@@ -145,8 +163,7 @@ class HistoryDetailsController extends GetxController {
         height: 180,
         type: DialogType.neutral,
         title: 'Success',
-        subtitle:
-            'Transaction history was saved as image to your device\'s gallery',
+        subtitle: 'Transaction history was saved as image to your device\'s gallery',
         actions: [
           DialogButton(
             label: 'Close',
@@ -155,8 +172,7 @@ class HistoryDetailsController extends GetxController {
           DialogButton(
             label: 'Share',
             onTap: () {
-              Share.shareXFiles([XFile(savePath)],
-                  text: 'Share Receipt as Image');
+              Share.shareXFiles([XFile(savePath)], text: 'Share Receipt as Image');
             },
           ),
         ],
@@ -178,8 +194,7 @@ class HistoryDetailsController extends GetxController {
         height: 180,
         type: DialogType.neutral,
         title: 'Success',
-        subtitle:
-            'Transaction history was saved as PDF to your device\'s gallery',
+        subtitle: 'Transaction history was saved as PDF to your device\'s gallery',
         actions: [
           DialogButton(
             label: 'Close',
@@ -188,8 +203,7 @@ class HistoryDetailsController extends GetxController {
           DialogButton(
             label: 'Share',
             onTap: () {
-              Share.shareXFiles([XFile(savePath)],
-                  text: 'Share Receipt as PDF');
+              Share.shareXFiles([XFile(savePath)], text: 'Share Receipt as PDF');
             },
           ),
         ],
@@ -213,8 +227,10 @@ class HistoryDetailsController extends GetxController {
         interactive: false,
       ),
     );
-    var document = await exportDelegate.exportToPdfDocument(toPDFframeId,
-        overrideOptions: overrideOptions);
+    var document = await exportDelegate.exportToPdfDocument(
+      toPDFframeId,
+      overrideOptions: overrideOptions,
+    );
     return await document.save();
   }
 
@@ -223,10 +239,8 @@ class HistoryDetailsController extends GetxController {
     final deviceInfo = await DeviceInfo.getInfo();
     final appInfo = await AppInfo.getInfo();
 
-    final String subjectOfMail =
-        'Report Bug In ${appInfo.appName.toCapitalized()} app';
-    final String bodyOfMail =
-        'Dear ${appInfo.appName.toCapitalized()} Support Team,'
+    final String subjectOfMail = 'Report Bug In ${appInfo.appName.toCapitalized()} app';
+    final String bodyOfMail = 'Dear ${appInfo.appName.toCapitalized()} Support Team,'
         '%0A%0A%0A%0A'
         'Device Info:'
         '%0A%0A'
@@ -238,8 +252,7 @@ class HistoryDetailsController extends GetxController {
         '%0A'
         'OS version: ${deviceInfo?.osVersion}';
 
-    final Uri reportIssueUrl = Uri.parse(
-        'mailto:$supportMail?subject=$subjectOfMail&body=$bodyOfMail');
+    final Uri reportIssueUrl = Uri.parse('mailto:$supportMail?subject=$subjectOfMail&body=$bodyOfMail');
     if (!await launchUrl(reportIssueUrl)) {
       Get.snackbar(
         'Uh-oh!',
