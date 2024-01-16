@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/sign_up_individual_controller.dart';
+import '../../controllers/rider/sign_up_individual_controller.dart';
 import '../../widgets/overlay_indeterminate_progress.dart';
 import '../../widgets/password_strength_bar.dart';
 import '../../widgets/standard_button.dart';

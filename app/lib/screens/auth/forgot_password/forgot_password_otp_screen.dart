@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-import '../../../controllers/forgot_password_otp_controller.dart';
+import '../../../controllers/rider/forgot_password_otp_controller.dart';
 import '../../../shareds/utils/app_colors.dart';
 import '../../../widgets/app_styles.dart';
 import '../../../widgets/circle_countdown_timer.dart';
