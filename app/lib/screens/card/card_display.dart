@@ -79,8 +79,7 @@ class CardDisplayScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   controller.cardNumber.value,
-                                  style: appStyles(
-                                      18, Colors.white, FontWeight.bold),
+                                  style: appStyles(18, Colors.white, FontWeight.bold),
                                 ),
                                 const SizedBox(height: 32),
                                 RichText(
@@ -89,13 +88,11 @@ class CardDisplayScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: 'Expiry    ',
-                                        style:
-                                            appStyles(18, Colors.white, null),
+                                        style: appStyles(18, Colors.white, null),
                                       ),
                                       TextSpan(
                                         text: controller.expiryDate.value,
-                                        style: appStyles(
-                                            18, Colors.white, FontWeight.bold),
+                                        style: appStyles(18, Colors.white, FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -103,8 +100,7 @@ class CardDisplayScreen extends StatelessWidget {
                                 const SizedBox(height: 20),
                                 Text(
                                   controller.customerName.value,
-                                  style: appStyles(
-                                      18, Colors.white, FontWeight.bold),
+                                  style: appStyles(18, Colors.white, FontWeight.bold),
                                 ),
                               ],
                             ),
@@ -120,13 +116,11 @@ class CardDisplayScreen extends StatelessWidget {
                                     children: <TextSpan>[
                                       TextSpan(
                                         text: 'CVV    ',
-                                        style:
-                                            appStyles(18, Colors.white, null),
+                                        style: appStyles(18, Colors.white, null),
                                       ),
                                       TextSpan(
                                         text: controller.cvv.value,
-                                        style: appStyles(
-                                            18, Colors.white, FontWeight.bold),
+                                        style: appStyles(18, Colors.white, FontWeight.bold),
                                       ),
                                     ],
                                   ),
@@ -156,8 +150,7 @@ class CardDisplayScreen extends StatelessWidget {
                           style: appStyles(32, titleActive, FontWeight.bold),
                         ),
                         const SizedBox(height: 20),
-                        Text('Balance',
-                            style: appStyles(18, null, FontWeight.w400)),
+                        Text('Balance', style: appStyles(18, null, FontWeight.w400)),
                       ],
                     ),
                     const SizedBox(height: 32),
@@ -168,6 +161,15 @@ class CardDisplayScreen extends StatelessWidget {
                         color: titleActive,
                       ),
                       onTap: () => Get.to(() => FundVirtualCardScreen()),
+                    ),
+                    const SizedBox(height: 8),
+                    TransparentButton(
+                      text: 'Copy Card Details',
+                      icon: const Icon(
+                        Icons.copy_all_rounded,
+                        color: titleActive,
+                      ),
+                      onTap:  controller.copyCardDetails,
                     ),
                   ],
                 ),

@@ -2,6 +2,7 @@ import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/currency_format.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../repositories/cards_repository.dart';
@@ -15,6 +16,7 @@ class CardDisplayController extends GetxController {
   final cardNumber = '****************'.obs;
   final cardType = ''.obs;
   final cvv = '***'.obs;
+  final pan = ''.obs;
   final cardsRepository = CardsRepository();
   final session = GetSessionManager();
 
@@ -35,6 +37,8 @@ class CardDisplayController extends GetxController {
         balance.value = ngnFormatCurrency(data.balance);
         cardNumber.value = data.securedDataDetail?.pan ?? '';
         cvv.value = data.securedDataDetail?.cvv ?? '';
+        pan.value = data.pan;
+
         switch (data.brand.toLowerCase()) {
           case 'verve':
             cardType.value = verveCard;
@@ -48,8 +52,7 @@ class CardDisplayController extends GetxController {
           default:
         }
       } else {
-        Get.defaultDialog(
-            title: 'Information', content: Text(response.message));
+        Get.defaultDialog(title: 'Information', content: Text(response.message));
       }
       isLoading.value = false;
     } catch (e) {
@@ -61,5 +64,20 @@ class CardDisplayController extends GetxController {
       );
       isLoading.value = false;
     }
+  }
+
+  void copyCardDetails() async {
+    String text = 'Card PAN: ${pan.value}'
+        '\n\n'
+        'CVV: ${cvv.value}';
+
+    ClipboardData data = ClipboardData(text: text);
+    await Clipboard.setData(data);
+    Get.snackbar(
+      'Success',
+      'Card details copied to clipboard',
+      backgroundColor: dialogInfoBackground,
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 }
