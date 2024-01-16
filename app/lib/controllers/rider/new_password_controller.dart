@@ -1,15 +1,15 @@
 import 'dart:async';
 
 import 'package:app/screens/auth/login.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/widgets/app_dialog.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
-import '../services/requests/post_requests/reset_password_request.dart';
-import '../shareds/utils/app_colors.dart';
-import '../widgets/password_strength_bar.dart';
-import 'rider/bloc/user_controller.dart';
+import '../../services/requests/rider/post_requests/reset_password_request.dart';
+import '../../shareds/utils/app_colors.dart';
+import '../../widgets/password_strength_bar.dart';
+import 'bloc/user_controller.dart';
 
 class NewPasswordController extends GetxController {
   var formKey = GlobalKey<FormState>();

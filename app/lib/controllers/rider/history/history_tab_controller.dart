@@ -1,5 +1,5 @@
 import 'package:app/controllers/rider/bloc/transaction_controller.dart';
-import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
+import 'package:app/services/responses/rider/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:get/get.dart';
 

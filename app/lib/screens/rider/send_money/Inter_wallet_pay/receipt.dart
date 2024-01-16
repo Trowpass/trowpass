@@ -1,5 +1,5 @@
 import 'package:app/controllers/rider/inter_wallet_transfer_controller/receipt_screen_controller.dart';
-import 'package:app/services/responses/inter_wallet_transfer_response.dart';
+import 'package:app/services/responses/rider/inter_wallet_transfer_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../widgets/app_styles.dart';
-import '../../../widgets/currency_format.dart';
-import '../../../widgets/standard_button.dart';
+import '../../../../widgets/app_styles.dart';
+import '../../../../widgets/currency_format.dart';
+import '../../../../widgets/standard_button.dart';
 
 class InterWalletTransferReceiptScreen extends StatelessWidget {
   InterWalletTransferReceiptScreen(

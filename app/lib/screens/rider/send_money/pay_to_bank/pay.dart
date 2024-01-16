@@ -11,8 +11,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../shareds/utils/images.dart';
-import '../../../widgets/overlay_indeterminate_progress.dart';
+import '../../../../shareds/utils/images.dart';
+import '../../../../widgets/overlay_indeterminate_progress.dart';
 
 class PayToBankScreen extends StatelessWidget {
   PayToBankScreen({super.key});

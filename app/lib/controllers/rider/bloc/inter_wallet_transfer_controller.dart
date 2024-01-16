@@ -1,9 +1,9 @@
-import 'package:app/repositories/inter_wallet_transfer_repository.dart';
-import 'package:app/services/requests/post_requests/inter_wallet_transfer_request.dart';
-import 'package:app/services/responses/inter_wallet_transfer_response.dart';
-import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:app/repositories/rider/inter_wallet_transfer_repository.dart';
+import 'package:app/services/requests/rider/post_requests/inter_wallet_transfer_request.dart';
+import 'package:app/services/responses/rider/inter_wallet_transfer_response.dart';
+import 'package:app/shareds/managers/rider/set_session_manager.dart';
 
-import '../../../shareds/managers/get_session_manager.dart';
+import '../../../shareds/managers/rider/get_session_manager.dart';
 
 class InterwalletController {
   final InterWalletTransferRepository interWalletTransferRepository =

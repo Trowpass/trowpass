@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:app/screens/get_transport_card/card_type.dart';
+import 'package:app/screens/rider/get_transport_card/card_type.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../screens/auth/otp.dart';
-import '../../services/requests/post_requests/rider_registration_request.dart';
-import '../../shareds/managers/set_session_manager.dart';
+import '../../services/requests/rider/post_requests/rider_registration_request.dart';
+import '../../shareds/managers/rider/set_session_manager.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../widgets/password_strength_bar.dart';
 import 'bloc/user_controller.dart';

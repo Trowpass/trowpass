@@ -9,9 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/rider/inter_wallet_transfer_controller/pay_screen_controller.dart';
-import '../../../shareds/utils/images.dart';
-import '../../../widgets/overlay_indeterminate_progress.dart';
+import '../../../../controllers/rider/inter_wallet_transfer_controller/pay_screen_controller.dart';
+import '../../../../shareds/utils/images.dart';
+import '../../../../widgets/overlay_indeterminate_progress.dart';
 
 class InterWalletPayScreen extends StatelessWidget {
   InterWalletPayScreen({super.key});

@@ -1,4 +1,5 @@
-import 'package:app/controllers/physical_card_design_controller.dart';
+
+import 'package:app/controllers/rider/physical_card_design_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';

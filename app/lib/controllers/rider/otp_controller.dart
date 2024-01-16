@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:timer_count_down/timer_controller.dart' as resend_timer;
 
 import '../../screens/auth/pin/choose_pin_screen.dart';
-import '../../services/requests/post_requests/resend_otp_request.dart';
-import '../../services/requests/post_requests/verify_otp_request.dart';
-import '../../shareds/managers/get_session_manager.dart';
+import '../../services/requests/rider/post_requests/resend_otp_request.dart';
+import '../../services/requests/rider/post_requests/verify_otp_request.dart';
+import '../../shareds/managers/rider/get_session_manager.dart';
 import '../../shareds/utils/app_colors.dart';
 import 'bloc/user_controller.dart';
 

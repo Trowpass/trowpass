@@ -1,4 +1,4 @@
-import 'package:app/screens/get_transport_card/card_request_successful.dart';
+import 'package:app/screens/rider/get_transport_card/card_request_successful.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,5 +1,5 @@
-import 'package:app/screens/send_money/Inter_wallet_pay/pay.dart';
-import 'package:app/screens/send_money/pay_to_bank/pay.dart';
+import 'package:app/screens/rider/send_money/Inter_wallet_pay/pay.dart';
+import 'package:app/screens/rider/send_money/pay_to_bank/pay.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/heneficiaries_controller.dart';
+import '../../../controllers/rider/heneficiaries_controller.dart';
 
 class SendMoneyScreen extends StatelessWidget {
   SendMoneyScreen({super.key});

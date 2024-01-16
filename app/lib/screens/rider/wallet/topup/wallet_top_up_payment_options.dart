@@ -1,4 +1,4 @@
-import 'package:app/screens/wallet/topup/add_new_card.dart';
+import 'package:app/screens/rider/wallet/topup/add_new_card.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/wallet_top_up_payment_option_contoller.dart';
-import '../../../shareds/utils/border_radius.dart';
+import '../../../../controllers/rider/wallet_top_up_payment_option_contoller.dart';
+import '../../../../shareds/utils/border_radius.dart';
 import '../top_up_transport_wallet_summary.dart';
 
 class WalletTopUpPaymentOptions extends StatelessWidget {

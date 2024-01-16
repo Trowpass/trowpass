@@ -1,11 +1,11 @@
-import 'package:app/screens/beneficiary/add_beneficiary.dart';
+import 'package:app/screens/rider/beneficiary/add_beneficiary.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/heneficiaries_controller.dart';
+import '../../../controllers/rider/heneficiaries_controller.dart';
 
 class BeneficiariesScreen extends StatelessWidget {
   BeneficiariesScreen({super.key});

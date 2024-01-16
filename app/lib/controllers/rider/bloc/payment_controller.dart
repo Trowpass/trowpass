@@ -1,12 +1,12 @@
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 
-import '../../../repositories/payment_repository.dart';
-import '../../../services/requests/post_requests/credit_wallet_request.dart';
-import '../../../services/requests/post_requests/top_up_wallet_request.dart';
-import '../../../services/requests/post_requests/verify_paystack_transaction_request.dart';
-import '../../../services/responses/credit_wallet_response.dart';
-import '../../../services/responses/top_up_wallet_response.dart';
-import '../../../services/responses/verify_paystack_transaction_response.dart';
+import '../../../repositories/rider/payment_repository.dart';
+import '../../../services/requests/rider/post_requests/credit_wallet_request.dart';
+import '../../../services/requests/rider/post_requests/top_up_wallet_request.dart';
+import '../../../services/requests/rider/post_requests/verify_paystack_transaction_request.dart';
+import '../../../services/responses/rider/credit_wallet_response.dart';
+import '../../../services/responses/rider/top_up_wallet_response.dart';
+import '../../../services/responses/rider/verify_paystack_transaction_response.dart';
 
 class PaymentController {
   final paymentRepository = PaymentRepository();

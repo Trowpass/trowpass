@@ -1,13 +1,13 @@
-import 'package:app/screens/wallet/topup/wallet_top_up.dart';
-import 'package:app/screens/wallet/topup/wallet_top_up_done_screen.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/screens/rider/wallet/topup/wallet_top_up.dart';
+import 'package:app/screens/rider/wallet/topup/wallet_top_up_done_screen.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/bloc/payment_controller.dart';
-import '../../shareds/utils/app_colors.dart';
-import '../../widgets/overlay_indeterminate_progress.dart';
+import '../../../controllers/rider/bloc/payment_controller.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
 
 class PaymentProcessing extends StatefulWidget {
   final String reference;

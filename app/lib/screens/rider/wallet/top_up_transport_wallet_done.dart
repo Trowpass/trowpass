@@ -1,4 +1,4 @@
-import 'package:app/services/responses/topup_transport_wallet_response.dart';
+import 'package:app/services/responses/rider/topup_transport_wallet_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:dotted_line/dotted_line.dart';
@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/top_up_transport_wallet_done_controller.dart';
-import '../../widgets/app_styles.dart';
-import '../../widgets/currency_format.dart';
-import '../../widgets/standard_button.dart';
+import '../../../controllers/rider/top_up_transport_wallet_done_controller.dart';
+import '../../../widgets/app_styles.dart';
+import '../../../widgets/currency_format.dart';
+import '../../../widgets/standard_button.dart';
 
 class TopUpTransportWalletDoneScreen extends StatelessWidget {
   TopUpTransportWalletDoneScreen({super.key, required this.transactionDetails});

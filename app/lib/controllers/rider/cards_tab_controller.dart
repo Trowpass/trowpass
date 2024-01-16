@@ -1,5 +1,5 @@
 import 'package:app/shareds/constants/key_constants.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:get/get.dart';
 
 class CardsTabController extends GetxController {

@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../services/exceptions/dio_exceptions.dart';
-import '../services/requests/post_requests/credit_wallet_request.dart';
-import '../services/requests/post_requests/top_up_wallet_request.dart';
-import '../services/requests/post_requests/verify_paystack_transaction_request.dart';
-import '../services/responses/credit_wallet_response.dart';
-import '../services/responses/top_up_wallet_response.dart';
-import '../services/responses/verify_paystack_transaction_response.dart';
-import '../shareds/constants/endpoints.dart';
-import '../shareds/helpers/api_connection_helper.dart';
+import '../../services/exceptions/dio_exceptions.dart';
+import '../../services/requests/rider/post_requests/credit_wallet_request.dart';
+import '../../services/requests/rider/post_requests/top_up_wallet_request.dart';
+import '../../services/requests/rider/post_requests/verify_paystack_transaction_request.dart';
+import '../../services/responses/rider/credit_wallet_response.dart';
+import '../../services/responses/rider/top_up_wallet_response.dart';
+import '../../services/responses/rider/verify_paystack_transaction_response.dart';
+import '../../shareds/constants/endpoints.dart';
+import '../../shareds/helpers/api_connection_helper.dart';
 
 class PaymentRepository {
   var apiConnectionHelper = ApiConnectionHelper();

@@ -1,5 +1,5 @@
 import 'package:app/screens/auth/login.dart';
-import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
+import 'package:app/screens/rider/navigation_menus/home_landing_tab_screen.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/rider/bindings/dashboard_tab_binding.dart';

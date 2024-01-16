@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../services/exceptions/dio_exceptions.dart';
-import '../services/responses/transaction_history/transaction_history_response.dart';
-import '../shareds/constants/endpoints.dart';
-import '../shareds/helpers/api_connection_helper.dart';
-import '../shareds/managers/get_session_manager.dart';
+import '../../services/exceptions/dio_exceptions.dart';
+import '../../services/responses/rider/transaction_history/transaction_history_response.dart';
+import '../../shareds/constants/endpoints.dart';
+import '../../shareds/helpers/api_connection_helper.dart';
+import '../../shareds/managers/rider/get_session_manager.dart';
 
 class TransactionHistoryRepository {
   var session = GetSessionManager();

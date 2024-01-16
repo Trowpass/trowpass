@@ -1,12 +1,12 @@
-import 'package:app/screens/card/card_display.dart';
-import 'package:app/screens/card/card_type.dart';
-import 'package:app/screens/kyc/tier_upgrade_selection.dart';
+import 'package:app/screens/rider/card/card_display.dart';
+import 'package:app/screens/rider/card/card_type.dart';
+import 'package:app/screens/rider/kyc/tier_upgrade_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/cards_tab_controller.dart';
-import '../../shareds/utils/app_colors.dart';
+import '../../../controllers/rider/cards_tab_controller.dart';
+import '../../../shareds/utils/app_colors.dart';
 
 class CardsTabScreen extends StatelessWidget {
   CardsTabScreen({super.key});

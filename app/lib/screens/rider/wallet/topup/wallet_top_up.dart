@@ -5,12 +5,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/wallet_top_up_controller.dart';
-import '../../../shareds/utils/app_colors.dart';
-import '../../../widgets/currency_format.dart';
-import '../../../widgets/overlay_indeterminate_progress.dart';
-import '../../../widgets/standard_button.dart';
-import '../../../widgets/text_form_input.dart';
+import '../../../../controllers/rider/wallet_top_up_controller.dart';
+import '../../../../shareds/utils/app_colors.dart';
+import '../../../../widgets/currency_format.dart';
+import '../../../../widgets/overlay_indeterminate_progress.dart';
+import '../../../../widgets/standard_button.dart';
+import '../../../../widgets/text_form_input.dart';
 
 class WalletTopUpScreen extends StatelessWidget {
   WalletTopUpScreen({super.key});

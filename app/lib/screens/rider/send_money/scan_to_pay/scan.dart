@@ -3,13 +3,13 @@
 import 'dart:io';
 
 import 'package:app/controllers/rider/scan_to_pay_controllers/scan_controller.dart';
-import 'package:app/screens/send_money/scan_to_pay/scan_qr_pay.dart';
+import 'package:app/screens/rider/send_money/scan_to_pay/scan_qr_pay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-import '../../../shareds/utils/app_colors.dart';
+import '../../../../shareds/utils/app_colors.dart';
 
 class QrScanArea extends StatefulWidget {
   @override

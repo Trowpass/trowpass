@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/top_up_transport_wallet_summary_controller.dart';
-import '../../shareds/utils/app_colors.dart';
-import '../../shareds/utils/images.dart';
-import '../../widgets/currency_format.dart';
-import '../../widgets/standard_button.dart';
+import '../../../controllers/rider/top_up_transport_wallet_summary_controller.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../shareds/utils/images.dart';
+import '../../../widgets/currency_format.dart';
+import '../../../widgets/standard_button.dart';
 
 class TopUpTransportWalletSummaryScreen extends StatelessWidget {
   TopUpTransportWalletSummaryScreen({super.key});

@@ -1,15 +1,15 @@
-import 'package:app/screens/history/history_share_bottom_sheet.dart';
-import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
+import 'package:app/screens/rider/history/history_share_bottom_sheet.dart';
+import 'package:app/services/responses/rider/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/border_radius.dart';
-import 'package:app/screens/history/components/transaction_receipt.dart';
+import 'package:app/screens/rider/history/components/transaction_receipt.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/history/history_details_controller.dart';
-import '../../widgets/app_styles.dart';
+import '../../../controllers/rider/history/history_details_controller.dart';
+import '../../../widgets/app_styles.dart';
 import 'history_share_image_preview.dart';
 import 'history_share_pdf_preview.dart';
 

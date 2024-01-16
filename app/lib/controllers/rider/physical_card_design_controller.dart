@@ -1,5 +1,5 @@
-import 'package:app/screens/card/success_screen.dart';
-import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
+import 'package:app/screens/rider/card/success_screen.dart';
+import 'package:app/screens/rider/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

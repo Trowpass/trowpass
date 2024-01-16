@@ -5,7 +5,7 @@ import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../shareds/utils/app_colors.dart';
+import '../../../shareds/utils/app_colors.dart';
 
 class CardCreatedScreen extends StatelessWidget {
   @override

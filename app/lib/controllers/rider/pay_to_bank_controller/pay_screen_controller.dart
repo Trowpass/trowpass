@@ -2,11 +2,11 @@
 
 import 'package:app/controllers/rider/bloc/pay_to_bank_controller.dart';
 import 'package:app/controllers/rider/dashboard_controller.dart';
-import 'package:app/screens/send_money/pay_to_bank/receipt.dart';
-import 'package:app/services/requests/post_requests/pay_to_bank_request.dart';
-import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
-import 'package:app/services/responses/pay_to_bank_response.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/screens/rider/send_money/pay_to_bank/receipt.dart';
+import 'package:app/services/requests/rider/post_requests/pay_to_bank_request.dart';
+import 'package:app/services/requests/rider/post_requests/user_by_account_number_request.dart';
+import 'package:app/services/responses/rider/pay_to_bank_response.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

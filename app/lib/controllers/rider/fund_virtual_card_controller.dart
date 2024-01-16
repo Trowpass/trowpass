@@ -1,12 +1,12 @@
 import 'package:app/controllers/rider/bloc/card_controller.dart';
-import 'package:app/screens/card/card_display.dart';
-import 'package:app/screens/card/success_screen.dart';
-import 'package:app/services/requests/post_requests/fund_virtual_card.dart';
+import 'package:app/screens/rider/card/card_display.dart';
+import 'package:app/screens/rider/card/success_screen.dart';
+import 'package:app/services/requests/rider/post_requests/fund_virtual_card.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../shareds/managers/get_session_manager.dart';
+import '../../shareds/managers/rider/get_session_manager.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../widgets/currency_format.dart';
 

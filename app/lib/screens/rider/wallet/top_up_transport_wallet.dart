@@ -11,10 +11,10 @@ import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/top_up_transport_wallet_controller.dart';
-import '../../shareds/utils/app_colors.dart';
-import '../../shareds/utils/images.dart';
-import '../../widgets/text_form_input.dart';
+import '../../../controllers/rider/top_up_transport_wallet_controller.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../shareds/utils/images.dart';
+import '../../../widgets/text_form_input.dart';
 
 class TopUpTransportWalletScreen extends StatelessWidget {
   TopUpTransportWalletScreen({super.key});

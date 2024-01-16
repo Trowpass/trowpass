@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/add_new_card_controller.dart';
-import '../../../shareds/utils/border_radius.dart';
-import '../../../shareds/utils/card_month_input_formatter.dart';
-import '../../../shareds/utils/card_number_input_formatter.dart';
-import '../../../widgets/standard_button.dart';
+import '../../../../controllers/rider/add_new_card_controller.dart';
+import '../../../../shareds/utils/border_radius.dart';
+import '../../../../shareds/utils/card_month_input_formatter.dart';
+import '../../../../shareds/utils/card_number_input_formatter.dart';
+import '../../../../widgets/standard_button.dart';
 
 class AddNewCardScreen extends StatelessWidget {
   AddNewCardScreen({super.key});

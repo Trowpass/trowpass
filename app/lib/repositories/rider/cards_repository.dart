@@ -1,16 +1,16 @@
 import 'dart:io';
 
-import 'package:app/services/requests/post_requests/create_virtual_card_request.dart';
-import 'package:app/services/requests/post_requests/fund_virtual_card.dart';
-import 'package:app/services/responses/create_virtual_card_response.dart';
+import 'package:app/services/requests/rider/post_requests/create_virtual_card_request.dart';
+import 'package:app/services/requests/rider/post_requests/fund_virtual_card.dart';
+import 'package:app/services/responses/rider/create_virtual_card_response.dart';
 import 'package:app/shareds/helpers/api_connection_helper.dart';
 import 'package:dio/dio.dart';
 
-import '../services/exceptions/dio_exceptions.dart';
-import '../services/requests/put_requests/change_pin_request.dart';
-import '../services/responses/card_details_response.dart';
-import '../services/responses/fund_virtual_card_response.dart';
-import '../shareds/constants/endpoints.dart';
+import '../../services/exceptions/dio_exceptions.dart';
+import '../../services/requests/rider/put_requests/change_pin_request.dart';
+import '../../services/responses/rider/card_details_response.dart';
+import '../../services/responses/rider/fund_virtual_card_response.dart';
+import '../../shareds/constants/endpoints.dart';
 
 class CardsRepository {
   final apiConnectionHelper = ApiConnectionHelper();

@@ -2,8 +2,8 @@ import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 
-import '../../../services/responses/transaction_history/payment_type.dart';
-import '../../../services/responses/transaction_history/transaction_history_response.dart';
+import '../../../../services/responses/rider/transaction_history/payment_type.dart';
+import '../../../../services/responses/rider/transaction_history/transaction_history_response.dart';
 
 class TransactionReceipt extends StatelessWidget {
   final TransactionHistoryData history;

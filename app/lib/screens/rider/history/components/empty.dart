@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../shareds/utils/images.dart';
-import '../../../widgets/app_styles.dart';
+import '../../../../shareds/utils/images.dart';
+import '../../../../widgets/app_styles.dart';
 
 class EmptyWidget extends StatelessWidget {
   const EmptyWidget({

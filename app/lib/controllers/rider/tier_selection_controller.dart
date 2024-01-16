@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
 import '../../shareds/constants/key_constants.dart';
-import '../../shareds/managers/get_session_manager.dart';
+import '../../shareds/managers/rider/get_session_manager.dart';
 
 class TierSelectionController extends GetxController {
   bool isT1Done = false;

@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:app/controllers/card_design_holder_input_controller.dart';
+import 'package:app/controllers/rider/card_design_holder_input_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';

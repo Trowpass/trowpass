@@ -1,4 +1,4 @@
-import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
+import 'package:app/services/responses/rider/transaction_history/transaction_history_response.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:flutter/material.dart';
@@ -6,9 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../controllers/rider/history/history_details_controller.dart';
-import '../../widgets/app_logo.dart';
-import '../../widgets/app_styles.dart';
+import '../../../controllers/rider/history/history_details_controller.dart';
+import '../../../widgets/app_logo.dart';
+import '../../../widgets/app_styles.dart';
 import 'components/transaction_receipt.dart';
 
 class HistoryShareImagePreview extends StatelessWidget {

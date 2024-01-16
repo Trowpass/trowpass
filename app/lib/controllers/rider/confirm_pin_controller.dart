@@ -1,7 +1,7 @@
 import 'package:app/controllers/rider/bloc/user_controller.dart';
-import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
-import 'package:app/services/requests/post_requests/choose_pin_request.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/screens/rider/navigation_menus/home_landing_tab_screen.dart';
+import 'package:app/services/requests/rider/post_requests/choose_pin_request.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';

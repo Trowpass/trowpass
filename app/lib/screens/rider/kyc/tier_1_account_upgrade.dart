@@ -15,7 +15,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../../shareds/utils/images.dart';
+import '../../../shareds/utils/images.dart';
 
 class TeirOneAccountUpgradeScreen extends StatefulWidget {
   const TeirOneAccountUpgradeScreen({super.key});

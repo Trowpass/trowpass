@@ -1,5 +1,5 @@
-import 'package:app/screens/history/components/empty.dart';
-import 'package:app/screens/history/components/main.dart';
+import 'package:app/screens/rider/history/components/empty.dart';
+import 'package:app/screens/rider/history/components/main.dart';
 import 'package:app/widgets/history_list_loading.dart';
 import 'package:app/widgets/list_shimmer_loader.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +8,10 @@ import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/history/history_tab_controller.dart';
-import '../../shareds/utils/app_colors.dart';
-import '../../shareds/utils/images.dart';
-import '../../widgets/app_styles.dart';
+import '../../../controllers/rider/history/history_tab_controller.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../shareds/utils/images.dart';
+import '../../../widgets/app_styles.dart';
 
 class TransactionHistoryScreen extends StatelessWidget {
   final controller = Get.put(HistoryTabController());

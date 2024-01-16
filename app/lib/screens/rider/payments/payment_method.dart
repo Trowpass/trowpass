@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/payment_method_controller.dart';
-import '../../shareds/utils/app_colors.dart';
-import '../../widgets/app_styles.dart';
-import '../../widgets/currency_format.dart';
-import '../../widgets/overlay_indeterminate_progress.dart';
+import '../../../controllers/rider/payment_method_controller.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../widgets/app_styles.dart';
+import '../../../widgets/currency_format.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
   final controller = Get.put(PaymentMethodController());

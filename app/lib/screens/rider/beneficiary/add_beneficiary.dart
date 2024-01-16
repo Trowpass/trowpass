@@ -1,12 +1,12 @@
+import 'package:app/controllers/rider/add_beneficiary_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
-import '../../controllers/add_beneficiary_controller.dart';
-import '../../shareds/utils/border_radius.dart';
-import '../../widgets/standard_button.dart';
-import '../../widgets/text_input.dart';
+import '../../../shareds/utils/border_radius.dart';
+import '../../../widgets/standard_button.dart';
+import '../../../widgets/text_input.dart';
 
 class AddBeneficiaryScreen extends StatelessWidget {
   AddBeneficiaryScreen({super.key});

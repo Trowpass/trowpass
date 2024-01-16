@@ -5,9 +5,9 @@ import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../widgets/app_styles.dart';
-import '../../../widgets/currency_format.dart';
-import '../../../widgets/standard_button.dart';
+import '../../../../widgets/app_styles.dart';
+import '../../../../widgets/currency_format.dart';
+import '../../../../widgets/standard_button.dart';
 
 class WalletTopUpDoneScreen extends StatelessWidget {
   final String successMessage;

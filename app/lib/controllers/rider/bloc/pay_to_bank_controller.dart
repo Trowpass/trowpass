@@ -1,12 +1,12 @@
-import 'package:app/repositories/pay_to_bank_repository.dart';
-import 'package:app/services/requests/post_requests/pay_to_bank_request.dart';
-import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
-import 'package:app/services/responses/get_all_banks_reponse.dart';
-import 'package:app/services/responses/get_user_by_account_response.dart';
-import 'package:app/services/responses/pay_to_bank_response.dart';
-import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:app/repositories/rider/pay_to_bank_repository.dart';
+import 'package:app/services/requests/rider/post_requests/pay_to_bank_request.dart';
+import 'package:app/services/requests/rider/post_requests/user_by_account_number_request.dart';
+import 'package:app/services/responses/rider/get_all_banks_reponse.dart';
+import 'package:app/services/responses/rider/get_user_by_account_response.dart';
+import 'package:app/services/responses/rider/pay_to_bank_response.dart';
+import 'package:app/shareds/managers/rider/set_session_manager.dart';
 
-import '../../../shareds/managers/get_session_manager.dart';
+import '../../../shareds/managers/rider/get_session_manager.dart';
 
 class PaytToBankController {
   final PayToBankRepository payToBankRepository = PayToBankRepository();

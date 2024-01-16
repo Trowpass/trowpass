@@ -1,5 +1,5 @@
-import 'package:app/screens/kyc/tier_upgrade_selection.dart';
-import 'package:app/screens/send_money/scan_to_pay/qr_code.dart';
+import 'package:app/screens/rider/kyc/tier_upgrade_selection.dart';
+import 'package:app/screens/rider/send_money/scan_to_pay/qr_code.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -9,9 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/user_profile_controller.dart';
-import '../auth/edit_profile.dart';
-import '../auth/pin/change_pin.dart';
+import '../../../controllers/rider/user_profile_controller.dart';
+import '../../auth/edit_profile.dart';
+import '../../auth/pin/change_pin.dart';
 
 class UserProfileScreen extends StatelessWidget {
   UserProfileScreen({super.key});

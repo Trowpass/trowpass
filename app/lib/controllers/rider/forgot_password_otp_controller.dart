@@ -1,5 +1,5 @@
 import 'package:app/screens/auth/forgot_password/new_password_screen.dart';
-import 'package:app/services/requests/post_requests/resend_otp_request.dart';
+import 'package:app/services/requests/rider/post_requests/resend_otp_request.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart'
     as expiry_timer;
 import 'package:flutter/material.dart';

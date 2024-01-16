@@ -1,15 +1,15 @@
 import 'package:app/controllers/rider/bloc/user_controller.dart';
 import 'package:app/shareds/constants/file_upload_purpose.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../screens/auth/login.dart';
-import '../services/responses/file_upload_response.dart';
-import '../shareds/constants/key_constants.dart';
-import '../shareds/managers/set_session_manager.dart';
+import '../../screens/auth/login.dart';
+import '../../services/responses/rider/file_upload_response.dart';
+import '../../shareds/constants/key_constants.dart';
+import '../../shareds/managers/rider/set_session_manager.dart';
 
 class UserProfileController extends GetxController {
   final title = Rx<String>('Profile');

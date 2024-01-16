@@ -1,18 +1,18 @@
-import 'package:app/repositories/user_repository.dart';
+import 'package:app/repositories/rider/user_repository.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/screens/auth/otp.dart';
 import 'package:app/screens/auth/pin/choose_pin_screen.dart';
-import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
-import 'package:app/services/requests/post_requests/resend_otp_request.dart';
-import 'package:app/services/requests/post_requests/user_login_request.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/screens/rider/navigation_menus/home_landing_tab_screen.dart';
+import 'package:app/services/requests/rider/post_requests/resend_otp_request.dart';
+import 'package:app/services/requests/rider/post_requests/user_login_request.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart'
     as expiry_timer;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_controller.dart' as resend_timer;
 
-import '../../shareds/managers/set_session_manager.dart';
+import '../../shareds/managers/rider/set_session_manager.dart';
 import '../../shareds/utils/app_colors.dart';
 import 'bloc/user_controller.dart';
 

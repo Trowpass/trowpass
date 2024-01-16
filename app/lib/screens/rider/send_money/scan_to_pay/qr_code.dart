@@ -1,5 +1,5 @@
 import 'package:app/controllers/rider/dashboard_controller.dart';
-import 'package:app/screens/send_money/scan_to_pay/scan.dart';
+import 'package:app/screens/rider/send_money/scan_to_pay/scan.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -11,7 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/rider/scan_to_pay_controllers/scan_controller.dart';
+import '../../../../controllers/rider/scan_to_pay_controllers/scan_controller.dart';
 
 class ScanScreen extends StatelessWidget {
   ScanScreen({super.key});

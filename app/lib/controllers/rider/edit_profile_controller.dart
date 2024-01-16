@@ -1,8 +1,8 @@
 import 'package:app/controllers/rider/bloc/user_controller.dart';
-import 'package:app/services/requests/put_requests/update_customer_data_request.dart';
+import 'package:app/services/requests/rider/put_requests/update_customer_data_request.dart';
 import 'package:app/shareds/constants/dropdown_constants.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
-import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/set_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

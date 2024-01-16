@@ -1,7 +1,7 @@
 import 'package:app/shareds/utils/images.dart';
 import 'package:get/get.dart';
 
-import '../../screens/navigation_menus/home_landing_tab_screen.dart';
+import '../../screens/rider/navigation_menus/home_landing_tab_screen.dart';
 
 class TopUpTransportWalletDoneContoller extends GetxController {
   final transactionId = Rx<String>('');

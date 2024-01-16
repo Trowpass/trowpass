@@ -1,9 +1,9 @@
-import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:app/shareds/managers/rider/set_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../screens/auth/forgot_password/forgot_password_otp_screen.dart';
-import '../../services/requests/post_requests/forget_password_request.dart';
+import '../../services/requests/rider/post_requests/forget_password_request.dart';
 import '../../shareds/helpers/api_connection_helper.dart';
 import '../../shareds/utils/app_colors.dart';
 import 'bloc/user_controller.dart';

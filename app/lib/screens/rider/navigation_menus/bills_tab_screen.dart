@@ -5,8 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../shareds/utils/app_colors.dart';
-import '../../shareds/utils/images.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../shareds/utils/images.dart';
 
 class BillsTabScreen extends StatelessWidget {
   const BillsTabScreen({super.key});

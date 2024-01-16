@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/fund_virtual_card_controller.dart';
-import '../../widgets/app_styles.dart';
-import '../../widgets/overlay_indeterminate_progress.dart';
-import '../../widgets/standard_button.dart';
-import '../../widgets/text_form_input.dart';
+import '../../../controllers/rider/fund_virtual_card_controller.dart';
+import '../../../widgets/app_styles.dart';
+import '../../../widgets/overlay_indeterminate_progress.dart';
+import '../../../widgets/standard_button.dart';
+import '../../../widgets/text_form_input.dart';
 
 class FundVirtualCardScreen extends StatelessWidget {
   final controller = Get.put(FundVirtualCardController());

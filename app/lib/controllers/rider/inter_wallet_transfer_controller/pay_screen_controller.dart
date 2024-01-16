@@ -3,11 +3,11 @@
 import 'package:app/controllers/rider/bloc/inter_wallet_transfer_controller.dart';
 import 'package:app/controllers/rider/bloc/user_controller.dart';
 import 'package:app/controllers/rider/dashboard_controller.dart';
-import 'package:app/screens/send_money/Inter_wallet_pay/receipt.dart';
-import 'package:app/services/requests/post_requests/inter_wallet_transfer_request.dart';
-import 'package:app/services/requests/post_requests/view_user_by_phone_request.dart';
-import 'package:app/services/responses/inter_wallet_transfer_response.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/screens/rider/send_money/Inter_wallet_pay/receipt.dart';
+import 'package:app/services/requests/rider/post_requests/inter_wallet_transfer_request.dart';
+import 'package:app/services/requests/rider/post_requests/view_user_by_phone_request.dart';
+import 'package:app/services/responses/rider/inter_wallet_transfer_response.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

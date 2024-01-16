@@ -1,11 +1,11 @@
 import 'package:app/controllers/rider/bloc/payment_controller.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:get/get.dart';
 
-import '../../screens/payments/payment_processing.dart';
-import '../../services/requests/post_requests/credit_wallet_request.dart';
+import '../../screens/rider/payments/payment_processing.dart';
+import '../../services/requests/rider/post_requests/credit_wallet_request.dart';
 import '../../shareds/constants/key_constants.dart';
 import '../../widgets/app_logo.dart';
 import '../../widgets/fund_options_bottom_sheet.dart';

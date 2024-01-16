@@ -1,6 +1,6 @@
-import 'package:app/screens/kyc/kyc_upgrade_account.dart';
+import 'package:app/screens/rider/kyc/kyc_upgrade_account.dart';
 import 'package:app/shareds/constants/key_constants.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../shareds/utils/images.dart';
+import '../../../shareds/utils/images.dart';
 
 class TierSelectionPage extends StatelessWidget {
   const TierSelectionPage({super.key});

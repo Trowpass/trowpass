@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/card_display_controller.dart';
-import '../../shareds/utils/app_colors.dart';
-import '../../widgets/app_styles.dart';
+import '../../../controllers/rider/card_display_controller.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../widgets/app_styles.dart';
 import 'fund_virtual_card.dart';
 
 class CardDisplayScreen extends StatelessWidget {

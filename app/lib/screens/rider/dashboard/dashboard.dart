@@ -1,10 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:app/screens/dashboard/components/custom_card.dart';
-import 'package:app/screens/dashboard/components/image_slider.dart';
-import 'package:app/screens/send_money/scan_to_pay/qr_code.dart';
-import 'package:app/screens/send_money/send_money.dart';
-import 'package:app/screens/wallet/topup/wallet_top_up.dart';
+import 'package:app/screens/rider/dashboard/components/custom_card.dart';
+import 'package:app/screens/rider/dashboard/components/image_slider.dart';
+import 'package:app/screens/rider/send_money/scan_to_pay/qr_code.dart';
+import 'package:app/screens/rider/send_money/send_money.dart';
+import 'package:app/screens/rider/wallet/topup/wallet_top_up.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';
@@ -13,8 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controllers/rider/dashboard_controller.dart';
-import '../../widgets/currency_format.dart';
+import '../../../controllers/rider/dashboard_controller.dart';
+import '../../../widgets/currency_format.dart';
 import '../navigation_menus/cards_tab_screen.dart';
 import '../wallet/top_up_transport_wallet.dart';
 

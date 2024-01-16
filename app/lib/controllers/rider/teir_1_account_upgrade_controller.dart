@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:app/controllers/rider/bloc/user_controller.dart';
 import 'package:app/screens/auth/login.dart';
-import 'package:app/services/requests/put_requests/tier_one_request.dart';
+import 'package:app/services/requests/rider/put_requests/tier_one_request.dart';
 import 'package:app/shareds/constants/file_upload_purpose.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

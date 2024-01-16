@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../screens/payments/payment_method.dart';
-import '../screens/wallet/topup/wallet_top_up_payment_options.dart';
-import '../shareds/managers/get_session_manager.dart';
+import '../../screens/rider/payments/payment_method.dart';
+import '../../screens/rider/wallet/topup/wallet_top_up_payment_options.dart';
+import '../../shareds/managers/rider/get_session_manager.dart';
 
 class WalletTopUpController extends GetxController {
   final formKey = GlobalKey<FormState>();

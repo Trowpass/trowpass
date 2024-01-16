@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../shareds/utils/app_colors.dart';
-import '../../widgets/app_styles.dart';
-import '../../widgets/transparent_button.dart';
+import '../../../shareds/utils/app_colors.dart';
+import '../../../widgets/app_styles.dart';
+import '../../../widgets/transparent_button.dart';
 
 class _HistoryShareBottomSheet extends StatelessWidget {
   final bool? autoClose;

@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
-import '../../shareds/utils/border_radius.dart';
-import '../../widgets/standard_button.dart';
-import '../../widgets/text_form_input.dart';
+import '../../../shareds/utils/border_radius.dart';
+import '../../../widgets/standard_button.dart';
+import '../../../widgets/text_form_input.dart';
 
 class KycUpgradeAccountScreen extends StatelessWidget {
   KycUpgradeAccountScreen({super.key});

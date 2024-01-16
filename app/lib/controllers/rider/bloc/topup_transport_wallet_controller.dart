@@ -1,13 +1,13 @@
-import 'package:app/repositories/topup_transport_wallet_repository.dart';
-import 'package:app/services/requests/post_requests/topup_transport_wallet_request.dart';
-import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
-import 'package:app/services/responses/get_all_banks_reponse.dart';
-import 'package:app/services/responses/get_all_transport_company_response.dart';
-import 'package:app/services/responses/get_user_by_account_response.dart';
-import 'package:app/services/responses/topup_transport_wallet_response.dart';
-import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:app/repositories/rider/topup_transport_wallet_repository.dart';
+import 'package:app/services/requests/rider/post_requests/topup_transport_wallet_request.dart';
+import 'package:app/services/requests/rider/post_requests/user_by_account_number_request.dart';
+import 'package:app/services/responses/rider/get_all_banks_reponse.dart';
+import 'package:app/services/responses/rider/get_all_transport_company_response.dart';
+import 'package:app/services/responses/rider/get_user_by_account_response.dart';
+import 'package:app/services/responses/rider/topup_transport_wallet_response.dart';
+import 'package:app/shareds/managers/rider/set_session_manager.dart';
 
-import '../../../shareds/managers/get_session_manager.dart';
+import '../../../shareds/managers/rider/get_session_manager.dart';
 
 class TopupTransportWalletController {
   final TopupTransportWalletRepository topupTransportWalletRepository =

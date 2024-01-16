@@ -5,11 +5,11 @@ import 'package:app/controllers/rider/bloc/topup_transport_wallet_controller.dar
 import 'package:app/controllers/rider/bloc/user_controller.dart';
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/screens/auth/login.dart';
-import 'package:app/screens/dashboard/dashboard.dart';
-import 'package:app/services/requests/post_requests/create_wallet_request.dart';
-import 'package:app/services/responses/get_all_banks_reponse.dart';
-import 'package:app/services/responses/get_all_transport_company_response.dart';
-import 'package:app/shareds/managers/set_session_manager.dart';
+import 'package:app/screens/rider/dashboard/dashboard.dart';
+import 'package:app/services/requests/rider/post_requests/create_wallet_request.dart';
+import 'package:app/services/responses/rider/get_all_banks_reponse.dart';
+import 'package:app/services/responses/rider/get_all_transport_company_response.dart';
+import 'package:app/shareds/managers/rider/set_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/currency_format.dart';
 import 'package:cron/cron.dart';
@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../screens/auth/pin/choose_pin_screen.dart';
-import '../../shareds/managers/get_session_manager.dart';
+import '../../shareds/managers/rider/get_session_manager.dart';
 import '../../widgets/app_dialog.dart';
 
 class DashboardController extends GetxController {

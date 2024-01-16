@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../shareds/utils/images.dart';
+import '../../../../shareds/utils/images.dart';
 
 class ScanQrPayScreen extends StatelessWidget {
   final String? scannedData; // Change the type to String?

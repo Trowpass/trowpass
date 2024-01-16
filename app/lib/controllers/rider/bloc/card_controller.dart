@@ -1,10 +1,10 @@
-import 'package:app/repositories/cards_repository.dart';
-import 'package:app/services/requests/post_requests/create_virtual_card_request.dart';
-import 'package:app/services/requests/post_requests/fund_virtual_card.dart';
-import 'package:app/services/requests/put_requests/change_pin_request.dart';
-import 'package:app/services/responses/card_details_response.dart';
-import 'package:app/services/responses/create_virtual_card_response.dart';
-import 'package:app/services/responses/fund_virtual_card_response.dart';
+import 'package:app/repositories/rider/cards_repository.dart';
+import 'package:app/services/requests/rider/post_requests/create_virtual_card_request.dart';
+import 'package:app/services/requests/rider/post_requests/fund_virtual_card.dart';
+import 'package:app/services/requests/rider/put_requests/change_pin_request.dart';
+import 'package:app/services/responses/rider/card_details_response.dart';
+import 'package:app/services/responses/rider/create_virtual_card_response.dart';
+import 'package:app/services/responses/rider/fund_virtual_card_response.dart';
 
 class CardController {
   final CardsRepository cardRepository = CardsRepository();

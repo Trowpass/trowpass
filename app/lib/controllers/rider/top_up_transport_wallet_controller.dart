@@ -2,11 +2,11 @@
 
 import 'package:app/controllers/rider/bloc/topup_transport_wallet_controller.dart';
 import 'package:app/controllers/rider/dashboard_controller.dart';
-import 'package:app/screens/wallet/top_up_transport_wallet_done.dart';
-import 'package:app/services/requests/post_requests/topup_transport_wallet_request.dart';
-import 'package:app/services/requests/post_requests/user_by_account_number_request.dart';
-import 'package:app/services/responses/topup_transport_wallet_response.dart';
-import 'package:app/shareds/managers/get_session_manager.dart';
+import 'package:app/screens/rider/wallet/top_up_transport_wallet_done.dart';
+import 'package:app/services/requests/rider/post_requests/topup_transport_wallet_request.dart';
+import 'package:app/services/requests/rider/post_requests/user_by_account_number_request.dart';
+import 'package:app/services/responses/rider/topup_transport_wallet_response.dart';
+import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

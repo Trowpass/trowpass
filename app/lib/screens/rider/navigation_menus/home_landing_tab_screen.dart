@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../widgets/bottom_bar_navigation_menu.dart';
+import '../../../widgets/bottom_bar_navigation_menu.dart';
 import 'bills_tab_screen.dart';
 import 'history_tab_screen.dart';
 import 'home_tab_screen.dart';

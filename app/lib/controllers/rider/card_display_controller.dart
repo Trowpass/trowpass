@@ -4,8 +4,8 @@ import 'package:app/widgets/currency_format.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../repositories/cards_repository.dart';
-import '../../shareds/managers/get_session_manager.dart';
+import '../../repositories/rider/cards_repository.dart';
+import '../../shareds/managers/rider/get_session_manager.dart';
 
 class CardDisplayController extends GetxController {
   final isLoading = false.obs;
