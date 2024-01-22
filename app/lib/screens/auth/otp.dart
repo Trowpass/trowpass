@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-import '../../controllers/otp_controller.dart';
+import '../../controllers/rider/otp_controller.dart';
 import '../../shareds/utils/app_colors.dart';
 import '../../widgets/circle_countdown_timer.dart';
 import '../../widgets/overlay_indeterminate_progress.dart';

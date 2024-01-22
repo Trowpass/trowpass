@@ -1,10 +1,9 @@
+import 'package:app/controllers/rider/change_pin_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
-import '../../../controllers/change_pin_controller.dart';
 import '../../../widgets/standard_button.dart';
 import '../../../widgets/text_form_input.dart';
 
