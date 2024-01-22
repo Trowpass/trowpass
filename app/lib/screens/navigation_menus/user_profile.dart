@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../controllers/user_profile_controller.dart';
+import '../../shareds/utils/border_radius.dart';
 import '../auth/edit_profile.dart';
 import '../auth/pin/change_pin.dart';
 
@@ -215,20 +216,51 @@ class UserProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: GestureDetector(
-                  onTap: () => controller.logout(),
+              InkWell(
+                customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)),
+                onTap: () => Get.to(() => ScanScreen()),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: ListTile(
-                    textColor: validationErrorColor,
-                    iconColor: validationErrorColor,
                     horizontalTitleGap: 0,
-                    leading: Image.asset(logout),
+                    leading: const Icon(
+                      Icons.auto_delete_outlined,
+                      size: 30,
+                    ),
+                    trailing: const Icon(Icons.keyboard_arrow_right, size: 24),
                     contentPadding: EdgeInsets.zero,
-                    title: Text('Logout',
+                    title: Text('Delete Account',
                         style: appStyles(18, null, FontWeight.w500)),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: SizedBox(
+                    width: double.maxFinite,
+                    child: ElevatedButton.icon(
+                      onPressed: () => controller.logout(),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(defaultBorderRadius)),
+                        side: const BorderSide(
+                          color:
+                              primaryColor, // Apply border color or transparent if not provided
+                        ),
+                        backgroundColor: background,
+                        minimumSize: const Size(double.infinity, 60),
+                      ),
+                      icon: Image.asset(logout),
+                      label: Text(
+                        'Logout',
+                        style: appStyles(16, Colors.black, FontWeight.w400),
+                      ),
+                    )),
               ),
             ],
           ),

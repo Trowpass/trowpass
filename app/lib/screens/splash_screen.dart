@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors
 
-import 'package:app/screens/auth/login.dart';
+import 'package:app/screens/auth/delete_account.dart';
 import 'package:app/screens/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/screens/onboarding/onboarding_screen.dart';
 import 'package:app/shareds/managers/get_session_manager.dart';
@@ -74,7 +74,8 @@ class SplashScreen extends StatelessWidget {
         Get.offAll(() => OnBoardingScreen());
         break;
       case AppRoutes.login:
-        Get.offAll(() => LoginScreen());
+        // Get.offAll(() => LoginScreen());
+        Get.offAll(() => DeleteAccountScreen());
         break;
       case AppRoutes.dashboard:
         Get.offAll(() => HomeLandingTabScreen());
