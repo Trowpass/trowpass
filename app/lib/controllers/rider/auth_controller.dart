@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:app/repositories/rider/user_repository.dart';
 import 'package:app/screens/auth/account_type_screen.dart';
 import 'package:app/screens/auth/otp.dart';
 import 'package:app/screens/auth/pin/choose_pin_screen.dart';
+import 'package:app/screens/fleet_manager/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/screens/rider/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/rider/post_requests/resend_otp_request.dart';
 import 'package:app/services/requests/rider/post_requests/user_login_request.dart';
@@ -70,7 +73,12 @@ class AuthController extends GetxController {
           session.writeIsUserLoggedIn(true);
           session.writeTokenExpiration(response.data!.tokenExpires);
           session.writeShouldRememberMe(shouldRememberUser.value);
-          Get.offAll(() => const HomeLandingTabScreen());
+           if (response.data!.loginData!.userAccountType == 'rider') {
+            Get.offAll(() => const HomeLandingTabScreen());
+          } else if (response.data!.loginData!.userAccountType ==
+              'fleet_manager') {
+            Get.offAll(() => FleetManagerHomeLandingTabScreen());
+          } else {}
         }
       } else {
         // Check for invalid credentials specifically

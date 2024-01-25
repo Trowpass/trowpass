@@ -47,13 +47,17 @@ class UserLoginData {
 class ChecksumData {
   bool isAccountVerified;
   bool isPinCreated;
+  String userAccountType;
 
   ChecksumData({
     required this.isAccountVerified,
     required this.isPinCreated,
+    required this.userAccountType,
   });
 
   factory ChecksumData.fromJson(Map<String, dynamic> json) => ChecksumData(
       isAccountVerified: json['isAccountVerified'],
-      isPinCreated: json['isPinCreated']);
+      isPinCreated: json['isPinCreated'],
+      userAccountType: json['userAccountType']
+      );
 }
