@@ -22,12 +22,29 @@ class ScanQrPayController extends GetxController {
   final pinController = TextEditingController();
   final narrationController = TextEditingController();
 
+  final TextEditingController expenseTypeController = TextEditingController();
+  final selectedExpenseTypeName = 'Select expense type'.obs;
+
+  List<String> allExpenseTypes = [];
+  List<String> allExpenseTypeNames = [];
+  Map<String, int> expenseTypeIdMap = {};
+
   final isLoaded = false.obs;
 
   @override
   void onInit() {
     isLoaded.value = false;
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    fetchExpenseTypeDetailsFromSessionStorage();
+    super.onReady();
+  }
+
+  void onSetSelectedExpenseTypeName(Object? value) {
+    selectedExpenseTypeName.value = value.toString();
   }
 
   void clearTextFields() {
@@ -42,10 +59,34 @@ class ScanQrPayController extends GetxController {
   InterwalletController interwalletController = InterwalletController();
   UserController userController = UserController();
 
+  int getSelectedExpenseTypeId() {
+    return expenseTypeIdMap[selectedExpenseTypeName.value] ?? 0;
+  }
+
+  void fetchExpenseTypeDetailsFromSessionStorage() {
+    try {
+      // Retrieve bank details from session storage
+      List<String> storedExpenseTypes =
+          session.readAllExpenseTypes('allExpenseTypes');
+      String storedselectedExpenseTypeName =
+          session.readSelectedExpenseTypeName('selectedExpenseTypeName') ??
+              'Select expense type';
+      Map<String, int> storedexpenseTypeIdMap =
+          session.readExpenseTypeIdMap('expenseTypeIdMap');
+      // Update controller's variables with retrieved values
+      allExpenseTypes = storedExpenseTypes;
+      selectedExpenseTypeName.value = storedselectedExpenseTypeName;
+      expenseTypeIdMap = storedexpenseTypeIdMap;
+    } catch (e) {
+      print('Error fetching bank details from: $e');
+    }
+  }
+
   Future<void> scanToPay() async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
     try {
+      int expenseTypeId = getSelectedExpenseTypeId();
       int senderUserId = session.readUserId() as int;
       var response = await interwalletController
           .interWalletTransferAsync(InterWalletTransferRequest(
@@ -53,6 +94,7 @@ class ScanQrPayController extends GetxController {
         recipientPhoneNumber: phoneNumberController.text.trim(),
         narration: narrationController.text.trim(),
         amount: int.parse(amountController.text),
+        transportExpenseId: expenseTypeId,
         pin: pinController.text.trim(),
       ));
       if (response.status) {

@@ -19,13 +19,18 @@ class PayController extends GetxController {
   final TextEditingController narrationController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController pinController = TextEditingController();
+  final TextEditingController expenseTypeController = TextEditingController();
+  final selectedExpenseTypeName = 'Select expense type'.obs;
+
+  List<String> allExpenseTypes = [];
+  List<String> allExpenseTypeNames = [];
+  Map<String, int> expenseTypeIdMap = {};
 
   final isLoaded = false.obs;
 
   @override
   void onInit() {
     isLoaded.value = false;
-    // Add a listener to phoneNumberController
     phoneNumberController.addListener(() {
       if (phoneNumberController.text.trim().length == 11) {
         fetchUserDataByPhoneNumber();
@@ -34,12 +39,46 @@ class PayController extends GetxController {
     super.onInit();
   }
 
+  @override
+  void onReady() {
+    fetchExpenseTypeDetailsFromSessionStorage();
+    super.onReady();
+  }
+
+  void onSetSelectedExpenseTypeName(Object? value) {
+    selectedExpenseTypeName.value = value.toString();
+  }
+
+  int getSelectedExpenseTypeId() {
+    return expenseTypeIdMap[selectedExpenseTypeName.value] ?? 0;
+  }
+
+  void fetchExpenseTypeDetailsFromSessionStorage() {
+    try {
+      // Retrieve bank details from session storage
+      List<String> storedExpenseTypes =
+          session.readAllExpenseTypes('allExpenseTypes');
+      String storedselectedExpenseTypeName =
+          session.readSelectedExpenseTypeName('selectedExpenseTypeName') ??
+              'Select expense type';
+      Map<String, int> storedexpenseTypeIdMap =
+          session.readExpenseTypeIdMap('expenseTypeIdMap');
+      // Update controller's variables with retrieved values
+      allExpenseTypes = storedExpenseTypes;
+      selectedExpenseTypeName.value = storedselectedExpenseTypeName;
+      expenseTypeIdMap = storedexpenseTypeIdMap;
+    } catch (e) {
+      print('Error fetching bank details from: $e');
+    }
+  }
+
   void clearTextFields() {
     phoneNumberController.clear();
     fullNameController.clear();
     amountController.clear();
     narrationController.clear();
     pinController.clear();
+    expenseTypeController.clear();
   }
 
   GetSessionManager session = GetSessionManager();
@@ -77,6 +116,7 @@ class PayController extends GetxController {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
     try {
+      int expenseTypeId = getSelectedExpenseTypeId();
       int senderUserId = session.readUserId() as int;
       var response = await interwalletController
           .interWalletTransferAsync(InterWalletTransferRequest(
@@ -84,6 +124,7 @@ class PayController extends GetxController {
         recipientPhoneNumber: phoneNumberController.text.trim(),
         narration: narrationController.text.trim(),
         amount: int.parse(amountController.text),
+        transportExpenseId: expenseTypeId,
         pin: pinController.text.trim(),
       ));
       if (response.status) {

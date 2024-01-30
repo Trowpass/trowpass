@@ -24,7 +24,7 @@ class InterWalletTransferRepository {
       } else {
         throw Exception('Transaction Failed');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
