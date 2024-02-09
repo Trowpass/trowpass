@@ -105,7 +105,7 @@ class PayForm extends StatelessWidget {
               initialValue: payController.expenseTypeController.text,
             ),
             const SizedBox(height: 10),
-            LabelText(textLabel: "Receipient Phone Number"),
+            LabelText(textLabel: "Recipient Phone Number"),
             const SizedBox(height: 10),
             TextInputForm(
               inputType: TextInputType.number,

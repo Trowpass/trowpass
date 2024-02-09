@@ -21,11 +21,18 @@ class PayToBankController extends GetxController {
   final selectedBankName = 'Select bank'.obs;
   final isLoaded = false.obs;
   final PaytToBankController paytToBankController = PaytToBankController();
+  final TextEditingController expenseTypeController = TextEditingController();
+  final selectedExpenseTypeName = 'Select expense type'.obs;
+
+  List<String> allExpenseTypes = [];
+  List<String> allExpenseTypeNames = [];
+  Map<String, int> expenseTypeIdMap = {};
 
   @override
   void onInit() {
     isLoaded.value = false;
     fetchBankDetailsFromSessionStorage();
+    fetchExpenseTypeDetailsFromSessionStorage();
     accountNumberController.addListener(() {
       if (accountNumberController.text.trim().length == 10) {
         fetchUserDataByAccountNumber();
@@ -37,7 +44,16 @@ class PayToBankController extends GetxController {
   @override
   void onReady() {
     fetchBankDetailsFromSessionStorage();
+    fetchExpenseTypeDetailsFromSessionStorage();
     super.onReady();
+  }
+
+  void onSetSelectedExpenseTypeName(Object? value) {
+    selectedExpenseTypeName.value = value.toString();
+  }
+
+  int getSelectedExpenseTypeId() {
+    return expenseTypeIdMap[selectedExpenseTypeName.value] ?? 0;
   }
 
   void clearTextFields() {
@@ -46,6 +62,7 @@ class PayToBankController extends GetxController {
     fullNameController.clear();
     amountController.clear();
     pinController.clear();
+    expenseTypeController.clear();
   }
 
   GetSessionManager session = GetSessionManager();
@@ -74,6 +91,25 @@ class PayToBankController extends GetxController {
       selectedBankName.value = storedSelectedBankName;
       bankIdMap = storedBankIdMap;
       bankCodeMap = storedBankCodeMap;
+    } catch (e) {
+      print('Error fetching bank details from: $e');
+    }
+  }
+
+  void fetchExpenseTypeDetailsFromSessionStorage() {
+    try {
+      // Retrieve bank details from session storage
+      List<String> storedExpenseTypes =
+          session.readAllExpenseTypes('allExpenseTypes');
+      String storedselectedExpenseTypeName =
+          session.readSelectedExpenseTypeName('selectedExpenseTypeName') ??
+              'Select expense type';
+      Map<String, int> storedexpenseTypeIdMap =
+          session.readExpenseTypeIdMap('expenseTypeIdMap');
+      // Update controller's variables with retrieved values
+      allExpenseTypes = storedExpenseTypes;
+      selectedExpenseTypeName.value = storedselectedExpenseTypeName;
+      expenseTypeIdMap = storedexpenseTypeIdMap;
     } catch (e) {
       print('Error fetching bank details from: $e');
     }
@@ -119,6 +155,7 @@ class PayToBankController extends GetxController {
     Get.focusScope!.unfocus();
     try {
       int bankId = getSelectedBankId();
+      int expenseTypeId = getSelectedExpenseTypeId();
       int senderUserId = session.readUserId() as int;
       var response = await paytToBankController.payToBankAsync(PayToBankRequest(
           senderUserId: senderUserId,
@@ -126,6 +163,7 @@ class PayToBankController extends GetxController {
           beneficiaryName: fullNameController.text.trim(),
           amount: int.parse(amountController.text),
           bankId: bankId,
+          transportExpenseId: expenseTypeId,
           pin: pinController.text.trim()));
       if (response.status) {
         PayToBankData transactionDetails = response.data!;
