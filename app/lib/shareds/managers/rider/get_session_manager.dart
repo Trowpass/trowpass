@@ -26,8 +26,13 @@ class GetSessionManager {
   bool readWalletCreated() => storage.read(walletCreated) ?? false;
   List<String> readAllBanks(String key) =>
       (storage.read(key) as List<dynamic>?)?.cast<String>() ?? [];
+  List<String> readAllExpenseTypes(String key) =>
+      (storage.read(key) as List<dynamic>?)?.cast<String>() ?? [];
   String? readSelectedBankName(String key) => storage.read(key);
+  String? readSelectedExpenseTypeName(String key) => storage.read(key);
   Map<String, int> readBankIdMap(String key) =>
+      (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
+  Map<String, int> readExpenseTypeIdMap(String key) =>
       (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, int>() ?? {};
   Map<String, String> readbankCodeMap(String key) =>
       (storage.read(key) as Map<dynamic, dynamic>?)?.cast<String, String>() ??

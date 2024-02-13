@@ -30,6 +30,7 @@ class TransferResponseData {
   String? transactionType;
   String? transactionMethod;
   int? amount;
+  String? transportExpense;
 
   TransferResponseData({
     this.senderName,
@@ -39,6 +40,7 @@ class TransferResponseData {
     this.transactionType,
     this.transactionMethod,
     this.amount,
+    this.transportExpense,
   });
 
   factory TransferResponseData.fromJson(Map<String, dynamic> json) =>
@@ -50,5 +52,6 @@ class TransferResponseData {
         transactionType: json['transactionType'],
         transactionMethod: json['transactionMethod'],
         amount: json['amount'],
+        transportExpense: json['transportExpense'] ?? '',
       );
 }

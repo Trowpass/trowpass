@@ -86,11 +86,23 @@ class SetSessionManager {
     storage.writeIfNull(key, value);
   }
 
+  void writeAllExpenseTypes(String key, List<String> value) {
+    storage.writeIfNull(key, value);
+  }
+
   void writeSelectedBankName(String key, String value) {
     storage.writeIfNull(key, value);
   }
 
+  void writeSelectedExpenseTypeName(String key, String value) {
+    storage.writeIfNull(key, value);
+  }
+
   void writeBankIdMap(String key, Map<String, int> value) {
+    storage.writeIfNull(key, value);
+  }
+
+  void writeExpenseTypeIdMap(String key, Map<String, int> value) {
     storage.writeIfNull(key, value);
   }
 

@@ -13,8 +13,9 @@ class TransportCompanyResponse {
 
   factory TransportCompanyResponse.fromJson(Map<String, dynamic> json) {
     List<dynamic> jsonDataList = json['data'] ?? [];
-    List<TransportCompanyResponseData> responseDataList =
-        jsonDataList.map((item) => TransportCompanyResponseData.fromJson(item)).toList();
+    List<TransportCompanyResponseData> responseDataList = jsonDataList
+        .map((item) => TransportCompanyResponseData.fromJson(item))
+        .toList();
 
     return TransportCompanyResponse(
       message: json['message'] ?? '',
@@ -39,9 +40,9 @@ class TransportCompanyResponseData {
   bool isActive;
   String createdBy;
   DateTime createdAt;
-  String name; 
-  String slug; 
-  String logoPath; 
+  String name;
+  String slug;
+  String logoPath;
 
   TransportCompanyResponseData({
     required this.id,
@@ -61,7 +62,7 @@ class TransportCompanyResponseData {
       createdAt: json['createdAt'] != null
           ? DateTime.parse(json['createdAt'])
           : DateTime.now(),
-      name: json['name'] ?? '', 
+      name: json['name'] ?? '',
       slug: json['slug'] ?? '',
       logoPath: json['logoPath'] ?? '',
     );
