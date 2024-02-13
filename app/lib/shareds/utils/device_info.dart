@@ -7,6 +7,7 @@ class DeviceInfo {
   String model;
   String operatingSystem;
   String osVersion;
+  int sdkInt;
 
   DeviceInfo({
     required this.deviceName,
@@ -14,6 +15,7 @@ class DeviceInfo {
     required this.model,
     required this.operatingSystem,
     required this.osVersion,
+    required this.sdkInt,
   });
 
   static Future<DeviceInfo?> getInfo() async {
@@ -27,6 +29,7 @@ class DeviceInfo {
           model: androidInfo.model,
           operatingSystem: 'Android OS',
           osVersion: androidInfo.version.release,
+          sdkInt: androidInfo.version.sdkInt,
         );
       } else if (defaultTargetPlatform == TargetPlatform.iOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
@@ -36,6 +39,7 @@ class DeviceInfo {
           model: iosInfo.name,
           operatingSystem: 'iOS',
           osVersion: iosInfo.systemVersion,
+          sdkInt: -1,
         );
       }
     } catch (e) {
