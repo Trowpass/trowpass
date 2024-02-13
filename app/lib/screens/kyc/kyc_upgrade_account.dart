@@ -1,107 +1,281 @@
-import 'package:app/controllers/rider/bloc/user_controller.dart';
-import 'package:app/screens/rider/kyc/tier_1_account_upgrade.dart';
-import 'package:app/services/requests/rider/put_requests/update_customer_data_request.dart';
-import 'package:app/shareds/constants/dropdown_constants.dart';
-import 'package:app/shareds/managers/rider/get_session_manager.dart';
-import 'package:app/shareds/managers/rider/set_session_manager.dart';
+import 'package:app/controllers/kyc_upgrade_account_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
+import 'package:app/widgets/all_state_list.dart';
+import 'package:app/widgets/overlay_indeterminate_progress.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
-class KycUpgradeAccountController extends GetxController {
-  final formKey = GlobalKey<FormState>();
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-  TextEditingController phoneNumberController = TextEditingController();
-  TextEditingController bioController = TextEditingController();
-  TextEditingController bvnController = TextEditingController();
-  TextEditingController streetAddressController = TextEditingController();
-  TextEditingController postalCodeController = TextEditingController();
-  TextEditingController stateController = TextEditingController();
+import '../../shareds/utils/border_radius.dart';
+import '../../widgets/standard_button.dart';
+import '../../widgets/text_form_input.dart';
 
-  List<dynamic> country = ['Select', 'Nigeria'];
-  final selectedCountry = 'Select'.obs;
-
-  List<String> states = nigeriaStates;
-  final selectedState = 'Select'.obs;
-
-  final isLoaded = false.obs;
-
-  UserController userController = UserController();
-  GetSessionManager session = GetSessionManager();
-  SetSessionManager setSession = SetSessionManager();
+class KycUpgradeAccountScreen extends StatelessWidget {
+  KycUpgradeAccountScreen({super.key});
+  final controller = Get.put(KycUpgradeAccountController());
 
   @override
-  void onInit() async {
-    isLoaded.value = false;
-    //get profile details
-    bioController.text = session.readProfileBioData();
-    bvnController.text = session.readProfileBvn();
-    firstNameController.text = session.readProfileFN();
-    lastNameController.text = session.readProfileLN();
-    postalCodeController.text = session.readProfilePostalCode();
-    stateController.text = session.readProfileState();
-    cityController.text = session.readProfileCity();
-    phoneNumberController.text = session.readProfilePN();
-    streetAddressController.text = session.readProfileStreet();
-    selectedCountry.value = session.readProfileCountry() == ''
-        ? 'Select'
-        : session.readProfileCountry();
-    selectedState.value = session.readProfileState() == ''
-        ? country[0]
-        : session.readProfileState();
-    super.onInit();
+  Widget build(BuildContext context) {
+    return Obx(() => OverlayIndeterminateProgress(
+        isLoading: controller.isLoaded.value,
+        overlayBackgroundColor: background,
+        progressColor: primaryColor,
+        child: GestureDetector(
+            onTap: () => Get.focusScope!.unfocus(),
+            child: Scaffold(
+              resizeToAvoidBottomInset: true,
+              backgroundColor: background,
+              appBar: AppBar(
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: primaryColor,
+                  statusBarBrightness: Brightness.light, // For iOS
+                  statusBarIconBrightness: Brightness.light, // For Android
+                  systemNavigationBarColor: navigationBarBackground,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+                elevation: 0,
+                title: const Text('Update Profile'),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.black),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+                centerTitle: true,
+                backgroundColor: background,
+              ),
+              body: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: const Text('First Name'),
+                                subtitle: TextInputForm(
+                                  enabled: true,
+                                  inputController:
+                                      controller.firstNameController,
+                                  validatorMessage: 'Please enter first name',
+                                  isPassword: false,
+                                  autoCorrect: false,
+                                )),
+                            const SizedBox(height: 3),
+                            ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: const Text('Last Name'),
+                                subtitle: TextInputForm(
+                                  enabled: true,
+                                  inputController:
+                                      controller.lastNameController,
+                                  validatorMessage: 'Please enter last name',
+                                  isPassword: false,
+                                  autoCorrect: false,
+                                )),
+                            const SizedBox(height: 3),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Phone Number'),
+                              subtitle: TextInputForm(
+                                inputType: TextInputType.phone,
+                                enabled: true,
+                                inputController:
+                                    controller.phoneNumberController,
+                                validatorMessage: 'Please enter a valid number',
+                                isPassword: false,
+                                autoCorrect: false,
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Bank Verification Number'),
+                              subtitle: TextInputForm(
+                                inputType: TextInputType.phone,
+                                enabled: true,
+                                inputController: controller.bvnController,
+                                validatorMessage: 'Please enter your bvn',
+                                isPassword: false,
+                                autoCorrect: false,
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: const Text('Bio Data'),
+                                subtitle: TextInputForm(
+                                  enabled: true,
+                                  inputController: controller.bioController,
+                                  validatorMessage:
+                                      'Please enter your bio data',
+                                  isPassword: false,
+                                  autoCorrect: false,
+                                )),
+                            const SizedBox(height: 3),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Select Country'),
+                              subtitle: DropdownButtonFormField(
+                                elevation: 1,
+                                decoration: InputDecoration(
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: primaryColor),
+                                    ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(color: grayscale),
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            defaultBorderRadius))),
+                                onChanged: (Object? newSeleted) {
+                                  controller.onSetSelectedCountry(newSeleted);
+                                },
+                                isExpanded: true,
+                                validator: (value) => value == 'Select'
+                                    ? 'Please select country'
+                                    : null,
+                                value: controller.selectedCountry.value,
+                                items: controller.country.map((selectedType) {
+                                  return DropdownMenuItem(
+                                    value: selectedType,
+                                    child: Text(
+                                      selectedType,
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Select State'),
+                              subtitle: TextInputForm(
+                                onTap: () => showStateLists(context),
+                                enabled: true,
+                                readOnly: true,
+                                inputController: controller.stateController,
+                                validatorMessage: 'Please select state',
+                                isPassword: false,
+                                autoCorrect: false,
+                                suffixIcon: InkWell(
+                                  onTap: () => showStateLists(context),
+                                  child: const Icon(Icons.arrow_drop_down),
+                                ),
+                                initialValue: controller.stateController.text,
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('City/LGA'),
+                              subtitle: TextInputForm(
+                                autoCorrect: false,
+                                enabled: true,
+                                isPassword: false,
+                                inputController: controller.cityController,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? 'Field can\'t be empty'
+                                        : null,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.cityController.clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_outlined,
+                                      size: 15,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Address'),
+                              subtitle: TextInputForm(
+                                autoCorrect: false,
+                                enabled: true,
+                                isPassword: false,
+                                inputController:
+                                    controller.streetAddressController,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? 'Field can\'t be empty'
+                                        : null,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.streetAddressController
+                                          .clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_outlined,
+                                      size: 15,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(height: 3),
+                            ListTile(
+                              contentPadding: EdgeInsets.zero,
+                              title: const Text('Postal Code'),
+                              subtitle: TextInputForm(
+                                inputType: TextInputType.number,
+                                autoCorrect: false,
+                                enabled: true,
+                                isPassword: false,
+                                inputController:
+                                    controller.postalCodeController,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? 'Field can\'t be empty'
+                                        : null,
+                                suffixIcon: IconButton(
+                                    onPressed: () {
+                                      controller.postalCodeController.clear();
+                                    },
+                                    icon: const Icon(
+                                      Icons.close_outlined,
+                                      size: 15,
+                                    )),
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            StandardButton(
+                              text: 'Continue',
+                              onPressed: () async {
+                                if (controller.formKey.currentState!
+                                    .validate()) {
+                                  controller.formKey.currentState!.save();
+                                  controller.updateProfile(context);
+                                }
+                              },
+                            ),
+                          ],
+                        ))),
+              ),
+            ))));
   }
 
-  void onSetSelectedCountry(Object? value) {
-    selectedCountry.value = value.toString();
-  }
-
-  void onSetSelectedState(Object? value) {
-    selectedState.value = value.toString();
-  }
-
-  Future updateProfile(BuildContext context) async {
-    try {
-      isLoaded.value = true;
-      var response = await userController.updateCustomerDataAsync(
-          UpdateCustomerDataRequest(
-              firstName: firstNameController.text.trim(),
-              lastName: lastNameController.text.trim(),
-              phoneNumber: phoneNumberController.text.trim(),
-              bio: bioController.text.trim(),
-              bvn: bvnController.text.trim(),
-              address: UpdateCustomerDataAddress(
-                  city: cityController.text.trim(),
-                  street: streetAddressController.text.trim(),
-                  postalCode: postalCodeController.text.trim(),
-                  country: selectedCountry.value.trim(),
-                  state: selectedState.value.trim())));
-      if (response.status) {
-        setSession.writeProfileBioData(bioController.text.trim());
-        setSession.writeProfileBvn(bvnController.text.trim());
-        setSession.writeProfileCity(cityController.text.trim());
-        setSession.writeProfileCountry(selectedCountry.value.trim());
-        setSession.writeProfileState(selectedState.value.trim());
-        setSession.writeProfileStreet(streetAddressController.text.trim());
-        setSession.writeProfilePostalCode(postalCodeController.text.trim());
-        setSession.writeProfileFN(firstNameController.text.trim());
-        setSession.writeProfileLN(lastNameController.text.trim());
-        setSession.writeProfilePN(phoneNumberController.text.trim());
-        Get.to(() => const TeirOneAccountUpgradeScreen());
-        isLoaded.value = false;
-      } else {
-        isLoaded.value = false;
-        Get.snackbar('Information', response.message,
-            backgroundColor: dialogInfoBackground,
-            snackPosition: SnackPosition.BOTTOM);
-      }
-    } catch (e) {
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: dialogInfoBackground,
-          snackPosition: SnackPosition.BOTTOM);
-      isLoaded.value = false;
-    }
+  Future<dynamic> showStateLists(BuildContext context) {
+    return showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (BuildContext context) {
+        return StateListModalSheet(
+          onStateSelected: (selectedCompany) {
+            controller.onSetSelectedState(selectedCompany);
+            controller.stateController.text = selectedCompany;
+            Navigator.pop(context);
+          },
+          allStates: controller.states,
+          initialSelectedState: controller.selectedState.value,
+        );
+      },
+    );
   }
 }

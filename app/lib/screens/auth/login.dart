@@ -1,136 +1,193 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'package:app/repositories/rider/user_repository.dart';
-import 'package:app/screens/auth/account_type_screen.dart';
-import 'package:app/screens/auth/otp.dart';
-import 'package:app/screens/auth/pin/choose_pin_screen.dart';
-import 'package:app/screens/fleet_manager/navigation_menus/home_landing_tab_screen.dart';
-import 'package:app/screens/rider/navigation_menus/home_landing_tab_screen.dart';
-import 'package:app/services/requests/rider/post_requests/resend_otp_request.dart';
-import 'package:app/services/requests/rider/post_requests/user_login_request.dart';
-import 'package:app/shareds/managers/rider/get_session_manager.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart'
-    as expiry_timer;
+import 'package:app/controllers/auth_controller.dart';
+import 'package:app/shareds/utils/app_colors.dart';
+import 'package:app/shareds/utils/images.dart';
+import 'package:app/widgets/app_styles.dart';
+import 'package:app/widgets/overlay_indeterminate_progress.dart';
+import 'package:app/widgets/standard_button.dart';
+import 'package:app/widgets/text_form_input.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:timer_count_down/timer_controller.dart' as resend_timer;
 
-import '../../shareds/managers/rider/set_session_manager.dart';
-import '../../shareds/utils/app_colors.dart';
-import 'bloc/user_controller.dart';
+import 'forgot_password/forgot_password_screen.dart';
 
-class AuthController extends GetxController {
-  final formKey = GlobalKey<FormState>();
-  final TextEditingController emailPhoneNumberController =
-      TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final resendCountDownController = resend_timer.CountdownController();
-  final expiryCountDownController = expiry_timer.CountDownController();
-  final isPassword = false.obs;
-  final showPassword = false.obs;
-  final isFocused = false.obs;
-  final isLoaded = false.obs;
-  final isExpiryTimeElapsed = false.obs;
-  final shouldRememberUser = false.obs;
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
+  final controller = Get.put(AuthController());
 
   @override
-  void onInit() {
-    isLoaded.value = false;
-    shouldRememberUser.value = false;
-    super.onInit();
-  }
-
-  void timerElapsed() {
-    isExpiryTimeElapsed.value = true;
-  }
-
-  SetSessionManager session = SetSessionManager();
-  GetSessionManager getSession = GetSessionManager();
-  UserController userController = UserController();
-  UserRepository userRepository = UserRepository();
-
-  Future<void> login() async {
-    isLoaded.value = true;
-    Get.focusScope!.unfocus();
-    try {
-      var response = await userController.loginAsync(
-        UserLoginRequest(
-            phoneNumber: emailPhoneNumberController.text.trim(),
-            password: passwordController.text.trim(),
-            shouldRememberMe: shouldRememberUser.value),
-      );
-      if (response.status) {
-        session.writeUserId(response.data!.userId);
-        session.writeAuthorizationToken(response.data!.token);
-        if (!response.data!.loginData!.isAccountVerified) {
-          isLoaded.value = true;
-          gotoVerification();
-        } else if (!response.data!.loginData!.isPinCreated) {
-          isLoaded.value = false;
-          Get.to(() => ChoosePinScreen());
-        } else {
-          isLoaded.value = false;
-          session.writeIsUserLoggedIn(true);
-          session.writeTokenExpiration(response.data!.tokenExpires);
-          session.writeShouldRememberMe(shouldRememberUser.value);
-          if (response.data!.loginData!.userAccountType == 'rider') {
-            Get.offAll(() => const HomeLandingTabScreen());
-          } else if (response.data!.loginData!.userAccountType ==
-              'fleet_manager') {
-            Get.offAll(() => FleetManagerHomeLandingTabScreen());
-          } else {}
-        }
-      } else {
-        // Check for invalid credentials specifically
-        if (response.responseCode == "11") {
-          isLoaded.value = false;
-          Get.defaultDialog(
-            title: 'Login Failed',
-            content: Text(
-              response.message,
-              style: const TextStyle(color: Colors.white),
+  Widget build(BuildContext context) {
+    return Obx(() => OverlayIndeterminateProgress(
+          isLoading: controller.isLoaded.value,
+          overlayBackgroundColor: background,
+          progressColor: primaryColor,
+          child: GestureDetector(
+            onTap: () => Get.focusScope!.unfocus(),
+            child: Scaffold(
+              resizeToAvoidBottomInset: true,
+              backgroundColor: background,
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: primaryColor,
+                  statusBarBrightness: Brightness.light, // For iOS
+                  statusBarIconBrightness: Brightness.light, // For Android
+                  systemNavigationBarColor: navigationBarBackground,
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+                backgroundColor: background,
+                elevation: 0.0,
+              ),
+              body: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      Image.asset(loginImg),
+                      const SizedBox(height: 32),
+                      Form(
+                        key: controller.formKey,
+                        child: Column(
+                          children: [
+                            Obx(() => TextInputForm(
+                                  inputType: TextInputType.number,
+                                  enabled: true,
+                                  inputController:
+                                      controller.emailPhoneNumberController,
+                                  // textLabel: 'Enter phone number',
+                                  textHint: 'Enter phone number',
+                                  validatorMessage:
+                                      'Please enter a valid phone number',
+                                  isPassword: false,
+                                  autoCorrect: false,
+                                  prefixIcon: Icon(
+                                    Icons.phone_android_outlined,
+                                    size: 24,
+                                    color: controller.isFocused.value
+                                        ? primaryColor
+                                        : null,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: Icon(Icons.cancel,
+                                        color: controller.isFocused.value
+                                            ? primaryColor
+                                            : null),
+                                    onPressed: () {
+                                      controller.emailPhoneNumberController
+                                          .clear();
+                                    },
+                                  ),
+                                )),
+                            const SizedBox(height: 16),
+                            Obx(() => TextInputForm(
+                                  enabled: true,
+                                  inputController:
+                                      controller.passwordController,
+                                  // textLabel: 'Password',
+                                  textHint: 'Password',
+                                  validatorMessage:
+                                      'Please enter a valid password',
+                                  isPassword: !controller.isPassword.value,
+                                  autoCorrect: false,
+                                  prefixIcon: Icon(
+                                    Icons.lock,
+                                    size: 24,
+                                    color: controller.isFocused.value
+                                        ? primaryColor
+                                        : null,
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: controller.isPassword.value
+                                        ? const Icon(Icons.visibility_off)
+                                        : const Icon(Icons.visibility),
+                                    color: controller.isFocused.value
+                                        ? primaryColor
+                                        : null,
+                                    onPressed: () {
+                                      controller.isPassword.value =
+                                          !controller.isPassword.value;
+                                    },
+                                  ),
+                                  onFieldSubmitted: (_) =>
+                                      controller.isFocused.value = false,
+                                )),
+                            const SizedBox(height: 03),
+                            Row(
+                              children: [
+                                Expanded(
+                                    child: Obx(() => CheckboxListTile(
+                                          dense: true,
+                                          contentPadding: EdgeInsets.zero,
+                                          title: const Text('Remember Me'),
+                                          activeColor: primaryColor,
+                                          value: controller
+                                              .shouldRememberUser.value,
+                                          onChanged: (newValue) {
+                                            controller.shouldRememberUser
+                                                .value = newValue ?? false;
+                                          },
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                        ))),
+                                Expanded(
+                                    child: Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: TextButton(
+                                    onPressed: () =>
+                                        Get.to(() => ForgotPasswordScreen()),
+                                    child: Text(
+                                      'Forgot Password?',
+                                      style: appStyles(
+                                        14,
+                                        grayscale,
+                                        FontWeight.w400,
+                                      ),
+                                    ),
+                                  ),
+                                ))
+                              ],
+                            ),
+                            const SizedBox(height: 18),
+                            StandardButton(
+                              text: 'LOG IN',
+                              onPressed: () {
+                                if (controller.formKey.currentState!
+                                    .validate()) {
+                                  controller.formKey.currentState!.save();
+                                  controller.login();
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 32),
+                      Text(
+                        'Don\'t have an account?',
+                        style: appStyles(
+                          14,
+                          grayscale,
+                          FontWeight.w600,
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            controller.createAccount();
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: appStyles(
+                              14,
+                              primaryColor,
+                              FontWeight.w600,
+                            ),
+                          ))
+                    ],
+                  ),
+                ),
+              ),
             ),
-          );
-        } else {
-          isLoaded.value = false;
-          Get.defaultDialog(
-            title: 'Information',
-            content: Text(
-              response.message,
-              style: const TextStyle(color: Colors.white),
-            ),
-          );
-        }
-      }
-    } catch (e) {
-      Get.snackbar('Information', e.toString(),
-          backgroundColor: dialogInfoBackground,
-          snackPosition: SnackPosition.BOTTOM);
-      isLoaded.value = false;
-    }
-  }
-
-  void createAccount() {
-    Get.to(const AccountTypeScreen());
-  }
-
-  Future gotoVerification() async {
-    String phoneNumber = getSession.readRiderPhoneNumber() ?? '';
-    Get.offAll(() => OtpScreen(phoneNumber: phoneNumber));
-    //send new otp
-    ResendOtpRequest request = ResendOtpRequest(phoneNumber: phoneNumber);
-    var response = await userRepository.resendOtpToPhoneNumberAsync(request);
-    if (response.status) {
-      isLoaded.value = false;
-      isExpiryTimeElapsed.value = false;
-      resendCountDownController.restart();
-      expiryCountDownController.restart();
-    } else {
-      Get.defaultDialog(
-          title: 'Information',
-          content: Text(response.message),
-          backgroundColor: dialogInfoBackground);
-      isLoaded.value = false;
-    }
+          ),
+        ));
   }
 }
