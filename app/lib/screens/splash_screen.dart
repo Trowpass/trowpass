@@ -81,7 +81,7 @@ class SplashScreen extends StatelessWidget {
         break;
     }
   }
-
+  
   bool isLogoutTimeElapsed() {
     final endTime = store.readTokenExpires();
     if (endTime != null) {
