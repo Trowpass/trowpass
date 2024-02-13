@@ -1,6 +1,7 @@
 import 'package:app/repositories/rider/topup_transport_wallet_repository.dart';
 import 'package:app/services/requests/rider/post_requests/topup_transport_wallet_request.dart';
 import 'package:app/services/requests/rider/post_requests/user_by_account_number_request.dart';
+import 'package:app/services/responses/rider/all_expense_types_response.dart';
 import 'package:app/services/responses/rider/get_all_banks_reponse.dart';
 import 'package:app/services/responses/rider/get_all_transport_company_response.dart';
 import 'package:app/services/responses/rider/get_user_by_account_response.dart';
@@ -24,6 +25,19 @@ class TopupTransportWalletController {
       return Future.error(response.message);
     } catch (e) {
       return Future.error('Unable to fetch banks. Please try again!');
+    }
+  }
+
+  Future<AllExpenseTypeResponse> getAllExpenseTypesAsync() async {
+    try {
+      final response =
+          await topupTransportWalletRepository.getAllExpenseTypesAsync();
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unable to fetch expense types. Please try again!');
     }
   }
 

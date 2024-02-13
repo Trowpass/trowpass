@@ -16,9 +16,8 @@ class PayToBankResponse {
         status: json['status'],
         message: json['message'],
         responseCode: json['responseCode'],
-        data: json['data'] != null
-            ? PayToBankData.fromJson(json['data'])
-            : null,
+        data:
+            json['data'] != null ? PayToBankData.fromJson(json['data']) : null,
       );
 }
 
@@ -32,6 +31,7 @@ class PayToBankData {
   String? transactionMethod;
   String? bank;
   int? amount;
+  String? transportExpense;
 
   PayToBankData({
     this.senderName,
@@ -43,10 +43,10 @@ class PayToBankData {
     this.transactionMethod,
     this.bank,
     this.amount,
+    this.transportExpense,
   });
 
-  factory PayToBankData.fromJson(Map<String, dynamic> json) =>
-      PayToBankData(
+  factory PayToBankData.fromJson(Map<String, dynamic> json) => PayToBankData(
         senderName: json['senderName'],
         recipientName: json['recipientName'],
         recipientPhoneNumber: json['recipientPhoneNumber'],
@@ -56,6 +56,7 @@ class PayToBankData {
         transactionMethod: json['transactionMethod'],
         bank: json['bank'],
         amount: json['amount'],
+        transportExpense: json['transportExpense'] ?? '',
       );
 
   Map<String, dynamic> toJson() {

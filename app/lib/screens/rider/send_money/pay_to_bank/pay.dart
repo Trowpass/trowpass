@@ -2,6 +2,7 @@
 import 'package:app/controllers/rider/pay_to_bank_controller/pay_screen_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/all_banks_list.dart';
+import 'package:app/widgets/all_exepnse_types_list.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
 import 'package:app/widgets/text_form_input.dart';
@@ -47,7 +48,7 @@ class PayToBankScreen extends StatelessWidget {
                 centerTitle: true,
                 actions: [
                   IconButton(
-              icon: SvgPicture.asset(notificationIcon),
+                    icon: SvgPicture.asset(notificationIcon),
                     onPressed: () {
                       Get.back();
                     },
@@ -87,6 +88,24 @@ class PayForm extends StatelessWidget {
         key: payController.formKey,
         child: Column(
           children: [
+            LabelText(textLabel: "Expense Type"),
+            const SizedBox(height: 10),
+            TextInputForm(
+              onTap: () => showExpenseTypeList(context),
+              enabled: true,
+              readOnly: true,
+              inputController: payController.expenseTypeController,
+              textHint: 'Select Type',
+              validatorMessage: 'Please expense type',
+              isPassword: false,
+              autoCorrect: false,
+              suffixIcon: InkWell(
+                onTap: () => showExpenseTypeList(context),
+                child: Icon(Icons.arrow_drop_down),
+              ),
+              initialValue: payController.expenseTypeController.text,
+            ),
+            const SizedBox(height: 10),
             LabelText(textLabel: "Bank Name"),
             const SizedBox(height: 10),
             TextInputForm(
@@ -186,6 +205,28 @@ class PayForm extends StatelessWidget {
           },
           allBanks: payController.allBanks,
           initialSelectedBank: payController.selectedBankName.value,
+        );
+      },
+    );
+  }
+
+  void showExpenseTypeList(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0), topRight: Radius.circular(16.0)),
+      ),
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      builder: (BuildContext context) {
+        return ExpenseTypeModalSheet(
+          onExpenseSelected: (selectedExpenseType) {
+            payController.onSetSelectedExpenseTypeName(selectedExpenseType);
+            payController.expenseTypeController.text = selectedExpenseType;
+            Navigator.pop(context);
+          },
+          allExpenseTypes: payController.allExpenseTypes,
+          initialSelectedType: payController.selectedExpenseTypeName.value,
         );
       },
     );

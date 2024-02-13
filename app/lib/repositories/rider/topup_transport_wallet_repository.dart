@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:app/services/requests/rider/post_requests/topup_transport_wallet_request.dart';
 import 'package:app/services/requests/rider/post_requests/user_by_account_number_request.dart';
+import 'package:app/services/responses/rider/all_expense_types_response.dart';
 import 'package:app/services/responses/rider/get_all_banks_reponse.dart';
 import 'package:app/services/responses/rider/get_all_transport_company_response.dart';
 import 'package:app/services/responses/rider/get_user_by_account_response.dart';
@@ -33,7 +34,27 @@ class TopupTransportWalletRepository {
       } else {
         throw Exception('Unable to fetch banks');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<AllExpenseTypeResponse> getAllExpenseTypesAsync() async {
+    try {
+      var url = Endpoints.expenseTypes;
+      var response = await apiConnectionHelper.getDataAsync(
+        url: url,
+      );
+      if (response.data != null) {
+        return AllExpenseTypeResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to fetch expense types');
+      }
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -55,7 +76,7 @@ class TopupTransportWalletRepository {
       } else {
         throw Exception('Unable to fetch transport companies');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -74,7 +95,7 @@ class TopupTransportWalletRepository {
       } else {
         throw Exception('Transaction Failed');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);
@@ -93,7 +114,7 @@ class TopupTransportWalletRepository {
       } else {
         throw Exception('Unable to get user with account number');
       }
-    } on DioError catch (e) {
+    } on DioException catch (e) {
       return Future.error(DioExceptions.fromDioError(e));
     } on SocketException catch (e) {
       return Future.error(e);

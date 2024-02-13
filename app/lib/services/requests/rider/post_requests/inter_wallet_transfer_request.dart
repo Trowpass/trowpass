@@ -3,6 +3,7 @@ class InterWalletTransferRequest {
   String recipientPhoneNumber;
   String narration;
   int amount;
+  int transportExpenseId;
   String pin;
 
   InterWalletTransferRequest({
@@ -10,6 +11,7 @@ class InterWalletTransferRequest {
     required this.recipientPhoneNumber,
     required this.narration,
     required this.amount,
+    required this.transportExpenseId,
     required this.pin,
   });
 
@@ -18,6 +20,7 @@ class InterWalletTransferRequest {
         'recipientPhoneNumber': recipientPhoneNumber,
         'narration': narration,
         'amount': amount,
+        'transportExpenseId': transportExpenseId,
         'pin': pin,
       };
 }
