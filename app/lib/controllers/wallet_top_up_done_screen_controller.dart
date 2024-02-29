@@ -27,6 +27,6 @@ class WalletTopUpDoneScreenContoller extends GetxController {
 
   void trySubmit() {
     Get.focusScope!.unfocus();
-    Get.offAll(() => HomeLandingTabScreen());
+    Get.offAll(() => const HomeLandingTabScreen());
   }
 }
