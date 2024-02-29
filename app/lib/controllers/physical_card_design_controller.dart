@@ -13,7 +13,7 @@ class PhysicalCardDesignController extends GetxController {
           message:
               'Card request successful! You will be notified when its ready for pickup.',
           imageAsset: cardSuccess,
-          onTap: () => Get.offAll(() => HomeLandingTabScreen()),
+          onTap: () => Get.offAll(() => const HomeLandingTabScreen()),
         ));
   }
 }

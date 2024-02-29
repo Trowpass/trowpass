@@ -26,6 +26,6 @@ class ReceiptController extends GetxController {
   }
 
   void done() {
-    Get.offAll(() => HomeLandingTabScreen());
+    Get.offAll(() => const HomeLandingTabScreen());
   }
 }
