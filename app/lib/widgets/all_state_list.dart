@@ -1,6 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
-import 'package:app/controllers/top_up_transport_wallet_controller.dart';
+import 'package:app/controllers/rider/top_up_transport_wallet_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/border_radius.dart';
 import 'package:app/widgets/app_styles.dart';

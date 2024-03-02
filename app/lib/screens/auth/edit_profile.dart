@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemUiOverlayStyle;
 import 'package:get/get.dart';
 
-import '../../controllers/edit_profile_controller.dart';
+import '../../controllers/rider/edit_profile_controller.dart';
 import '../../shareds/utils/border_radius.dart';
 import '../../widgets/standard_button.dart';
 import '../../widgets/text_form_input.dart';

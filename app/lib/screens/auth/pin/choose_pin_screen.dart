@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_is_empty, use_key_in_widget_constructors
 
-import 'package:app/controllers/create_pin_controller.dart';
+import 'package:app/controllers/rider/create_pin_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/widgets/app_styles.dart';
 import 'package:app/widgets/standard_button.dart';
