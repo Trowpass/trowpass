@@ -126,7 +126,7 @@ class DialogButton {
 
 Future<T?> showAppDialog<T>({
   DialogType type = DialogType.neutral,
-  double height = 150,
+  double height = 180,
   required String title,
   required String subtitle,
   List<DialogButton>? actions,

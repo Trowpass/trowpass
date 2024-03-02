@@ -1,12 +1,12 @@
-import 'package:app/services/responses/transaction_history/payment_type.dart';
-import 'package:app/services/responses/transaction_history/transaction_history_response.dart';
+import 'package:app/services/responses/rider/transaction_history/payment_type.dart';
+import 'package:app/services/responses/rider/transaction_history/transaction_history_response.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../shareds/utils/app_colors.dart';
 import '../../shareds/utils/border_radius.dart';
 import '../../widgets/app_styles.dart';
-import '../screens/history/transaction_history_details.dart';
+import '../screens/rider/history/transaction_history_details.dart';
 
 class HistoryListItem extends StatelessWidget {
   final TransactionHistoryData transactHistory;

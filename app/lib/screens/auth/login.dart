@@ -1,4 +1,4 @@
-import 'package:app/controllers/auth_controller.dart';
+import 'package:app/controllers/rider/auth_controller.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:app/shareds/utils/images.dart';
 import 'package:app/widgets/app_styles.dart';

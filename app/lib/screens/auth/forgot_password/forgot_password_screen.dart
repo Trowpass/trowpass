@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../../controllers/forgot_password_controller.dart';
+import '../../../controllers/rider/forgot_password_controller.dart';
 import '../../../shareds/utils/app_colors.dart';
 import '../../../widgets/app_styles.dart';
 import '../../../widgets/overlay_indeterminate_progress.dart';
