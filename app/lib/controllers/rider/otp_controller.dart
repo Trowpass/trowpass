@@ -95,4 +95,38 @@ class OtpController extends GetxController {
       isLoaded.value = false;
     }
   }
+
+  Future<void> tryResendOtpToFleetManager(String email) async {
+    isLoaded.value = true;
+    Get.focusScope!.unfocus();
+    try {
+      var response = await userController
+          .resendOtpToFleetManagerAsync(ResendOtpRequest(email: email));
+      if (response.status) {
+        isLoaded.value = false;
+        isExpiryTimeElapsed.value = false;
+        resendCountDownController.restart();
+        expiryCountDownController.restart();
+        Get.snackbar(
+          'Information',
+          response.message,
+          backgroundColor: dialogInfoBackground,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        isLoaded.value = false;
+      } else {
+        Get.defaultDialog(
+            title: 'Information', content: Text(response.message));
+        isLoaded.value = false;
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Information',
+        e.toString(),
+        backgroundColor: dialogInfoBackground,
+        snackPosition: SnackPosition.BOTTOM,
+      );
+      isLoaded.value = false;
+    }
+  }
 }

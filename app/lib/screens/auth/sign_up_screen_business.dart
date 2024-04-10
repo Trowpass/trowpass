@@ -180,16 +180,21 @@ class SignUpScreenBusiness extends StatelessWidget {
                                 const SizedBox(height: 25),
                                 StandardButton(
                                   text: 'SIGN UP',
-                                  onPressed: () {
-                                    if (businessController.formKey.currentState!
-                                        .validate()) {
-                                      businessController.strength.value !=
-                                              Strength.secure
-                                          ? null
-                                          : businessController.trySubmit();
-                                    }
-                                  },
+                                  onPressed: () =>
+                                      businessController.trySubmit(),
                                 ),
+                                // StandardButton(
+                                //   text: 'SIGN UP',
+                                //   onPressed: () {
+                                //     if (businessController.formKey.currentState!
+                                //         .validate()) {
+                                //       businessController.strength.value !=
+                                //               Strength.secure
+                                //           ? null
+                                //           : businessController.trySubmit();
+                                //     }
+                                //   },
+                                // ),
                               ],
                             )),
                         const SizedBox(height: 32),

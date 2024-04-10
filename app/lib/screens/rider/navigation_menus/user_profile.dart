@@ -119,7 +119,7 @@ class UserProfileScreen extends StatelessWidget {
                   style: appStyles(18, null, FontWeight.bold)),
               const SizedBox(height: 8),
               Text(
-                'Rider',
+                controller.userType.value,
                 style: appStyles(18, null, FontWeight.w300),
               ),
               Padding(

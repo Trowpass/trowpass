@@ -12,6 +12,8 @@ class Endpoints {
       '/api/v1/transaction/{id}/histories/details/{userId}';
   static const String riderRegister = 'api/v1/auth/create';
   static const String verifyOtp = 'api/v1/auth/verify-account';
+  static const String verifyFleetManagerOtp =
+      'api/v1/auth/verify-account/email';
   static const String login = 'api/v1/auth/sign-in';
   static const String createPin = 'api/v1/setting/create-pin';
   static const String userProfile = 'api/v1/user/profile';
@@ -24,6 +26,8 @@ class Endpoints {
       'api/v1/auth/resend-otp/${OtpType.accountVerification}';
   static const String resendOtpForgetPassword =
       'api/v1/auth/resend-otp/${OtpType.forgotPassword}';
+  static const String resendOtpFleetManager =
+      'api/v1/auth/resend-otp/${OtpType.fleetManager}';
   static const String userWallet = 'api/v1/wallet/me';
   static const String userKyc = 'api/v1/userkyc/create-update';
   static const String createWallet = 'api/v1/wallet/create';

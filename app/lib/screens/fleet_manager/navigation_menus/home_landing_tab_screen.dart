@@ -1,18 +1,21 @@
+import 'package:app/screens/rider/navigation_menus/history_tab_screen.dart';
 import 'package:app/widgets/bottom_bar_navigation_menu_fleet_manager.dart';
 import 'package:flutter/material.dart';
-import 'bills_tab_screen.dart';
-import 'history_tab_screen.dart';
+
+import '../../rider/navigation_menus/bills_tab_screen.dart';
+import '../../rider/navigation_menus/user_profile.dart';
 import 'home_tab_screen.dart';
-import 'user_profile.dart';
 
 class FleetManagerHomeLandingTabScreen extends StatefulWidget {
   const FleetManagerHomeLandingTabScreen({super.key});
 
   @override
-  State<FleetManagerHomeLandingTabScreen> createState() => _FleetManagerHomeLandingTabScreenState();
+  State<FleetManagerHomeLandingTabScreen> createState() =>
+      _FleetManagerHomeLandingTabScreenState();
 }
 
-class _FleetManagerHomeLandingTabScreenState extends State<FleetManagerHomeLandingTabScreen> {
+class _FleetManagerHomeLandingTabScreenState
+    extends State<FleetManagerHomeLandingTabScreen> {
   int pageIndex = 0;
 
   @override

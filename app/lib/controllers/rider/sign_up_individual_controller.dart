@@ -1,3 +1,4 @@
+import 'package:app/shareds/enums/user_type.dart';
 import 'package:app/widgets/app_dialog.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,7 @@ class SignUpIndividualController extends GetxController {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
     String businessName = 'N/A';
+    String userType = UserType.rider.toString();
 
     try {
       if (passwordController.text != confirmPasswordController.text) {
@@ -70,11 +72,13 @@ class SignUpIndividualController extends GetxController {
           phoneNumber: phoneNumberController.text.trim(),
           password: passwordController.text.trim(),
           confirmPassword: confirmPasswordController.text.trim(),
-          userAccountType: 'rider',
+          userAccountType: userType,
         ));
         if (response.status) {
-          session.writeRiderPhoneNumber(phoneNumberController.text);
-          Get.offAll(() => OtpScreen(phoneNumber: phoneNumberController.text));
+          session.writePhoneNumber(phoneNumberController.text.trim());
+          session.writeUserType(UserType.rider);
+          Get.offAll(
+              () => OtpScreen(verificationParam: phoneNumberController.text));
           isLoaded.value = false;
         } else {
           Get.defaultDialog(

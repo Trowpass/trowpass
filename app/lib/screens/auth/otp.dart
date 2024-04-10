@@ -11,20 +11,19 @@ import '../../widgets/overlay_indeterminate_progress.dart';
 import '../../widgets/standard_button.dart';
 
 class OtpScreen extends StatelessWidget {
-  final String phoneNumber;
-  OtpScreen({super.key, required this.phoneNumber});
+  final String verificationParam;
+  OtpScreen({super.key, required this.verificationParam});
   final controller = Get.put(OtpController());
 
 // to prevent back button click
-  Future<bool> _onWillPop() async => false;
   @override
   Widget build(BuildContext context) {
     return Obx(() => OverlayIndeterminateProgress(
           isLoading: controller.isLoaded.value,
           overlayBackgroundColor: background,
           progressColor: primaryColor,
-          child: WillPopScope(
-            onWillPop: _onWillPop,
+          child: PopScope(
+            canPop: false,
             child: Scaffold(
               resizeToAvoidBottomInset: true,
               backgroundColor: background,
@@ -58,7 +57,7 @@ class OtpScreen extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, right: 30, top: 8, bottom: 16),
                       child: Text(
-                        'Please enter the code sent to $phoneNumber. It expires in 2 minutes',
+                        'Please enter the code sent to $verificationParam. It expires in 2 minutes',
                         style: appStyles(16, null, null),
                         textAlign: TextAlign.center,
                       ),
@@ -207,8 +206,8 @@ class OtpScreen extends StatelessWidget {
                                   onPressed: () {
                                     if ([controller.countdown, 0]
                                         .contains(time)) {
-                                      controller
-                                          .tryResendOtpSubmit(phoneNumber);
+                                      controller.tryResendOtpSubmit(
+                                          verificationParam);
                                     }
                                   },
                                   child: Text(

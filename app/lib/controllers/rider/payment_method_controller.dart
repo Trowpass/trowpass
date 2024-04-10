@@ -49,9 +49,8 @@ class PaymentMethodController extends GetxController {
     isLoaded.value = true;
     int price = int.parse(amount) * 100;
     paymentReference.value = 'ref_${DateTime.now().millisecondsSinceEpoch}';
-    paymentEmail.value = session.readRiderEmail() != null
-        ? session.readRiderEmail()!
-        : 'none@gmail.com';
+    paymentEmail.value =
+        session.readEmail() != null ? session.readEmail()! : 'none@gmail.com';
     paymentCurrency.value = 'NGN';
     Charge charge = Charge()
       ..amount = price
