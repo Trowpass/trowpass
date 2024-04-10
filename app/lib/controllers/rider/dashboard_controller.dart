@@ -220,9 +220,15 @@ class DashboardController extends GetxController {
   Future userProfile() async {
     var response = await userController.userProfileAsync();
     if (response.status) {
+      var userType = response.data?.userAccountType;
       var fullName2 =
           '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}';
-      fullName.value = fullName2;
+      if (userType == 'rider') {
+        fullName.value = fullName2;
+      }
+      if (userType == 'fleet_manager') {
+        fullName.value = 'Manager';
+      }
       session2.writeUserFullName(fullName2);
       session2.writeAccountType(response.data!.accountType);
       isWalletCreated.value =

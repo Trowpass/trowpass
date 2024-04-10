@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:app/screens/fleet_manager/dashboard/dashboard.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,14 +13,7 @@ class HomeTabScreen extends GetView<HomeTabController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: primaryColor,
-      body: Column(
-        children: [
-          SizedBox(height: 30,),
-          Center(
-            child: Text("Hello Fleet Manager Dashboard is here"),
-          ),
-        ],
-      ),
+      body: DashboardScreen(),
     );
   }
 }

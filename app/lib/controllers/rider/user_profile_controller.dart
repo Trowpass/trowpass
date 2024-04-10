@@ -21,6 +21,7 @@ class UserProfileController extends GetxController {
   final userController = UserController();
   final profileImage = Rx<String>('');
   final kycRegistrationText = ''.obs;
+  final userType = ''.obs;
 
   @override
   void onInit() {
@@ -55,9 +56,16 @@ class UserProfileController extends GetxController {
         session2.writeAccountType(data.accountType);
         displayAccountType();
         profileImage.value = data.profilePix!;
-        fullName.value =
-            '${data.firstName.capitalize} ${data.lastName.capitalize}';
         isLoading.value = false;
+        var userAccountType = response.data?.userAccountType;
+        if (userAccountType == 'rider') {
+          userType.value = 'Rider';
+          fullName.value =
+            '${data.firstName.capitalize} ${data.lastName.capitalize}';
+        }
+        if (userAccountType == 'fleet_manager') {
+          userType.value = 'Fleet Manager';
+        }
         return response;
       } else {
         Get.defaultDialog(

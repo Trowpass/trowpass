@@ -1,14 +1,14 @@
 class UserLoginRequest {
-  String phoneNumber;
+  String username;
   String password;
   bool shouldRememberMe;
 
   UserLoginRequest(
-      {required this.phoneNumber,
+      {required this.username,
       required this.password,
       required this.shouldRememberMe});
   Map<String, dynamic> toJson() => {
-        'phoneNumber': phoneNumber,
+        'username': username,
         'password': password,
         'shouldRememberMe': shouldRememberMe,
       };

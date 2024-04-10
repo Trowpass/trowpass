@@ -52,10 +52,12 @@ class AuthController extends GetxController {
   Future<void> login() async {
     isLoaded.value = true;
     Get.focusScope!.unfocus();
+    String verifyParam = "";
+    String username = emailPhoneNumberController.text.trim();
     try {
       var response = await userController.loginAsync(
         UserLoginRequest(
-            phoneNumber: emailPhoneNumberController.text.trim(),
+            username: username,
             password: passwordController.text.trim(),
             shouldRememberMe: shouldRememberUser.value),
       );
@@ -64,7 +66,15 @@ class AuthController extends GetxController {
         session.writeAuthorizationToken(response.data!.token);
         if (!response.data!.loginData!.isAccountVerified) {
           isLoaded.value = true;
-          gotoVerification();
+          String phoneNumber = getSession.readPhoneNumber() ?? '';
+          String email = getSession.readEmail() ?? '';
+          //check if username is email or phone number
+          if (email.isEmail &&
+              email == emailPhoneNumberController.text.trim()) {
+            gotoVerification(email);
+          } else {
+            gotoVerification(phoneNumber);
+          }
         } else if (!response.data!.loginData!.isPinCreated) {
           isLoaded.value = false;
           Get.to(() => ChoosePinScreen());
@@ -73,13 +83,29 @@ class AuthController extends GetxController {
           session.writeIsUserLoggedIn(true);
           session.writeTokenExpiration(response.data!.tokenExpires);
           session.writeShouldRememberMe(shouldRememberUser.value);
-           if (response.data!.loginData!.userAccountType == 'rider') {
+          var userType = response.data?.loginData?.userAccountType;
+          if (userType == 'rider') {
             Get.offAll(() => const HomeLandingTabScreen());
-          } else if (response.data!.loginData!.userAccountType ==
-              'fleet_manager') {
+          }
+          if (userType == 'fleet_manager') {
             Get.offAll(() => FleetManagerHomeLandingTabScreen());
-          } else {}
+          }
         }
+      } else if (!response.status &&
+          response.data == null &&
+          response.message.contains('User account not yet verified')) {
+        if (username.isEmail) {
+          verifyParam = getSession.readEmail() ?? username;
+          //resend otp
+          await userRepository.resendOtpToFleetManagerAsync(
+              ResendOtpRequest(email: verifyParam));
+        } else {
+          verifyParam = getSession.readPhoneNumber() ?? username;
+          //resend otp
+          await userRepository.resendOtpToPhoneNumberAsync(
+              ResendOtpRequest(phoneNumber: verifyParam));
+        }
+        Get.offAll(() => OtpScreen(verificationParam: verifyParam));
       } else {
         // Check for invalid credentials specifically
         if (response.responseCode == "11") {
@@ -114,13 +140,23 @@ class AuthController extends GetxController {
     Get.to(const AccountTypeScreen());
   }
 
-  Future gotoVerification() async {
-    String phoneNumber = getSession.readRiderPhoneNumber() ?? '';
-    Get.offAll(() => OtpScreen(phoneNumber: phoneNumber));
+  Future gotoVerification(String verificationData) async {
+    String msg = "";
+    bool status = false;
+    Get.offAll(() => OtpScreen(verificationParam: verificationData));
     //send new otp
-    ResendOtpRequest request = ResendOtpRequest(phoneNumber: phoneNumber);
-    var response = await userRepository.resendOtpToPhoneNumberAsync(request);
-    if (response.status) {
+    if (verificationData.isEmail) {
+      var response = await userRepository.resendOtpToFleetManagerAsync(
+          ResendOtpRequest(email: verificationData));
+      status = response.status;
+      msg = response.message;
+    } else {
+      var response = await userRepository.resendOtpToPhoneNumberAsync(
+          ResendOtpRequest(phoneNumber: verificationData));
+      status = response.status;
+      msg = response.message;
+    }
+    if (status) {
       isLoaded.value = false;
       isExpiryTimeElapsed.value = false;
       resendCountDownController.restart();
@@ -128,7 +164,7 @@ class AuthController extends GetxController {
     } else {
       Get.defaultDialog(
           title: 'Information',
-          content: Text(response.message),
+          content: Text(msg),
           backgroundColor: dialogInfoBackground);
       isLoaded.value = false;
     }

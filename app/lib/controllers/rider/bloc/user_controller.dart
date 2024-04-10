@@ -1,6 +1,5 @@
 import 'package:app/extensions/string_casting_extension.dart';
 import 'package:app/repositories/rider/user_repository.dart';
-import 'package:app/screens/auth/otp.dart';
 import 'package:app/services/requests/rider/post_requests/choose_pin_request.dart';
 import 'package:app/services/requests/rider/post_requests/create_wallet_request.dart';
 import 'package:app/services/requests/rider/post_requests/forget_password_request.dart';
@@ -24,8 +23,8 @@ import 'package:app/services/responses/rider/view_profile_response.dart';
 import 'package:app/services/responses/rider/view_user_by_phone_response.dart';
 import 'package:app/services/responses/rider/view_wallet_response.dart';
 import 'package:app/shareds/constants/file_upload_purpose.dart';
+import 'package:app/shareds/enums/user_type.dart';
 import 'package:app/shareds/managers/rider/set_session_manager.dart';
-import 'package:get/get.dart';
 
 import '../../../services/requests/rider/post_requests/reset_password_request.dart';
 import '../../../services/responses/rider/reset_password_response.dart';
@@ -40,15 +39,7 @@ class UserController {
   Future<UserLoginResponse> loginAsync(UserLoginRequest request) async {
     try {
       final response = await userRepository.userLoginAsync(request);
-      if (response.status) {
-        return response;
-      } else if (!response.status &&
-          response.data == null &&
-          response.message.contains('User account not yet verified')) {
-        String phoneNumber = getSession.readRiderPhoneNumber() ?? '';
-        Get.offAll(() => OtpScreen(phoneNumber: phoneNumber));
-      }
-      return Future.error(response.message);
+      return response;
     } catch (e) {
       return Future.error('Login failed. Please try again!');
     }
@@ -59,7 +50,8 @@ class UserController {
     try {
       final response = await userRepository.createRiderAccountAsync(request);
       if (response.status) {
-        session.writeRiderPhoneNumber(request.phoneNumber);
+        session.writePhoneNumber(request.phoneNumber);
+        session.writeEmail(request.email);
         return response;
       }
       return Future.error(response.message);
@@ -70,9 +62,16 @@ class UserController {
 
   Future<VerifyAccountResponse> verifyOtpAsync(VerifyOtpRequest request) async {
     try {
-      var customerPhoneNumber = getSession.readRiderPhoneNumber();
-      final response =
-          await userRepository.verifyOtpAsync(request, customerPhoneNumber);
+      var customerPhoneNumber = getSession.readPhoneNumber();
+      var customerEmail = getSession.readEmail();
+      var userType = getSession.readUserType();
+
+      final response = userType == UserType.rider
+          ? await userRepository.verifyRiderOtpAsync(
+              request, customerPhoneNumber)
+          : await userRepository.verifyFleetManagerOtpAsync(
+              request, customerEmail);
+
       if (response.status) {
         session.writeUserId(response.data!.userId);
         return response;
@@ -89,7 +88,7 @@ class UserController {
       if (response.status) {
         session.writeUserFullName(
             '${response.data!.firstName.toTitleCase()} ${response.data!.lastName.toCapitalized()}');
-        session.writeRiderEmail(response.data!.email);
+        session.writeEmail(response.data!.email);
         session.writePinCreated(response.data!.isPinCreated);
         session.writeAccountType(response.data!.accountType);
         session.writeVirtualCardCreated(response.data!.isVirtualCardCreated);
@@ -193,6 +192,20 @@ class UserController {
   Future<BaseResponse> resendOtpToEmailAsync(ResendOtpRequest request) async {
     try {
       final response = await userRepository.resendOtpToEmailAsync(request);
+      if (response.status) {
+        return response;
+      }
+      return Future.error(response.message);
+    } catch (e) {
+      return Future.error('Unable to resend otp. Please try again!');
+    }
+  }
+
+  Future<BaseResponse> resendOtpToFleetManagerAsync(
+      ResendOtpRequest request) async {
+    try {
+      final response =
+          await userRepository.resendOtpToFleetManagerAsync(request);
       if (response.status) {
         return response;
       }

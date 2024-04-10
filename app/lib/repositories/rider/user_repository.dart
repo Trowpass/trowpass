@@ -75,10 +75,30 @@ class UserRepository {
     }
   }
 
-  Future<VerifyAccountResponse> verifyOtpAsync(
+  Future<VerifyAccountResponse> verifyRiderOtpAsync(
       VerifyOtpRequest request, dynamic customerPhoneNumber) async {
     try {
       var url = '${Endpoints.verifyOtp}/$customerPhoneNumber';
+      var response = await apiConnectionHelper.postDataAsync(
+          requestData: request, path: url);
+      if (response.data != null) {
+        return VerifyAccountResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to verify account');
+      }
+    } on DioException catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<VerifyAccountResponse> verifyFleetManagerOtpAsync(
+      VerifyOtpRequest request, dynamic customerEmail) async {
+    try {
+      var url = '${Endpoints.verifyFleetManagerOtp}/$customerEmail';
       var response = await apiConnectionHelper.postDataAsync(
           requestData: request, path: url);
       if (response.data != null) {
@@ -162,6 +182,27 @@ class UserRepository {
       var response = await apiConnectionHelper.postDataAsync(
         requestData: request,
         path: Endpoints.resendOtpAccountVerification,
+      );
+      if (response.data != null) {
+        return BaseResponse.fromJson(response.data);
+      } else {
+        throw Exception('Unable to resend otp');
+      }
+    } on DioException catch (e) {
+      return Future.error(DioExceptions.fromDioError(e));
+    } on SocketException catch (e) {
+      return Future.error(e);
+    } catch (e) {
+      return Future.error(e);
+    }
+  }
+
+  Future<BaseResponse> resendOtpToFleetManagerAsync(
+      ResendOtpRequest request) async {
+    try {
+      var response = await apiConnectionHelper.postDataAsync(
+        requestData: request,
+        path: Endpoints.resendOtpFleetManager,
       );
       if (response.data != null) {
         return BaseResponse.fromJson(response.data);

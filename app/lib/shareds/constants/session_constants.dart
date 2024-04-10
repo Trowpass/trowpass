@@ -1,5 +1,6 @@
-const String riderMobilePhone = 'phoneNumber';
-const String riderEmail = 'email';
+const String typeOfUser = 'typeOfUser';
+const String mobilePhone = 'phoneNumber';
+const String userEmail = 'emailAddress';
 const String authorizationToken = 'token';
 const String userIdKey = 'userId';
 const String userFirstName = 'firstName';

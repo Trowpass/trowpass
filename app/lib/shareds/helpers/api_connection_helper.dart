@@ -14,9 +14,9 @@ class ApiConnectionHelper {
   static const Duration connectTimeout = Duration(seconds: 20);
 
   final Dio dio = Dio(BaseOptions(
-      sendTimeout: sendTimeout,
-      connectTimeout: connectTimeout,
-      receiveTimeout: receiveTimeout,
+      // sendTimeout: sendTimeout,
+      // connectTimeout: connectTimeout,
+      // receiveTimeout: receiveTimeout,
       baseUrl: baseUrl,
       contentType: 'application/json',
       validateStatus: (status) {

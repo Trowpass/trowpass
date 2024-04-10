@@ -1,10 +1,13 @@
 import 'package:app/controllers/rider/bloc/user_controller.dart';
 import 'package:app/screens/rider/navigation_menus/home_landing_tab_screen.dart';
 import 'package:app/services/requests/rider/post_requests/choose_pin_request.dart';
+import 'package:app/shareds/enums/user_type.dart';
 import 'package:app/shareds/managers/rider/get_session_manager.dart';
 import 'package:app/shareds/utils/app_colors.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+
+import '../../screens/fleet_manager/navigation_menus/home_landing_tab_screen.dart';
 
 class ConfirmPinController extends GetxController {
   RxString pin = ''.obs;
@@ -16,6 +19,7 @@ class ConfirmPinController extends GetxController {
   List<FocusNode> focusNodes = List.generate(4, (index) => FocusNode());
 
   final isLoaded = false.obs;
+  GetSessionManager getSession = GetSessionManager();
 
   @override
   void onInit() {
@@ -61,7 +65,13 @@ class ConfirmPinController extends GetxController {
         confirmPin: pin.value,
       ));
       if (response.status) {
-        Get.offAll(() => const HomeLandingTabScreen());
+        var userType = getSession.readUserType();
+        if (userType == UserType.rider) {
+          Get.offAll(() => const HomeLandingTabScreen());
+        }
+        if (userType == UserType.fleetManager) {
+          Get.offAll(() => const FleetManagerHomeLandingTabScreen());
+        }
       } else {
         Get.defaultDialog(
           title: 'Information',

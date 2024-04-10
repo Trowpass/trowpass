@@ -6,8 +6,9 @@ import '../../constants/session_constants.dart';
 class GetSessionManager {
   final storage = GetStorage();
 
-  String? readRiderPhoneNumber() => storage.read(riderMobilePhone);
-  String? readRiderEmail() => storage.read(riderEmail);
+  dynamic readUserType() => storage.read(typeOfUser);
+  String? readPhoneNumber() => storage.read(mobilePhone);
+  String? readEmail() => storage.read(userEmail);
   String? readAuthorizationToken() => storage.read(authorizationToken);
   int? readUserId() => storage.read(userIdKey);
   String? readUserFirstName() => storage.read(userFirstName);

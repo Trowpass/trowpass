@@ -50,18 +50,17 @@ class LoginScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             Obx(() => TextInputForm(
-                                  inputType: TextInputType.number,
+                                  inputType: TextInputType.text,
                                   enabled: true,
                                   inputController:
                                       controller.emailPhoneNumberController,
-                                  // textLabel: 'Enter phone number',
-                                  textHint: 'Enter phone number',
+                                  textHint: 'Enter your username',
                                   validatorMessage:
-                                      'Please enter a valid phone number',
+                                      'Please enter a valid phone number or email',
                                   isPassword: false,
                                   autoCorrect: false,
                                   prefixIcon: Icon(
-                                    Icons.phone_android_outlined,
+                                    Icons.person,
                                     size: 24,
                                     color: controller.isFocused.value
                                         ? primaryColor

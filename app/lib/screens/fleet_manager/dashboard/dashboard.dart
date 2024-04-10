@@ -271,7 +271,7 @@ class DashboardScreen extends StatelessWidget {
                                 CustomCard(
                                   imagePath: scan,
                                   color: Color.fromRGBO(46, 189, 77, 0.1),
-                                  text: 'Scan to Pay',
+                                  text: 'Scan to Receive',
                                   onTap: () {
                                     Get.to(() => ScanScreen());
                                   },
@@ -279,18 +279,10 @@ class DashboardScreen extends StatelessWidget {
                                 CustomCard(
                                   imagePath: topup,
                                   color: Color.fromRGBO(241, 195, 78, 0.1),
-                                  text: 'Topup Transport Wallet',
+                                  text: 'Topup Wallet',
                                   onTap: () {
                                     Get.to(TopUpTransportWalletScreen());
                                   },
-                                ),
-                                CustomCard(
-                                  imagePath: loan,
-                                  color: Color.fromRGBO(9, 44, 247, 0.1),
-                                  text: 'Get Transport Loan',
-                                  onTap: () =>
-                                      controller.displayPlaceholderDialog(
-                                          'Get Transport Loan'),
                                 ),
                                 CustomCard(
                                   imagePath: card,
@@ -301,7 +293,7 @@ class DashboardScreen extends StatelessWidget {
                                 CustomCard(
                                   imagePath: book,
                                   color: Color.fromRGBO(231, 27, 27, 0.1),
-                                  text: 'Book a Bus',
+                                  text: 'Chartter',
                                   onTap: () => controller
                                       .displayPlaceholderDialog('Book a Bus'),
                                 ),
@@ -312,29 +304,7 @@ class DashboardScreen extends StatelessWidget {
                                   onTap: () {
                                     Get.to(SendMoneyScreen());
                                   },
-                                ),
-                                CustomCard(
-                                  imagePath: drop,
-                                  color: Color.fromRGBO(241, 195, 78, 0.1),
-                                  text: 'Pick n Drop',
-                                  onTap: () =>
-                                      controller.displayPlaceholderDialog(
-                                          'Transports Pay'),
-                                ),
-                                CustomCard(
-                                  imagePath: flight,
-                                  color: Color.fromRGBO(9, 44, 247, 0.1),
-                                  text: 'Book Flight',
-                                  onTap: () => controller
-                                      .displayPlaceholderDialog('Book Flight'),
-                                ),
-                                CustomCard(
-                                    imagePath: train,
-                                    color: Color.fromRGBO(60, 123, 245, 0.1),
-                                    text: 'Train Ticket',
-                                    onTap: () =>
-                                        controller.displayPlaceholderDialog(
-                                            'Train Ticket')),
+                                )
                               ],
                             ),
                             ImageSlider(),
